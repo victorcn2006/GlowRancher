@@ -5,56 +5,71 @@ using UnityEngine;
 public class MovementBehaviour : MonoBehaviour
 {
     // --------------------------------------------OBJETIVOS--------------------------------------------\\
-    // HACER QUE SE MUEVA ALEATORIAMENTE. FALSE
+    // HACER QUE SE MUEVA ALEATORIAMENTE. TRUE
     // PONER CONDICIONES DE MOVIMIENTO. FALSE
     // LIMITAR EL MOVIMIENTO PARA MAYOR CONTROL Y EVITAR BUGS. FALSE
 
     // --------------------------------------------MOVEMENT PARAMETERS--------------------------------------------\\
 
-    [Header("VALORES PARA RANGO DE MOVIMIENTO")]
-    [SerializeField] private float MIN_DISTANCE = -5f;
-    [SerializeField] private float MAX_DISTANCE = 5f;
+    [Header("RANGO DE MOVIMIENTO PARA LOS SALTOS")]
+    private const float MIN_DISTANCE = -5f;
+    private const float MAX_DISTANCE = 5f;
 
-    [Header("VALORES PARA RANGO DE TIEMPO")]
-    [SerializeField] private float MIN_TIME = 1f;
-    [SerializeField] private float MAX_TIME = 5f;
+    [Header("RANGO DE TIEMPO ENTRE SALTOS")]
+    private const float MIN_TIME = 5f;
+    private const float MAX_TIME = 10f;
 
     [Header("VALORES DEL SALTO")]
-    [SerializeField] private float JUMP_FORCE = 5f;
+    private const float VERTICAL_JUMP_FORCE = 5f;
+    private const float JUMP_FORCE = 3f;
 
-    private float movementTimer;
+    // --------------------------------------------PRIVATE VARIABLES--------------------------------------------\\
+    private float jumpTimer;
 
-    private bool CAN_JUMP;
+    private Rigidbody rb;
+
+    // --------------------------------------------PUBLIC VARIABLES--------------------------------------------\\
+    public bool CanJump;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
+    private void Start()
+    {
+        jumpTimer = GetRandomJumpTime();
+    }
 
     private void Update()
     {
-        if (CAN_JUMP)
+
+        if (CanJump)
         {
-            movementTimer -= Time.deltaTime;
-            if(movementTimer <= 0)
+            jumpTimer -= Time.deltaTime;
+            if(jumpTimer <= 0)
             {
                 Jump();
-                movementTimer = Random.Range(MIN_TIME, MAX_TIME);
+                jumpTimer = GetRandomJumpTime();
             }
         }
-        
         
     }
 
     private void Jump()
     {
-        //agregar impulso hacia la direccion asignada
+        rb.AddForce(GetRandomJumpDirection() * JUMP_FORCE, ForceMode.Impulse);
     }
 
-    void FixUpdate() //FixUpdate porque se moverá por fisicas.
+    private float GetRandomJumpTime()
     {
-        
+        return Random.Range(MIN_TIME, MAX_TIME);
     }
 
-    private Vector2 GetRandomCoordinate()
+    private Vector3 GetRandomJumpDirection()
     {
-        Vector2 nextRelativePosition = new Vector2(Random.Range(MIN_DISTANCE, MAX_DISTANCE), Random.Range(MIN_DISTANCE, MAX_DISTANCE));
-        return nextRelativePosition;
+        return new Vector3(Random.Range(MIN_DISTANCE, MAX_DISTANCE), VERTICAL_JUMP_FORCE, Random.Range(MIN_DISTANCE, MAX_DISTANCE));
     }
+
 
 }
