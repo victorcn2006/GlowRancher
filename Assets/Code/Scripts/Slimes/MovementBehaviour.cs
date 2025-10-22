@@ -29,7 +29,7 @@ public class MovementBehaviour : MonoBehaviour
     private Rigidbody rb;
 
     // --------------------------------------------PUBLIC VARIABLES--------------------------------------------\\
-    public bool CanJump;
+    public bool CanJump = true;
 
     private void Awake()
     {
@@ -43,7 +43,6 @@ public class MovementBehaviour : MonoBehaviour
 
     private void Update()
     {
-
         if (CanJump)
         {
             jumpTimer -= Time.deltaTime;

@@ -17,6 +17,11 @@ public class SlimeStateMachine : MonoBehaviour
     // --------------------------------------------PRIVATE VARIABLES--------------------------------------------\\
     [SerializeField] private MovementBehaviour movementBehaviour;
 
+    private void Start()
+    {
+        currentState = States.ON_FLOOR;
+    }
+
     void Update()
     {
 
@@ -53,6 +58,7 @@ public class SlimeStateMachine : MonoBehaviour
             currentState = States.ON_FLOOR;
             movementBehaviour.CanJump = true;
         }
+        else movementBehaviour.CanJump = false;
     }
 
     private void ToOnAir()
@@ -62,6 +68,7 @@ public class SlimeStateMachine : MonoBehaviour
             currentState = States.ON_AIR;
             movementBehaviour.CanJump = false;
         }
+        else movementBehaviour.CanJump = true;
     }
 
     // OTHER FUNCTIONS \\
