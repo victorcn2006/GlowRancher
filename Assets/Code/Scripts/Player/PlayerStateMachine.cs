@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlimeStateMachine : MonoBehaviour
+public class PlayerStateMachine : MonoBehaviour
 {
     // --------------------------------------------LINKED SCRIPTS--------------------------------------------\\
-    private MovementBehaviour movementBehaviour;
+    private PlayerMovement playerMovement;
 
 
     // --------------------------------------------RAYCAST SETTINGS--------------------------------------------\\
@@ -14,12 +14,12 @@ public class SlimeStateMachine : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
 
     // --------------------------------------------STATES--------------------------------------------\\
-    private enum States {ON_FLOOR, ON_AIR };
+    private enum States { ON_FLOOR, ON_AIR };
     private States currentState;
 
     private void Start()
     {
-        movementBehaviour = GetComponent<MovementBehaviour>();
+        playerMovement = GetComponent<PlayerMovement>();
         currentState = States.ON_FLOOR;
     }
 
@@ -57,19 +57,19 @@ public class SlimeStateMachine : MonoBehaviour
         if (Grounded())
         {
             currentState = States.ON_FLOOR;
-            movementBehaviour.SetCanJump(true);
+            playerMovement.SetCanJump(true);
         }
-        else movementBehaviour.SetCanJump(false);
+        else playerMovement.SetCanJump(false);
     }
 
-    private void ToOnAir()  
+    private void ToOnAir()
     {
         if (!Grounded())
         {
             currentState = States.ON_AIR;
-            movementBehaviour.SetCanJump(false);
+            playerMovement.SetCanJump(false);
         }
-        else movementBehaviour.SetCanJump(true);
+        else playerMovement.SetCanJump(true);
     }
 
     // OTHER FUNCTIONS \\

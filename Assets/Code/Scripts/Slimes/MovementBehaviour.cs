@@ -37,8 +37,7 @@ public class MovementBehaviour : MonoBehaviour
 
     private Rigidbody rb;
 
-    // --------------------------------------------PUBLIC VARIABLES--------------------------------------------\\
-    public bool CanJump = true;
+    public bool canJump = true;
 
     private void Awake()
     {
@@ -47,7 +46,7 @@ public class MovementBehaviour : MonoBehaviour
 
     private void Update()
     {
-        if (CanJump)
+        if (canJump)
         {
             jumpTimer -= Time.deltaTime;
             if(jumpTimer <= 0)
@@ -125,6 +124,11 @@ public class MovementBehaviour : MonoBehaviour
         //Debug.Log(foodDirection);
 
         return foodDirection;
+    }
+
+    public void SetCanJump(bool a)
+    {
+        canJump = a;
     }
 
 }

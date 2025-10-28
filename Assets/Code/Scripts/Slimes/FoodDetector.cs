@@ -7,6 +7,7 @@ public class FoodDetector : MonoBehaviour
 {
     
     private List<GameObject> inRangeFoodList = new List<GameObject>();
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Food")) 
