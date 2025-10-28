@@ -4,29 +4,30 @@ using UnityEngine;
 
 public class SlimeStateMachine : MonoBehaviour
 {
+    // --------------------------------------------LINKED SCRIPTS--------------------------------------------\\
+    private MovementBehaviour movementBehaviour;
+
 
     // --------------------------------------------RAYCAST SETTINGS--------------------------------------------\\
-    [Header("Valores Grounded")]
-    [SerializeField] private float groundCheckDistance = 0.5f;
+    [Header("VALORES GROUNDED")]
+    private const float groundCheckDistance = 1f;
     [SerializeField] private LayerMask groundLayer;
 
     // --------------------------------------------STATES--------------------------------------------\\
     private enum States {ON_FLOOR, ON_AIR };
     private States currentState;
 
-    // --------------------------------------------PRIVATE VARIABLES--------------------------------------------\\
-    [SerializeField] private MovementBehaviour movementBehaviour;
-
     private void Start()
     {
+        movementBehaviour = GetComponent<MovementBehaviour>();
         currentState = States.ON_FLOOR;
     }
 
     void Update()
     {
-
-        Debug.Log(movementBehaviour.CanJump);
-        Debug.Log(currentState);
+        // DEBUGS ESTADO Y SI PUEDE SALTAR
+        //Debug.Log(movementBehaviour.CanJump);
+        //Debug.Log(currentState);
 
         switch (currentState)
         {
@@ -61,7 +62,7 @@ public class SlimeStateMachine : MonoBehaviour
         else movementBehaviour.CanJump = false;
     }
 
-    private void ToOnAir()
+    private void ToOnAir()  
     {
         if (!Grounded())
         {
@@ -72,16 +73,18 @@ public class SlimeStateMachine : MonoBehaviour
     }
 
     // OTHER FUNCTIONS \\
-
     private bool Grounded()
     {
         return Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundLayer);
     }
 
-    private void OnDrawGizmos()
+
+
+    // RAYCAST LINE (DEBUG) \\
+    /*private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position, transform.position + Vector3.down * groundCheckDistance);
 
-    }
+    }*/
 }
