@@ -10,7 +10,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     // --------------------------------------------RAYCAST SETTINGS--------------------------------------------\\
     [Header("VALORES GROUNDED")]
-    private const float groundCheckDistance = 1f;
+    private const float groundCheckDistance = 1.1f;
     [SerializeField] private LayerMask groundLayer;
 
     // --------------------------------------------STATES--------------------------------------------\\
@@ -26,7 +26,7 @@ public class PlayerStateMachine : MonoBehaviour
     void Update()
     {
         // DEBUGS ESTADO Y SI PUEDE SALTAR
-        //Debug.Log(movementBehaviour.CanJump);
+        //Debug.Log(playerMovement.canJump);
         //Debug.Log(currentState);
 
         switch (currentState)
@@ -79,10 +79,10 @@ public class PlayerStateMachine : MonoBehaviour
     }
 
     // RAYCAST LINE (DEBUG) \\
-    /*private void OnDrawGizmos()
+    private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position, transform.position + Vector3.down * groundCheckDistance);
 
-    }*/
+    }
 }

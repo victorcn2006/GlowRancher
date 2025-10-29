@@ -69,6 +69,7 @@ public class PlayerController : MonoBehaviour
         isGrounded = Physics.Raycast(transform.position, Vector3.down, 1.2f, Mask);
         Debug.DrawRay(transform.position, Vector3.down * 2f, isGrounded ? Color.green : Color.red);
     }*/
+    /*
     public void OnJump(InputAction.CallbackContext ctx) {
         isGrounded = true;
         if(ctx.performed && isGrounded)
@@ -80,7 +81,7 @@ public class PlayerController : MonoBehaviour
 
             Debug.Log("¡Salta!");
         }
-    }
+    }*/
     /*
     //The jump
     public void playerJump() {

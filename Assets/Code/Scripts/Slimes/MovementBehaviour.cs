@@ -37,7 +37,7 @@ public class MovementBehaviour : MonoBehaviour
 
     private Rigidbody rb;
 
-    public bool canJump = true;
+    private bool canJump = true;
 
     private void Awake()
     {
@@ -113,6 +113,12 @@ public class MovementBehaviour : MonoBehaviour
             return new Vector3(Random.Range(MIN_DISTANCE, MAX_DISTANCE), VERTICAL_JUMP_FORCE, Random.Range(MIN_DISTANCE, MAX_DISTANCE));
         }
     }
+    // --------------------------------------------SETTERS--------------------------------------------\\
+
+    public void SetCanJump(bool a)
+    {
+        canJump = a;
+    }
 
     // --------------------------------------------OTHERS--------------------------------------------\\
 
@@ -126,9 +132,5 @@ public class MovementBehaviour : MonoBehaviour
         return foodDirection;
     }
 
-    public void SetCanJump(bool a)
-    {
-        canJump = a;
-    }
 
 }

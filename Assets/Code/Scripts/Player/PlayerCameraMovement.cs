@@ -12,7 +12,6 @@ public class PlayerCameraMovement : MonoBehaviour
     Vector3 rotationInput = Vector3.zero; // iniciem la rotacio a 0
     [SerializeField] private Camera playerCamera;
 
-    // Update is called once per frame
     void Update()
     {
         Look();
@@ -28,6 +27,11 @@ public class PlayerCameraMovement : MonoBehaviour
 
         transform.Rotate(Vector3.up * rotationInput.x);
         playerCamera.transform.localRotation = Quaternion.Euler(-cameraVerticaleAngle, 0f, 0f);
+    }
+
+    public Vector3 GetCameraRotation()
+    {
+        return playerCamera.transform.rotation.eulerAngles;
     }
 
 }

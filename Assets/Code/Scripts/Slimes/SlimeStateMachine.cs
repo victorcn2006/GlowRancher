@@ -25,9 +25,6 @@ public class SlimeStateMachine : MonoBehaviour
 
     void Update()
     {
-        // DEBUGS ESTADO Y SI PUEDE SALTAR
-        //Debug.Log(movementBehaviour.CanJump);
-        //Debug.Log(currentState);
 
         switch (currentState)
         {
