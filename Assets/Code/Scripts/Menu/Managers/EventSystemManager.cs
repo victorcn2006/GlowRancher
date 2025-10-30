@@ -46,9 +46,11 @@ public class EventSystemManager : MonoBehaviour {
 
     private void Update() {
         //Here it overrides the focus everytime you move
-        if (EventSystem.current.currentSelectedGameObject != null && EventSystem.current.currentSelectedGameObject != lastSelectedObject)
+        var current = EventSystem.current.currentSelectedGameObject;
+        if (current != null && current != lastSelectedObject)
         {
-            lastSelectedObject = EventSystem.current.currentSelectedGameObject;
+            lastSelectedObject = current;
+            UnityEvents.Instance?.OnSelectionChanged.Invoke();
         }
     }
 
