@@ -8,16 +8,16 @@ public class PlayerController : MonoBehaviour
 
     [Header("Variables")]
     public float speed;
-    public float upForce = 250f;
+    //public float upForce = 250f;
     public float force = 10f;
     public float jumpHeight = 0.7f; //que tan alt salta
     private bool isGrounded;
 
-    [Header("View")]
+    /*[Header("View")]
     public float rotationSense = 150f; //la sens
     private float cameraVerticaleAngle;
     Vector3 rotationInput = Vector3.zero; // iniciem la rotacio a 0
-    public Camera playerCamera;
+    [SerializeField] private Camera playerCamera;*/
 
     [Header("References")]
     public InputActionReference move;
@@ -40,16 +40,16 @@ public class PlayerController : MonoBehaviour
     {
         move.action.Enable();
         Jump.action.Enable();
-        rb =GetComponent<Rigidbody>();
-        playerInput = GetComponent<PlayerInput>(); 
+        rb = GetComponent<Rigidbody>();
+        playerInput = GetComponent<PlayerInput>();
     }
 
-    
+
 
     void Update()
     {
-        CheckGround();//per saber si esta en el terra
-        look(); //es la funcio la cual s'utilitza per girar la camera
+        //CheckGround();//per saber si esta en el terra
+        //look(); //es la funcio la cual s'utilitza per girar la camera
 
         input = playerInput.actions["Move"].ReadValue<Vector2>();
     }
@@ -64,11 +64,12 @@ public class PlayerController : MonoBehaviour
     }
 
     //asegurar-se de que toqui el terra i no sortir volant
-    private void CheckGround() 
+    /*private void CheckGround() 
     {
         isGrounded = Physics.Raycast(transform.position, Vector3.down, 1.2f, Mask);
         Debug.DrawRay(transform.position, Vector3.down * 2f, isGrounded ? Color.green : Color.red);
-    }
+    }*/
+    /*
     public void OnJump(InputAction.CallbackContext ctx) {
         isGrounded = true;
         if(ctx.performed && isGrounded)
@@ -80,7 +81,7 @@ public class PlayerController : MonoBehaviour
 
             Debug.Log("¡Salta!");
         }
-    }
+    }*/
     /*
     //The jump
     public void playerJump() {
@@ -93,7 +94,7 @@ public class PlayerController : MonoBehaviour
     */
 
     //vista del player
-    private void look()
+    /*private void look()
     {
         rotationInput.x = Input.GetAxis("Mouse X") * rotationSense * Time.deltaTime;
         rotationInput.y = Input.GetAxis("Mouse Y") * rotationSense * Time.deltaTime;
@@ -103,6 +104,6 @@ public class PlayerController : MonoBehaviour
 
         transform.Rotate(Vector3.up * rotationInput.x);
         playerCamera.transform.localRotation = Quaternion.Euler(-cameraVerticaleAngle, 0f, 0f);
-    }
+    }*/
 
 }
