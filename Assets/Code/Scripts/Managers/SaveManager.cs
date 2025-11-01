@@ -150,6 +150,7 @@ public class SaveManager: MonoBehaviour {
             // Marca que la fase de carga ha terminado para que otros componentes
             // que dependían de IsLoading en Awake/Start puedan funcionar normalmente.
             IsLoading = false;
+            LogSaveAllContents();
         }
         catch(Exception e)
         {
@@ -231,6 +232,13 @@ public class SaveManager: MonoBehaviour {
                 else if(value is Vector3 v3)
                 {
                     valueStr = $"({v3.x}, {v3.y}, {v3.z})";
+                }
+                else if (value is Array arr) // detecta arrays
+                {
+                    var elems = new List<string>();
+                    foreach (var item in arr)
+                        elems.Add(item != null ? item.ToString() : "null");
+                    valueStr = $"[{string.Join(", ", elems)}]";
                 }
                 else
                 {
