@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class AutoSave : MonoBehaviour{
     public static AutoSave Instance {get; private set; }

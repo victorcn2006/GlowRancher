@@ -27,11 +27,18 @@ public class Enemy : Character, ISavable
 
     private void OnEnable()
     {
+        _OnEnable();
         SaveManager.Instance?.RegisterSavable(this);
     }
     private void OnDisable()
     {
         SaveManager.Instance?.UnregisterSavable(this);
+    }
+    IEnumerator _OnEnable() {
+        while (SaveManager.Instance == null || SaveManager.Instance.IsLoading)
+            yield return null;
+
+        OnEnable();
     }
     protected override void Attack()
     {

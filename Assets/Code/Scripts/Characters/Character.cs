@@ -1,7 +1,6 @@
 using UnityEngine;
 
 public class Character : MonoBehaviour {
-    //Variables opcionales
     [SerializeField] protected string characterName;
     [SerializeField, TextArea] protected string description;
     /*maxHealth es protected porque las hijas podran acceder a la variable debido a su proteccion, 
@@ -26,6 +25,7 @@ public class Character : MonoBehaviour {
     public int GetCurrentHealth() { return currentHealth; }
     public Vector3 GetPosition() { return position; }
 
+    //==========================SETTERS======================
     protected void SetCharacterName(string name) {
         characterName = name;
     }

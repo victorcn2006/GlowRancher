@@ -12,6 +12,7 @@ public class Farm : Building, ISavable{
     }
     private void OnEnable()
     {
+        _OnEnable();
         SaveManager.Instance?.RegisterSavable(this);
     }
     private void OnDisable()
@@ -27,6 +28,11 @@ public class Farm : Building, ISavable{
         while (SaveManager.Instance == null || SaveManager.Instance.IsLoading)
             yield return null;
         base.Start();
+    }
+    IEnumerator _OnEnable() {
+        while (SaveManager.Instance == null || SaveManager.Instance.IsLoading)
+            yield return null;
+        OnEnable();
     }
     //===================== METODOS DE ISAVABLE =====================//
     public string GetSaveID()
@@ -53,6 +59,4 @@ public class Farm : Building, ISavable{
             Debug.LogWarning("RestoreState: el objeto no es de tipo FarmData para " + GetSaveID());
         }
     }
-    //public Vector3 GetPosition() => transform.position;
-    
 }

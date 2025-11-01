@@ -52,35 +52,7 @@ public class Player : Character, ISavable{
     // Quan el jugador rep dany
     protected override void TakeDamage(int damage) {
         base.TakeDamage(damage);
-    }
-
-    // Quan el jugador canvia de posici� (opcional, si ho vols registrar)
-    
-    
-    // Método público para inicializar el player después de que SaveManager cargue los datos.
-    // Llama a base.Awake() (inicialización por defecto) y aplica el PlayerData cargado
-    /*
-    public void InitializeAfterLoad(PlayerData playerData)
-    {
-        if (playerData == null)
-        {
-            Debug.LogWarning("Player.InitializeAfterLoad: datos nulos.");
-            return;
-        }
-        // Ejecuta la inicialización base que normalmente se haría en Awake
-        base.Awake();
-
-        // Aplica los datos cargados
-        currentBiome = playerData.currentBiome;
-        money = playerData.money;
-        currentHealth = playerData.health;
-        characterName = playerData.characterName;
-        description = playerData.description;
-        maxHealth = playerData.maxHealth;
-        moveSpeed = playerData.moveSpeed;
-        position = new Vector3(data.position[0], data.position[1], data.position[2]);
-        Debug.Log("Player initialized from save. Biome: " + currentBiome + " Money: " + money + " Health: " + currentHealth);
-    }*/
+    } 
 
     //===================== METODOS DE ISAVABLE =====================//
     public string GetSaveID()

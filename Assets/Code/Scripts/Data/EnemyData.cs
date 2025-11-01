@@ -24,6 +24,5 @@ public class EnemyData{
         position[0] = enemy.transform.position.x;
         position[1] = enemy.transform.position.y;
         position[2] = enemy.transform.position.z;
-        
     }
 }
