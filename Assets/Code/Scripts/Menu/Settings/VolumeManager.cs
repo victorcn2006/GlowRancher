@@ -28,7 +28,6 @@ public class VolumeManager : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log($"Mixer asignado: {mixer != null}");
         switch (sliderType)
         {
             case SLIDERS.GENERAL: sliderValue = PlayerPrefs.GetFloat("generalAudio", 0.5f); break;
@@ -52,15 +51,17 @@ public class VolumeManager : MonoBehaviour
     }
     private void SetVolume(float value)
     {
-        // Convierte 0–1 a decibelios (rango típico de -80 dB a 0 dB)
-        float dB = Mathf.Log10(Mathf.Max(value, 0.0001f)) * 20f;
+        // Evitar valores negativos o cero
+        value = Mathf.Clamp(value, 0.0001f, 1f);
+        float minDB = -60f;
+        float maxDB = 15f;
+        float curve = 0.3f;
+        float curvedValue = Mathf.Pow(value, curve); // curva más suave entre 0 y 1
+        float dB = Mathf.Lerp(minDB, maxDB, curvedValue);
         mixer.SetFloat(volumeParameter, dB);
+
     }
     public void CheckMute(){
         imageMute.SetActive(slider.value <= 0.001f);
-    }
-    public void ChangeSliderType(SLIDERS newSliderType)
-    {
-        sliderType = newSliderType;
     }
 }

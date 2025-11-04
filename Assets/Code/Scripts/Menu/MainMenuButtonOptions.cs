@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MenuButtonOptions : MonoBehaviour {
+public class MainMenuButtonOptions : MonoBehaviour {
     public enum ButtonType {
         Exit,
         Start,
-        Options
+        Options,
     }
 
     [SerializeField] private ButtonType buttonType;
