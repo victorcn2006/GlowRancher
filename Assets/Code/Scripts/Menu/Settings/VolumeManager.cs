@@ -13,7 +13,8 @@ public class VolumeManager : MonoBehaviour
 
     private void Start()
     {
-        slider.value = PlayerPrefs.GetFloat("volumenAudio", 0.5f);
+        sliderValue = PlayerPrefs.GetFloat("volumenAudio", 0.5f);
+        slider.value = sliderValue;
         AudioListener.volume = slider.value;
         CheckMute();
     }
@@ -23,13 +24,7 @@ public class VolumeManager : MonoBehaviour
         AudioListener.volume = slider.value;
         CheckMute();
     }
-    public void CheckMute(){ 
-        if(sliderValue == 0)
-        {
-            imageMute.SetActive(true);
-        } else
-        {
-            imageMute.SetActive(false);
-        }
+    public void CheckMute(){
+        imageMute.SetActive(slider.value <= 0.001f);
     }
 }

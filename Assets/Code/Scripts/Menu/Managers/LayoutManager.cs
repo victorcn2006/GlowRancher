@@ -26,6 +26,13 @@ public class LayoutManager : MonoBehaviour
         }
 
         UnityEvents.Instance.OnSelectionChanged.AddListener(ChangeLayout);
+
+        //Activar panel inicial: GAME_OPTIONS
+        foreach (var pair in panelDictionary) {
+            pair.Value.SetActive(false);
+        }
+
+        panelDictionary[MENU_PANEL.GAME_OPTIONS].SetActive(true);
     }
     private void OnDisable()
     {
