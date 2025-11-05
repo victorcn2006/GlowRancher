@@ -2,19 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlimeStateMachine : MonoBehaviour
+public class SlimeStateMachine : MonoBehaviour, IAspirable
 {
     // --------------------------------------------LINKED SCRIPTS--------------------------------------------\\
     private MovementBehaviour movementBehaviour;
+    [SerializeField] private SlimeBonesReference slimeBonesReference;
 
 
     // --------------------------------------------RAYCAST SETTINGS--------------------------------------------\\
     [Header("VALORES GROUNDED")]
-    private const float groundCheckDistance = 1f;
+    private const float groundCheckDistance = 0.4f;
     [SerializeField] private LayerMask groundLayer;
 
+
     // --------------------------------------------STATES--------------------------------------------\\
-    private enum States {ON_FLOOR, ON_AIR };
+    private enum States { ON_FLOOR, ON_AIR, BEING_ASPIRED };
     private States currentState;
 
     private void Start()
@@ -25,49 +27,91 @@ public class SlimeStateMachine : MonoBehaviour
 
     void Update()
     {
-
+        Debug.Log(currentState);
         switch (currentState)
         {
+
             case States.ON_FLOOR:
                 OnFloor();
                 break;
             case States.ON_AIR:
                 OnAir();
                 break;
+            case States.BEING_ASPIRED:
+                OnBeingAspired();
+                break;
         }
     }
 
+
     // STATES FUNCTIONS \\
+
     private void OnFloor()
     {
+        movementBehaviour.SetCanJump(true);
         ToOnAir();
     }
 
     private void OnAir()
     {
+        movementBehaviour.SetCanJump(false);
         ToOnFloor();
     }
 
+    private void OnBeingAspired()
+    {
+        movementBehaviour.SetCanJump(false);
+
+    }
+
+
     // STATES TRANSITIONS FUNCTIONS \\
+
     private void ToOnFloor()
     {
         if (Grounded())
         {
             currentState = States.ON_FLOOR;
-            movementBehaviour.SetCanJump(true);
         }
-        else movementBehaviour.SetCanJump(false);
     }
 
-    private void ToOnAir()  
+    private void ToOnAir()
     {
         if (!Grounded())
         {
             currentState = States.ON_AIR;
-            movementBehaviour.SetCanJump(false);
         }
-        else movementBehaviour.SetCanJump(true);
     }
+
+
+    // ASPIRE TRANSITIONS \\
+
+    public void BeingAspired()
+    {
+        currentState = States.BEING_ASPIRED;
+
+        movementBehaviour.SetGravity(false);
+
+        foreach (GameObject obj in slimeBonesReference.GetSlimeBonesList())
+        {
+            obj.GetComponent<Rigidbody>().useGravity = false;
+        }
+
+    }
+
+    public void StopBeingAspired()
+    {
+        movementBehaviour.SetGravity(true);
+
+        foreach (GameObject obj in slimeBonesReference.GetSlimeBonesList())
+        {
+            obj.GetComponent<Rigidbody>().useGravity = true;
+        }
+
+        ToOnAir();
+        ToOnFloor();
+    }
+
 
     // OTHER FUNCTIONS \\
     private bool Grounded()
@@ -75,11 +119,12 @@ public class SlimeStateMachine : MonoBehaviour
         return Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundLayer);
     }
 
+
     // RAYCAST LINE (DEBUG) \\
-    /*private void OnDrawGizmos()
+    private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position, transform.position + Vector3.down * groundCheckDistance);
 
-    }*/
+    }
 }

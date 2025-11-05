@@ -7,6 +7,9 @@ public class HungerSystem : MonoBehaviour
 
     // --------------------------------------------LINKED SCRIPTS--------------------------------------------\\
     private FoodDetector foodDetector;
+    [SerializeField] private GemSystem gemSystem;
+
+
 
     [Header("TEMPORIZADOR HAMBRE")]
     [SerializeField] private float hungerTimeReset;
@@ -30,6 +33,7 @@ public class HungerSystem : MonoBehaviour
         hungry = false;
         hungerTimer = hungerTimeReset;
         foodDetector.RemoveFood(food);
+        StartCoroutine(gemSystem.SpawnGem());
     }
 
     public bool IsHungry()

@@ -21,7 +21,6 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private InputActionReference move;
-    [SerializeField] private InputActionReference jump;
 
     private const float walkSpeed = 5f;
     private const float JUMP_FORCE = 5f;
@@ -37,7 +36,6 @@ public class PlayerMovement : MonoBehaviour
         playerCameraMovement = GetComponent<PlayerCameraMovement>();
 
         move.action.Enable();
-        jump.action.Enable();
         rb = GetComponent<Rigidbody>();
         playerInput = GetComponent<PlayerInput>();
     }
@@ -48,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void Move()
-    {   
+    {
         movementInput = move.action.ReadValue<Vector2>();
 
         Transform camTransform = playerCameraMovement.transform;
@@ -64,13 +62,13 @@ public class PlayerMovement : MonoBehaviour
         Vector3 moveDirection = (camRight * movementInput.x + camForward * movementInput.y).normalized;
 
         Vector3 newVelocity = moveDirection * walkSpeed;
-        newVelocity.y = rb.velocity.y; // mantenemos la gravedad/salto
+        newVelocity.y = rb.velocity.y;
         rb.velocity = newVelocity;
         
     }
     public void Jump(InputAction.CallbackContext ctx)
     {
-            if (ctx.performed && canJump)
+        if (ctx.performed && canJump)
         {
             rb.AddForce(new Vector3(0,1,0) * JUMP_FORCE, ForceMode.Impulse);
         }

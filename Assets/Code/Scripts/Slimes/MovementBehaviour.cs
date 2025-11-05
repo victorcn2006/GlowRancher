@@ -38,45 +38,52 @@ public class MovementBehaviour : MonoBehaviour
     private Rigidbody rb;
 
     private bool canJump = true;
+    private bool hasRotated = false;
+
+    private Vector3 jumpDirection;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
     }
 
+    private void Start()
+    {
+        jumpTimer = Random.Range(MIN_TIME, MAX_TIME);
+    }
+
     private void Update()
     {
+        Debug.Log(canJump);
+
         if (canJump)
         {
             jumpTimer -= Time.deltaTime;
+            if (hasRotated)
+            {
+                Jump();
+            }
             if(jumpTimer <= 0)
             {
                 GoJump();
                 jumpTimer = Random.Range(MIN_TIME, MAX_TIME);
             }
         }
-        
     }
 
     // --------------------------------------------JUMP FUNCTIONS--------------------------------------------\\
 
     private void GoJump()
     {
-        Vector3 jumpDirection = GetJumpDirection();
+        jumpDirection = GetJumpDirection();
 
-        StartCoroutine(RotateAndJumpToDirection(jumpDirection));
-
+        StartCoroutine(RotateAndJumpToDirection());
     }
 
-    private void Jump(Vector3 jumpDirection)
+    private IEnumerator RotateAndJumpToDirection()
     {
-        rb.AddForce(jumpDirection * JUMP_FORCE, ForceMode.Impulse);
-    }
-
-    private IEnumerator RotateAndJumpToDirection(Vector3 jumpDirection)
-    {
-        Vector3 lookDirection = new Vector3(jumpDirection.x, 0, jumpDirection.z); //solamente te quedas con la direccion horizontal
-        if (lookDirection == Vector3.zero) yield break; //en caso de que el Vector3 sea (0,0,0) sales de la corrutina
+        Vector3 lookDirection = new Vector3(jumpDirection.x, 0, jumpDirection.z); 
+        if (lookDirection == Vector3.zero) yield break; 
 
         Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
 
@@ -90,8 +97,13 @@ public class MovementBehaviour : MonoBehaviour
             yield return null; //Se espera al siguiente frame antes de seguir rotando
         }
 
-        Jump(jumpDirection);
+        hasRotated = true;
 
+    }
+    private void Jump()
+    {
+        rb.AddForce(jumpDirection * JUMP_FORCE, ForceMode.Impulse);
+        hasRotated = false;
     }
 
     // --------------------------------------------GETTERS-------------------------------------------\\
@@ -130,6 +142,11 @@ public class MovementBehaviour : MonoBehaviour
         //Debug.Log(foodDirection);
 
         return foodDirection;
+    }
+
+    public void SetGravity(bool gravity)
+    {
+        rb.useGravity = gravity;
     }
 
 
