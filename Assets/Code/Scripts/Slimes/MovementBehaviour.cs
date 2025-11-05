@@ -54,6 +54,7 @@ public class MovementBehaviour : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(canJump);
 
         if (canJump)
         {

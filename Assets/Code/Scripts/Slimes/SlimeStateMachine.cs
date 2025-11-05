@@ -27,6 +27,7 @@ public class SlimeStateMachine : MonoBehaviour, IAspirable
 
     void Update()
     {
+        Debug.Log(currentState);
         switch (currentState)
         {
 
