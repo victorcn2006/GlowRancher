@@ -2,50 +2,67 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-public class ResolutionManager : MonoBehaviour
-{
-    private TMP_Dropdown dropDown;
-    Resolution[] resolutions;
+
+public class ResolutionManager : MonoBehaviour {
+    private TMP_Dropdown dropdown;
+    private Resolution[] resolutions;
     private int currentResolutionIndex;
+
+    private const string RESOLUTION_INDEX_KEY = "resolutionIndex";
+    
     private void Awake() {
-        if (dropDown == null)
-            dropDown = GetComponent<TMP_Dropdown>();
-        resolutions = Screen.resolutions;
+        if (dropdown == null) dropdown = GetComponent<TMP_Dropdown>();
+        InitializeDropdown();
     }
+
     private void Start() {
         CheckResolution();
-        dropDown.onValueChanged.AddListener(ChangeResolution);
+        if(dropdown != null) dropdown.onValueChanged.AddListener(ChangeResolution);
     }
-    public void CheckResolution() {
-        dropDown.ClearOptions();
-
+    private void OnDisable(){
+        dropdown.onValueChanged.RemoveListener(ChangeResolution);
+    }
+    private void InitializeDropdown() {
+        resolutions = Screen.resolutions;
+    }
+    private List<string> CreateDropdownOptions() {
         List<string> options = new List<string>();
-        int currentResolutionIndex = 0;
+        currentResolutionIndex = 0;
 
-        for (int i = 0; i < resolutions.Length; i++)
-        {
+        for (int i = 0; i < resolutions.Length; i++){
             string option = $"{resolutions[i].width} x {resolutions[i].height}";
-            options.Add(option);
-
-            if (resolutions[i].width == Screen.width &&
-                resolutions[i].height == Screen.height)
-            {
+            if (resolutions[i].width == Screen.currentResolution.width &&
+                resolutions[i].height == Screen.currentResolution.height){
                 currentResolutionIndex = i;
             }
+            
+            options.Add(option);
         }
-
-        dropDown.AddOptions(options);
-
-        int savedIndex = PlayerPrefs.GetInt("resolutionIndex", currentResolutionIndex);
-        dropDown.value = Mathf.Clamp(savedIndex, 0, resolutions.Length - 1);
-        dropDown.RefreshShownValue();
-
-        ChangeResolution(dropDown.value);
+        return options;
     }
     public void ChangeResolution(int index) {
+        if (index < 0 || index >= resolutions.Length) return;
         Resolution resolution = resolutions[index];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
 
-        PlayerPrefs.SetInt("resolutionIndex", index);
+        PlayerPrefs.SetInt(RESOLUTION_INDEX_KEY, index);
+        PlayerPrefs.Save();
+    }
+    public void SetupDropdown() {
+        if(dropdown == null) return;
+        dropdown.ClearOptions();
+        List<string> options = CreateDropdownOptions();
+        dropdown.AddOptions(options);
+        
+        int savedIndex = PlayerPrefs.GetInt(RESOLUTION_INDEX_KEY, currentResolutionIndex);
+        dropdown.value = Mathf.Clamp(savedIndex, 0, resolutions.Length - 1);
+        dropdown.RefreshShownValue();
+
+        ChangeResolution(dropdown.value);
+    }
+
+    public void CheckResolution() {
+        if(dropdown == null) return;
+        SetupDropdown();
     }
 }
