@@ -12,6 +12,10 @@ public class PlayerCameraMovement : MonoBehaviour
     Vector3 rotationInput = Vector3.zero; // iniciem la rotacio a 0
     [SerializeField] private Camera playerCamera;
 
+    private void Awake()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
     void Update()
     {
         Look();
