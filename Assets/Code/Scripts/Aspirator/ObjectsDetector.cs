@@ -22,7 +22,7 @@ public class ObjectsDetector : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Food") || other.CompareTag("Slime"))
+        if (other.CompareTag("Food") || other.CompareTag("Slime") || other.CompareTag("Gem"))
         {
             aspirableObjectsList.Add(other.gameObject);
         }
