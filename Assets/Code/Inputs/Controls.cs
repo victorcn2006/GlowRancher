@@ -541,22 +541,31 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         },
         {
             ""name"": ""Player"",
-            ""id"": ""1373ff16-a734-4f29-a4ac-de9dd4d59b1d"",
+            ""id"": ""f0452100-72bb-4534-9352-2bfdf6072111"",
             ""actions"": [
                 {
                     ""name"": ""Move"",
                     ""type"": ""Value"",
-                    ""id"": ""6918d996-a57d-460c-b38f-9eebb024bb3c"",
+                    ""id"": ""7346aa5b-4710-495b-a794-cd7183d02240"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""f8fe87a9-1aee-4389-8bf5-da2960a5464d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": ""2D Vector"",
-                    ""id"": ""1bd6e71c-688d-438d-8d22-61866b47c875"",
+                    ""id"": ""9caf25b7-06c5-4ba0-809e-358d6af61dea"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -567,7 +576,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""up"",
-                    ""id"": ""8a22e151-6791-420b-878f-4ceb4ebc43e1"",
+                    ""id"": ""8285fe4e-ac6f-48e0-8a65-3db8bc92a347"",
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -578,7 +587,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""down"",
-                    ""id"": ""60b2769d-f865-425a-9f95-3fc433d3893f"",
+                    ""id"": ""9b829cd8-755b-44cd-91f4-5fbf596f8671"",
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -589,7 +598,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""left"",
-                    ""id"": ""896f0379-b8e1-414f-a0c9-910474698ff8"",
+                    ""id"": ""e20e27b1-9aed-47f9-85d0-c8a54a0b9da0"",
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -600,7 +609,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""right"",
-                    ""id"": ""524e3aa3-bdca-4fcb-a7c6-9b376f2913de"",
+                    ""id"": ""cb41b72e-e998-4b53-a390-4d992c7a73b9"",
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -608,6 +617,45 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""08bb6e23-5363-437b-9aff-24abce80e812"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Aspirator"",
+            ""id"": ""2676db0f-9e8c-45b7-9f33-c6f98977cac7"",
+            ""actions"": [
+                {
+                    ""name"": ""Aspirate"",
+                    ""type"": ""Button"",
+                    ""id"": ""954352f0-b851-4158-87b8-ebd09ed8605a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""a4250c8f-3643-45d9-912d-fb0979f0ae71"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aspirate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -629,6 +677,10 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
+        m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+        // Aspirator
+        m_Aspirator = asset.FindActionMap("Aspirator", throwIfNotFound: true);
+        m_Aspirator_Aspirate = m_Aspirator.FindAction("Aspirate", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -809,11 +861,13 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
+    private readonly InputAction m_Player_Jump;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
         public PlayerActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
+        public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -826,6 +880,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
+            @Jump.started += instance.OnJump;
+            @Jump.performed += instance.OnJump;
+            @Jump.canceled += instance.OnJump;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -833,6 +890,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
+            @Jump.started -= instance.OnJump;
+            @Jump.performed -= instance.OnJump;
+            @Jump.canceled -= instance.OnJump;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -850,6 +910,52 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Aspirator
+    private readonly InputActionMap m_Aspirator;
+    private List<IAspiratorActions> m_AspiratorActionsCallbackInterfaces = new List<IAspiratorActions>();
+    private readonly InputAction m_Aspirator_Aspirate;
+    public struct AspiratorActions
+    {
+        private @Controls m_Wrapper;
+        public AspiratorActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Aspirate => m_Wrapper.m_Aspirator_Aspirate;
+        public InputActionMap Get() { return m_Wrapper.m_Aspirator; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(AspiratorActions set) { return set.Get(); }
+        public void AddCallbacks(IAspiratorActions instance)
+        {
+            if (instance == null || m_Wrapper.m_AspiratorActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_AspiratorActionsCallbackInterfaces.Add(instance);
+            @Aspirate.started += instance.OnAspirate;
+            @Aspirate.performed += instance.OnAspirate;
+            @Aspirate.canceled += instance.OnAspirate;
+        }
+
+        private void UnregisterCallbacks(IAspiratorActions instance)
+        {
+            @Aspirate.started -= instance.OnAspirate;
+            @Aspirate.performed -= instance.OnAspirate;
+            @Aspirate.canceled -= instance.OnAspirate;
+        }
+
+        public void RemoveCallbacks(IAspiratorActions instance)
+        {
+            if (m_Wrapper.m_AspiratorActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IAspiratorActions instance)
+        {
+            foreach (var item in m_Wrapper.m_AspiratorActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_AspiratorActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public AspiratorActions @Aspirator => new AspiratorActions(this);
     public interface IUIActions
     {
         void OnNavigate(InputAction.CallbackContext context);
@@ -866,5 +972,10 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
+    }
+    public interface IAspiratorActions
+    {
+        void OnAspirate(InputAction.CallbackContext context);
     }
 }
