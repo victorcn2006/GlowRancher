@@ -1140,6 +1140,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5508962264597310824, guid: 17d982f16127e6d418ad023742259aab, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1433339129}
+    - targetCorrespondingSourceObject: {fileID: 5508962264597310824, guid: 17d982f16127e6d418ad023742259aab, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1433339133}
   m_SourcePrefab: {fileID: 100100000, guid: 17d982f16127e6d418ad023742259aab, type: 3}
 --- !u!1 &1433339126 stripped
 GameObject:
@@ -1177,10 +1180,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 01e531daa8a5847439614ba9cf0e0451, type: 3}
---- !u!114 &1433339131 stripped
+--- !u!114 &1433339133
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3750762084333466871, guid: 17d982f16127e6d418ad023742259aab, type: 3}
-  m_PrefabInstance: {fileID: 1433339125}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1433339128}
   m_Enabled: 1
@@ -1524,7 +1528,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1433339131}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: Exit
         m_Mode: 1
