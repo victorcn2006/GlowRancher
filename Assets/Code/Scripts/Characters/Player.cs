@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Player : Character, ISavable{
     //Variables opcionales con Getter publico y setter privado
+    [RequiredField, SerializeField] GameObject gm;
     public string currentBiome { get; private set; } = "Pradera";
     public int money { get; private set; } = 0;
     public int stamina { get; private set; } = 100;
