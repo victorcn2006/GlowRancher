@@ -2,37 +2,58 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
+using UnityEngine.InputSystem;
 
 public class PlayerCameraMovement : MonoBehaviour
 {
 
     [Header("View")]
-    public float rotationSense = 150f; //la sens
-    private float cameraVerticaleAngle;
-    Vector3 rotationInput = Vector3.zero; // iniciem la rotacio a 0
+    public float rotationSense = 150f;
+    private float cameraVerticalAngle;
+    
     [SerializeField] private Camera playerCamera;
+
+    private InputAction lookAction;
+    Vector2 rotationInput = Vector2.zero;
+    private PlayerInput playerInput;
 
     private void Awake()
     {
-        Cursor.lockState = CursorLockMode.Locked; //Para mostrar cursor poner en CursorLockMode.None
+        if(playerInput == null) playerInput = GetComponent<PlayerInput>();
+        Cursor.lockState = CursorLockMode.Locked;
+        lookAction = playerInput.actions["Look"];
+
+    }
+
+    private void OnEnable() {
+        lookAction?.Enable();
+    }
+
+    private void OnDisable() {
+        lookAction?.Disable();
     }
 
 
     void Update()
     {
+        ReadLookInput();
         Look();
     }
+    private void ReadLookInput() {
+        if (lookAction != null)
+        {
+            rotationInput = lookAction.ReadValue<Vector2>() * rotationSense * Time.deltaTime;
+        }
+    }
+    private void Look() {
+        cameraVerticalAngle += rotationInput.y;
+        cameraVerticalAngle = Mathf.Clamp(cameraVerticalAngle, -70f, 70f);
 
-    private void Look()
-    {
-        rotationInput.x = Input.GetAxis("Mouse X") * rotationSense * Time.deltaTime;
-        rotationInput.y = Input.GetAxis("Mouse Y") * rotationSense * Time.deltaTime;
-
-        cameraVerticaleAngle = cameraVerticaleAngle + rotationInput.y;
-        cameraVerticaleAngle = Mathf.Clamp(cameraVerticaleAngle, -70, 70);
-
+        // Rota al jugador horizontalmente
         transform.Rotate(Vector3.up * rotationInput.x);
-        playerCamera.transform.localRotation = Quaternion.Euler(-cameraVerticaleAngle, 0f, 0f);
+
+        // Rota la cámara verticalmente
+        playerCamera.transform.localRotation = Quaternion.Euler(-cameraVerticalAngle, 0f, 0f);
     }
 
     public Vector3 GetCameraRotation()
