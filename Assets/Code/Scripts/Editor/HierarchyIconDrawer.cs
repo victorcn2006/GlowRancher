@@ -15,17 +15,34 @@ public static class HierarchyIconDrawer {
     }
     static void OnHierarchyWindowItemOnGUI(int instanceID, Rect selectionRect){
         if (EditorUtility.InstanceIDToObject(instanceID) is not GameObject gameObject) return;
-        foreach(var component in gameObject.GetComponents<Component>()){
+        foreach (var component in gameObject.GetComponents<Component>())
+        {
             if (component == null) continue;
-            var fields = GetCachedFieldsWithRequiredAttribute(component.GetType());
-            if(fields == null) continue;
 
-            if(fields.Any(fields => isFieldUnassigned(fields.GetValue(component)))){
-                var iconRect = new Rect(selectionRect.xMax - 20, selectionRect.y, 16, 16);
-                GUI.Label(iconRect, new GUIContent(requiredIcon, "One or more required fields are missing or empty"));
-                break;
+            var fields = GetCachedFieldsWithRequiredAttribute(component.GetType());
+            if (fields == null) continue;
+
+            foreach (var field in fields)
+            {
+                object value = null;
+                try
+                {
+                    value = field.GetValue(component);
+                }
+                catch
+                {
+                    continue;
+                }
+
+                if (isFieldUnassigned(value))
+                {
+                    var iconRect = new Rect(selectionRect.xMax - 20, selectionRect.y, 16, 16);
+                    GUI.Label(iconRect, new GUIContent(requiredIcon, "One or more required fields are missing or empty"));
+                    break;
+                }
             }
         }
+
     }
 
     static FieldInfo[] GetCachedFieldsWithRequiredAttribute(Type componentType){
