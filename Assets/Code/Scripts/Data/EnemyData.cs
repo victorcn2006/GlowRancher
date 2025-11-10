@@ -6,7 +6,6 @@ public class EnemyData{
     public string characterName, description;
     [Header("Stats")]
     public int health, maxHealth;
-    public float moveSpeed;
     [Header("Transform Data")]
     public float[] position = new float[3];
     
@@ -19,7 +18,6 @@ public class EnemyData{
         characterName = enemy.GetCharacterName();
         description = enemy.GetDescription();
         health = enemy.GetCurrentHealth();
-        moveSpeed = enemy.GetMoveSpeed();
         maxHealth = enemy.GetMaxHealth();
         position[0] = enemy.transform.position.x;
         position[1] = enemy.transform.position.y;

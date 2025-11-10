@@ -64,7 +64,6 @@ public class Enemy : Character, ISavable
             characterName = data.characterName;
             description = data.description;
             currentHealth = data.health;
-            moveSpeed = data.moveSpeed;
             maxHealth = data.maxHealth;
             position = new Vector3(data.position[0], data.position[1], data.position[2]);
         }

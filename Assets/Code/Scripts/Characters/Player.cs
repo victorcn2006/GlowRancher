@@ -75,7 +75,6 @@ public class Player : Character, ISavable{
             money = data.money;
             currentHealth = data.health;
             maxHealth= data.maxHealth;
-            moveSpeed = data.moveSpeed;
             stamina = data.stamina;
             transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
         }

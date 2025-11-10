@@ -12,7 +12,6 @@ public class Character : MonoBehaviour {
     //Se va actualizando y es protected accesible para los hijos
     protected int currentHealth;
     //Velocidad de la entidad, override para sobreescribir, por eso es virtual
-    [SerializeField] protected float moveSpeed;
     protected virtual void Awake(){
         currentHealth = maxHealth;
         position = transform.position;
@@ -21,7 +20,6 @@ public class Character : MonoBehaviour {
     public string GetCharacterName() { return characterName; }
     public string GetDescription() { return description; }
     public int GetMaxHealth() {  return maxHealth; }
-    public float GetMoveSpeed() {  return moveSpeed; }
     public int GetCurrentHealth() { return currentHealth; }
     public Vector3 GetPosition() { return position; }
 
@@ -31,9 +29,6 @@ public class Character : MonoBehaviour {
     }
     protected void SetDescription(string description) { 
         this.description = description; 
-    }
-    protected void SetMoveSpeed(float speed) { 
-        moveSpeed = speed;
     }
     protected void Heal(int amount)
     {
