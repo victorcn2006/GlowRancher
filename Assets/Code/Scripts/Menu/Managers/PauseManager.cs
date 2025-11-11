@@ -11,12 +11,9 @@ public class PauseManager : MonoBehaviour
     }
 
     private void Update() {
-        if(InputManager.Instance.isPaused)
+        if(InputManager.Instance.isPaused && InputManager.Instance != null)
             pausePanel.SetActive(true);
         else
             pausePanel.SetActive(false);
     }
-
-
-
 }
