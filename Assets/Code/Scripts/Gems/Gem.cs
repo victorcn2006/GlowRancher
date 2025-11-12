@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Gem : MonoBehaviour, IAspirable
 {
-
+    [SerializeField] private GemData gemData;
     Rigidbody rb;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        Debug.Log(gemData.gemValue);
     }
 
     public void BeingAspired()
@@ -25,4 +26,7 @@ public class Gem : MonoBehaviour, IAspirable
     {
         Aspirator.instance.RemoveAspirableObject(this.gameObject);
     }
+
+
+
 }
