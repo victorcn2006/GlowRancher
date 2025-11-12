@@ -25,4 +25,6 @@ public class Gem : MonoBehaviour, IAspirable
     {
         Aspirator.instance.RemoveAspirableObject(this.gameObject);
     }
+
+    //BanckAcount.instance.Score(scoreObtained);
 }
