@@ -8,7 +8,7 @@ public class PlayerCameraMovement : MonoBehaviour
 {
 
     [Header("View")]
-    [HideInInspector] public float rotationSense = 3f;
+    [HideInInspector] public float rotationSense = 10f;
     private float cameraVerticalAngle;
     
     [SerializeField] private Camera playerCamera;
@@ -42,15 +42,15 @@ public class PlayerCameraMovement : MonoBehaviour
     private void ReadLookInput() {
         if (lookAction != null)
         {
-            rotationInput = lookAction.ReadValue<Vector2>() * rotationSense * Time.deltaTime;
+            rotationInput = lookAction.ReadValue<Vector2>() * rotationSense;
         }
     }
     private void Look() {
-        cameraVerticalAngle += rotationInput.y;
+        cameraVerticalAngle += rotationInput.y * Time.deltaTime;
         cameraVerticalAngle = Mathf.Clamp(cameraVerticalAngle, -70f, 70f);
 
         // Rota al jugador horizontalmente
-        transform.Rotate(Vector3.up * rotationInput.x);
+        transform.Rotate(Vector3.up * rotationInput.x * Time.deltaTime);
 
         // Rota la cámara verticalmente
         playerCamera.transform.localRotation = Quaternion.Euler(-cameraVerticalAngle, 0f, 0f);
