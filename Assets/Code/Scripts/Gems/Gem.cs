@@ -9,7 +9,6 @@ public class Gem : MonoBehaviour, IAspirable
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        Debug.Log(gemData.gemValue);
     }
 
     public void BeingAspired()

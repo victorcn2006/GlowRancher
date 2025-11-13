@@ -27,12 +27,7 @@ public class Player : Character, ISavable{
     {
         SaveManager.Instance?.UnregisterSavable(this);
     }
-    //Override al attack cambiar por la logica nueva de la aspiradora
-    protected override void Attack() {
-        if (SaveManager.Instance != null && SaveManager.Instance.IsLoading)
-            return;
-        base.Attack();
-    }
+    
     public void AddMoney(int amount) {
         money += amount;
         // Notifica el SaveManager del canvi
@@ -50,8 +45,9 @@ public class Player : Character, ISavable{
     }
 
     // Quan el jugador rep dany
-    protected override void TakeDamage(int damage) {
+    public override void TakeDamage(int damage) {
         base.TakeDamage(damage);
+
     } 
 
     //===================== METODOS DE ISAVABLE =====================//

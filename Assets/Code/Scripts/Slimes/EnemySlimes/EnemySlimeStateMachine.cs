@@ -5,13 +5,13 @@ using UnityEngine;
 public class EnemySlimeStateMachine : MonoBehaviour, IAspirable
 {
     // --------------------------------------------LINKED SCRIPTS--------------------------------------------\\
-    private EnemySlimeMovementBehaviour enemySlimeMovementBehaviour;
+    [SerializeField] private EnemySlimeMovementBehaviour enemySlimeMovementBehaviour;
     [SerializeField] private SlimeBonesReference slimeBonesReference;
 
 
     // --------------------------------------------RAYCAST SETTINGS--------------------------------------------\\
     [Header("VALORES GROUNDED")]
-    private const float groundCheckDistance = 0.4f;
+    private const float groundCheckDistance = 0.6f;
     [SerializeField] private LayerMask groundLayer;
 
 

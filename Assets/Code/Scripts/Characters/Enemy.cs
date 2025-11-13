@@ -40,7 +40,7 @@ public class Enemy : Character, ISavable
 
         OnEnable();
     }
-    protected override void Attack()
+    public override void Attack()
     {
         if (SaveManager.Instance?.IsLoading == true)
             return;

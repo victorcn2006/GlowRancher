@@ -37,12 +37,12 @@ public class Character : MonoBehaviour {
     }
 
     //======================METODOS OVERRIDE===================
-    protected virtual void Attack()
+    public virtual void Attack()
     {
         Debug.Log(characterName + " ataca.");
     }
 
-    protected virtual void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         //Evita valores negativos
         damage = Mathf.Max(0, damage);

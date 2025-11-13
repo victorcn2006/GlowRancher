@@ -11,14 +11,6 @@ public class ObjectsDetector : MonoBehaviour
     private Vector3 point1;
     private Vector3 point2;
 
-    void Update()
-    {
-        foreach (GameObject obj in aspirableObjectsList)
-        {
-            Debug.Log(obj.gameObject.name);
-        }
-
-    }
 
     private void OnTriggerEnter(Collider other)
     {
