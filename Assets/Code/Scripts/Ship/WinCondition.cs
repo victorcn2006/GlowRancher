@@ -14,7 +14,7 @@ public class WinCondition : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player")) winConditionPanel.SetActive(true);
-        Invoke("FreezeTime", 0.5f);
+        Invoke("FreezeTime", 1);
         
     }
     private void FreezeTime()
