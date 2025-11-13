@@ -31,9 +31,15 @@ public class Select : MonoBehaviour
             {
                 hit.collider.transform.GetComponent<lightInteractionController>().ActivateObject();
             }
+
             if (hit.collider.tag == "InteractuableShop")
             {
-                hit.collider.transform.GetComponent<InteractiveShop>().ActivateObject();
+                Debug.Log("Shop.Entra");
+                hit.collider.transform.GetComponent<InteractiveShop>().ToggleShop(); // Canviem aquí
+            }
+            else
+            {
+                Debug.Log("Error");
             }
         }
     }
