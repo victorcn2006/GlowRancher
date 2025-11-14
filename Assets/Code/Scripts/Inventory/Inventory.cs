@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
-using UnityEngine.InputSystem; // Nuevo sistema de entrada
+using UnityEngine.InputSystem;
 
 public class Inventory : MonoBehaviour
 {
@@ -13,26 +13,31 @@ public class Inventory : MonoBehaviour
 
     private int slotSeleccionado = 0;
 
-    [Header("🎮 Controles del inventario")]
-    [SerializeField] private InputAction scrollAction;     // Movimiento de rueda del ratón
-    [SerializeField] private InputAction rightClickAction; // Clic derecho
+    [Header("Controles del inventario")]
+    [SerializeField] private InputAction scrollAction;      // Rueda del ratón
+    [SerializeField] private InputAction rightClickAction;  // Clic derecho
+    [SerializeField] private InputAction slotKeysAction;    // Teclas 1,2,3,4
 
     void OnEnable()
     {
         scrollAction.Enable();
         rightClickAction.Enable();
+        slotKeysAction.Enable();
 
         scrollAction.performed += OnScroll;
         rightClickAction.performed += OnRightClick;
+        slotKeysAction.performed += OnNumberKey;
     }
 
     void OnDisable()
     {
         scrollAction.performed -= OnScroll;
         rightClickAction.performed -= OnRightClick;
+        slotKeysAction.performed -= OnNumberKey;
 
         scrollAction.Disable();
         rightClickAction.Disable();
+        slotKeysAction.Disable();
     }
 
     void Start()
@@ -46,7 +51,35 @@ public class Inventory : MonoBehaviour
         ActualizarSeleccionVisual();
     }
 
-    // Movimiento de la rueda del ratón
+    // -----------------------------------------
+    // Selección con teclas 1,2,3,4
+    // -----------------------------------------
+    private void OnNumberKey(InputAction.CallbackContext ctx)
+    {
+        string key = ctx.control.name;
+
+        switch (key)
+        {
+            case "1":
+                slotSeleccionado = 0;
+                break;
+            case "2":
+                slotSeleccionado = 1;
+                break;
+            case "3":
+                slotSeleccionado = 2;
+                break;
+            case "4":
+                slotSeleccionado = 3;
+                break;
+            default:
+                return;
+        }
+
+        ActualizarSeleccionVisual();
+    }
+
+    // Movimiento de rueda del ratón
     private void OnScroll(InputAction.CallbackContext ctx)
     {
         float scroll = ctx.ReadValue<Vector2>().y;
@@ -59,7 +92,7 @@ public class Inventory : MonoBehaviour
         ActualizarSeleccionVisual();
     }
 
-    // Clic derecho: quitar uno del slot seleccionado
+    // Clic derecho → quitar 1 unidad
     private void OnRightClick(InputAction.CallbackContext ctx)
     {
         QuitarUno(slotSeleccionado);
@@ -71,7 +104,7 @@ public class Inventory : MonoBehaviour
             slotUI[i].SetSeleccionado(i == slotSeleccionado);
     }
 
-    // Quita una unidad del objeto seleccionado
+    // Quitar una unidad del objeto seleccionado
     private void QuitarUno(int indice)
     {
         var slot = slots[indice];
@@ -81,7 +114,6 @@ public class Inventory : MonoBehaviour
 
         Debug.Log($"Quitando 1 de {slot.nombre}, quedan {slot.cantidad}");
 
-        // Si ya no quedan, expulsar el objeto y limpiar el slot
         if (slot.cantidad <= 0)
         {
             ExpulsarObjeto(indice);
@@ -92,7 +124,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    // Expulsa el objeto y limpia el slot
+    // Expulsar objeto si se queda en 0
     private void ExpulsarObjeto(int indice)
     {
         var slot = slots[indice];
@@ -100,19 +132,17 @@ public class Inventory : MonoBehaviour
 
         Debug.Log($"Expulsando objeto {slot.nombre} del slot {indice}");
 
-        // Crea el objeto en el mundo (si existe su prefab)
         GameObject prefab = Resources.Load<GameObject>($"Objetos/{slot.nombre}");
         if (prefab != null)
         {
             Instantiate(prefab, transform.position + transform.forward, Quaternion.identity);
         }
 
-        // Limpia el slot
         slots[indice] = null;
         slotUI[indice].ActualizarSlot(null);
     }
 
-    // Añadir y sacar objetos (sin cambios)
+    // Añadir objetos
     public bool AñadirAlInventario(Sprite icono, string nombre)
     {
         for (int i = 0; i < slots.Count; i++)
