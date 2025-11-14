@@ -5,12 +5,11 @@ using UnityEngine;
 public class GemSystem : MonoBehaviour
 {
 
-    [SerializeField] private GemsPool.gemType gemTypeToDrop;
 
     public IEnumerator SpawnGem()
     {
         yield return new WaitForSeconds(2f);
-        GameObject newGem = GemsPool.Instance.GetGem(gemTypeToDrop);
+        GameObject newGem = BasicGemsPool.Instance.GetFirstAvailableObject();
         newGem.SetActive(true);
         newGem.transform.position = transform.position;
     }
