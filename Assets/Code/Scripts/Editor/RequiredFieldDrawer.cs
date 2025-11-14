@@ -19,12 +19,15 @@ public class RequiredFieldDrawer : PropertyDrawer{
             GUI.Label(iconRect, new GUIContent(requiredIcon, "This field is required and is either missing or empty!"));
         }
 
-        if (EditorGUI.EndChangeCheck()){
-            property.serializedObject.ApplyModifiedProperties();
-            EditorUtility.SetDirty(property.serializedObject.targetObject);
-
-            //Force a repaint of the hierarchy
+        if (EditorGUI.EndChangeCheck())
+        {
+            if (property.serializedObject != null && property.serializedObject.targetObject != null)
+            {
+                property.serializedObject.ApplyModifiedProperties();
+                EditorUtility.SetDirty(property.serializedObject.targetObject);
+            }
         }
+
 
         EditorGUI.EndProperty();
     }
