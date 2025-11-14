@@ -15,7 +15,7 @@ public class WinCondition : MonoBehaviour
     {
         if (other.CompareTag("Player")) winConditionPanel.SetActive(true);
         Invoke("FreezeTime", 1f);
-        Destroy(this.player.gameObject);
+        //Destroy(this.player.gameObject);
     }
     private void FreezeTime()
     {
