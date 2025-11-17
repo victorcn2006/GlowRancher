@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementBehaviour : MonoBehaviour
+public class EnemySlimeMovementBehaviour : MonoBehaviour
 {
 
     // --------------------------------------------LINKED SCRIPTS------------------------------------------------- \\
     [Header("LINKED SCRIPTS")]
-    [SerializeField] private HungerSystem hungerSystem;
-    [SerializeField] private FoodDetector foodDetector;
+    [SerializeField] private PlayerDetector playerDetector;
 
     // --------------------------------------------MOVEMENT PARAMETERS-------------------------------------------- \\
 
@@ -103,11 +102,11 @@ public class MovementBehaviour : MonoBehaviour
 
     private Vector3 GetJumpDirection()
     {
-        if (hungerSystem.IsHungry() && foodDetector.FoodOnInRangeFoodList())
+        if (playerDetector.CheckPlayerInRange())
         {
-            Vector3 foodDirection = foodDetector.GetClosestFood().gameObject.transform.position - transform.position;
+            Vector3 foodDirection = playerDetector.GetPlayer().transform.position - transform.position;
 
-            foodDirection = LimitateFoodDirectionToRange(foodDirection);
+            foodDirection = LimitateplayerDirectionToRange(foodDirection);
 
             foodDirection.y = VERTICAL_JUMP_FORCE;
 
@@ -127,7 +126,7 @@ public class MovementBehaviour : MonoBehaviour
 
     // --------------------------------------------OTHERS--------------------------------------------\\
 
-    private Vector3 LimitateFoodDirectionToRange(Vector3 foodDirection)
+    private Vector3 LimitateplayerDirectionToRange(Vector3 foodDirection)
     {
         foodDirection.x = Mathf.Clamp(foodDirection.x, MIN_DISTANCE, MAX_DISTANCE);
         foodDirection.z = Mathf.Clamp(foodDirection.z, MIN_DISTANCE, MAX_DISTANCE);

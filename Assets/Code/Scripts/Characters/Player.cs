@@ -50,7 +50,7 @@ public class Player : Character, ISavable{
     }
 
     // Quan el jugador rep dany
-    protected override void TakeDamage(int damage) {
+    public override void TakeDamage(int damage) {
         base.TakeDamage(damage);
     } 
 
