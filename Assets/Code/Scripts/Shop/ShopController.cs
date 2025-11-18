@@ -16,7 +16,7 @@ public class ShopController : MonoBehaviour
         //OnCollisionEnter
         if (collision.collider.tag == "Gem")
         {
-            //que destrueixi la Slimestone
+            Destroy(collision.gameObject);
 
         }
     }

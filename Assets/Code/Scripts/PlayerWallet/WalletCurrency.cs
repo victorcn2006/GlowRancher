@@ -19,6 +19,8 @@ public class WalletCurrency : MonoBehaviour
     }
 
 
+
+
     //serveix per resetajar els diners (es un Singeltone)
     public void ResetMoney(bool save = true)
     {
@@ -67,6 +69,5 @@ public class WalletCurrency : MonoBehaviour
     void UpdateUI()
     {
         Score_txt.text = bank.ToString();
-
     }
 }

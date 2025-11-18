@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Gem : MonoBehaviour, IAspirable
 {
+    public GemData data;
 
     Rigidbody rb;
     private void Start()
@@ -23,8 +24,13 @@ public class Gem : MonoBehaviour, IAspirable
 
     private void OnDestroy()
     {
-        Aspirator.instance.RemoveAspirableObject(this.gameObject);
+        // Si la gemma és destruïda, afegim el valor al banc de monedes
+        if (data != null)
+        {
+            // Afegeix els diners al compte
+            WalletCurrency.instance.Score(data.value);
+            Debug.Log($"Has obtingut {data.value} monedes per la {data.gemName}");
+        }
     }
 
-    //BanckAcount.instance.Score(scoreObtained);
 }
