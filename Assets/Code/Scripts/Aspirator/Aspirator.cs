@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,16 +9,19 @@ public class Aspirator : MonoBehaviour
     public static Aspirator instance;
 
     [SerializeField] private InputActionReference aspirate;
+    [SerializeField] private InputActionReference launchObject;
 
     [SerializeField] private ObjectsDetector objectsDetector;
 
     [SerializeField] private SuctionPoint suctionPoint;
 
+    [SerializeField] private Inventory inventory;
     private List<GameObject> aspirableObjectsList = new List<GameObject>();
 
     private bool aspirating;
 
     [SerializeField] private float aspirateForce;
+    [SerializeField] private float launchForce;
     [SerializeField] private Transform aspiratePoint;
 
     private void Awake()
@@ -38,6 +42,8 @@ public class Aspirator : MonoBehaviour
 
         aspirate.action.performed += SetAspirate;
         aspirate.action.canceled += SetAspirate;
+
+        launchObject.action.performed += LaunchObject;
 
         aspirate.action.Enable();
         aspirating = false;  
@@ -65,6 +71,25 @@ public class Aspirator : MonoBehaviour
             Vector3 aspirateDirection = (aspiratePoint.position - obj.transform.position).normalized;
             obj.GetComponent<Rigidbody>().AddForce(aspirateDirection * aspirateForce * forceFactor, ForceMode.Force);
 
+        }
+    }
+    public void LaunchObject(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            //codigo para disparar el objeto 
+
+            GameObject objectToLaunch = PoolManager.Instance.GetFirstAvailableObject(inventory.QuitarUno());
+            objectToLaunch.transform.position = aspiratePoint.position;
+
+            if (objectToLaunch.CompareTag("Slime"))
+            {
+                objectToLaunch.GetComponentInChildren<Rigidbody>().AddForce(aspiratePoint.forward.normalized * launchForce, ForceMode.Impulse);
+            }
+            else
+            {
+                objectToLaunch.GetComponent<Rigidbody>().AddForce(aspiratePoint.forward.normalized * launchForce, ForceMode.Impulse);
+            }
         }
     }
 

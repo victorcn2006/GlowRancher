@@ -25,18 +25,18 @@ public class Inventory : MonoBehaviour
         slotKeysAction.Enable();
 
         scrollAction.performed += OnScroll;
-        rightClickAction.performed += OnRightClick;
+        //rightClickAction.performed += OnRightClick;
         slotKeysAction.performed += OnNumberKey;
     }
 
     void OnDisable()
     {
         scrollAction.performed -= OnScroll;
-        rightClickAction.performed -= OnRightClick;
+        //rightClickAction.performed -= OnRightClick;
         slotKeysAction.performed -= OnNumberKey;
 
         scrollAction.Disable();
-        rightClickAction.Disable();
+        //rightClickAction.Disable();
         slotKeysAction.Disable();
     }
 
@@ -93,10 +93,11 @@ public class Inventory : MonoBehaviour
     }
 
     // Clic derecho → quitar 1 unidad
+    /*
     private void OnRightClick(InputAction.CallbackContext ctx)
     {
         QuitarUno(slotSeleccionado);
-    }
+    }*/
 
     private void ActualizarSeleccionVisual()
     {
@@ -105,30 +106,32 @@ public class Inventory : MonoBehaviour
     }
 
     // Quitar una unidad del objeto seleccionado
-    private void QuitarUno(int indice)
+    public string QuitarUno()
     {
-        var slot = slots[indice];
-        if (slot == null) return;
+        string objectName = "noName";
+        var slot = slots[slotSeleccionado];
+        if (slot == null) return null;
 
         slot.cantidad--; // Quita 1
 
         Debug.Log($"Quitando 1 de {slot.nombre}, quedan {slot.cantidad}");
 
-        if (slot.cantidad <= 0)
+        if (slot.cantidad >= 0)
         {
-            ExpulsarObjeto(indice);
+            objectName = ExpulsarObjeto(slotSeleccionado);
         }
         else
         {
-            slotUI[indice].ActualizarSlot(slot);
+            slotUI[slotSeleccionado].ActualizarSlot(slot);
         }
+        return objectName;
     }
 
     // Expulsar objeto si se queda en 0
-    private void ExpulsarObjeto(int indice)
+    private string ExpulsarObjeto(int indice)
     {
         var slot = slots[indice];
-        if (slot == null) return;
+        if (slot == null) return null;
 
         Debug.Log($"Expulsando objeto {slot.nombre} del slot {indice}");
 
@@ -140,6 +143,7 @@ public class Inventory : MonoBehaviour
 
         slots[indice] = null;
         slotUI[indice].ActualizarSlot(null);
+        return slot.nombre;
     }
 
     // Añadir objetos
@@ -197,6 +201,7 @@ public class SlotInventario
     public Sprite icono;
     public string nombre;
     public int cantidad;
+    public GameObject slotObject;
 
     public SlotInventario(Sprite icono, string nombre, int cantidad)
     {
