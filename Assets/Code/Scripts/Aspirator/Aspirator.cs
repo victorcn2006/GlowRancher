@@ -11,6 +11,8 @@ public class Aspirator : MonoBehaviour
 
     [SerializeField] private ObjectsDetector objectsDetector;
 
+    [SerializeField] private SuctionPoint suctionPoint;
+
     private List<GameObject> aspirableObjectsList = new List<GameObject>();
 
     private bool aspirating;
@@ -81,11 +83,14 @@ public class Aspirator : MonoBehaviour
     private void StartAspire()
     {
         aspirating = true;
+        suctionPoint.SetCanSuck(true);
+
     }
 
     private void StopAspire()
     {
         aspirating = false;
+        suctionPoint.SetCanSuck(false);
 
         foreach (GameObject obj in aspirableObjectsList)
         {

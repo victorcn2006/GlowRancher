@@ -12,7 +12,7 @@ public class Mouth : MonoBehaviour
         if (other.CompareTag("Food") && hungerSystem.IsHungry())
         {
             hungerSystem.Feed(other.gameObject);
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
         }
     }
 }

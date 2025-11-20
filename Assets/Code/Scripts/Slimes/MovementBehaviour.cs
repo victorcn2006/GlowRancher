@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class MovementBehaviour : MonoBehaviour
 {
-    // --------------------------------------------OBJETIVOS------------------------------------------------------ \\
-    // HACER QUE SE MUEVA ALEATORIAMENTE.                                                    TRUE
-    // PONER CONDICIONES DE MOVIMIENTO.                                                      TRUE (Solo se mueve si está en el estado de OnFloor)
-    // LIMITAR EL MOVIMIENTO PARA MAYOR CONTROL Y EVITAR BUGS.                               FALSE [PRIORIDAD - BAJA] 
-    // IMPLEMENTAR CON EL SISTEMA DE HAMBRE (SE MUEVE HACE LA COMIDA MAS CERCANA)            TRUE
-    // HACER QUE ROTE ANTES DE MOVERSE SALTAR ALEATORIAMENTE.                                FALSE [PRIORIDAD - ALTA]
 
     // --------------------------------------------LINKED SCRIPTS------------------------------------------------- \\
     [Header("LINKED SCRIPTS")]
@@ -52,7 +46,7 @@ public class MovementBehaviour : MonoBehaviour
         jumpTimer = Random.Range(MIN_TIME, MAX_TIME);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
 
         if (canJump)
@@ -126,8 +120,7 @@ public class MovementBehaviour : MonoBehaviour
     }
     // --------------------------------------------SETTERS--------------------------------------------\\
 
-    public void SetCanJump(bool a)
-    {
+    public void SetCanJump(bool a){
         canJump = a;
     }
 

@@ -42,7 +42,7 @@ public class Character : MonoBehaviour {
         Debug.Log(characterName + " ataca.");
     }
 
-    protected virtual void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         //Evita valores negativos
         damage = Mathf.Max(0, damage);
