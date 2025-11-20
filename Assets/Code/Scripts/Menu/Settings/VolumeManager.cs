@@ -21,6 +21,7 @@ public class VolumeManager : MonoBehaviour {
     
     private void Awake(){
         if(slider == null) slider = GetComponentInChildren<Slider>();
+
         switch (sliderType){
             case SLIDERS.GENERAL: volumeParameter = "General"; break;
             case SLIDERS.MUSIC: volumeParameter = "Music"; break;
@@ -55,27 +56,35 @@ public class VolumeManager : MonoBehaviour {
     }
     private void ChangeSlider(float volume){
         if(slider == null || mixer == null) return;
-        
+        if (volume < 0.001f)
+        {
+            slider.onValueChanged.RemoveListener(ChangeSlider);
+            slider.value = 0f;
+            slider.onValueChanged.AddListener(ChangeSlider);
+            volume = 0f;
+        }
         string key = GetPlayerPrefsKey();
         PlayerPrefs.SetFloat(key, volume);
         PlayerPrefs.Save();
+
         SetVolume(volume);
         CheckMute();
     }
     private void SetVolume(float value){
-        if(mixer == null || string.IsNullOrEmpty(volumeParameter)) return;
-        // Evitar valores negativos o cero
-        value = Mathf.Clamp(value, 0.0001f, 1f);
+        if (slider == null || string.IsNullOrEmpty(volumeParameter)) return;
+        value = Mathf.Clamp(value, 0f, 1f);
+        
+
         float minDB = -60f;
         float maxDB = 15f;
         float curve = 0.3f;
+
         float curvedValue = Mathf.Pow(value, curve);
         float dB = Mathf.Lerp(minDB, maxDB, curvedValue);
         mixer.SetFloat(volumeParameter, dB);
-
     }
     private void CheckMute(){
         if(imageMute == null || slider == null) return;
-        imageMute.SetActive(slider.value <= 0.001f);
+        imageMute.SetActive(slider.value <= 0.0001f);
     }
 }

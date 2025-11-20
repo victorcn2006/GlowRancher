@@ -49,7 +49,7 @@ public class EventSystemManager : MonoBehaviour {
     
     private void OnClick(InputAction.CallbackContext context) {
         //This piece of code helps to not lose the focus if we click in other area.
-        if (EventSystem.current.currentSelectedGameObject == null && lastSelectedObject != null)
+        if (EventSystem.current.currentSelectedGameObject == null && lastSelectedObject != null && lastSelectedObject.activeInHierarchy)
             EventSystem.current.SetSelectedGameObject(lastSelectedObject);
     }
     

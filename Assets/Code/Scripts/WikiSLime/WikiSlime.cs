@@ -4,36 +4,32 @@ using UnityEngine.UI;
 public class WikiSlime : MonoBehaviour
 {
     // Referencia al GameObject que contiene la UI de la wiki
-    public GameObject wikiMenu;
-    public GameObject wikiInfo;
+    [SerializeField] private GameObject wikiMenu;
     // Referencias a los GameObjects de los slimes
-    public GameObject slime1;
-    public GameObject slime2;
+    [SerializeField] private GameObject slime1;
+    [SerializeField] private GameObject slime2;
     // (Añadir más slimes si es necesario)
 
     // Referencia al GameObject actualmente activo
     private GameObject currentActiveSlime;
 
     // Referencias a los botones (si usas botones UI)
-    public Button slime1Button;
-    public Button slime2Button;
+    [SerializeField] private Button slime1Button;
+    [SerializeField] private Button slime2Button;
     // (Añadir más botones si es necesario)
 
     // Función para mostrar la UI de la wiki
     public void ActiveWiki()
     {
-        Debug.Log("Activando la UI de la wiki.");
         wikiMenu.SetActive(true);
     }
-
     // Función para ocultar la UI de la wiki
     public void DesactiveWiki()
     {
-        Debug.Log("Desactivando la UI de la wiki.");
         wikiMenu.SetActive(false);
-    }
 
-    void Start()
+    }
+    private void Start()
     {
         // Asegúrate de que slime1 y slime2 no sean nulos
         if (slime1 == null || slime2 == null)
