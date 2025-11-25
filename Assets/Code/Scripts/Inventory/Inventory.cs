@@ -2,10 +2,16 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 
 public class Inventory : MonoBehaviour
 {
-    public List<SlotInventario> slots = new List<SlotInventario>();
+
+    [SerializeField] private InputActionAsset inputs;
+
+    private InputActionMap inventoryInputs;
+
+    private List<SlotInventario> slots = new List<SlotInventario>();
     private const int maxSlots = 4;
     private const int maxCantidadPorSlot = 20;
 
@@ -14,34 +20,32 @@ public class Inventory : MonoBehaviour
     private int slotSeleccionado = 0;
 
     [Header("Controles del inventario")]
-    [SerializeField] private InputAction scrollAction;      // Rueda del ratón
-    [SerializeField] private InputAction rightClickAction;  // Clic derecho
-    [SerializeField] private InputAction slotKeysAction;    // Teclas 1,2,3,4
+    private InputAction scrollAction;      // Rueda del ratón
+    private InputAction rightClickAction;  // Clic derecho
+    private InputAction slotKeysAction;    // Teclas 1,2,3,4
 
-    void OnEnable()
-    {
-        scrollAction.Enable();
-        rightClickAction.Enable();
-        slotKeysAction.Enable();
-
-        scrollAction.performed += OnScroll;
-        rightClickAction.performed += OnRightClick;
-        slotKeysAction.performed += OnNumberKey;
-    }
-
-    void OnDisable()
+    private void OnDisable()
     {
         scrollAction.performed -= OnScroll;
         rightClickAction.performed -= OnRightClick;
         slotKeysAction.performed -= OnNumberKey;
-
-        scrollAction.Disable();
-        rightClickAction.Disable();
-        slotKeysAction.Disable();
+        inputs.Disable();
     }
 
-    void Start()
+    private void Start()
     {
+        if (inputs == null) return; 
+        else inputs.Enable();
+
+        if (inventoryInputs == null) inventoryInputs = inputs.FindActionMap("Inventory");
+        if (scrollAction == null) scrollAction = inventoryInputs.FindAction("Scroll");
+        if (rightClickAction == null) rightClickAction = inventoryInputs.FindAction("RightClick");
+        if (slotKeysAction == null) slotKeysAction = inventoryInputs.FindAction("InventoryNavigation");
+
+        scrollAction.performed += OnScroll;
+        rightClickAction.performed += OnRightClick;
+        slotKeysAction.performed += OnNumberKey;
+
         slots.Clear();
         for (int i = 0; i < maxSlots; i++)
         {
@@ -54,42 +58,44 @@ public class Inventory : MonoBehaviour
     // -----------------------------------------
     // Selección con teclas 1,2,3,4
     // -----------------------------------------
-    private void OnNumberKey(InputAction.CallbackContext ctx)
+    public void OnNumberKey(InputAction.CallbackContext ctx)
     {
-        string key = ctx.control.name;
-
+        if (!ctx.performed)
+            return;
+        if (InputManager.Instance.isPaused || InputManager.Instance.IsWikiOpen()) return;
+        Key key = ((KeyControl)ctx.control).keyCode;
         switch (key)
         {
-            case "1":
+            case Key.Digit1:
                 slotSeleccionado = 0;
                 break;
-            case "2":
+            case Key.Digit2:
                 slotSeleccionado = 1;
                 break;
-            case "3":
+            case Key.Digit3:
                 slotSeleccionado = 2;
                 break;
-            case "4":
+            case Key.Digit4:
                 slotSeleccionado = 3;
                 break;
-            default:
-                return;
         }
-
         ActualizarSeleccionVisual();
     }
 
     // Movimiento de rueda del ratón
     private void OnScroll(InputAction.CallbackContext ctx)
     {
+        if (InputManager.Instance.isPaused || InputManager.Instance.IsWikiOpen()) return;
         float scroll = ctx.ReadValue<Vector2>().y;
 
-        if (scroll > 0)
+        if (scroll > 0f)
             slotSeleccionado = (slotSeleccionado + 1) % maxSlots;
-        else if (scroll < 0)
+        else if (scroll < 0f)
             slotSeleccionado = (slotSeleccionado - 1 + maxSlots) % maxSlots;
 
         ActualizarSeleccionVisual();
+        
+
     }
 
     // Clic derecho → quitar 1 unidad
@@ -204,4 +210,5 @@ public class SlotInventario
         this.nombre = nombre;
         this.cantidad = cantidad;
     }
+
 }
