@@ -92,21 +92,38 @@ public class Inventory : MonoBehaviour
         ActualizarSeleccionVisual();
     }
 
-    // Clic derecho → quitar 1 unidad
-    /*
-    private void OnRightClick(InputAction.CallbackContext ctx)
-    {
-        QuitarUno(slotSeleccionado);
-    }*/
-
     private void ActualizarSeleccionVisual()
     {
         for (int i = 0; i < slotUI.Length; i++)
             slotUI[i].SetSeleccionado(i == slotSeleccionado);
     }
 
-    // Quitar una unidad del objeto seleccionado
     public string QuitarUno()
+    {
+
+        string objectName = "NoName";
+
+        var slot = slots[slotSeleccionado];
+        if (slot == null) return null;
+
+
+        if (slot.cantidad > 0)
+        {
+            slot.cantidad--; //Quita 1
+            objectName = slot.nombre;
+            slotUI[slotSeleccionado].ActualizarSlot(slot);
+            if (slot.cantidad <= 0)
+            {
+                ExpulsarObjeto(slotSeleccionado);
+            }
+        }
+
+        return objectName;
+    }
+
+    // Quitar una unidad del objeto seleccionado
+    /*
+    public string QuitarUino()
     {
         string objectName = "noName";
         var slot = slots[slotSeleccionado];
@@ -116,17 +133,27 @@ public class Inventory : MonoBehaviour
 
         Debug.Log($"Quitando 1 de {slot.nombre}, quedan {slot.cantidad}");
 
-        if (slot.cantidad >= 0)
+        if (slot.cantidad <= 0)
         {
-            objectName = ExpulsarObjeto(slotSeleccionado);
+            ExpulsarObjeto(slotSeleccionado);
         }
         else
         {
             slotUI[slotSeleccionado].ActualizarSlot(slot);
         }
         return objectName;
+    }*/
+
+    private void ExpulsarObjeto(int indice)
+    {
+        var slot = slots[indice];
+
+        slots[indice] = null;
+        slotUI[indice].ActualizarSlot(null);
     }
 
+
+    /*
     // Expulsar objeto si se queda en 0
     private string ExpulsarObjeto(int indice)
     {
@@ -138,13 +165,13 @@ public class Inventory : MonoBehaviour
         GameObject prefab = Resources.Load<GameObject>($"Objetos/{slot.nombre}");
         if (prefab != null)
         {
-            Instantiate(prefab, transform.position + transform.forward, Quaternion.identity);
+            //Instantiate(prefab, transform.position + transform.forward, Quaternion.identity);
         }
 
         slots[indice] = null;
         slotUI[indice].ActualizarSlot(null);
         return slot.nombre;
-    }
+    }*/
 
     // Añadir objetos
     public bool AñadirAlInventario(Sprite icono, string nombre)
@@ -176,7 +203,7 @@ public class Inventory : MonoBehaviour
 
         return false;
     }
-
+    /*
     public bool SacarDelInventario(string nombre)
     {
         for (int i = 0; i < slots.Count; i++)
@@ -193,6 +220,8 @@ public class Inventory : MonoBehaviour
         }
         return false;
     }
+
+    */
 }
 
 [System.Serializable]

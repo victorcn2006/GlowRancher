@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PoolManager : MonoBehaviour
@@ -37,9 +39,14 @@ public class PoolManager : MonoBehaviour
 
     public GameObject GetFirstAvailableObject(string id)
     {
+        if (id == null)
+        {
+            id = "NullId";
+        }
+
         if (!poolsDictionary.ContainsKey(id))   
         {
-            Debug.LogError("No existe pool con ID: " + id);
+            Debug.Log("No existe pool con ID: " + id);
             return null;
         }
 
