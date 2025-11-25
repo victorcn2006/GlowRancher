@@ -15,7 +15,7 @@ public class SceneFieldPropertyDrawer : PropertyDrawer {
         {
             sceneAsset.objectReferenceValue = EditorGUI.ObjectField(position, sceneAsset.objectReferenceValue, typeof(SceneAsset), false);
         }
-        if (sceneAsset.objectReferenceValue != null)
+        if (sceneAsset != null && sceneAsset.objectReferenceValue != null)
         {
             sceneName.stringValue = (sceneAsset.objectReferenceValue as SceneAsset).name;
         }

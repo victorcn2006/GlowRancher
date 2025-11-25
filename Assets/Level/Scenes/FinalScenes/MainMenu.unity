@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 44059468}
   - component: {fileID: 44059467}
   - component: {fileID: 44059466}
+  - component: {fileID: 44059471}
   - component: {fileID: 44059469}
   - component: {fileID: 44059470}
   m_Layer: 0
@@ -272,6 +273,19 @@ MonoBehaviour:
   sceneToLoad:
     _sceneAsset: {fileID: 102900000, guid: fe480cf8412ab69419a7f4f77ac26a32, type: 3}
     _sceneName: World
+--- !u!114 &44059471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44059464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7caca753bb14bdb4e889b1f11e860fc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentButton: 0
 --- !u!1 &57745451
 GameObject:
   m_ObjectHideFlags: 0
@@ -1078,6 +1092,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1348939583}
   m_CullTransparentMesh: 1
+--- !u!1 &1411521766 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 765488798403800077, guid: 17d982f16127e6d418ad023742259aab, type: 3}
+  m_PrefabInstance: {fileID: 1433339125}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1411521767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411521766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3898fcea83e8cb444b3c7767edf89407, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1433339125
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1134,9 +1165,15 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 765488798403800077, guid: 17d982f16127e6d418ad023742259aab, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1411521767}
     - targetCorrespondingSourceObject: {fileID: 7582234958551040542, guid: 17d982f16127e6d418ad023742259aab, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1433339127}
+    - targetCorrespondingSourceObject: {fileID: 7582234958551040542, guid: 17d982f16127e6d418ad023742259aab, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1433339130}
     - targetCorrespondingSourceObject: {fileID: 5508962264597310824, guid: 17d982f16127e6d418ad023742259aab, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1433339129}
@@ -1180,6 +1217,102 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 01e531daa8a5847439614ba9cf0e0451, type: 3}
+--- !u!82 &1433339130
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1433339126}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -1444234569401721273, guid: 26c5e59eb3ca8b44ebc3a0b4e969f6dc, type: 2}
+  m_audioClip: {fileID: 8300000, guid: b255e344f3d87be48a9d1f13a2ec74c1, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &1433339133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1204,8 +1337,10 @@ GameObject:
   - component: {fileID: 1549357013}
   - component: {fileID: 1549357012}
   - component: {fileID: 1549357011}
+  - component: {fileID: 1549357017}
   - component: {fileID: 1549357014}
   - component: {fileID: 1549357015}
+  - component: {fileID: 1549357016}
   m_Layer: 0
   m_Name: Options Button
   m_TagString: Untagged
@@ -1341,7 +1476,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneToLoad:
     _sceneAsset: {fileID: 102900000, guid: d63ead7897518c149b9409dc5dfe52f5, type: 3}
-    _sceneName: OptionsScene
+    _sceneName: OptionsMenu
+--- !u!114 &1549357016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1549357009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7caca753bb14bdb4e889b1f11e860fc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentButton: 1
+--- !u!114 &1549357017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1549357009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7caca753bb14bdb4e889b1f11e860fc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentButton: 2
 --- !u!1 &1619499241
 GameObject:
   m_ObjectHideFlags: 0
@@ -1456,7 +1617,9 @@ GameObject:
   - component: {fileID: 1770851258}
   - component: {fileID: 1770851257}
   - component: {fileID: 1770851256}
+  - component: {fileID: 1770851261}
   - component: {fileID: 1770851259}
+  - component: {fileID: 1770851260}
   m_Layer: 0
   m_Name: Exit Button
   m_TagString: Untagged
@@ -1527,19 +1690,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1770851257}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: Exit
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1770851257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1590,6 +1741,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c75a4433206744f41b276ae1bf5de9a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1770851260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1770851254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7caca753bb14bdb4e889b1f11e860fc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentButton: 4
+--- !u!114 &1770851261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1770851254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7caca753bb14bdb4e889b1f11e860fc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentButton: 4
 --- !u!1 &1796240191
 GameObject:
   m_ObjectHideFlags: 0
