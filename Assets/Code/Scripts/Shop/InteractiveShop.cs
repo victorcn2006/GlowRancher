@@ -5,7 +5,10 @@ using UnityEngine.InputSystem;
 
 public class InteractiveShop : MonoBehaviour
 {
+    [Header("Refs")]
     public GameObject ShopPanel;
+
+
     private bool isShopActive = false; // Variable per saber si la botiga està activa
 
     private void Update()

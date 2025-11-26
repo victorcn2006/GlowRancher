@@ -5,12 +5,20 @@ using UnityEngine.UI;
 
 public class PanelShopController : MonoBehaviour
 {
-    public GameObject itemOneLabel;
+    [Header("Refs")]
+    WalletCurrency wallet;
+
+    public GameObject incinerator;
+
+    [Header("Buttons")]
+    [SerializeField]private Button ItemOne;
 
     // Start is called before the first frame update
     void Start()
     {
-        itemOneLabel.SetActive(false);
+        incinerator.SetActive(false);
+
+        wallet = WalletCurrency.instance;
     }
 
     // Update is called once per frame
@@ -20,6 +28,23 @@ public class PanelShopController : MonoBehaviour
     }
 
     public void ActivateItemOne() {
-        itemOneLabel.SetActive(true);
+        incinerator.SetActive(true);
+    }
+
+    public void BuyIncinerator() {
+
+        if (wallet.bank >= 5)
+        {
+            wallet.bank -= 5;
+            wallet.SaveMoney();
+            wallet.Score_txt.text = wallet.bank.ToString();
+
+            Debug.Log("Incinerator purchased");
+            incinerator.SetActive(true);
+        }
+        else
+        {
+            Debug.Log("Not enough money");
+        }
     }
 }
