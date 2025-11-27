@@ -46,7 +46,7 @@ public class MovementBehaviour : MonoBehaviour
         jumpTimer = Random.Range(MIN_TIME, MAX_TIME);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
 
         if (canJump)
@@ -120,8 +120,7 @@ public class MovementBehaviour : MonoBehaviour
     }
     // --------------------------------------------SETTERS--------------------------------------------\\
 
-    public void SetCanJump(bool a)
-    {
+    public void SetCanJump(bool a){
         canJump = a;
     }
 

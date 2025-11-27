@@ -7,7 +7,6 @@ public class SlotUI : MonoBehaviour
 {
     public Image icono;       // Imagen que muestra el icono del objeto
     public TextMeshProUGUI cantidadTexto;
-    private SlotInventario slotActual;
 
     [Header("Colores de selección")]
     [SerializeField] private Image fondoSlot; //Imagen de fondo del slot (así no tocas el icono del objeto)
@@ -16,7 +15,7 @@ public class SlotUI : MonoBehaviour
 
     public void ActualizarSlot(SlotInventario slot)
     {
-        slotActual = slot;
+        var slotActual = slot;
 
         if (slot == null)
         {
@@ -31,7 +30,7 @@ public class SlotUI : MonoBehaviour
         }
     }
 
-    // 🔹 Método que cambia visualmente el color del slot seleccionado
+    //Método que cambia visualmente el color del slot seleccionado
     public void SetSeleccionado(bool seleccionado)
     {
         if (fondoSlot != null)

@@ -25,7 +25,7 @@ public class WikiManager : MonoBehaviour
     {
         // Desactivamos el menú de Wiki al inicio
         wikiMenu.DesactiveWiki();
-
+        InputManager.Instance.SetWikiOpen(false);
         // Aseguramos que el puntero esté oculto al inicio si el menú está desactivado
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;  // Opcional: bloquear el puntero en el centro
@@ -36,6 +36,8 @@ public class WikiManager : MonoBehaviour
         // Verificamos si la acción de entrada está siendo activada (por ejemplo, tecla 'I' presionada)
         if (wikiAction.triggered)
         {
+            if (InputManager.Instance != null && InputManager.Instance.isPaused)
+                return;
             // Cambiamos el estado del menú (si está activo, lo desactivamos; si está desactivado, lo activamos)
             isWikiActive = !isWikiActive;
 
@@ -45,9 +47,8 @@ public class WikiManager : MonoBehaviour
                 wikiMenu.ActiveWiki();
                 Cursor.visible = true; // Mostrar el puntero
                 Cursor.lockState = CursorLockMode.None; // Desbloquear el puntero
-
-                // Pausar el juego (detener el tiempo)
-                Time.timeScale = 0;  // Detener el tiempo del juego
+                Time.timeScale = 0f;
+                InputManager.Instance.SetWikiOpen(true);
             }
             else
             {
@@ -55,9 +56,8 @@ public class WikiManager : MonoBehaviour
                 wikiMenu.DesactiveWiki();
                 Cursor.visible = false; // Ocultar el puntero
                 Cursor.lockState = CursorLockMode.Locked; // Opcional: bloquear el puntero en el centro
-
-                // Reanudar el juego (restaurar el tiempo normal)
-                Time.timeScale = 1;  // Reanudar el tiempo del juego
+                Time.timeScale = 1f;
+                InputManager.Instance.SetWikiOpen(false);
             }
         }
     }
