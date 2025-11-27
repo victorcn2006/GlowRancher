@@ -67,7 +67,7 @@ public class VolumeManager : MonoBehaviour {
         // Evitar valores negativos o cero
         value = Mathf.Clamp(value, 0.0001f, 1f);
         float minDB = -60f;
-        float maxDB = 15f;
+        float maxDB = 0f;
         float curve = 0.3f;
         float curvedValue = Mathf.Pow(value, curve);
         float dB = Mathf.Lerp(minDB, maxDB, curvedValue);
