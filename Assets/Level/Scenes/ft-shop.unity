@@ -1165,6 +1165,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 392648527}
   m_CullTransparentMesh: 1
+--- !u!1001 &412474824
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1713312694162730621, guid: 7bc1bf32e62b36a4183ae345186c165b, type: 3}
+      propertyPath: m_Name
+      value: BlueSlimestone
+      objectReference: {fileID: 0}
+    - target: {fileID: 5423906584640572661, guid: 7bc1bf32e62b36a4183ae345186c165b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.56734
+      objectReference: {fileID: 0}
+    - target: {fileID: 5423906584640572661, guid: 7bc1bf32e62b36a4183ae345186c165b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.2100004
+      objectReference: {fileID: 0}
+    - target: {fileID: 5423906584640572661, guid: 7bc1bf32e62b36a4183ae345186c165b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -14.90506
+      objectReference: {fileID: 0}
+    - target: {fileID: 5423906584640572661, guid: 7bc1bf32e62b36a4183ae345186c165b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5423906584640572661, guid: 7bc1bf32e62b36a4183ae345186c165b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5423906584640572661, guid: 7bc1bf32e62b36a4183ae345186c165b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5423906584640572661, guid: 7bc1bf32e62b36a4183ae345186c165b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5423906584640572661, guid: 7bc1bf32e62b36a4183ae345186c165b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5423906584640572661, guid: 7bc1bf32e62b36a4183ae345186c165b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5423906584640572661, guid: 7bc1bf32e62b36a4183ae345186c165b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7bc1bf32e62b36a4183ae345186c165b, type: 3}
 --- !u!1 &417663816 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3205707121517663164, guid: aaf5f0c1e594b854fb67e145c0d2e296, type: 3}
@@ -3724,12 +3781,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 111143062fc2d4a46b266e77b387a160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  basicGemPrefab: {fileID: 7305070837011203057, guid: ec706ca08ecd19c4cbcadd72d0ee2a78, type: 3}
-  grassGemPrefab: {fileID: 0}
-  rockGemPrefab: {fileID: 0}
-  basicGemsList: []
-  grassGemsList: []
-  rockGemsList: []
+  BlueGemPrefab: {fileID: 1713312694162730621, guid: 7bc1bf32e62b36a4183ae345186c165b, type: 3}
+  RedGemPrefab: {fileID: 5097261789379587870, guid: b8167ae71f7ed084487204e9c9e5f763, type: 3}
+  RedBlueGemPrefab: {fileID: 686360474168351902, guid: d51df7d31cb592c42aca3941fd49432d, type: 3}
+  blueGemsList: []
+  redGemsList: []
+  redblueGemsList: []
 --- !u!114 &908038398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7684,3 +7741,4 @@ SceneRoots:
   - {fileID: 1983394758}
   - {fileID: 1573464851}
   - {fileID: 266947580}
+  - {fileID: 412474824}

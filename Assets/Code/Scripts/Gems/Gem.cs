@@ -22,15 +22,8 @@ public class Gem : MonoBehaviour, IAspirable
         rb.useGravity = true;
     }
 
-    private void OnDestroy()
-    {
-        // Si la gemma és destruïda, afegim el valor al banc de monedes
-        if (data != null)
-        {
-            // Afegeix els diners al compte
-            WalletCurrency.instance.Score(data.value);
-            Debug.Log($"Has obtingut {data.value} monedes per la {data.gemName}");
-        }
+    public int GetValue() {
+        return data.value;
     }
 
 }

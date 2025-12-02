@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class ShopController : MonoBehaviour
 {
+    //[SerializeField]Gem gem;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,8 +18,10 @@ public class ShopController : MonoBehaviour
         //OnCollisionEnter
         if (collision.collider.tag == "Gem")
         {
-            Destroy(collision.gameObject);
-
+            int gemValue = collision.gameObject.GetComponent<Gem>().GetValue();
+            WalletCurrency.instance.Score(gemValue);
+            Debug.Log($"Has obtingut {gemValue} monedes per la {collision.gameObject.GetComponent<Gem>().data.gemName}");
+            collision.gameObject.SetActive(false);
         }
     }
 

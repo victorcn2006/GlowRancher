@@ -5,7 +5,7 @@ using UnityEngine;
 public class GemSystem : MonoBehaviour
 {
 
-    [SerializeField] private GemsPool.gemType gemTypeToDrop;
+    [SerializeField] private GemsPool.gemTypes gemTypeToDrop;
 
     public IEnumerator SpawnGem()
     {
