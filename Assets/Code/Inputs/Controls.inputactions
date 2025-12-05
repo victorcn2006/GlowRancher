@@ -754,6 +754,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "LaunchObject",
+                    "type": "Button",
+                    "id": "5730e902-ba6b-4e99-aeab-d2070f98deb0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -765,6 +774,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Aspirate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "47089912-b4d8-499a-b941-7859d8f5030c",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LaunchObject",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -7,7 +7,7 @@ public class ItemPickUp : MonoBehaviour, IAspirable
 
     public void BeingAspired()
     {
-        Debug.Log("Que me chucla");
+        throw new System.NotImplementedException();
     }
 
     public void StopBeingAspired()

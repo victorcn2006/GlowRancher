@@ -8,7 +8,7 @@ public class PlayerCameraMovement : MonoBehaviour
 {
 
     [Header("View")]
-    [HideInInspector] public float rotationSense = 3f;
+    [HideInInspector] public float rotationSense = 10f;
     private float cameraVerticalAngle;
     
     [SerializeField] private Camera playerCamera;
