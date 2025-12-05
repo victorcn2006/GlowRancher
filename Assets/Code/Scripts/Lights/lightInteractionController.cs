@@ -28,7 +28,7 @@ public class lightInteractionController : MonoBehaviour
 
     public void ActivateObject() {
 
-        lRef.sun.intensity = 0.2f;
+        lRef.sun.intensity = 0.5f;
         //lRef.sun.intensity = Mathf.Lerp(intenPrin, intenenFi, ActTime / duration);            //Llum progresiva
 
         isOn = !isOn;

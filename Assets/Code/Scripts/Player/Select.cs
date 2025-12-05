@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class Select : MonoBehaviour
 {
     lightInteractionController lightContrll;
+    InteractiveShop interactiveShop;
 
     LayerMask mask;
     public float distance = 1.5f;
@@ -29,6 +30,16 @@ public class Select : MonoBehaviour
             if (hit.collider.tag == "InteractuableObject" ) 
             {
                 hit.collider.transform.GetComponent<lightInteractionController>().ActivateObject();
+            }
+
+            if (hit.collider.tag == "InteractuableShop")
+            {
+                Debug.Log("Shop.Entra");
+                hit.collider.transform.GetComponent<InteractiveShop>().ToggleShop(); // Canviem aquí
+            }
+            else
+            {
+                Debug.Log("Error");
             }
         }
     }

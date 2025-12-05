@@ -7,16 +7,25 @@ public class GemsPool : MonoBehaviour
 
     public static GemsPool Instance;
 
-    [SerializeField] private GameObject basicGemPrefab;
-    [SerializeField] private GameObject grassGemPrefab;
-    [SerializeField] private GameObject rockGemPrefab;
+    [Header("BASIC GEMS")]
+    [SerializeField] private GameObject BlueGemPrefab;
+    [SerializeField] private GameObject RedGemPrefab;
+
+    [Header("FUSION GEMS")]
+    [SerializeField] private GameObject RedBlueGemPrefab;
+
+
+    [Header("BASIC GEMS POOLS")]
+    public List<GameObject> blueGemsList = new List<GameObject>();
+    public List<GameObject> redGemsList = new List<GameObject>();
+
+    [Header("FUSION GEMS POOLS")]
+    public List<GameObject> redblueGemsList = new List<GameObject>();
+
     private GameObject currentGemPrefab;
 
-    public List<GameObject> basicGemsList = new List<GameObject>();
-    public List<GameObject> grassGemsList = new List<GameObject>();
-    public List<GameObject> rockGemsList = new List<GameObject>();
 
-    public enum gemType {BASIC_GEM, GRASS_GEM, ROCK_GEM};
+    public enum gemTypes { BLUE_GEM, RED_GEM, REDBLUE_GEM};
 
     private void Awake()
     {
@@ -30,31 +39,31 @@ public class GemsPool : MonoBehaviour
         }
     }
 
-    public GameObject GetGem(gemType gemTypeRequested)
+    public GameObject GetGem(gemTypes gemTypeRequested)
     {
         List<GameObject> currentGemList = new List<GameObject>();
         GameObject gemToRetrun;
         switch (gemTypeRequested)
         {
-            case gemType.BASIC_GEM:
-                currentGemPrefab = basicGemPrefab;
-                currentGemList = basicGemsList;
+            case gemTypes.BLUE_GEM:
+                currentGemPrefab = BlueGemPrefab;
+                currentGemList = blueGemsList;
                 gemToRetrun = GetFirstAvailableObject(currentGemList);
-                basicGemsList = currentGemList;
+                blueGemsList = currentGemList;
                 return gemToRetrun;
 
-            case gemType.GRASS_GEM:
-                currentGemPrefab = grassGemPrefab;
-                currentGemList = grassGemsList;
+            case gemTypes.RED_GEM:
+                currentGemPrefab = RedGemPrefab;
+                currentGemList = redGemsList;
                 gemToRetrun = GetFirstAvailableObject(currentGemList);
-                grassGemsList = currentGemList;
+                redGemsList = currentGemList;
                 return gemToRetrun;
 
-            case gemType.ROCK_GEM:
-                currentGemPrefab = rockGemPrefab;
-                currentGemList = rockGemsList;
+            case gemTypes.REDBLUE_GEM:
+                currentGemPrefab = RedBlueGemPrefab;
+                currentGemList = redblueGemsList;
                 gemToRetrun = GetFirstAvailableObject(currentGemList);
-                rockGemsList = currentGemList;
+                redblueGemsList = currentGemList;
                 return gemToRetrun;
         }
         return null;
