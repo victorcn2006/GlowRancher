@@ -8,6 +8,7 @@ public class VolumeManager : MonoBehaviour {
         MUSIC,
         GUI
     }
+
     private const string VOLUME_KEY = "generalAudio";
     private const string MUSIC_KEY = "musicAudio";
     private const string GUI_KEY = "guiAudio";
@@ -18,73 +19,83 @@ public class VolumeManager : MonoBehaviour {
 
     private string volumeParameter;
     private Slider slider;
-    
-    private void Awake(){
-        if(slider == null) slider = GetComponentInChildren<Slider>();
 
-        switch (sliderType){
+    private void Awake() {
+        slider = GetComponentInChildren<Slider>();
+
+        switch (sliderType) {
             case SLIDERS.GENERAL: volumeParameter = "General"; break;
-            case SLIDERS.MUSIC: volumeParameter = "Music"; break;
-            case SLIDERS.GUI: volumeParameter = "GUI"; break;
+            case SLIDERS.MUSIC:   volumeParameter = "Music"; break;
+            case SLIDERS.GUI:     volumeParameter = "GUI"; break;
         }
     }
 
-    private void Start(){
-        if(slider == null || mixer == null) return;
-        
-        // Cargar valor guardado si existe (sin usar default)
+    private void Start() {
+        if (slider == null || mixer == null) return;
+
+        // Cargar valor guardado
         string key = GetPlayerPrefsKey();
-        if(PlayerPrefs.HasKey(key)){
+        if (PlayerPrefs.HasKey(key))
             slider.value = PlayerPrefs.GetFloat(key);
-        }
-        
-        SetVolume(slider.value);
-        CheckMute();
-        slider.onValueChanged.AddListener(ChangeSlider);
+
+        ApplyVolume(slider.value);
+
+        slider.onValueChanged.AddListener(OnSliderChanged);
+
+        UpdateMuteIcon();
     }
-    
-    private string GetPlayerPrefsKey(){
-        switch (sliderType){
-            case SLIDERS.GENERAL: return VOLUME_KEY;
-            case SLIDERS.MUSIC: return MUSIC_KEY;
-            case SLIDERS.GUI: return GUI_KEY;
-            default: return VOLUME_KEY;
-        }
+
+    private void OnDisable() {
+        if (slider != null)
+            slider.onValueChanged.RemoveListener(OnSliderChanged);
     }
-    private void OnDisable(){
-        if(slider != null) slider.onValueChanged.RemoveListener(ChangeSlider);
+
+    private string GetPlayerPrefsKey() {
+        return sliderType switch {
+            SLIDERS.GENERAL => VOLUME_KEY,
+            SLIDERS.MUSIC => MUSIC_KEY,
+            SLIDERS.GUI => GUI_KEY,
+            _ => VOLUME_KEY
+        };
     }
-    private void ChangeSlider(float volume){
-        if(slider == null || mixer == null) return;
-        if (volume < 0.001f)
-        {
-            slider.onValueChanged.RemoveListener(ChangeSlider);
+
+    private void OnSliderChanged(float value) {
+        if (value < 0.001f) {
+            // Evita loops
+            slider.onValueChanged.RemoveListener(OnSliderChanged);
             slider.value = 0f;
-            slider.onValueChanged.AddListener(ChangeSlider);
-            volume = 0f;
+            slider.onValueChanged.AddListener(OnSliderChanged);
+            value = 0f;
         }
-        string key = GetPlayerPrefsKey();
-        PlayerPrefs.SetFloat(key, volume);
+
+        PlayerPrefs.SetFloat(GetPlayerPrefsKey(), value);
         PlayerPrefs.Save();
 
-        SetVolume(volume);
-        CheckMute();
+        ApplyVolume(value);
+        UpdateMuteIcon();
     }
-    private void SetVolume(float value){
-        if (slider == null || string.IsNullOrEmpty(volumeParameter)) return;
-        value = Mathf.Clamp(value, 0f, 1f);
-        
 
-        float minDB = -60f;
-        float maxDB = 15f;
+    private void ApplyVolume(float value) {
+        value = Mathf.Clamp01(value);
+
+        // dB mínimos para silencio real
+        float minDB = -80f;  
+        float maxDB = 0f;
+
+        // Curva logarítmica
         float curve = 0.3f;
-
         float curvedValue = Mathf.Pow(value, curve);
         float dB = Mathf.Lerp(minDB, maxDB, curvedValue);
+
+        // Asegurar mute REAL
+        if (value <= 0.0001f)
+            dB = minDB;
+
         mixer.SetFloat(volumeParameter, dB);
     }
-    private void CheckMute(){
-        if(imageMute == null || slider == null) return;
-        imageMute.SetActive(slider.value <= 0.0001f);
+
+    private void UpdateMuteIcon() {
+        if (imageMute != null)
+            imageMute.SetActive(slider.value <= 0.001f);
     }
 }
