@@ -2,16 +2,10 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Controls;
 
 public class Inventory : MonoBehaviour
 {
-
-    [SerializeField] private InputActionAsset inputs;
-
-    private InputActionMap inventoryInputs;
-
-    private List<SlotInventario> slots = new List<SlotInventario>();
+    public List<SlotInventario> slots = new List<SlotInventario>();
     private const int maxSlots = 4;
     private const int maxCantidadPorSlot = 20;
 
@@ -20,32 +14,34 @@ public class Inventory : MonoBehaviour
     private int slotSeleccionado = 0;
 
     [Header("Controles del inventario")]
-    private InputAction scrollAction;      // Rueda del ratón
-    private InputAction rightClickAction;  // Clic derecho
-    private InputAction slotKeysAction;    // Teclas 1,2,3,4
+    [SerializeField] private InputAction scrollAction;      // Rueda del ratón
+    [SerializeField] private InputAction rightClickAction;  // Clic derecho
+    [SerializeField] private InputAction slotKeysAction;    // Teclas 1,2,3,4
 
-    private void OnDisable()
+    void OnEnable()
     {
-        scrollAction.performed -= OnScroll;
-        rightClickAction.performed -= OnRightClick;
-        slotKeysAction.performed -= OnNumberKey;
-        inputs.Disable();
-    }
-
-    private void Start()
-    {
-        if (inputs == null) return; 
-        else inputs.Enable();
-
-        if (inventoryInputs == null) inventoryInputs = inputs.FindActionMap("Inventory");
-        if (scrollAction == null) scrollAction = inventoryInputs.FindAction("Scroll");
-        if (rightClickAction == null) rightClickAction = inventoryInputs.FindAction("RightClick");
-        if (slotKeysAction == null) slotKeysAction = inventoryInputs.FindAction("InventoryNavigation");
+        scrollAction.Enable();
+        rightClickAction.Enable();
+        slotKeysAction.Enable();
 
         scrollAction.performed += OnScroll;
-        rightClickAction.performed += OnRightClick;
+        //rightClickAction.performed += OnRightClick;
         slotKeysAction.performed += OnNumberKey;
+    }
 
+    void OnDisable()
+    {
+        scrollAction.performed -= OnScroll;
+        //rightClickAction.performed -= OnRightClick;
+        slotKeysAction.performed -= OnNumberKey;
+
+        scrollAction.Disable();
+        //rightClickAction.Disable();
+        slotKeysAction.Disable();
+    }
+
+    void Start()
+    {
         slots.Clear();
         for (int i = 0; i < maxSlots; i++)
         {
@@ -58,50 +54,42 @@ public class Inventory : MonoBehaviour
     // -----------------------------------------
     // Selección con teclas 1,2,3,4
     // -----------------------------------------
-    public void OnNumberKey(InputAction.CallbackContext ctx)
+    private void OnNumberKey(InputAction.CallbackContext ctx)
     {
-        if (!ctx.performed)
-            return;
-        if (InputManager.Instance.isPaused || InputManager.Instance.IsWikiOpen()) return;
-        Key key = ((KeyControl)ctx.control).keyCode;
+        string key = ctx.control.name;
+
         switch (key)
         {
-            case Key.Digit1:
+            case "1":
                 slotSeleccionado = 0;
                 break;
-            case Key.Digit2:
+            case "2":
                 slotSeleccionado = 1;
                 break;
-            case Key.Digit3:
+            case "3":
                 slotSeleccionado = 2;
                 break;
-            case Key.Digit4:
+            case "4":
                 slotSeleccionado = 3;
                 break;
+            default:
+                return;
         }
+
         ActualizarSeleccionVisual();
     }
 
     // Movimiento de rueda del ratón
     private void OnScroll(InputAction.CallbackContext ctx)
     {
-        if (InputManager.Instance.isPaused || InputManager.Instance.IsWikiOpen()) return;
         float scroll = ctx.ReadValue<Vector2>().y;
 
-        if (scroll > 0f)
+        if (scroll > 0)
             slotSeleccionado = (slotSeleccionado + 1) % maxSlots;
-        else if (scroll < 0f)
+        else if (scroll < 0)
             slotSeleccionado = (slotSeleccionado - 1 + maxSlots) % maxSlots;
 
         ActualizarSeleccionVisual();
-        
-
-    }
-
-    // Clic derecho → quitar 1 unidad
-    private void OnRightClick(InputAction.CallbackContext ctx)
-    {
-        QuitarUno(slotSeleccionado);
     }
 
     private void ActualizarSeleccionVisual()
@@ -110,11 +98,36 @@ public class Inventory : MonoBehaviour
             slotUI[i].SetSeleccionado(i == slotSeleccionado);
     }
 
-    // Quitar una unidad del objeto seleccionado
-    private void QuitarUno(int indice)
+    public string QuitarUno()
     {
-        var slot = slots[indice];
-        if (slot == null) return;
+
+        string objectName = "NoName";
+
+        var slot = slots[slotSeleccionado];
+        if (slot == null) return null;
+
+
+        if (slot.cantidad > 0)
+        {
+            slot.cantidad--; //Quita 1
+            objectName = slot.nombre;
+            slotUI[slotSeleccionado].ActualizarSlot(slot);
+            if (slot.cantidad <= 0)
+            {
+                ExpulsarObjeto(slotSeleccionado);
+            }
+        }
+
+        return objectName;
+    }
+
+    // Quitar una unidad del objeto seleccionado
+    /*
+    public string QuitarUino()
+    {
+        string objectName = "noName";
+        var slot = slots[slotSeleccionado];
+        if (slot == null) return null;
 
         slot.cantidad--; // Quita 1
 
@@ -122,31 +135,43 @@ public class Inventory : MonoBehaviour
 
         if (slot.cantidad <= 0)
         {
-            ExpulsarObjeto(indice);
+            ExpulsarObjeto(slotSeleccionado);
         }
         else
         {
-            slotUI[indice].ActualizarSlot(slot);
+            slotUI[slotSeleccionado].ActualizarSlot(slot);
         }
-    }
+        return objectName;
+    }*/
 
-    // Expulsar objeto si se queda en 0
     private void ExpulsarObjeto(int indice)
     {
         var slot = slots[indice];
-        if (slot == null) return;
+
+        slots[indice] = null;
+        slotUI[indice].ActualizarSlot(null);
+    }
+
+
+    /*
+    // Expulsar objeto si se queda en 0
+    private string ExpulsarObjeto(int indice)
+    {
+        var slot = slots[indice];
+        if (slot == null) return null;
 
         Debug.Log($"Expulsando objeto {slot.nombre} del slot {indice}");
 
         GameObject prefab = Resources.Load<GameObject>($"Objetos/{slot.nombre}");
         if (prefab != null)
         {
-            Instantiate(prefab, transform.position + transform.forward, Quaternion.identity);
+            //Instantiate(prefab, transform.position + transform.forward, Quaternion.identity);
         }
 
         slots[indice] = null;
         slotUI[indice].ActualizarSlot(null);
-    }
+        return slot.nombre;
+    }*/
 
     // Añadir objetos
     public bool AñadirAlInventario(Sprite icono, string nombre)
@@ -178,7 +203,7 @@ public class Inventory : MonoBehaviour
 
         return false;
     }
-
+    /*
     public bool SacarDelInventario(string nombre)
     {
         for (int i = 0; i < slots.Count; i++)
@@ -195,6 +220,8 @@ public class Inventory : MonoBehaviour
         }
         return false;
     }
+
+    */
 }
 
 [System.Serializable]
@@ -203,6 +230,7 @@ public class SlotInventario
     public Sprite icono;
     public string nombre;
     public int cantidad;
+    public GameObject slotObject;
 
     public SlotInventario(Sprite icono, string nombre, int cantidad)
     {
@@ -210,5 +238,4 @@ public class SlotInventario
         this.nombre = nombre;
         this.cantidad = cantidad;
     }
-
 }

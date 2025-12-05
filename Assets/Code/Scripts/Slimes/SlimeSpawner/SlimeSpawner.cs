@@ -19,8 +19,7 @@ public class SlimeSpawner : MonoBehaviour
         for (int i = 0; i < slimesQuantity; i++)
         {
             yield return new WaitForSeconds(0.5f);
-            GameObject slime = SlimesPool.Instance.GetFirstAvailableObject();
-            slime.SetActive(true);
+            GameObject slime = PoolManager.Instance.GetFirstAvailableObject("BasicSlime");
             slime.transform.position = transform.position;
             slime.GetComponentInChildren<Rigidbody>().AddForce(new Vector3(Random.Range(-launchRange, launchRange), launchUpForce, Random.Range(-launchRange, launchRange)), ForceMode.Impulse);
         }
