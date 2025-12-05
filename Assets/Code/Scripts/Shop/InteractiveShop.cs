@@ -21,10 +21,12 @@ public class InteractiveShop : MonoBehaviour
         if (isShopActive)
         {
             DesActivateObject();
+            Cursor.visible = false;
         }
         else
         {
             ActivateObject();
+            Cursor.visible = true;
         }
     }
 
