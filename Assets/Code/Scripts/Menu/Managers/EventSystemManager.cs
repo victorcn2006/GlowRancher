@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
 
 public class EventSystemManager : MonoBehaviour {
-
+    
     [HideInInspector] public GameObject lastSelectedObject;
     
     [SerializeField] private GameObject initialFocusObject;
@@ -21,7 +21,7 @@ public class EventSystemManager : MonoBehaviour {
             lastSelectedObject = initialFocusObject;
         }
         else{
-            Debug.Log("Initial focus object not assigned in the Inspector");
+            Debug.LogWarning("Initial focus object not assigned in the Inspector");
             return;
         }
 
@@ -52,5 +52,4 @@ public class EventSystemManager : MonoBehaviour {
         if (EventSystem.current.currentSelectedGameObject == null && lastSelectedObject != null && lastSelectedObject.activeInHierarchy)
             EventSystem.current.SetSelectedGameObject(lastSelectedObject);
     }
-    
 }

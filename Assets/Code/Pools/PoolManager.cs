@@ -12,7 +12,7 @@ public class PoolManager : MonoBehaviour
     {
         public string id;
         public GameObject prefab;
-        [HideInInspector] public List<GameObject> objects = new List<GameObject>();
+        public List<GameObject> objects = new List<GameObject>();
     }
 
     public List<Pool> pools;

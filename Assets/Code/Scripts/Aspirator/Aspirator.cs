@@ -86,18 +86,9 @@ public class Aspirator : MonoBehaviour
             }
             objectToLaunch.transform.position = aspiratePoint.position;
 
-            if (objectToLaunch.CompareTag("Slime"))
-            {
-                objectToLaunch.GetComponentInChildren<Rigidbody>().velocity = Vector3.zero;
-                objectToLaunch.GetComponentInChildren<Rigidbody>().angularVelocity = Vector3.zero; 
-                objectToLaunch.GetComponentInChildren<Rigidbody>().AddForce(aspiratePoint.forward.normalized * launchForce, ForceMode.Impulse);
-            }
-            else
-            {
-                objectToLaunch.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                objectToLaunch.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-                objectToLaunch.GetComponent<Rigidbody>().AddForce(aspiratePoint.forward.normalized * launchForce, ForceMode.Impulse);
-            }
+            objectToLaunch.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            objectToLaunch.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+            objectToLaunch.GetComponent<Rigidbody>().AddForce(aspiratePoint.forward.normalized * launchForce, ForceMode.Impulse);
         }
     }
 

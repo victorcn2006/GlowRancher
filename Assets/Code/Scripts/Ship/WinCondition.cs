@@ -1,7 +1,4 @@
-
 using UnityEngine;
-
-
 public class WinCondition : MonoBehaviour
 {
     [SerializeField] private GameObject winConditionPanel;

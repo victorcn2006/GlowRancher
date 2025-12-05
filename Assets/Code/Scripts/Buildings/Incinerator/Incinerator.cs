@@ -6,7 +6,7 @@ public class Incinerator : Building
 {
     private void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.GetComponent<IAspirable>() != null) {
-            Destroy(collision.gameObject);
+            collision.gameObject.SetActive(false);
         }
         
     }
