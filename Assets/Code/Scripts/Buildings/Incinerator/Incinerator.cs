@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Incinerator : Building
@@ -8,6 +6,5 @@ public class Incinerator : Building
         if (collision.gameObject.GetComponent<IAspirable>() != null) {
             collision.gameObject.SetActive(false);
         }
-        
     }
 }

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Gem : MonoBehaviour, IAspirable
 {
-    [SerializeField] private GemData gemData;
+    public GemData data;
+
     Rigidbody rb;
     private void Start()
     {
@@ -21,11 +22,8 @@ public class Gem : MonoBehaviour, IAspirable
         rb.useGravity = true;
     }
 
-    private void OnDestroy()
-    {
-        Aspirator.instance.RemoveAspirableObject(this.gameObject);
+    public int GetValue() {
+        return data.value;
     }
-
-
 
 }
