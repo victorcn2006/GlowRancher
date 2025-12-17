@@ -29,6 +29,14 @@ public class ObjectsDetector : MonoBehaviour
         }
     }
 
+    public void RemoveTargetFromAspirableObjectList(GameObject target)
+    {
+        if (aspirableObjectsList.Contains(target))
+        {
+            aspirableObjectsList.Remove(target);
+        }
+    }
+
     public List<GameObject> GetAspirableObjects()
     {
         return aspirableObjectsList;
