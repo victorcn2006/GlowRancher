@@ -6,12 +6,11 @@ public class SlimeStateMachine : MonoBehaviour, IAspirable
 {
     // --------------------------------------------LINKED SCRIPTS--------------------------------------------\\
     private MovementBehaviour movementBehaviour;
-    [SerializeField] private SlimeBonesReference slimeBonesReference;
 
 
     // --------------------------------------------RAYCAST SETTINGS--------------------------------------------\\
     [Header("VALORES GROUNDED")]
-    private const float groundCheckDistance = 0.4f;
+    private const float groundCheckDistance = 0.7f;
     [SerializeField] private LayerMask groundLayer;
 
 
@@ -27,6 +26,7 @@ public class SlimeStateMachine : MonoBehaviour, IAspirable
 
     void Update()
     {
+        Debug.Log(currentState);
         switch (currentState)
         {
 
@@ -91,10 +91,8 @@ public class SlimeStateMachine : MonoBehaviour, IAspirable
 
         movementBehaviour.SetGravity(false);
 
-        foreach (GameObject obj in slimeBonesReference.GetSlimeBonesList())
-        {
-            obj.GetComponent<Rigidbody>().useGravity = false;
-        }
+        GetComponent<Rigidbody>().useGravity = false;
+
 
     }
 
@@ -102,10 +100,7 @@ public class SlimeStateMachine : MonoBehaviour, IAspirable
     {
         movementBehaviour.SetGravity(true);
 
-        foreach (GameObject obj in slimeBonesReference.GetSlimeBonesList())
-        {
-            obj.GetComponent<Rigidbody>().useGravity = true;
-        }
+        GetComponent<Rigidbody>().useGravity = true;
 
         ToOnAir();
         ToOnFloor();
