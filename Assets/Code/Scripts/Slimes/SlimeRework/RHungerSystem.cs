@@ -2,11 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RSlimeMovementBehaviour : MonoBehaviour
+public class RHungerSystem : MonoBehaviour
 {
-
-
-
 
 
 }
