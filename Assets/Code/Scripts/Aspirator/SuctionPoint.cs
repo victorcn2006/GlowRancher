@@ -18,7 +18,7 @@ public class SuctionPoint : MonoBehaviour
             {
                 ItemPickUp objectPickUp = other.GetComponent<ItemPickUp>();
                 // Añadimos el objeto al inventario
-                if (inventory.AñadirAlInventario(objectPickUp.icono, objectPickUp.nombre))
+                if (inventory.AddToInventory(objectPickUp.icono, objectPickUp.nombre))
                 {
                     //other.GetComponentInParent<GameObject>().SetActive(false);
                     other.gameObject.SetActive(false); // desactivar el objeto en el mundo

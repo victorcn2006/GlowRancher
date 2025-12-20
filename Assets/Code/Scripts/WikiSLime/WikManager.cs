@@ -1,64 +1,74 @@
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem;  // Necesario para el nuevo sistema de entrada
+using UnityEngine.InputSystem;
 
 public class WikiManager : MonoBehaviour
 {
-    [SerializeField] private WikiSlime wikiMenu;    // Menú de Wiki
-    [SerializeField] private InputAction wikiAction; // Acción de entrada para el menú
+    [Header("Wiki panel to display")]
+    [SerializeField] private WikiSlime wikiMenu;
 
-    private bool isWikiActive = false;  // Variable para controlar si el menú está activo o no
-
-    private void OnEnable()
-    {
-        // Aseguramos que la acción se habilite al principio
-        wikiAction.Enable();
-    }
-
-    private void OnDisable()
-    {
-        // Aseguramos que la acción se deshabilite al final
-        wikiAction.Disable();
-    }
+    private bool isWikiActive = false;
 
     private void Start()
     {
-        // Desactivamos el menú de Wiki al inicio
+
         wikiMenu.DesactiveWiki();
-        InputManager.Instance.SetWikiOpen(false);
-        // Aseguramos que el puntero esté oculto al inicio si el menú está desactivado
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;  // Opcional: bloquear el puntero en el centro
+        if (InputManager.Instance != null)
+        {
+
+            InputManager.Instance.OnWikiToggled += ToggleWiki;
+        }
+        else
+        {
+            Debug.LogError("WikiManager: InputManager instance not found!");
+        }
+    }
+    private void OnDestroy() {
+
+        if (InputManager.Instance != null)
+        {
+            InputManager.Instance.OnWikiToggled -= ToggleWiki;
+        }
+    }
+    private void ToggleWiki() {
+        // Don't allow opening wiki if game is paused
+        if (InputManager.Instance != null && InputManager.Instance.isPaused)
+            return;
+
+        isWikiActive = !isWikiActive;
+
+        if (isWikiActive)
+        {
+            OpenWiki();
+        }
+        else
+        {
+            CloseWiki();
+        }
+    }
+    private void OpenWiki() {
+        wikiMenu.ActiveWiki();
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        Time.timeScale = 0f;
+
+        if (InputManager.Instance != null)
+        {
+            InputManager.Instance.SetWikiOpen(true);
+        }
+        InputManager.Instance.inventoryMap.Disable();
     }
 
-    private void Update()
-    {
-        // Verificamos si la acción de entrada está siendo activada (por ejemplo, tecla 'I' presionada)
-        if (wikiAction.triggered)
-        {
-            if (InputManager.Instance != null && InputManager.Instance.isPaused)
-                return;
-            // Cambiamos el estado del menú (si está activo, lo desactivamos; si está desactivado, lo activamos)
-            isWikiActive = !isWikiActive;
+    private void CloseWiki() {
+        wikiMenu.DesactiveWiki();
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Time.timeScale = 1f;
 
-            if (isWikiActive)
-            {
-                // Activar el menú y mostrar el puntero
-                wikiMenu.ActiveWiki();
-                Cursor.visible = true; // Mostrar el puntero
-                Cursor.lockState = CursorLockMode.None; // Desbloquear el puntero
-                Time.timeScale = 0f;
-                InputManager.Instance.SetWikiOpen(true);
-            }
-            else
-            {
-                // Desactivar el menú y ocultar el puntero
-                wikiMenu.DesactiveWiki();
-                Cursor.visible = false; // Ocultar el puntero
-                Cursor.lockState = CursorLockMode.Locked; // Opcional: bloquear el puntero en el centro
-                Time.timeScale = 1f;
-                InputManager.Instance.SetWikiOpen(false);
-            }
+        if (InputManager.Instance != null)
+        {
+            InputManager.Instance.SetWikiOpen(false);
         }
+        InputManager.Instance.inventoryMap.Enable();
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ActionButtonManager : MonoBehaviour{
@@ -30,15 +31,20 @@ public class ActionButtonManager : MonoBehaviour{
         switch (currentButton)
         {
             case BUTTONS.PLAY:
+                Time.timeScale = 1f;
                 break;
             case BUTTONS.OPTIONS:
-                InputManager.Instance?.SetPause(false);
+                UIInputManager.Instance?.SetPause(false);
                 break;
             case BUTTONS.MAINMENU:
-                InputManager.Instance?.SetPause(false);
+                if (UIInputManager.Instance != null)
+                {
+                    UIInputManager.Instance.SetPause(false);
+                }
+                Time.timeScale = 1f;
                 break;
             case BUTTONS.CONTINUE:
-                InputManager.Instance?.SetPause(false);
+                UIInputManager.Instance?.SetPause(false);
                 break;
             case BUTTONS.EXIT:
                 Application.Quit();

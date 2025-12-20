@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-    void Start()
+    private void Start()
     {
         playerStateMachine = GetComponent<PlayerStateMachine>();
         playerCameraMovement = GetComponent<PlayerCameraMovement>();
@@ -38,13 +38,23 @@ public class PlayerMovement : MonoBehaviour
         move.action.Enable();
         rb = GetComponent<Rigidbody>();
         playerInput = GetComponent<PlayerInput>();
-    }
 
-    private void FixedUpdate()
-    {
+        if (InputManager.Instance != null)
+        {
+            InputManager.Instance.OnJumpPressed += Jump;
+        }
+    }
+    private void OnDestroy() {
+        if (InputManager.Instance != null)
+        {
+            InputManager.Instance.OnJumpPressed -= Jump;
+        }
+    }
+    
+    private void FixedUpdate() {
         Move();
     }
-
+    
     public void Move()
     {
         movementInput = move.action.ReadValue<Vector2>();
@@ -66,16 +76,16 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = newVelocity;
         
     }
-    public void Jump(InputAction.CallbackContext ctx)
+    public void Jump()
     {
-        if (ctx.performed && canJump)
+        if (canJump)
         {
             rb.AddForce(new Vector3(0,1,0) * JUMP_FORCE, ForceMode.Impulse);
         }
     }
     
-    public void SetCanJump(bool a)
+    public void SetCanJump(bool value)
     {
-        canJump = a;
+        canJump = value;
     }
 }
