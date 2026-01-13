@@ -8,6 +8,10 @@ public class Prueba : MonoBehaviour
     private GameObject obj;
     private void Start()
     {
-        obj = gameObject;   
+        obj = gameObject; 
+    }
+    private void Awake()
+    {
+        Debug.Log("Hola");
     }
 }
