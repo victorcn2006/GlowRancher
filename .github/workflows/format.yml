@@ -4,27 +4,29 @@ name: Code Format Check
 on:
   pull_request:
   push:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
   format:
     runs-on: ubuntu-latest
-
     steps:
-    # 1. Clonar el repositorio
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    # 2. Instalar la versión de .NET del proyecto
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 8.0.x
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
 
-    # 3. Restaurar herramientas definidas en .config/dotnet-tools.json
-    - name: Restore .NET tools
-      run: dotnet tool restore
+      # Restaurar la solución explícitamente
+      - name: Restore solution
+        run: dotnet restore GlowRancher.sln
 
-    # 4. Verificar que el código cumple con el formato
-    - name: Check code format
-      run: dotnet format --verify-no-changes
+      # Restaurar tools
+      - name: Restore .NET tools
+        run: dotnet tool restore
+
+      # Formatear la solución explícitamente
+      - name: Check code format
+        run: dotnet format GlowRancher.sln --verify-no-changes
+
 
