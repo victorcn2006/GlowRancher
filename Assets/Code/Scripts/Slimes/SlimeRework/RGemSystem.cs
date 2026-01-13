@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class RGemSystem : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private GemsPool.gemTypes gemTypeToDrop;
 
-    // Update is called once per frame
-    void Update()
+    public IEnumerator SpawnGem()
     {
-        
+        yield return new WaitForSeconds(2f);
+        GameObject newGem = GemsPool.Instance.GetGem(gemTypeToDrop);
+        newGem.SetActive(true);
+        newGem.transform.position = transform.position;
     }
 }

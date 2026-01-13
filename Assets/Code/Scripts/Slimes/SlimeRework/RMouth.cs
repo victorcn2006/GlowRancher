@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class RMouth : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private RSlime _RSlime;
     void Start()
     {
-        
+        _RSlime = GetComponent<RSlime>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (_RSlime.foodDetector.GetInRangeFoodList().Contains(other.gameObject))
+        {
+            _RSlime.hungerSystem.Eat(other.gameObject);
+        }
     }
 }
