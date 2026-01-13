@@ -6,7 +6,7 @@ public class MovementBehaviour : MonoBehaviour
 {
 
     // --------------------------------------------LINKED SCRIPTS------------------------------------------------- \\
-    [Header("LINKED SCRIPTS")]
+    [Header("SLIME SCRIPTS")]
     [SerializeField] private HungerSystem hungerSystem;
     [SerializeField] private FoodDetector foodDetector;
 
@@ -21,8 +21,8 @@ public class MovementBehaviour : MonoBehaviour
     private const float MAX_TIME = 10f;
 
     [Header("VALORES DEL SALTO")]
-    private const float VERTICAL_JUMP_FORCE = 5f;
-    private const float JUMP_FORCE = 3f;
+    private float VERTICAL_JUMP_FORCE = 5f;
+    private float JUMP_FORCE = 3f;
 
     [Header("VALORES DE ROTACIÓN")]
     [SerializeField]private float ROTATION_SPEED = 5f;
@@ -46,8 +46,10 @@ public class MovementBehaviour : MonoBehaviour
         jumpTimer = Random.Range(MIN_TIME, MAX_TIME);
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
+        Debug.Log(canJump);
+        Debug.Log(jumpTimer);
 
         if (canJump)
         {
@@ -130,8 +132,6 @@ public class MovementBehaviour : MonoBehaviour
     {
         foodDirection.x = Mathf.Clamp(foodDirection.x, MIN_DISTANCE, MAX_DISTANCE);
         foodDirection.z = Mathf.Clamp(foodDirection.z, MIN_DISTANCE, MAX_DISTANCE);
-
-        //Debug.Log(foodDirection);
 
         return foodDirection;
     }

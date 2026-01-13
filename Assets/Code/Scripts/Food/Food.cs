@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Food : MonoBehaviour, IAspirable
 {
+    public string foodName;
+
     Rigidbody rb;
     private void Start()
     {
@@ -20,9 +22,10 @@ public class Food : MonoBehaviour, IAspirable
         rb.useGravity = true;
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         Aspirator.instance.RemoveAspirableObject(this.gameObject);
     }
+
 
 }
