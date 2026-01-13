@@ -14,4 +14,8 @@ public class Prueba : MonoBehaviour
     {
         Debug.Log("Hola");
     }
+    private void Update()
+    {
+        Debug.Log("Update");
+    }
 }
