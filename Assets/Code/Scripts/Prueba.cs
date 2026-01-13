@@ -18,4 +18,8 @@ public class Prueba : MonoBehaviour
     {
         Debug.Log("Update");
     }
+    private void OnEnable()
+    {
+        Debug.Log("OnEnable");
+    }
 }
