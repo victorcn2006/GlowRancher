@@ -6,40 +6,40 @@ using UnityEngine;
 public class ObjectsDetector : MonoBehaviour
 {
 
-    private List<GameObject> aspirableObjectsList = new List<GameObject>();
+    private List<GameObject> _aspirableObjectsList = new List<GameObject>();
 
-    private Vector3 point1;
-    private Vector3 point2;
+    private Vector3 _point1;
+    private Vector3 _point2;
 
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Food") || other.CompareTag("Slime") || other.CompareTag("Gem"))
         {
-            aspirableObjectsList.Add(other.gameObject);
+            _aspirableObjectsList.Add(other.gameObject);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (aspirableObjectsList.Contains(other.gameObject))
+        if (_aspirableObjectsList.Contains(other.gameObject))
         {
             other.GetComponent<IAspirable>().StopBeingAspired();
-            aspirableObjectsList.Remove(other.gameObject);
+            _aspirableObjectsList.Remove(other.gameObject);
         }
     }
 
     public void RemoveTargetFromAspirableObjectList(GameObject target)
     {
-        if (aspirableObjectsList.Contains(target))
+        if (_aspirableObjectsList.Contains(target))
         {
-            aspirableObjectsList.Remove(target);
+            _aspirableObjectsList.Remove(target);
         }
     }
 
     public List<GameObject> GetAspirableObjects()
     {
-        return aspirableObjectsList;
+        return _aspirableObjectsList;
     }
 
 }

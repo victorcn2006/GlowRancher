@@ -1,16 +1,16 @@
 using UnityEngine;
 public class WinCondition : MonoBehaviour
 {
-    [SerializeField] private GameObject winConditionPanel;
-    [SerializeField] private Player player;
+    [SerializeField] private GameObject _winConditionPanel;
+    [SerializeField] private Player _player;
     private void Awake()
     {
-        if (winConditionPanel == null) return;
-        winConditionPanel.SetActive(false);
+        if (_winConditionPanel == null) return;
+        _winConditionPanel.SetActive(false);
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) winConditionPanel.SetActive(true);
+        if (other.CompareTag("Player")) _winConditionPanel.SetActive(true);
         Invoke("FreezeTime", 1f);
         //Destroy(this.player.gameObject);
     }

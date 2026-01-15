@@ -432,9 +432,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77613c64275c24342a7cec00bf9f1b41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sliderType: 0
-  imageMute: {fileID: 1884801011}
-  mixer: {fileID: 24100000, guid: 26c5e59eb3ca8b44ebc3a0b4e969f6dc, type: 2}
+  _sliderType: 0
+  _imageMute: {fileID: 1884801011}
+  _mixer: {fileID: 24100000, guid: 26c5e59eb3ca8b44ebc3a0b4e969f6dc, type: 2}
 --- !u!1 &109164657
 GameObject:
   m_ObjectHideFlags: 0
@@ -1551,7 +1551,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d87d8b2e147b4f34e80a2c44a6de393e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  brightnessPanel: {fileID: 754589236}
+  _brighnessPanel: {fileID: 754589236}
 --- !u!1 &522285607
 GameObject:
   m_ObjectHideFlags: 0
@@ -2672,9 +2672,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77613c64275c24342a7cec00bf9f1b41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sliderType: 1
-  imageMute: {fileID: 1956575154}
-  mixer: {fileID: 24100000, guid: 26c5e59eb3ca8b44ebc3a0b4e969f6dc, type: 2}
+  _sliderType: 0
+  _imageMute: {fileID: 1956575154}
+  _mixer: {fileID: 24100000, guid: 26c5e59eb3ca8b44ebc3a0b4e969f6dc, type: 2}
 --- !u!1 &754589234
 GameObject:
   m_ObjectHideFlags: 0
@@ -4712,9 +4712,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77613c64275c24342a7cec00bf9f1b41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sliderType: 2
-  imageMute: {fileID: 858205931}
-  mixer: {fileID: 24100000, guid: 26c5e59eb3ca8b44ebc3a0b4e969f6dc, type: 2}
+  _sliderType: 0
+  _imageMute: {fileID: 858205931}
+  _mixer: {fileID: 24100000, guid: 26c5e59eb3ca8b44ebc3a0b4e969f6dc, type: 2}
 --- !u!1 &1320058724
 GameObject:
   m_ObjectHideFlags: 0
@@ -4764,8 +4764,12 @@ MonoBehaviour:
   - {fileID: 1898309923}
   - {fileID: 1416768965}
   - {fileID: 1709220742}
-  buttons: []
-  buttonsParent: {fileID: 1940375390}
+  buttons:
+  - {fileID: 1048534625}
+  - {fileID: 604168104}
+  - {fileID: 631585071}
+  - {fileID: 1994642636}
+  _buttonsParent: {fileID: 1940375390}
 --- !u!1 &1340933687
 GameObject:
   m_ObjectHideFlags: 0
@@ -7974,7 +7978,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastSelectedObject: {fileID: 0}
-  initialFocusObject: {fileID: 1048534625}
+  _initialFocusObject: {fileID: 1048534625}
 --- !u!114 &1975870893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8164,7 +8168,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2011316902}
   - component: {fileID: 2011316904}
-  - component: {fileID: 2011316903}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -8187,14 +8190,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 895507102}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!81 &2011316903
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2011316901}
-  m_Enabled: 1
 --- !u!20 &2011316904
 Camera:
   m_ObjectHideFlags: 0

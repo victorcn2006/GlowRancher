@@ -7,13 +7,13 @@ public class EnemySlimeMovementBehaviour : MonoBehaviour
 
     // --------------------------------------------LINKED SCRIPTS------------------------------------------------- \\
     [Header("LINKED SCRIPTS")]
-    [SerializeField] private PlayerDetector playerDetector;
+    [SerializeField] private PlayerDetector _playerDetector;
 
     // --------------------------------------------MOVEMENT PARAMETERS-------------------------------------------- \\
 
     [Header("RANGO DE MOVIMIENTO PARA LOS SALTOS")]
     private const float MIN_DISTANCE = -5f;        //coordenadas negativas minimas
-    private const float MAX_DISTANCE = 5f;         //coordenadas positivas máximas
+    private const float MAX_DISTANCE = 5f;         //coordenadas positivas mÃ¡ximas
 
     [Header("RANGO DE TIEMPO ENTRE SALTOS")]
     private const float MIN_TIME = 5f;
@@ -23,42 +23,42 @@ public class EnemySlimeMovementBehaviour : MonoBehaviour
     private const float VERTICAL_JUMP_FORCE = 5f;
     private const float JUMP_FORCE = 3f;
 
-    [Header("VALORES DE ROTACIÓN")]
-    [SerializeField]private float ROTATION_SPEED = 5f;
+    [Header("VALORES DE ROTACIÃ“N")]
+    [SerializeField] private const float ROTATION_SPEED = 5f;
     // --------------------------------------------PRIVATE VARIABLES--------------------------------------------\\
-    private float jumpTimer;
+    private float _jumpTimer;
 
-    private Rigidbody rb;
+    private Rigidbody _rb;
 
-    private bool canJump = true;
-    private bool hasRotated = false;
+    private bool _canJump = true;
+    private bool _hasRotated = false;
 
-    private Vector3 jumpDirection;
+    private Vector3 _jumpDirection;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        _rb = GetComponent<Rigidbody>();
     }
 
     private void Start()
     {
-        jumpTimer = Random.Range(MIN_TIME, MAX_TIME);
+        _jumpTimer = Random.Range(MIN_TIME, MAX_TIME);
     }
 
     private void Update()
     {
 
-        if (canJump)
+        if (_canJump)
         {
-            jumpTimer -= Time.deltaTime;
-            if (hasRotated)
+            _jumpTimer -= Time.deltaTime;
+            if (_hasRotated)
             {
                 Jump();
             }
-            if(jumpTimer <= 0)
+            if(_jumpTimer <= 0)
             {
                 GoJump();
-                jumpTimer = Random.Range(MIN_TIME, MAX_TIME);
+                _jumpTimer = Random.Range(MIN_TIME, MAX_TIME);
             }
         }
     }
@@ -67,14 +67,14 @@ public class EnemySlimeMovementBehaviour : MonoBehaviour
 
     private void GoJump()
     {
-        jumpDirection = GetJumpDirection();
+        _jumpDirection = GetJumpDirection();
 
         StartCoroutine(RotateAndJumpToDirection());
     }
 
     private IEnumerator RotateAndJumpToDirection()
     {
-        Vector3 lookDirection = new Vector3(jumpDirection.x, 0, jumpDirection.z); 
+        Vector3 lookDirection = new Vector3(_jumpDirection.x, 0, _jumpDirection.z); 
         if (lookDirection == Vector3.zero) yield break; 
 
         Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
@@ -89,22 +89,22 @@ public class EnemySlimeMovementBehaviour : MonoBehaviour
             yield return null; //Se espera al siguiente frame antes de seguir rotando
         }
 
-        hasRotated = true;
+        _hasRotated = true;
 
     }
     private void Jump()
     {
-        rb.AddForce(jumpDirection * JUMP_FORCE, ForceMode.Impulse);
-        hasRotated = false;
+        _rb.AddForce(_jumpDirection * JUMP_FORCE, ForceMode.Impulse);
+        _hasRotated = false;
     }
 
     // --------------------------------------------GETTERS-------------------------------------------\\
 
     private Vector3 GetJumpDirection()
     {
-        if (playerDetector.CheckPlayerInRange())
+        if (_playerDetector.CheckPlayerInRange())
         {
-            Vector3 foodDirection = playerDetector.GetPlayer().transform.position - transform.position;
+            Vector3 foodDirection = _playerDetector.GetPlayer().transform.position - transform.position;
 
             foodDirection = LimitateplayerDirectionToRange(foodDirection);
 
@@ -121,7 +121,7 @@ public class EnemySlimeMovementBehaviour : MonoBehaviour
 
     public void SetCanJump(bool a)
     {
-        canJump = a;
+        _canJump = a;
     }
 
     // --------------------------------------------OTHERS--------------------------------------------\\
@@ -138,7 +138,7 @@ public class EnemySlimeMovementBehaviour : MonoBehaviour
 
     public void SetGravity(bool gravity)
     {
-        rb.useGravity = gravity;
+        _rb.useGravity = gravity;
     }
 
 

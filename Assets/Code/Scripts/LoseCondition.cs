@@ -3,16 +3,16 @@ using UnityEngine;
 public class LoseCondition : MonoBehaviour
 {
 
-    [SerializeField] private Player player;
-    [SerializeField] private Transform spawnPoint;// PosiciÛn a la que se teletransportar·
-    [SerializeField] private float delayTp;
+    [SerializeField] private Player _player;
+    [SerializeField] private Transform _spawnPoint;// Posici√≥n a la que se teletransportar√°
+    [SerializeField] private float _delayTp;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             // Inicia la corutina para esperar y luego teletransportar
-            StartCoroutine(TeleportAfterDelay(delayTp));
+            StartCoroutine(TeleportAfterDelay(_delayTp));
         }
     }
 
@@ -20,9 +20,9 @@ public class LoseCondition : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-        if (player != null && spawnPoint != null)
+        if (_player != null && _spawnPoint != null)
         {
-            player.transform.position = spawnPoint.position; // Teletransporta al spawn
+            _player.transform.position = _spawnPoint.position; // Teletransporta al spawn
         }
     }
 }

@@ -13,45 +13,45 @@ public class VolumeManager : MonoBehaviour {
     private const string MUSIC_KEY = "musicAudio";
     private const string GUI_KEY = "guiAudio";
 
-    [SerializeField] private SLIDERS sliderType = SLIDERS.GENERAL;
-    [SerializeField] private GameObject imageMute;
-    [SerializeField] private AudioMixer mixer;
+    [SerializeField] private SLIDERS _sliderType = SLIDERS.GENERAL;
+    [SerializeField] private GameObject _imageMute;
+    [SerializeField] private AudioMixer _mixer;
 
-    private string volumeParameter;
-    private Slider slider;
+    private string _volumeParameter;
+    private Slider _slider;
 
     private void Awake() {
-        slider = GetComponentInChildren<Slider>();
+        _slider = GetComponentInChildren<Slider>();
 
-        switch (sliderType) {
-            case SLIDERS.GENERAL: volumeParameter = "General"; break;
-            case SLIDERS.MUSIC:   volumeParameter = "Music"; break;
-            case SLIDERS.GUI:     volumeParameter = "GUI"; break;
+        switch (_sliderType) {
+            case SLIDERS.GENERAL: _volumeParameter = "General"; break;
+            case SLIDERS.MUSIC:   _volumeParameter = "Music"; break;
+            case SLIDERS.GUI:     _volumeParameter = "GUI"; break;
         }
     }
 
     private void Start() {
-        if (slider == null || mixer == null) return;
+        if (_slider == null || _mixer == null) return;
 
         // Cargar valor guardado
         string key = GetPlayerPrefsKey();
         if (PlayerPrefs.HasKey(key))
-            slider.value = PlayerPrefs.GetFloat(key);
+            _slider.value = PlayerPrefs.GetFloat(key);
 
-        ApplyVolume(slider.value);
+        ApplyVolume(_slider.value);
 
-        slider.onValueChanged.AddListener(OnSliderChanged);
+        _slider.onValueChanged.AddListener(OnSliderChanged);
 
         UpdateMuteIcon();
     }
 
     private void OnDisable() {
-        if (slider != null)
-            slider.onValueChanged.RemoveListener(OnSliderChanged);
+        if (_slider != null)
+            _slider.onValueChanged.RemoveListener(OnSliderChanged);
     }
 
     private string GetPlayerPrefsKey() {
-        return sliderType switch {
+        return _sliderType switch {
             SLIDERS.GENERAL => VOLUME_KEY,
             SLIDERS.MUSIC => MUSIC_KEY,
             SLIDERS.GUI => GUI_KEY,
@@ -62,9 +62,9 @@ public class VolumeManager : MonoBehaviour {
     private void OnSliderChanged(float value) {
         if (value < 0.001f) {
             // Evita loops
-            slider.onValueChanged.RemoveListener(OnSliderChanged);
-            slider.value = 0f;
-            slider.onValueChanged.AddListener(OnSliderChanged);
+            _slider.onValueChanged.RemoveListener(OnSliderChanged);
+            _slider.value = 0f;
+            _slider.onValueChanged.AddListener(OnSliderChanged);
             value = 0f;
         }
 
@@ -91,11 +91,11 @@ public class VolumeManager : MonoBehaviour {
         if (value <= 0.0001f)
             dB = minDB;
 
-        mixer.SetFloat(volumeParameter, dB);
+        _mixer.SetFloat(_volumeParameter, dB);
     }
 
     private void UpdateMuteIcon() {
-        if (imageMute != null)
-            imageMute.SetActive(slider.value <= 0.001f);
+        if (_imageMute != null)
+            _imageMute.SetActive(_slider.value <= 0.001f);
     }
 }

@@ -7,32 +7,32 @@ public class LayoutManager : MonoBehaviour
 {
     public List<GameObject> panels;
     public List<GameObject> buttons;
-    [SerializeField] Transform buttonsParent;
+    [SerializeField] private Transform _buttonsParent;
     public enum MENU_PANEL { GAME_OPTIONS, AUDIO, GRAPHICS, CONTROL, LENGTH };
-    Dictionary<MENU_PANEL, GameObject> panelDictionary;
+    Dictionary<MENU_PANEL, GameObject> _panelDictionary;
 
 
     private void Start()
     {
-        panelDictionary = new Dictionary<MENU_PANEL, GameObject>();
+        _panelDictionary = new Dictionary<MENU_PANEL, GameObject>();
         for (int i = 0; i < (int)MENU_PANEL.LENGTH; i++)
         {
-            panelDictionary.Add((MENU_PANEL)i, panels[i]);
+            _panelDictionary.Add((MENU_PANEL)i, panels[i]);
         }
 
-        for (int i = 0; i < buttonsParent.transform.childCount; i++)
+        for (int i = 0; i < _buttonsParent.transform.childCount; i++)
         {
-            buttons.Add(buttonsParent.transform.GetChild(i).gameObject);
+            buttons.Add(_buttonsParent.transform.GetChild(i).gameObject);
         }
 
         UnityEvents.Instance.OnSelectionChanged.AddListener(ChangeLayout);
 
         //Activar panel inicial: GAME_OPTIONS
-        foreach (var pair in panelDictionary) {
+        foreach (var pair in _panelDictionary) {
             pair.Value.SetActive(false);
         }
 
-        panelDictionary[MENU_PANEL.GAME_OPTIONS].SetActive(true);
+        _panelDictionary[MENU_PANEL.GAME_OPTIONS].SetActive(true);
     }
     private void OnDisable()
     {
@@ -45,12 +45,12 @@ public class LayoutManager : MonoBehaviour
         {
             if (EventSystem.current.currentSelectedGameObject == buttons[i])
             {
-                activePanel = panelDictionary[(MENU_PANEL)i];
+                activePanel = _panelDictionary[(MENU_PANEL)i];
             }
         }
         if (activePanel != null)
         {
-            foreach (KeyValuePair<MENU_PANEL, GameObject> pair in panelDictionary)
+            foreach (KeyValuePair<MENU_PANEL, GameObject> pair in _panelDictionary)
             {
                 if (pair.Value != activePanel)
                 {
@@ -66,7 +66,7 @@ public class LayoutManager : MonoBehaviour
 
     public GameObject GetPanel(MENU_PANEL panel)
     {
-        return panelDictionary[panel];
+        return _panelDictionary[panel];
     }
 
 }

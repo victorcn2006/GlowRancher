@@ -1,33 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SlimeStateMachine : MonoBehaviour, IAspirable
 {
     // --------------------------------------------LINKED SCRIPTS--------------------------------------------\\
-    private MovementBehaviour movementBehaviour;
-    [SerializeField] private SlimeBonesReference slimeBonesReference;
+    private MovementBehaviour _movementBehaviour;
+    [SerializeField] private SlimeBonesReference _slimeBonesReference;
 
 
     // --------------------------------------------RAYCAST SETTINGS--------------------------------------------\\
     [Header("VALORES GROUNDED")]
-    private const float groundCheckDistance = 0.4f;
-    [SerializeField] private LayerMask groundLayer;
+    private const float GROUND_CHECK_DISTANCE = 0.4f;
+    [SerializeField] private LayerMask _groundLayer;
 
 
     // --------------------------------------------STATES--------------------------------------------\\
     private enum States { ON_FLOOR, ON_AIR, BEING_ASPIRED };
-    private States currentState;
+    private States _currentState;
 
     private void Start()
     {
-        movementBehaviour = GetComponent<MovementBehaviour>();
-        currentState = States.ON_FLOOR;
+        _movementBehaviour = GetComponent<MovementBehaviour>();
+        _currentState = States.ON_FLOOR;
     }
 
     void Update()
     {
-        switch (currentState)
+        switch (_currentState)
         {
 
             case States.ON_FLOOR:
@@ -47,20 +45,19 @@ public class SlimeStateMachine : MonoBehaviour, IAspirable
 
     private void OnFloor()
     {
-        movementBehaviour.SetCanJump(true);
+        _movementBehaviour.SetCanJump(true);
         ToOnAir();
     }
 
     private void OnAir()
     {
-        movementBehaviour.SetCanJump(false);
+        _movementBehaviour.SetCanJump(false);
         ToOnFloor();
     }
 
     private void OnBeingAspired()
     {
-        movementBehaviour.SetCanJump(false);
-
+        _movementBehaviour.SetCanJump(false);
     }
 
 
@@ -70,7 +67,7 @@ public class SlimeStateMachine : MonoBehaviour, IAspirable
     {
         if (Grounded())
         {
-            currentState = States.ON_FLOOR;
+            _currentState = States.ON_FLOOR;
         }
     }
 
@@ -78,7 +75,7 @@ public class SlimeStateMachine : MonoBehaviour, IAspirable
     {
         if (!Grounded())
         {
-            currentState = States.ON_AIR;
+            _currentState = States.ON_AIR;
         }
     }
 
@@ -87,11 +84,11 @@ public class SlimeStateMachine : MonoBehaviour, IAspirable
 
     public void BeingAspired()
     {
-        currentState = States.BEING_ASPIRED;
+        _currentState = States.BEING_ASPIRED;
 
-        movementBehaviour.SetGravity(false);
+        _movementBehaviour.SetGravity(false);
 
-        foreach (GameObject obj in slimeBonesReference.GetSlimeBonesList())
+        foreach (GameObject obj in _slimeBonesReference.GetSlimeBonesList())
         {
             obj.GetComponent<Rigidbody>().useGravity = false;
         }
@@ -100,9 +97,9 @@ public class SlimeStateMachine : MonoBehaviour, IAspirable
 
     public void StopBeingAspired()
     {
-        movementBehaviour.SetGravity(true);
+        _movementBehaviour.SetGravity(true);
 
-        foreach (GameObject obj in slimeBonesReference.GetSlimeBonesList())
+        foreach (GameObject obj in _slimeBonesReference.GetSlimeBonesList())
         {
             obj.GetComponent<Rigidbody>().useGravity = true;
         }
@@ -115,7 +112,7 @@ public class SlimeStateMachine : MonoBehaviour, IAspirable
     // OTHER FUNCTIONS \\
     private bool Grounded()
     {
-        return Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundLayer);
+        return Physics.Raycast(transform.position, Vector3.down, GROUND_CHECK_DISTANCE, _groundLayer);
     }
 
 
@@ -123,7 +120,7 @@ public class SlimeStateMachine : MonoBehaviour, IAspirable
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * groundCheckDistance);
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * GROUND_CHECK_DISTANCE);
 
     }
 }

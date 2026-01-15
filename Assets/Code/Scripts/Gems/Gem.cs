@@ -6,20 +6,20 @@ public class Gem : MonoBehaviour, IAspirable
 {
     public GemData data;
 
-    Rigidbody rb;
+    private Rigidbody _rb;
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        _rb = GetComponent<Rigidbody>();
     }
 
     public void BeingAspired()
     {
-        rb.useGravity = false;
+        _rb.useGravity = false;
     }
 
     public void StopBeingAspired()
     {
-        rb.useGravity = true;
+        _rb.useGravity = true;
     }
 
     public int GetValue() {

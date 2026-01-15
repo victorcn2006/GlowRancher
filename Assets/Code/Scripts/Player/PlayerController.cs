@@ -4,14 +4,14 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
 
-    private Rigidbody rb;
+    private Rigidbody _rb;
 
     [Header("Variables")]
     public float speed;
     //public float upForce = 250f;
     public float force = 10f;
     public float jumpHeight = 0.7f; //que tan alt salta
-    private bool isGrounded;
+    private bool _isGrounded;
 
     /*[Header("View")]
     public float rotationSense = 150f; //la sens
@@ -30,18 +30,18 @@ public class PlayerController : MonoBehaviour
     public LayerMask Mask;
 
     [Header("MoveInputs")]
-    Vector3 moveInput = Vector3.zero; //fem que ho incialitci a 0
+    Vector3 _moveInput = Vector3.zero; //fem que ho incialitci a 0
 
-    private PlayerInput playerInput;
-    private Vector2 input;
+    private PlayerInput _playerInput;
+    private Vector2 _input;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         move.action.Enable();
         Jump.action.Enable();
-        rb =GetComponent<Rigidbody>();
-        playerInput = GetComponent<PlayerInput>(); 
+        _rb =GetComponent<Rigidbody>();
+        _playerInput = GetComponent<PlayerInput>(); 
     }
 
     
@@ -51,15 +51,15 @@ public class PlayerController : MonoBehaviour
         //CheckGround();//per saber si esta en el terra
         //look(); //es la funcio la cual s'utilitza per girar la camera
 
-        input = playerInput.actions["Move"].ReadValue<Vector2>();
+        _input = _playerInput.actions["Move"].ReadValue<Vector2>();
     }
 
     private void FixedUpdate()
     {
-        Vector3 desiredMovementDirection = ((input.x * transform.right) + (input.y * transform.forward)).normalized;
+        Vector3 desiredMovementDirection = ((_input.x * transform.right) + (_input.y * transform.forward)).normalized;
         // ha pasat de ser un valor global a un local de talmanera de ja no va per una cuadricula si no que funciona de talmanera de que agafa la direcio de lamirada i va perella
 
-        rb.AddForce(desiredMovementDirection * force);
+        _rb.AddForce(desiredMovementDirection * force);
 
     }
 
@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour
             // Cambia la velocidad del Rigidbody en el eje Y para simular el salto
             rb.velocity = new Vector3(rb.velocity.x, jumpVelocity, rb.velocity.z);
 
-            Debug.Log("¡Salta!");
+            Debug.Log("Â¡Salta!");
         }
     }*/
     /*

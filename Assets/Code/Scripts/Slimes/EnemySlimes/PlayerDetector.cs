@@ -6,36 +6,36 @@ using UnityEngine;
 public class PlayerDetector : MonoBehaviour
 {
 
-    [SerializeField] private GameObject playerReference;
-    private bool playerInRangeCheck;
+    [SerializeField] private GameObject _playerReference;
+    private bool _playerRangeCheck;
 
     private void Start()
     {
-        playerReference = GameObject.Find("Player");
+        _playerReference = GameObject.Find("Player");
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject == playerReference) 
+        if (other.gameObject == _playerReference) 
         {
-            playerInRangeCheck = true;
+            _playerRangeCheck = true;
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject == playerReference)
+        if (other.gameObject == _playerReference)
         {
-            playerInRangeCheck = false;
+            _playerRangeCheck = false;
         }
     }
 
     public bool CheckPlayerInRange()
     {
-        return playerInRangeCheck;
+        return _playerRangeCheck;
     }
 
     public GameObject GetPlayer()
     {
-        return playerReference;
+        return _playerReference;
     }
 }

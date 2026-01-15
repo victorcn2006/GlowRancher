@@ -9,16 +9,16 @@ public class InteractiveShop : MonoBehaviour
     public GameObject ShopPanel;
 
 
-    private bool isShopActive = false; // Variable per saber si la botiga est‡ activa
+    private bool _isShopActive = false; // Variable per saber si la botiga est√† activa
 
     private void Update()
     {
-        // Potser voldr‡s posar una altra condiciÛ per activar/desactivar la botiga (tecla especÌfica).
+        // Potser voldr√†s posar una altra condici√≥ per activar/desactivar la botiga (tecla espec√≠fica).
     }
 
     public void ToggleShop()
     {
-        if (isShopActive)
+        if (_isShopActive)
         {
             DesActivateObject();
             Cursor.visible = false;
@@ -38,7 +38,7 @@ public class InteractiveShop : MonoBehaviour
         Cursor.lockState = CursorLockMode.None; // Mostra el cursor
         Time.timeScale = 0;
 
-        isShopActive = true; // Marquem que la botiga est‡ activa
+        _isShopActive = true; // Marquem que la botiga est√† activa
     }
 
     public void DesActivateObject()
@@ -49,6 +49,6 @@ public class InteractiveShop : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked; // Oculta el cursor
         Time.timeScale = 1;
 
-        isShopActive = false; // Marquem que la botiga est‡ desactivada
+        _isShopActive = false; // Marquem que la botiga est√† desactivada
     }
 }

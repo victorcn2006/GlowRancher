@@ -6,12 +6,12 @@ public class Mouth : MonoBehaviour
 {
 
     [Header("LINKED SCRIPTS")]
-    [SerializeField] private HungerSystem hungerSystem;
+    [SerializeField] private HungerSystem _hungerSystem;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Food") && hungerSystem.IsHungry())
+        if (other.CompareTag("Food") && _hungerSystem.IsHungry())
         {
-            hungerSystem.Feed(other.gameObject);
+            _hungerSystem.Feed(other.gameObject);
             other.gameObject.SetActive(false);
         }
     }

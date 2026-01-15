@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class SuctionPoint : MonoBehaviour
 {
-    private bool canSuck;
-    [SerializeField] private Inventory inventory;
+    private bool _canSuck;
+    [SerializeField] private Inventory _inventory;
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Chuclando");
-        if (other.gameObject.GetComponent<IAspirable>() != null && canSuck)
+        if (other.gameObject.GetComponent<IAspirable>() != null && _canSuck)
         {
             Debug.Log("Chuclando algo chucable");
             
-            Debug.Log(inventory.gameObject.name);
-            if (inventory != null)
+            Debug.Log(_inventory.gameObject.name);
+            if (_inventory != null)
             {
                 ItemPickUp objectPickUp = other.GetComponent<ItemPickUp>();
-                // Añadimos el objeto al inventario
-                if (inventory.AñadirAlInventario(objectPickUp.icono, objectPickUp.nombre))
+                // AÃ±adimos el objeto al inventario
+                if (_inventory.AÃ±adirAlInventario(objectPickUp.icono, objectPickUp.nombre))
                 {
                     //other.GetComponentInParent<GameObject>().SetActive(false);
                     other.gameObject.SetActive(false); // desactivar el objeto en el mundo
@@ -29,6 +29,6 @@ public class SuctionPoint : MonoBehaviour
 
     public void SetCanSuck(bool state)
     {
-        canSuck = state;
+        _canSuck = state;
     }
 }

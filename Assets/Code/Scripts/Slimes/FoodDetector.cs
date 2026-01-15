@@ -6,20 +6,20 @@ using UnityEngine;
 public class FoodDetector : MonoBehaviour
 {
     
-    private List<GameObject> inRangeFoodList = new List<GameObject>();
+    private List<GameObject> _inRangeFoodList = new List<GameObject>();
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Food")) 
-        { 
-            inRangeFoodList.Add(other.gameObject);
+        {
+            _inRangeFoodList.Add(other.gameObject);
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Food"))
         {
-            inRangeFoodList.Remove(other.gameObject);
+            _inRangeFoodList.Remove(other.gameObject);
         }
     }
 
@@ -29,7 +29,7 @@ public class FoodDetector : MonoBehaviour
         GameObject closestFood = null;
         if (FoodOnInRangeFoodList())
         {
-            foreach (GameObject food in inRangeFoodList)
+            foreach (GameObject food in _inRangeFoodList)
             {
                 float ActualFoodDistance = Vector3.SqrMagnitude(transform.position - food.transform.position);
                 if (ActualFoodDistance < foodDistance)
@@ -49,11 +49,11 @@ public class FoodDetector : MonoBehaviour
 
     public void RemoveFood(GameObject food)
     {
-        inRangeFoodList.Remove(food);
+        _inRangeFoodList.Remove(food);
     }
 
     public bool FoodOnInRangeFoodList()
     {
-        return inRangeFoodList.Any();
+        return _inRangeFoodList.Any();
     }
 }

@@ -19,17 +19,17 @@ public class Farm : Building, ISavable{
     {
         SaveManager.Instance?.UnregisterSavable(this);
     }
-    IEnumerator _Awake() {
+    private IEnumerator _Awake() {
         while (SaveManager.Instance == null || SaveManager.Instance.IsLoading)
             yield return null;
         base.Awake();
     }
-    IEnumerator _Start() {
+    private IEnumerator _Start() {
         while (SaveManager.Instance == null || SaveManager.Instance.IsLoading)
             yield return null;
         base.Start();
     }
-    IEnumerator _OnEnable() {
+    private IEnumerator _OnEnable() {
         while (SaveManager.Instance == null || SaveManager.Instance.IsLoading)
             yield return null;
         OnEnable();

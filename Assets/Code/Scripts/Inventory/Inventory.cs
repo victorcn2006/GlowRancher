@@ -6,44 +6,44 @@ using UnityEngine.InputSystem;
 public class Inventory : MonoBehaviour
 {
     public List<SlotInventario> slots = new List<SlotInventario>();
-    private const int maxSlots = 4;
-    private const int maxCantidadPorSlot = 20;
+    private const int MAX_SLOTS = 4;
+    private const int MAX_CANTIDAD_POR_SLOT = 20;
 
     public SlotUI[] slotUI;
 
-    private int slotSeleccionado = 0;
+    private int _slotSeleccionado = 0;
 
     [Header("Controles del inventario")]
-    [SerializeField] private InputAction scrollAction;      // Rueda del ratón
-    [SerializeField] private InputAction rightClickAction;  // Clic derecho
-    [SerializeField] private InputAction slotKeysAction;    // Teclas 1,2,3,4
+    [SerializeField] private InputAction _scrollAction;      // Rueda del ratón
+    [SerializeField] private InputAction _rightClickAction;  // Clic derecho
+    [SerializeField] private InputAction _slotKeysAction;    // Teclas 1,2,3,4
 
     void OnEnable()
     {
-        scrollAction.Enable();
-        rightClickAction.Enable();
-        slotKeysAction.Enable();
+        _scrollAction.Enable();
+        _rightClickAction.Enable();
+        _slotKeysAction.Enable();
 
-        scrollAction.performed += OnScroll;
+        _scrollAction.performed += OnScroll;
         //rightClickAction.performed += OnRightClick;
-        slotKeysAction.performed += OnNumberKey;
+        _slotKeysAction.performed += OnNumberKey;
     }
 
     void OnDisable()
     {
-        scrollAction.performed -= OnScroll;
+        _scrollAction.performed -= OnScroll;
         //rightClickAction.performed -= OnRightClick;
-        slotKeysAction.performed -= OnNumberKey;
+        _slotKeysAction.performed -= OnNumberKey;
 
-        scrollAction.Disable();
+        _scrollAction.Disable();
         //rightClickAction.Disable();
-        slotKeysAction.Disable();
+        _slotKeysAction.Disable();
     }
 
     void Start()
     {
         slots.Clear();
-        for (int i = 0; i < maxSlots; i++)
+        for (int i = 0; i < MAX_SLOTS; i++)
         {
             slots.Add(null);
             slotUI[i].ActualizarSlot(null);
@@ -61,16 +61,16 @@ public class Inventory : MonoBehaviour
         switch (key)
         {
             case "1":
-                slotSeleccionado = 0;
+                _slotSeleccionado = 0;
                 break;
             case "2":
-                slotSeleccionado = 1;
+                _slotSeleccionado = 1;
                 break;
             case "3":
-                slotSeleccionado = 2;
+                _slotSeleccionado = 2;
                 break;
             case "4":
-                slotSeleccionado = 3;
+                _slotSeleccionado = 3;
                 break;
             default:
                 return;
@@ -85,9 +85,9 @@ public class Inventory : MonoBehaviour
         float scroll = ctx.ReadValue<Vector2>().y;
 
         if (scroll > 0)
-            slotSeleccionado = (slotSeleccionado + 1) % maxSlots;
+            _slotSeleccionado = (_slotSeleccionado + 1) % MAX_SLOTS;
         else if (scroll < 0)
-            slotSeleccionado = (slotSeleccionado - 1 + maxSlots) % maxSlots;
+            _slotSeleccionado = (_slotSeleccionado - 1 + MAX_SLOTS) % MAX_SLOTS;
 
         ActualizarSeleccionVisual();
     }
@@ -95,7 +95,7 @@ public class Inventory : MonoBehaviour
     private void ActualizarSeleccionVisual()
     {
         for (int i = 0; i < slotUI.Length; i++)
-            slotUI[i].SetSeleccionado(i == slotSeleccionado);
+            slotUI[i].SetSeleccionado(i == _slotSeleccionado);
     }
 
     public string QuitarUno()
@@ -103,7 +103,7 @@ public class Inventory : MonoBehaviour
 
         string objectName = "NoName";
 
-        var slot = slots[slotSeleccionado];
+        var slot = slots[_slotSeleccionado];
         if (slot == null) return null;
 
 
@@ -111,10 +111,10 @@ public class Inventory : MonoBehaviour
         {
             slot.cantidad--; //Quita 1
             objectName = slot.nombre;
-            slotUI[slotSeleccionado].ActualizarSlot(slot);
+            slotUI[_slotSeleccionado].ActualizarSlot(slot);
             if (slot.cantidad <= 0)
             {
-                ExpulsarObjeto(slotSeleccionado);
+                ExpulsarObjeto(_slotSeleccionado);
             }
         }
 
@@ -180,7 +180,7 @@ public class Inventory : MonoBehaviour
         {
             if (slots[i] != null && slots[i].nombre == nombre)
             {
-                if (slots[i].cantidad < maxCantidadPorSlot)
+                if (slots[i].cantidad < MAX_CANTIDAD_POR_SLOT)
                 {
                     slots[i].cantidad++;
                     slotUI[i].ActualizarSlot(slots[i]);

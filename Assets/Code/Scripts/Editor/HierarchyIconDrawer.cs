@@ -6,9 +6,9 @@ using UnityEditor;
 using UnityEngine;
 [InitializeOnLoad]
 public static class HierarchyIconDrawer {
-    static readonly Texture2D requiredIcon = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Art/Textures/Hierarchy/requiredIcon.png");
+    static readonly Texture2D _requiredIcon = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Art/Textures/Hierarchy/requiredIcon.png");
 
-    static readonly Dictionary<Type, FieldInfo[]> cachedFieldInfo = new();
+    static readonly Dictionary<Type, FieldInfo[]> _cachedFieldInfo = new();
 
     static HierarchyIconDrawer() {
         EditorApplication.hierarchyWindowItemOnGUI += OnHierarchyWindowItemOnGUI;
@@ -37,7 +37,7 @@ public static class HierarchyIconDrawer {
                 if (isFieldUnassigned(value))
                 {
                     var iconRect = new Rect(selectionRect.xMax - 20, selectionRect.y, 16, 16);
-                    GUI.Label(iconRect, new GUIContent(requiredIcon, "One or more required fields are missing or empty"));
+                    GUI.Label(iconRect, new GUIContent(_requiredIcon, "One or more required fields are missing or empty"));
                     break;
                 }
             }
@@ -46,7 +46,7 @@ public static class HierarchyIconDrawer {
     }
 
     static FieldInfo[] GetCachedFieldsWithRequiredAttribute(Type componentType){
-        if (!cachedFieldInfo.TryGetValue(componentType, out FieldInfo[] fields)){
+        if (!_cachedFieldInfo.TryGetValue(componentType, out FieldInfo[] fields)){
             fields = componentType.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
             List<FieldInfo> requiredFields = new ();
             foreach (FieldInfo field in fields){
@@ -59,7 +59,7 @@ public static class HierarchyIconDrawer {
             }
 
             fields = requiredFields.ToArray();
-            cachedFieldInfo[componentType] = fields;
+            _cachedFieldInfo[componentType] = fields;
         }
         return fields;
     }
