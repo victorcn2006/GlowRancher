@@ -271,7 +271,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoad:
-    _sceneAsset: {fileID: 102900000, guid: fe480cf8412ab69419a7f4f77ac26a32, type: 3}
+    _sceneAsset: {fileID: 102900000, guid: 11f0c1c63addd1b479e2bb1d63af9fa7, type: 3}
     _sceneName: World
 --- !u!114 &44059471
 MonoBehaviour:
@@ -1509,7 +1509,6 @@ GameObject:
   - component: {fileID: 1549357013}
   - component: {fileID: 1549357012}
   - component: {fileID: 1549357011}
-  - component: {fileID: 1549357017}
   - component: {fileID: 1549357014}
   - component: {fileID: 1549357015}
   - component: {fileID: 1549357016}
@@ -1662,19 +1661,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentButton: 1
---- !u!114 &1549357017
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1549357009}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7caca753bb14bdb4e889b1f11e860fc9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentButton: 2
 --- !u!1 &1619499241
 GameObject:
   m_ObjectHideFlags: 0
@@ -1791,7 +1777,6 @@ GameObject:
   - component: {fileID: 1770851256}
   - component: {fileID: 1770851261}
   - component: {fileID: 1770851259}
-  - component: {fileID: 1770851260}
   m_Layer: 0
   m_Name: Exit Button
   m_TagString: Untagged
@@ -1913,19 +1898,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c75a4433206744f41b276ae1bf5de9a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1770851260
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1770851254}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7caca753bb14bdb4e889b1f11e860fc9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentButton: 4
 --- !u!114 &1770851261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2248,7 +2220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastSelectedObject: {fileID: 0}
-  initialFocusObject: {fileID: 44059464}
+  _initialFocusObject: {fileID: 44059464}
 --- !u!1 &1984471599
 GameObject:
   m_ObjectHideFlags: 0

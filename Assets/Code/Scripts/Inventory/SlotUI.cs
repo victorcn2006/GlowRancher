@@ -9,9 +9,9 @@ public class SlotUI : MonoBehaviour
     public TextMeshProUGUI cantidadTexto;
 
     [Header("Colores de selección")]
-    [SerializeField] private Image fondoSlot; //Imagen de fondo del slot (así no tocas el icono del objeto)
-    [SerializeField] private Color colorNormal = Color.white;
-    [SerializeField] private Color colorSeleccionado = Color.yellow;
+    [SerializeField] private Image _fondoSlot; //Imagen de fondo del slot (así no tocas el icono del objeto)
+    [SerializeField] private Color _colorNormal = Color.white;
+    [SerializeField] private Color _colorSeleccionado = Color.yellow;
 
     public void ActualizarSlot(SlotInventario slot)
     {
@@ -33,7 +33,7 @@ public class SlotUI : MonoBehaviour
     //Método que cambia visualmente el color del slot seleccionado
     public void SetSeleccionado(bool seleccionado)
     {
-        if (fondoSlot != null)
-            fondoSlot.color = seleccionado ? colorSeleccionado : colorNormal;
+        if (_fondoSlot != null)
+            _fondoSlot.color = seleccionado ? _colorSeleccionado : _colorNormal;
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 [CustomPropertyDrawer(typeof(RequiredFieldAttribute))]
 public class RequiredFieldDrawer : PropertyDrawer{
-    Texture2D requiredIcon = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Art/Textures/Hierarchy/requiredIcon.png");
+    Texture2D _requiredIcon = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Art/Textures/Hierarchy/requiredIcon.png");
 
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
         EditorGUI.BeginProperty(position, label, property);
@@ -16,7 +16,7 @@ public class RequiredFieldDrawer : PropertyDrawer{
         //If the field is required but unassigned, show the icon
         if (IsFieldUnassigned(property)){
             Rect iconRect = new(position.xMax - 18, fieldRect.y, 16, 16);
-            GUI.Label(iconRect, new GUIContent(requiredIcon, "This field is required and is either missing or empty!"));
+            GUI.Label(iconRect, new GUIContent(_requiredIcon, "This field is required and is either missing or empty!"));
         }
 
         if (EditorGUI.EndChangeCheck())

@@ -4,28 +4,28 @@ using UnityEngine;
 
 public class EnemySlimeAttackZone : MonoBehaviour
 {
-    [SerializeField] private int damage;
-    [SerializeField] private float timeBetweenAttacks;
-    [SerializeField] private GameObject player;
+    [SerializeField] private int _damage;
+    [SerializeField] private float _timeBetweenAttacks;
+    [SerializeField] private GameObject _player;
 
-    private bool canAttack = false;
-    private float timerBetweenAttacks;
+    private bool _canAttack = false;
+    private float _timerBetweenAttacks;
 
     private void Start()
     {
-        timerBetweenAttacks = timeBetweenAttacks;
+        _timerBetweenAttacks = _timeBetweenAttacks;
     }
 
     private void Update()
     {
-        if (canAttack)
+        if (_canAttack)
         {
-            timerBetweenAttacks -= Time.deltaTime;
-            if (timerBetweenAttacks <= 0)
+            _timerBetweenAttacks -= Time.deltaTime;
+            if (_timerBetweenAttacks <= 0)
             {
                 Debug.Log("playerDamaged");
-                player.GetComponent<Player>().TakeDamage(damage);
-                timerBetweenAttacks = timeBetweenAttacks;
+                _player.GetComponent<Player>().TakeDamage(_damage);
+                _timerBetweenAttacks = _timeBetweenAttacks;
             }
         }
 
@@ -35,20 +35,20 @@ public class EnemySlimeAttackZone : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            player = other.gameObject;
-            canAttack = true;
-            timerBetweenAttacks = timeBetweenAttacks;
+            _player = other.gameObject;
+            _canAttack = true;
+            _timerBetweenAttacks = _timeBetweenAttacks;
             Debug.Log("playerDamaged");
-            other.gameObject.GetComponent<Player>().TakeDamage(damage);
+            other.gameObject.GetComponent<Player>().TakeDamage(_damage);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
 
-        if (other.gameObject == player)
+        if (other.gameObject == _player)
         {
-            canAttack = false;
+            _canAttack = false;
         }
     }
 

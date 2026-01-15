@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ContructionInventoryManager : MonoBehaviour
 {
-    private List<List<GameObject>> ObtainedConstructionObjects;
+    private List<List<GameObject>> _obtainedConstructionObjects;
 
     public void BuyItemOne() { 
         
