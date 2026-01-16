@@ -17174,6 +17174,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &838039857
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 838039858}
+  - component: {fileID: 838039859}
+  m_Layer: 0
+  m_Name: MarketManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &838039858
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838039857}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1958531453}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &838039859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838039857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52ee8b0dbbc120a41900725fc222a2d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &871797289
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17320,9 +17364,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 111143062fc2d4a46b266e77b387a160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BlueGemPrefab: {fileID: 0}
-  RedGemPrefab: {fileID: 0}
-  RedBlueGemPrefab: {fileID: 0}
+  BlueGemPrefab: {fileID: 1713312694162730621, guid: 7bc1bf32e62b36a4183ae345186c165b, type: 3}
+  RedGemPrefab: {fileID: 5097261789379587870, guid: b8167ae71f7ed084487204e9c9e5f763, type: 3}
+  RedBlueGemPrefab: {fileID: 686360474168351902, guid: d51df7d31cb592c42aca3941fd49432d, type: 3}
   blueGemsList: []
   redGemsList: []
   redblueGemsList: []
@@ -48333,6 +48377,7 @@ Transform:
   - {fileID: 750016190}
   - {fileID: 344855035}
   - {fileID: 908038396}
+  - {fileID: 838039858}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1983394754
