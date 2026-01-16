@@ -1,10 +1,13 @@
 using UnityEngine;
+using FMODUnity;
 
 public class LoseCondition : MonoBehaviour
 {
-
+    [Header("Audio de FMOD")]
+    public EventReference _sonidoRespawn;
+    [Header("References")]
     [SerializeField] private Player player;
-    [SerializeField] private Transform spawnPoint;// PosiciÛn a la que se teletransportar·
+    [SerializeField] private Transform spawnPoint;// Posici√≥n a la que se teletransportar√°
     [SerializeField] private float delayTp;
 
     private void OnTriggerEnter(Collider other)
@@ -23,6 +26,10 @@ public class LoseCondition : MonoBehaviour
         if (player != null && spawnPoint != null)
         {
             player.transform.position = spawnPoint.position; // Teletransporta al spawn
+            if (!_sonidoRespawn.IsNull)
+            {
+                RuntimeManager.PlayOneShot(_sonidoRespawn, transform.position);
+            }
         }
     }
 }

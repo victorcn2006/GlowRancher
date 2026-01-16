@@ -432,7 +432,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49c33d19d5c906946b0821a70fbe7b61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vcaPath: bus:/Master Bus
+  vcaPath: vca:/General
+  iconMuted: {fileID: 1884801011}
 --- !u!1 &109164657
 GameObject:
   m_ObjectHideFlags: 0
@@ -2667,12 +2668,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 752575626}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77613c64275c24342a7cec00bf9f1b41, type: 3}
+  m_Script: {fileID: 11500000, guid: 49c33d19d5c906946b0821a70fbe7b61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sliderType: 1
-  imageMute: {fileID: 1956575154}
-  mixer: {fileID: 24100000, guid: 26c5e59eb3ca8b44ebc3a0b4e969f6dc, type: 2}
+  vcaPath: vca:/Music
+  iconMuted: {fileID: 1956575154}
 --- !u!1 &754589234
 GameObject:
   m_ObjectHideFlags: 0
@@ -4707,12 +4707,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1251961695}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77613c64275c24342a7cec00bf9f1b41, type: 3}
+  m_Script: {fileID: 11500000, guid: 49c33d19d5c906946b0821a70fbe7b61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sliderType: 2
-  imageMute: {fileID: 858205931}
-  mixer: {fileID: 24100000, guid: 26c5e59eb3ca8b44ebc3a0b4e969f6dc, type: 2}
+  vcaPath: vca:/SFX
+  iconMuted: {fileID: 858205931}
 --- !u!1 &1320058724
 GameObject:
   m_ObjectHideFlags: 0
@@ -6535,7 +6534,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'GUI
+  m_text: 'SFX
 
 '
   m_isRightToLeft: 0

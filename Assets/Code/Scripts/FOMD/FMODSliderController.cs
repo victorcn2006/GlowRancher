@@ -3,43 +3,49 @@ using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
 using UnityEngine.UI;
-using JetBrains.Annotations;
 
 public class FMODSliderController : MonoBehaviour
 {
-
     [Header("FMOD Settings")]
     public string vcaPath;
 
+    [Header("UI Feedback")]
+    public GameObject iconMuted; // Arrastra aquí la imagen de "Mute" o "X"
+
     private FMOD.Studio.VCA _vcaController;
     private Slider _slider;
-
     private float _currentVolume;
 
     private void Start()
     {
-
-        //Referencia VCA
         _vcaController = RuntimeManager.GetVCA(vcaPath);
-
-        //Componente Slider
         _slider = GetComponent<Slider>();
 
         if (_slider != null)
         {
-            //Iniciar valor slider con el volumen actual del VCA
             _vcaController.getVolume(out _currentVolume);
             _slider.value = _currentVolume;
 
-            //Cambios en el Slider
+            // Ejecutar una vez al inicio para que el icono esté correcto
+            UpdateMuteIcon(_currentVolume);
+
             _slider.onValueChanged.AddListener(SetVolume);
         }
     }
 
     public void SetVolume(float volume)
     {
-        //El slider debe ir de 0 a 1
         _vcaController.setVolume(volume);
+        UpdateMuteIcon(volume);
     }
 
+    // Nueva función para controlar la visibilidad del icono
+    private void UpdateMuteIcon(float volume)
+    {
+        if (iconMuted != null)
+        {
+            // Se activa si el volumen es 0 o casi 0
+            iconMuted.SetActive(volume <= 0.001f);
+        }
+    }
 }
