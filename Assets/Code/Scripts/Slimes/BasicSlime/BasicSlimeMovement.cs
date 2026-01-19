@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RSlimeMovementBehaviour : MonoBehaviour
+public class BasicSlimeMovement : MonoBehaviour
 {
-    private RSlime _RSlime;
+    private BasicSlime _BasicSlime;
 
     // --------------------------------------------MOVEMENT PARAMETERS-------------------------------------------- \\
     [Header("RANGO DE TIEMPO ENTRE SALTOS")]
@@ -32,7 +32,7 @@ public class RSlimeMovementBehaviour : MonoBehaviour
 
     // --------------------------------------------RAYCAST SETTINGS--------------------------------------------\\
     [Header("VALORES GROUNDED")]
-    private const float groundCheckDistance = 0.7f;
+    public float groundCheckDistance = 0.7f;
 
     private void Awake()
     {
@@ -42,7 +42,7 @@ public class RSlimeMovementBehaviour : MonoBehaviour
 
     void Start()
     {
-        _RSlime = GetComponent<RSlime>();
+        _BasicSlime = GetComponent<BasicSlime>();
         jumpTimer = Random.Range(MIN_TIME, MAX_TIME);
     }
 
@@ -84,8 +84,8 @@ public class RSlimeMovementBehaviour : MonoBehaviour
 
     private IEnumerator Jump()
     {
-        yield return new WaitForSeconds(ROTATE_DURATION);   
-        rb.AddForce((transform.up + transform.forward) * JUMP_FORCE );
+        yield return new WaitForSeconds(ROTATE_DURATION);
+        rb.AddForce((transform.up + transform.forward) * JUMP_FORCE);
     }
 
     private void ResetJumpTimer()
@@ -112,5 +112,4 @@ public class RSlimeMovementBehaviour : MonoBehaviour
     {
         rb.useGravity = state;
     }
-
 }

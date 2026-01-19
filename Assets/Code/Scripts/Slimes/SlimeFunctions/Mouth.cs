@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class Mouth : MonoBehaviour
 {
-
     [Header("LINKED SCRIPTS")]
-    [SerializeField] private HungerSystem hungerSystem;
+    private HungerSystem hungerSystem;
+    private void Start()
+    {
+        hungerSystem = GetComponentInParent<HungerSystem>();
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Food") && hungerSystem.IsHungry())

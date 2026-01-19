@@ -2,16 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RSlime : MonoBehaviour, IAspirable
+public class BasicSlime : MonoBehaviour, IAspirable
 {
     // --------------------------------------------LINKED SCRIPTS------------------------------------------------- \\
-    // Acabar de crear y agregar todos los RFunction \\
     [Header("SLIME SCRIPTS")]
-    public RHungerSystem hungerSystem;
-    public RFoodDetector foodDetector;
-    public RGemSystem gemSystem;
-    public RMouth mouth;
-    public RSlimeMovementBehaviour movementbehaviour;
+    public HungerSystem hungerSystem;
+    //public RFoodDetector foodDetector;
+    public GemSystem gemSystem;
+    public Mouth mouth;
+    public BasicSlimeMovement movementbehaviour;
 
     public void BeingAspired()
     {

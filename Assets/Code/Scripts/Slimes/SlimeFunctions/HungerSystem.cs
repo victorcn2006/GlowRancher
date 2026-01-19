@@ -6,8 +6,7 @@ public class HungerSystem : MonoBehaviour
 {
 
     // --------------------------------------------LINKED SCRIPTS--------------------------------------------\\
-    private FoodDetector foodDetector;
-    [SerializeField] private GemSystem gemSystem;
+    private GemSystem gemSystem;
 
 
 
@@ -18,7 +17,7 @@ public class HungerSystem : MonoBehaviour
 
     private void Start()
     {
-        foodDetector = GetComponent<FoodDetector>();
+        gemSystem = GetComponentInChildren<GemSystem>();
         hungry = true;
         hungerTimer = 0;
     }
@@ -32,7 +31,6 @@ public class HungerSystem : MonoBehaviour
     {
         hungry = false;
         hungerTimer = hungerTimeReset;
-        foodDetector.RemoveFood(food);
         StartCoroutine(gemSystem.SpawnGem());
     }
 
