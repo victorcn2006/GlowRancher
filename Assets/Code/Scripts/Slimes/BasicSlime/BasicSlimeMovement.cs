@@ -13,19 +13,19 @@ public class BasicSlimeMovement : MonoBehaviour
     private const float MAX_TIME = 10f;
 
     [Header("VALORES DEL SALTO")]
-    [SerializeField] private float JUMP_FORCE = 3f;
-    [SerializeField] private float JUMP_TIME = 1f;
-    [SerializeField] private float JUMP_DISTANCE = 1f;
+    [SerializeField] private const float JUMP_FORCE = 3f;
+    [SerializeField] private const float JUMP_TIME = 1f;
+    [SerializeField] private const float JUMP_DISTANCE = 1f;
 
     [Header("VALORES DE ROTACIÓN")]
-    [SerializeField] private float ROTATE_DURATION = 2f;
+    [SerializeField] private const float ROTATE_DURATION = 2f;
 
     // --------------------------------------------PRIVATE VARIABLES--------------------------------------------\\
-    private float jumpTimer;
+    private float _jumpTimer;
 
-    private Rigidbody rb;
+    private Rigidbody _rb;
 
-    private bool beingAspired = false;
+    private bool _beingAspired = false;
 
     private Vector3 jumpDirection;
 
@@ -36,23 +36,23 @@ public class BasicSlimeMovement : MonoBehaviour
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        _rb = GetComponent<Rigidbody>();
     }
 
 
     void Start()
     {
         _BasicSlime = GetComponent<BasicSlime>();
-        jumpTimer = Random.Range(MIN_TIME, MAX_TIME);
+        _jumpTimer = Random.Range(MIN_TIME, MAX_TIME);
     }
 
     private void Update()
     {
 
-        if (Grounded() && !beingAspired)
+        if (Grounded() && !_beingAspired)
         {
-            jumpTimer -= Time.deltaTime;
-            if (jumpTimer <= 0)
+            _jumpTimer -= Time.deltaTime;
+            if (_jumpTimer <= 0)
             {
                 GoJump();
                 ResetJumpTimer();
@@ -85,12 +85,12 @@ public class BasicSlimeMovement : MonoBehaviour
     private IEnumerator Jump()
     {
         yield return new WaitForSeconds(ROTATE_DURATION);
-        rb.AddForce((transform.up + transform.forward) * JUMP_FORCE);
+        _rb.AddForce((transform.up + transform.forward) * JUMP_FORCE);
     }
 
     private void ResetJumpTimer()
     {
-        jumpTimer = Random.Range(MIN_TIME, MAX_TIME);
+        _jumpTimer = Random.Range(MIN_TIME, MAX_TIME);
     }
 
     private bool Grounded()
@@ -105,11 +105,11 @@ public class BasicSlimeMovement : MonoBehaviour
 
     public void SetBeingAspired(bool state)
     {
-        beingAspired = state;
+        _beingAspired = state;
     }
 
     public void SetGravity(bool state)
     {
-        rb.useGravity = state;
+        _rb.useGravity = state;
     }
 }
