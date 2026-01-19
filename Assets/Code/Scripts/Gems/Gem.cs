@@ -31,6 +31,7 @@ public class Gem : MonoBehaviour, IAspirable
             return MarketManager.Instance.GetCurrentPrice(type, data.value);
         }
         return data.value;
+
     }
 
 }

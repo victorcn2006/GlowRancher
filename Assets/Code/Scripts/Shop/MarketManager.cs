@@ -16,7 +16,7 @@ public class MarketManager : MonoBehaviour
         priceMultipliers[GemsPool.gemTypes.REDBLUE_GEM] = 1.0f;
     }
 
-    // Aquesta funció calcula el preu actual basat en el pool
+    // Aquesta funció calcula el preu actual basat en la pool de gemas
     public int GetCurrentPrice(GemsPool.gemTypes type, int baseValue)
     {
         float multiplier = priceMultipliers[type];
