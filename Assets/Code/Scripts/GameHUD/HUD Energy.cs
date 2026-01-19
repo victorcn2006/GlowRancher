@@ -7,22 +7,22 @@ using UnityEngine.UI;
 public class HUDEnergy : MonoBehaviour
 {
     [Header("References")] 
-    [SerializeField] private Player player;
-    [SerializeField] private Slider slider;
+    [SerializeField] private Player _player;
+    [SerializeField] private Slider _slider;
 
-    private int stamina;
+    private int _stamina;
 
     private void Start()
     {
 
-        stamina = player.stamina;
-        slider.maxValue = stamina;
-        slider.value = stamina;
+        _stamina = _player.stamina;
+        _slider.maxValue = _stamina;
+        _slider.value = _stamina;
         
     }
 
     private void Update()
     {
-        slider.value = stamina;
+        _slider.value = _stamina;
     }
 }

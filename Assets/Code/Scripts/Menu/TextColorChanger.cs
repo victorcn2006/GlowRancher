@@ -3,17 +3,17 @@ using TMPro;
 using UnityEngine.EventSystems;
 
 public class TextColorChanger : MonoBehaviour {
-    private TextMeshProUGUI textToChange;
+    private TextMeshProUGUI _textToChange;
 
     private void Awake() {
-        if (textToChange == null) textToChange = GetComponentInChildren<TextMeshProUGUI>();
+        if (_textToChange == null) _textToChange = GetComponentInChildren<TextMeshProUGUI>();
     }
 
     void Update() {
-        if (textToChange == null) return;
+        if (_textToChange == null) return;
         //Selected color
-        if (EventSystem.current.currentSelectedGameObject == gameObject) textToChange.color = Color.red;
+        if (EventSystem.current.currentSelectedGameObject == gameObject) _textToChange.color = Color.red;
         //Default color
-        else textToChange.color = Color.white;
+        else _textToChange.color = Color.white;
     }
 }

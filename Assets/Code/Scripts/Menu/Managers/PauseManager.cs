@@ -6,35 +6,35 @@ using UnityEngine.UI;
 
 public class PauseManager : MonoBehaviour
 {
-    [RequiredField, SerializeField] private GameObject pausePanel;
-    [RequiredField, SerializeField] private GameObject hud;
-    [SerializeField] private GameObject firstButton;
+    [RequiredField, SerializeField] private GameObject _pausePanel;
+    [RequiredField, SerializeField] private GameObject _hud;
+    [SerializeField] private GameObject _firstButton;
     //[RequiredField, SerializeField] private GameObject wiki;
-    [RequiredField, SerializeField] private GameObject gamePanel;
-    private bool focusSet = false;
+    [RequiredField, SerializeField] private GameObject _gamePanel;
+    private bool _focusSet = false;
     private void Awake() {
-        pausePanel.SetActive(false);
+        _pausePanel.SetActive(false);
     }
 
     private void Update() {
         if(InputManager.Instance != null && InputManager.Instance.isPaused && InputManager.Instance.wikiOpen != true)
         {
-            pausePanel.SetActive(true);
-            hud.SetActive(false);
+            _pausePanel.SetActive(true);
+            _hud.SetActive(false);
             //wiki.SetActive(false);
-            gamePanel.SetActive(false);
-            if (!focusSet)
+            _gamePanel.SetActive(false);
+            if (!_focusSet)
             {
-                EventSystem.current.SetSelectedGameObject(firstButton);
-                focusSet = true;
+                EventSystem.current.SetSelectedGameObject(_firstButton);
+                _focusSet = true;
             }
         }
         else
         {
-            pausePanel.SetActive(false);
-            hud.SetActive(true);
-            gamePanel.SetActive(true);
-            focusSet = false;
+            _pausePanel.SetActive(false);
+            _hud.SetActive(true);
+            _gamePanel.SetActive(true);
+            _focusSet = false;
         }
             
     }

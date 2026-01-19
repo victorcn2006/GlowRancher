@@ -1,22 +1,22 @@
 using UnityEngine;
 using UnityEngine.UI;
 public class FullScreen : MonoBehaviour{
-    private Toggle toggle;
+    private Toggle _toggle;
 
     private const string FULLSCREEN_KEY = "isFullScreen";
 
     private void Awake() {
-        if(toggle == null) toggle = GetComponent<Toggle>();
+        if(_toggle == null) _toggle = GetComponent<Toggle>();
     }
     private void Start() {
-        if(toggle == null) return;
+        if(_toggle == null) return;
         bool savedFullScreen = PlayerPrefs.GetInt(FULLSCREEN_KEY, 1) == 1;
-        toggle.isOn = savedFullScreen;
-        toggle.onValueChanged.AddListener(EnableFullScreen);
+        _toggle.isOn = savedFullScreen;
+        _toggle.onValueChanged.AddListener(EnableFullScreen);
                 
     }
     private void OnDisable(){
-        toggle.onValueChanged.RemoveListener(EnableFullScreen);
+        _toggle.onValueChanged.RemoveListener(EnableFullScreen);
     }
     private void EnableFullScreen(bool fullScreen) {
         Screen.fullScreen = fullScreen;

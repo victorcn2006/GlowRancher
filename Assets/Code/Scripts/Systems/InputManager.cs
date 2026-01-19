@@ -1,24 +1,22 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.UI;
 
 public class InputManager : MonoBehaviour{
     public static InputManager Instance { get; private set; }
 
-    [Header("InputAction asset with all the inputs")]
-    [RequiredField, SerializeField] private InputActionAsset inputs;
+    [Header("InputAction asset with all the _inputs")]
+    [RequiredField, SerializeField] private InputActionAsset _inputs;
 
     [Header("All the input actions and action maps to enable/disable them")]
     //Action maps
-    private InputActionMap playerMap;
-    private InputActionMap aspiratorMap;
-    private InputActionMap inventoryMap;
-    private InputActionMap UIMap;
+    private InputActionMap _playerMap;
+    private InputActionMap _aspiratorMap;
+    private InputActionMap _inventoryMap;
+    private InputActionMap _uIMap;
     //InputActions
-    private InputAction pauseGame;
-    private InputAction wiki;
-    private InputAction inventoryNavigation;
+    private InputAction _pauseGame;
+    private InputAction _wiki;
+    private InputAction _inventoryNavigation;
 
 
     public bool isPaused { get; private set; } = false;
@@ -34,33 +32,33 @@ public class InputManager : MonoBehaviour{
         }
             
 
-        //Inputs configuration
-        if (inputs == null) return; 
+        //_inputs configuration
+        if (_inputs == null) return;
         //Input Actions Map references
-        playerMap = inputs.FindActionMap("Player");
-        aspiratorMap = inputs.FindActionMap("Aspirator");
-        inventoryMap = inputs.FindActionMap("Inventory");
-        UIMap = inputs.FindActionMap("UI");
+        _playerMap = _inputs.FindActionMap("Player");
+        _aspiratorMap = _inputs.FindActionMap("Aspirator");
+        _inventoryMap = _inputs.FindActionMap("Inventory");
+        _uIMap = _inputs.FindActionMap("UI");
 
-        //Activate all the inputs
-        inputs.Enable();
+        //Activate all the _inputs
+        _inputs.Enable();
     }
 
     private void Start()
     {
-        if (inputs == null) return;
+        if (_inputs == null) return;
         //Input Action references
-        pauseGame = UIMap.FindAction("PauseGame");
-        wiki = UIMap.FindAction("OpenWiki");
-        inventoryNavigation = inventoryMap.FindAction("InventoryNavigation");
+        _pauseGame = _uIMap.FindAction("PauseGame");
+        _wiki = _uIMap.FindAction("OpenWiki");
+        _inventoryNavigation = _inventoryMap.FindAction("InventoryNavigation");
 
-        pauseGame.performed += OnPauseGame;
+        _pauseGame.performed += OnPauseGame;
         CheckPause(isPaused);
     }
 
     private void OnDisable() {
-        if (pauseGame != null)
-            pauseGame.performed -= OnPauseGame;
+        if (_pauseGame != null)
+            _pauseGame.performed -= OnPauseGame;
     }
 
     private void OnPauseGame(InputAction.CallbackContext ctx) {
@@ -86,12 +84,12 @@ public class InputManager : MonoBehaviour{
         if (isPaused)
         {
             Time.timeScale = 0f;
-            playerMap.Disable();
+            _playerMap.Disable();
         }
         else
         {
             Time.timeScale = 1f;
-            playerMap.Enable();
+            _playerMap.Enable();
         }
     }
 }

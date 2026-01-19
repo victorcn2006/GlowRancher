@@ -8,21 +8,21 @@ public class Aspirator : MonoBehaviour
 {
     public static Aspirator instance;
 
-    [SerializeField] private InputActionReference aspirate;
-    [SerializeField] private InputActionReference launchObject;
+    [SerializeField] private InputActionReference _aspirate;
+    [SerializeField] private InputActionReference _launchObject;
 
-    [SerializeField] private ObjectsDetector objectsDetector;
+    [SerializeField] private ObjectsDetector _objectsDetector;
 
-    [SerializeField] private SuctionPoint suctionPoint;
+    [SerializeField] private SuctionPoint _suctionPoint;
 
-    [SerializeField] private Inventory inventory;
-    private List<GameObject> aspirableObjectsList = new List<GameObject>();
+    [SerializeField] private Inventory _inventory;
+    private List<GameObject> _aspirableObjectsList = new List<GameObject>();
 
-    private bool aspirating;
+    private bool _aspirating;
 
-    [SerializeField] private float aspirateForce;
-    [SerializeField] private float launchForce;
-    [SerializeField] private Transform aspiratePoint;
+    [SerializeField] private float _aspirateForce;
+    [SerializeField] private float _launchForce;
+    [SerializeField] private Transform _aspiratePoint;
 
     private void Awake()
     {
@@ -40,19 +40,19 @@ public class Aspirator : MonoBehaviour
     private void Start()
     {
 
-        aspirate.action.performed += SetAspirate;
-        aspirate.action.canceled += SetAspirate;
+        _aspirate.action.performed += SetAspirate;
+        _aspirate.action.canceled += SetAspirate;
 
-        launchObject.action.performed += LaunchObject;
+        _launchObject.action.performed += LaunchObject;
 
-        aspirate.action.Enable();
-        aspirating = false;  
+        _aspirate.action.Enable();
+        _aspirating = false;  
     }
 
     private void Update()
     {
 
-        if (aspirating)
+        if (_aspirating)
         {
             AspirateObjects();
         }
@@ -60,16 +60,16 @@ public class Aspirator : MonoBehaviour
 
     private void AspirateObjects()
     {
-        aspirableObjectsList = objectsDetector.GetAspirableObjects();
+        _aspirableObjectsList = _objectsDetector.GetAspirableObjects();
 
-        foreach (GameObject obj in aspirableObjectsList)
+        foreach (GameObject obj in _aspirableObjectsList)
         {
             obj.GetComponent<IAspirable>().BeingAspired();
 
-            float distance = Vector3.Distance(obj.transform.position, aspiratePoint.position);
-            float forceFactor = Mathf.Clamp01(1f - (distance / 10f)); // 10 = rango m·ximo de succiÛn
-            Vector3 aspirateDirection = (aspiratePoint.position - obj.transform.position).normalized;
-            obj.GetComponent<Rigidbody>().AddForce(aspirateDirection * aspirateForce * forceFactor, ForceMode.Force);
+            float distance = Vector3.Distance(obj.transform.position, _aspiratePoint.position);
+            float forceFactor = Mathf.Clamp01(1f - (distance / 10f)); // 10 = rango m√°ximo de succi√≥n
+            Vector3 aspirateDirection = (_aspiratePoint.position - obj.transform.position).normalized;
+            obj.GetComponent<Rigidbody>().AddForce(aspirateDirection * _aspirateForce * forceFactor, ForceMode.Force);
 
         }
     }
@@ -79,17 +79,17 @@ public class Aspirator : MonoBehaviour
         {
             //codigo para disparar el objeto 
 
-            GameObject objectToLaunch = PoolManager.Instance.GetFirstAvailableObject(inventory.QuitarUno());
-            objectsDetector.RemoveTargetFromAspirableObjectList(objectToLaunch);
+            GameObject objectToLaunch = PoolManager.Instance.GetFirstAvailableObject(_inventory.QuitarUno());
+            _objectsDetector.RemoveTargetFromAspirableObjectList(objectToLaunch);
             if (objectToLaunch == null)
             {
                 return;
             }
-            objectToLaunch.transform.position = aspiratePoint.position;
+            objectToLaunch.transform.position = _aspiratePoint.position;
 
             objectToLaunch.GetComponent<Rigidbody>().velocity = Vector3.zero;
             objectToLaunch.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-            objectToLaunch.GetComponent<Rigidbody>().AddForce(aspiratePoint.forward.normalized * launchForce, ForceMode.Impulse);
+            objectToLaunch.GetComponent<Rigidbody>().AddForce(_aspiratePoint.forward.normalized * _launchForce, ForceMode.Impulse);
         }
     }
 
@@ -107,17 +107,17 @@ public class Aspirator : MonoBehaviour
 
     private void StartAspire()
     {
-        aspirating = true;
-        suctionPoint.SetCanSuck(true);
+        _aspirating = true;
+        _suctionPoint.SetCanSuck(true);
 
     }
 
     private void StopAspire()
     {
-        aspirating = false;
-        suctionPoint.SetCanSuck(false);
+        _aspirating = false;
+        _suctionPoint.SetCanSuck(false);
 
-        foreach (GameObject obj in aspirableObjectsList)
+        foreach (GameObject obj in _aspirableObjectsList)
         {
             obj.GetComponent<IAspirable>().StopBeingAspired();
         }
@@ -125,7 +125,7 @@ public class Aspirator : MonoBehaviour
 
     public void RemoveAspirableObject(GameObject aspirableObject)
     {
-        aspirableObjectsList.Remove(aspirableObject);
+        _aspirableObjectsList.Remove(aspirableObject);
     }
 
 

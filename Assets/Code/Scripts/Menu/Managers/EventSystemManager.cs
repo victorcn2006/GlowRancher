@@ -7,18 +7,18 @@ public class EventSystemManager : MonoBehaviour {
     
     [HideInInspector] public GameObject lastSelectedObject;
     
-    [SerializeField] private GameObject initialFocusObject;
-    private InputAction clickAction;
-    private InputSystemUIInputModule uIInputModule;
+    [SerializeField] private GameObject _initialFocusObject;
+    private InputAction _clickAction;
+    private InputSystemUIInputModule _uIInputModule;
 
     private void Awake() {
-        if(uIInputModule == null) uIInputModule = GetComponent<InputSystemUIInputModule>();
+        if(_uIInputModule == null) _uIInputModule = GetComponent<InputSystemUIInputModule>();
     }
     private void Start() {
         //If the focus is not null the EventSystem is gonna focus the first gameObject
-        if (initialFocusObject != null){
-            EventSystem.current.SetSelectedGameObject(initialFocusObject);
-            lastSelectedObject = initialFocusObject;
+        if (_initialFocusObject != null){
+            EventSystem.current.SetSelectedGameObject(_initialFocusObject);
+            lastSelectedObject = _initialFocusObject;
         }
         else{
             Debug.LogWarning("Initial focus object not assigned in the Inspector");
@@ -26,10 +26,10 @@ public class EventSystemManager : MonoBehaviour {
         }
 
         //uiInputModule has the UI input Click left action
-        if (uIInputModule != null){
-            clickAction = uIInputModule.actionsAsset.FindAction("UI/Click");
+        if (_uIInputModule != null){
+            _clickAction = _uIInputModule.actionsAsset.FindAction("UI/Click");
 
-            if (clickAction != null) clickAction.performed += OnClick;
+            if (_clickAction != null) _clickAction.performed += OnClick;
             else Debug.LogWarning("Action 'UI/Click' not found.", this);
         }
     }
@@ -44,7 +44,7 @@ public class EventSystemManager : MonoBehaviour {
     }
     private void OnDestroy()
     {
-        if (clickAction != null) clickAction.performed -= OnClick;
+        if (_clickAction != null) _clickAction.performed -= OnClick;
     }
     
     private void OnClick(InputAction.CallbackContext context) {

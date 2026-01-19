@@ -5,29 +5,29 @@ using UnityEngine;
 public class EnemySlimeStateMachine : MonoBehaviour, IAspirable
 {
     // --------------------------------------------LINKED SCRIPTS--------------------------------------------\\
-    [SerializeField] private EnemySlimeMovementBehaviour enemySlimeMovementBehaviour;
-    [SerializeField] private SlimeBonesReference slimeBonesReference;
+    [SerializeField] private EnemySlimeMovementBehaviour _enemySlimeMovementBehaviour;
+    [SerializeField] private SlimeBonesReference _slimeBonesReference;
 
 
     // --------------------------------------------RAYCAST SETTINGS--------------------------------------------\\
     [Header("VALORES GROUNDED")]
-    private const float groundCheckDistance = 0.6f;
-    [SerializeField] private LayerMask groundLayer;
+    private const float GROUND_CHECK_DISTANCE = 0.6f;
+    [SerializeField] private LayerMask _groundLayer;
 
 
     // --------------------------------------------STATES--------------------------------------------\\
     private enum States { ON_FLOOR, ON_AIR, BEING_ASPIRED };
-    private States currentState;
+    private States _currentState;
 
     private void Start()
     {
-        enemySlimeMovementBehaviour = GetComponent<EnemySlimeMovementBehaviour>();
-        currentState = States.ON_FLOOR;
+        _enemySlimeMovementBehaviour = GetComponent<EnemySlimeMovementBehaviour>();
+        _currentState = States.ON_FLOOR;
     }
 
     void Update()
     {
-        switch (currentState)
+        switch (_currentState)
         {
 
             case States.ON_FLOOR:
@@ -47,20 +47,19 @@ public class EnemySlimeStateMachine : MonoBehaviour, IAspirable
 
     private void OnFloor()
     {
-        enemySlimeMovementBehaviour.SetCanJump(true);
+        _enemySlimeMovementBehaviour.SetCanJump(true);
         ToOnAir();
     }
 
     private void OnAir()
     {
-        enemySlimeMovementBehaviour.SetCanJump(false);
+        _enemySlimeMovementBehaviour.SetCanJump(false);
         ToOnFloor();
     }
 
     private void OnBeingAspired()
     {
-        enemySlimeMovementBehaviour.SetCanJump(false);
-
+        _enemySlimeMovementBehaviour.SetCanJump(false);
     }
 
 
@@ -70,7 +69,7 @@ public class EnemySlimeStateMachine : MonoBehaviour, IAspirable
     {
         if (Grounded())
         {
-            currentState = States.ON_FLOOR;
+            _currentState = States.ON_FLOOR;
         }
     }
 
@@ -78,7 +77,7 @@ public class EnemySlimeStateMachine : MonoBehaviour, IAspirable
     {
         if (!Grounded())
         {
-            currentState = States.ON_AIR;
+            _currentState = States.ON_AIR;
         }
     }
 
@@ -87,11 +86,11 @@ public class EnemySlimeStateMachine : MonoBehaviour, IAspirable
 
     public void BeingAspired()
     {
-        currentState = States.BEING_ASPIRED;
+        _currentState = States.BEING_ASPIRED;
 
-        enemySlimeMovementBehaviour.SetGravity(false);
+        _enemySlimeMovementBehaviour.SetGravity(false);
 
-        foreach (GameObject obj in slimeBonesReference.GetSlimeBonesList())
+        foreach (GameObject obj in _slimeBonesReference.GetSlimeBonesList())
         {
             obj.GetComponent<Rigidbody>().useGravity = false;
         }
@@ -100,9 +99,9 @@ public class EnemySlimeStateMachine : MonoBehaviour, IAspirable
 
     public void StopBeingAspired()
     {
-        enemySlimeMovementBehaviour.SetGravity(true);
+        _enemySlimeMovementBehaviour.SetGravity(true);
 
-        foreach (GameObject obj in slimeBonesReference.GetSlimeBonesList())
+        foreach (GameObject obj in _slimeBonesReference.GetSlimeBonesList())
         {
             obj.GetComponent<Rigidbody>().useGravity = true;
         }
@@ -115,7 +114,7 @@ public class EnemySlimeStateMachine : MonoBehaviour, IAspirable
     // OTHER FUNCTIONS \\
     private bool Grounded()
     {
-        return Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundLayer);
+        return Physics.Raycast(transform.position, Vector3.down, GROUND_CHECK_DISTANCE, _groundLayer);
     }
 
 
@@ -123,7 +122,7 @@ public class EnemySlimeStateMachine : MonoBehaviour, IAspirable
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * groundCheckDistance);
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * GROUND_CHECK_DISTANCE);
 
     }
 }
