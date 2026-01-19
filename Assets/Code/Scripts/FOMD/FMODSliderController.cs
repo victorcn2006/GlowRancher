@@ -21,6 +21,12 @@ public class FMODSliderController : MonoBehaviour
         _vcaController = RuntimeManager.GetVCA(vcaPath);
         _slider = GetComponent<Slider>();
 
+        if (_slider == null)
+        {
+            Debug.Log("Slider can`t found");
+            return;
+        }
+
         if (_slider != null)
         {
             _vcaController.getVolume(out _currentVolume);
@@ -48,4 +54,5 @@ public class FMODSliderController : MonoBehaviour
             iconMuted.SetActive(volume <= 0.001f);
         }
     }
+  
 }
