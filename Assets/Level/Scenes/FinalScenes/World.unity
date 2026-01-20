@@ -16310,7 +16310,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastSelectedObject: {fileID: 0}
-  _initialFocusObject: {fileID: 0}
 --- !u!1 &571955512
 GameObject:
   m_ObjectHideFlags: 0
@@ -17526,6 +17525,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2984404204129254553, guid: aaf5f0c1e594b854fb67e145c0d2e296, type: 3}
   m_PrefabInstance: {fileID: 717932367}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &717932370 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1271533561978880060, guid: aaf5f0c1e594b854fb67e145c0d2e296, type: 3}
+  m_PrefabInstance: {fileID: 717932367}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &750016189
 GameObject:
   m_ObjectHideFlags: 0
@@ -17572,7 +17576,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pausePanel: {fileID: 717932369}
   _hud: {fileID: 545431004}
-  _firstButton: {fileID: 0}
+  _firstButton: {fileID: 717932370}
   _gamePanel: {fileID: 974131645}
 --- !u!1 &760787212
 GameObject:
@@ -23608,6 +23612,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1163723247}
   m_CullTransparentMesh: 1
+--- !u!20 &1197962660 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 413016187931345622, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
+  m_PrefabInstance: {fileID: 1563374104}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1199596605
 GameObject:
   m_ObjectHideFlags: 0
@@ -34028,11 +34037,19 @@ PrefabInstance:
       value: 7999
       objectReference: {fileID: 0}
     - target: {fileID: 1213622026763875800, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
+      propertyPath: _playerCamera
+      value: 
+      objectReference: {fileID: 1197962660}
+    - target: {fileID: 1213622026763875800, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
       propertyPath: rotationSense
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2930511059146918418, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
       propertyPath: move
+      value: 
+      objectReference: {fileID: 4188637062435728261, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
+    - target: {fileID: 2930511059146918418, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
+      propertyPath: _move
       value: 
       objectReference: {fileID: 4188637062435728261, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
     - target: {fileID: 4073121894591536787, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
@@ -34099,6 +34116,10 @@ PrefabInstance:
       propertyPath: inputs
       value: 
       objectReference: {fileID: -944628639613478452, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
+    - target: {fileID: 8581981930015451809, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
+      propertyPath: slots.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8581981930015451809, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
       propertyPath: scrollAction.m_Name
       value: Scroll
