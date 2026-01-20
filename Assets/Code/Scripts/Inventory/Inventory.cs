@@ -142,7 +142,7 @@ public class Inventory : MonoBehaviour
             slotUI[slotSeleccionado].ActualizarSlot(slot);
         }
         return objectName;
-    }*/
+    }
 
     private void ExpulsarObjeto(int indice)
     {
@@ -153,7 +153,7 @@ public class Inventory : MonoBehaviour
     }
 
 
-    /*
+    
     // Expulsar objeto si se queda en 0
     private string ExpulsarObjeto(int indice)
     {
@@ -171,7 +171,7 @@ public class Inventory : MonoBehaviour
         slots[indice] = null;
         slotUI[indice].ActualizarSlot(null);
         return slot.nombre;
-    }*/
+    }
 
     // Añadir objetos
     public bool AñadirAlInventario(Sprite icono, string nombre)
