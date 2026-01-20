@@ -6,8 +6,7 @@ using UnityEngine.InputSystem.UI;
 public class EventSystemManager : MonoBehaviour {
     
     [HideInInspector] public GameObject lastSelectedObject;
-    
-    [SerializeField] private GameObject _initialFocusObject;
+
     private InputAction _clickAction;
     private InputSystemUIInputModule _uIInputModule;
 
@@ -15,6 +14,7 @@ public class EventSystemManager : MonoBehaviour {
         if(_uIInputModule == null) _uIInputModule = GetComponent<InputSystemUIInputModule>();
     }
     private void Start() {
+        GameObject _initialFocusObject = EventSystem.current.firstSelectedGameObject;
         //If the focus is not null the EventSystem is gonna focus the first gameObject
         if (_initialFocusObject != null){
             EventSystem.current.SetSelectedGameObject(_initialFocusObject);

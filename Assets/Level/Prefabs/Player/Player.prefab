@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: 0}
+  m_Actions: {fileID: -944628639613478452, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
   m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -184,40 +184,92 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 3aa1a130-9907-4d28-a30b-a0e519daf788
+    m_ActionId: 5039cf6a-fb8c-4d53-a966-08a8ab5c45fe
+    m_ActionName: UI/Navigate[/XInputControllerWindows/leftStick/up,/XInputControllerWindows/rightStick/up,/XInputControllerWindows/leftStick/down,/XInputControllerWindows/rightStick/down,/XInputControllerWindows/leftStick/left,/XInputControllerWindows/rightStick/left,/XInputControllerWindows/leftStick/right,/XInputControllerWindows/rightStick/right,/XInputControllerWindows/dpad,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7a0ada22-84c5-44af-ae45-db307c6f5d8f
+    m_ActionName: UI/Submit[/Keyboard/enter,/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 11f77241-8bd6-42ea-931e-bf65d5b90ecf
+    m_ActionName: UI/Cancel[/Keyboard/escape,/XInputControllerWindows/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a4cb11e0-9672-4946-8a40-593b40e53fe5
+    m_ActionName: UI/Point[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4f39a2ea-c3ee-463c-bf10-83fcfe5fb921
+    m_ActionName: UI/Click[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: db578e1b-f4a1-4df5-82f8-39c4d1f6148f
+    m_ActionName: UI/ScrollWheel[/Mouse/scroll]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d1d81bc4-4732-4890-b511-d69361c39d1e
+    m_ActionName: UI/MiddleClick[/Mouse/middleButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f41cd804-980f-4191-a295-e26f049d3322
+    m_ActionName: UI/RightClick[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1cb192a6-6be8-4e73-a2d0-9189d7281d7e
+    m_ActionName: UI/TrackedDevicePosition
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9eb175ed-aaf3-4763-b162-3739b67c246d
+    m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fda71b17-e015-4b75-9e17-758a033533df
+    m_ActionName: UI/PauseGame[/XInputControllerWindows/start,/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9da88437-df06-4c7f-bcb5-d270694e7fc7
+    m_ActionName: UI/OpenWiki[/Keyboard/i,/XInputControllerWindows/buttonNorth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7346aa5b-4710-495b-a794-cd7183d02240
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2930511059146918418}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-        m_MethodName: Jump
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 9c480bad-6b59-4218-8fb3-c6341f38568e
+      m_Calls: []
+    m_ActionId: f8fe87a9-1aee-4389-8bf5-da2960a5464d
     m_ActionName: Player/Jump[/Keyboard/space]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5826915334557868795}
-        m_TargetAssemblyTypeName: Aspirator, Assembly-CSharp
-        m_MethodName: SetAspirate
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 0b6b6749-692c-4bb1-b5fd-37211147a516
+      m_Calls: []
+    m_ActionId: 9b8cecb2-4954-402a-8925-43985f22645c
+    m_ActionName: Player/Look[/Mouse/delta,/XInputControllerWindows/rightStick]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0001764c-4432-4977-9233-73e5ca7159e2
+    m_ActionName: Player/Interact[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 29a83f75-27bf-49b8-bc1e-7d7f62edc0cd
+    m_ActionName: Player/PauseGame[/Keyboard/escape,/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 954352f0-b851-4158-87b8-ebd09ed8605a
     m_ActionName: Aspirator/Aspirate[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5730e902-ba6b-4e99-aeab-d2070f98deb0
+    m_ActionName: Aspirator/LaunchObject[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 49d6a7bd-44cc-4ff6-a39e-ba952e2b87b3
+    m_ActionName: Inventory/RightClick[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8bdb0569-8055-4e17-8b6e-e42998b96785
+    m_ActionName: Inventory/InventoryNavigation[/Keyboard/1,/Keyboard/2,/Keyboard/3,/Keyboard/4]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5b2d87cb-7dca-4513-ab5a-0f582a1b95b6
+    m_ActionName: Inventory/Scroll[/Mouse/scroll]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -235,9 +287,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b8c6d2a808821f48945d991da9f3b7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundLayer:
+  _groundLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
 --- !u!114 &2930511059146918418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,7 +302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24c230e846a673044bf89d33c9bd595d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  move: {fileID: 0}
+  _move: {fileID: 0}
 --- !u!114 &1213622026763875800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,7 +316,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSense: 300
-  playerCamera: {fileID: 413016187931345622}
+  _playerCamera: {fileID: 0}
 --- !u!114 &8581981930015451809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,29 +335,29 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  scrollAction:
+  _scrollAction:
     m_Name: Scroll
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: e664a801-a905-4b80-917b-dffeb9c56cdc
+    m_Id: 00a29121-e719-4b55-b7dd-8a11c8a06124
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  rightClickAction:
+  _rightClickAction:
     m_Name: Right Click
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: dd34eea9-32e9-4bd0-bba4-ad9a0bf8b37f
+    m_Id: ec0b34f5-211f-4c43-8ff4-5f720189f6b8
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  slotKeysAction:
+  _slotKeysAction:
     m_Name: Slot Keys
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 7b331ec6-62ca-4d97-92cb-bb56cb37ab16
+    m_Id: 2f5bb56f-af9d-4096-8868-ac575b918ffc
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -491,17 +543,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4107839801496143454, guid: 523fc2f63ce365e4ea711bacc8984683, type: 3}
   m_PrefabInstance: {fileID: 3787868216515687724}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5826915334557868795 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7227268656683669463, guid: 523fc2f63ce365e4ea711bacc8984683, type: 3}
-  m_PrefabInstance: {fileID: 3787868216515687724}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 929cfe3f36705f547aecb671e158c58e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &7291182062202563311 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5890230464859365315, guid: 523fc2f63ce365e4ea711bacc8984683, type: 3}
