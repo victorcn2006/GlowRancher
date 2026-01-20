@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Windows;
@@ -9,13 +10,13 @@ public class PlayerMovement : MonoBehaviour
 {
 
 
-    // --------------------------------------------LINKED SCRIPTS--------------------------------------------\\
-    private PlayerStateMachine _playerStateMachine;
+    // --------------------------------------------LINKED SCRIPTS--------------------------------------------\\
+    private PlayerStateMachine _playerStateMachine;
     private PlayerCameraMovement _playerCameraMovement;
 
 
-    // --------------------------------------------OTHERS--------------------------------------------\\
-    private Rigidbody _rb;
+    // --------------------------------------------OTHERS--------------------------------------------\\
+    private Rigidbody _rb;
 
     private bool _canJump;
 
@@ -70,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (ctx.performed)
         {
-            
+
             _rb.AddForce(new Vector3(0, 1, 0) * JUMP_FORCE, ForceMode.Impulse);
         }
     }
@@ -80,3 +81,4 @@ public class PlayerMovement : MonoBehaviour
         _canJump = a;
     }
 }
+quiero que cuando este en el cielo so salte mas con la variable_canJump
