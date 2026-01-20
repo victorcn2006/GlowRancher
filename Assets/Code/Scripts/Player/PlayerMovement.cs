@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("References")]
     [SerializeField] private InputActionReference _move;
 
-    private const float WALK_SPEED = 5f;
+    private const float WALK_SEED = 5f;
     private const float JUMP_FORCE = 5f;
 
     private PlayerInput _playerInput;
@@ -61,19 +61,20 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 moveDirection = (camRight * _movementInput.x + camForward * _movementInput.y).normalized;
 
-        Vector3 newVelocity = moveDirection * WALK_SPEED;
+        Vector3 newVelocity = moveDirection * WALK_SEED;
         newVelocity.y = _rb.velocity.y;
         _rb.velocity = newVelocity;
-        
+
     }
     public void Jump(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && _canJump)
+        if (ctx.performed)
         {
-            _rb.AddForce(new Vector3(0,1,0) * JUMP_FORCE, ForceMode.Impulse);
+            
+            _rb.AddForce(new Vector3(0, 1, 0) * JUMP_FORCE, ForceMode.Impulse);
         }
     }
-    
+
     public void SetCanJump(bool a)
     {
         _canJump = a;
