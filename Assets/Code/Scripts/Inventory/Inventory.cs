@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class Inventory : MonoBehaviour
 {
     public List<SlotInventario> slots = new List<SlotInventario>();
-    private const int MAX_SLOTS = 4;
+    private const int MAX_SLOT = 4;
     private const int MAX_CANTIDAD_POR_SLOT = 20;
 
     public SlotUI[] slotUI;
@@ -43,7 +43,7 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         slots.Clear();
-        for (int i = 0; i < MAX_SLOTS; i++)
+        for (int i = 0; i < MAX_SLOT; i++)
         {
             slots.Add(null);
             slotUI[i].ActualizarSlot(null);
@@ -85,9 +85,9 @@ public class Inventory : MonoBehaviour
         float scroll = ctx.ReadValue<Vector2>().y;
 
         if (scroll > 0)
-            _slotSeleccionado = (_slotSeleccionado + 1) % MAX_SLOTS;
+            _slotSeleccionado = (_slotSeleccionado + 1) % MAX_SLOT;
         else if (scroll < 0)
-            _slotSeleccionado = (_slotSeleccionado - 1 + MAX_SLOTS) % MAX_SLOTS;
+            _slotSeleccionado = (_slotSeleccionado - 1 + MAX_SLOT) % MAX_SLOT;
 
         ActualizarSeleccionVisual();
     }
