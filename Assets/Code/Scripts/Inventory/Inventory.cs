@@ -13,31 +13,19 @@ public class Inventory : MonoBehaviour
 
     private int _slotSeleccionado = 0;
 
-    [Header("Controles del inventario")]
-    [SerializeField] private InputAction _scrollAction;      // Rueda del ratón
-    [SerializeField] private InputAction _rightClickAction;  // Clic derecho
-    [SerializeField] private InputAction _slotKeysAction;    // Teclas 1,2,3,4
 
     void OnEnable()
     {
-        _scrollAction.Enable();
-        _rightClickAction.Enable();
-        _slotKeysAction.Enable();
-
-        _scrollAction.performed += OnScroll;
-        //rightClickAction.performed += OnRightClick;
-        _slotKeysAction.performed += OnNumberKey;
+        InputManager.Instance.OnInventoryScroll.AddListener(OnScroll);
+        InputManager.Instance.OnInventorySlotKey.AddListener(OnSlotKey);
+        InputManager.Instance.OnInventoryRightClick.AddListener(OnRightClick);
     }
 
     void OnDisable()
     {
-        _scrollAction.performed -= OnScroll;
-        //rightClickAction.performed -= OnRightClick;
-        _slotKeysAction.performed -= OnNumberKey;
-
-        _scrollAction.Disable();
-        //rightClickAction.Disable();
-        _slotKeysAction.Disable();
+        InputManager.Instance.OnInventoryScroll.RemoveListener(OnScroll);
+        InputManager.Instance.OnInventorySlotKey.RemoveListener(OnSlotKey);
+        InputManager.Instance.OnInventoryRightClick.RemoveListener(OnRightClick);
     }
 
     void Start()
@@ -51,45 +39,29 @@ public class Inventory : MonoBehaviour
         ActualizarSeleccionVisual();
     }
 
-    // -----------------------------------------
-    // Selección con teclas 1,2,3,4
-    // -----------------------------------------
-    private void OnNumberKey(InputAction.CallbackContext ctx)
-    {
-        string key = ctx.control.name;
-
-        switch (key)
-        {
-            case "1":
-                _slotSeleccionado = 0;
-                break;
-            case "2":
-                _slotSeleccionado = 1;
-                break;
-            case "3":
-                _slotSeleccionado = 2;
-                break;
-            case "4":
-                _slotSeleccionado = 3;
-                break;
-            default:
-                return;
-        }
-
-        ActualizarSeleccionVisual();
-    }
-
     // Movimiento de rueda del ratón
-    private void OnScroll(InputAction.CallbackContext ctx)
+    private void OnScroll(float scroll)
     {
-        float scroll = ctx.ReadValue<Vector2>().y;
-
         if (scroll > 0)
             _slotSeleccionado = (_slotSeleccionado + 1) % MAX_SLOT;
         else if (scroll < 0)
             _slotSeleccionado = (_slotSeleccionado - 1 + MAX_SLOT) % MAX_SLOT;
 
         ActualizarSeleccionVisual();
+    }
+
+    // Selección con teclas 1,2,3,4
+    private void OnSlotKey(int slotIndex)
+    {
+        if (slotIndex < 0 || slotIndex >= MAX_SLOT) return;
+
+        _slotSeleccionado = slotIndex;
+        ActualizarSeleccionVisual();
+    }
+
+    private void OnRightClick()
+    {
+        QuitarUno();
     }
 
     private void ActualizarSeleccionVisual()
@@ -100,16 +72,14 @@ public class Inventory : MonoBehaviour
 
     public string QuitarUno()
     {
-
         string objectName = "NoName";
 
         var slot = slots[_slotSeleccionado];
         if (slot == null) return null;
 
-
         if (slot.cantidad > 0)
         {
-            slot.cantidad--; //Quita 1
+            slot.cantidad--; // Quita 1
             objectName = slot.nombre;
             slotUI[_slotSeleccionado].ActualizarSlot(slot);
             if (slot.cantidad <= 0)
@@ -121,29 +91,6 @@ public class Inventory : MonoBehaviour
         return objectName;
     }
 
-    // Quitar una unidad del objeto seleccionado
-    /*
-    public string QuitarUino()
-    {
-        string objectName = "noName";
-        var slot = slots[slotSeleccionado];
-        if (slot == null) return null;
-
-        slot.cantidad--; // Quita 1
-
-        Debug.Log($"Quitando 1 de {slot.nombre}, quedan {slot.cantidad}");
-
-        if (slot.cantidad <= 0)
-        {
-            ExpulsarObjeto(slotSeleccionado);
-        }
-        else
-        {
-            slotUI[slotSeleccionado].ActualizarSlot(slot);
-        }
-        return objectName;
-    }*/
-
     private void ExpulsarObjeto(int indice)
     {
         var slot = slots[indice];
@@ -152,30 +99,10 @@ public class Inventory : MonoBehaviour
         slotUI[indice].ActualizarSlot(null);
     }
 
-
-    /*
-    // Expulsar objeto si se queda en 0
-    private string ExpulsarObjeto(int indice)
-    {
-        var slot = slots[indice];
-        if (slot == null) return null;
-
-        Debug.Log($"Expulsando objeto {slot.nombre} del slot {indice}");
-
-        GameObject prefab = Resources.Load<GameObject>($"Objetos/{slot.nombre}");
-        if (prefab != null)
-        {
-            //Instantiate(prefab, transform.position + transform.forward, Quaternion.identity);
-        }
-
-        slots[indice] = null;
-        slotUI[indice].ActualizarSlot(null);
-        return slot.nombre;
-    }*/
-
     // Añadir objetos
     public bool AñadirAlInventario(Sprite icono, string nombre)
     {
+        // Buscar si ya existe el objeto en algún slot
         for (int i = 0; i < slots.Count; i++)
         {
             if (slots[i] != null && slots[i].nombre == nombre)
@@ -191,6 +118,7 @@ public class Inventory : MonoBehaviour
             }
         }
 
+        // Buscar un slot vacío
         for (int i = 0; i < slots.Count; i++)
         {
             if (slots[i] == null)
@@ -203,25 +131,6 @@ public class Inventory : MonoBehaviour
 
         return false;
     }
-    /*
-    public bool SacarDelInventario(string nombre)
-    {
-        for (int i = 0; i < slots.Count; i++)
-        {
-            if (slots[i] != null && slots[i].nombre == nombre)
-            {
-                slots[i].cantidad--;
-                if (slots[i].cantidad <= 0)
-                    slots[i] = null;
-
-                slotUI[i].ActualizarSlot(slots[i]);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    */
 }
 
 [System.Serializable]

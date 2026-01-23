@@ -1,95 +1,171 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-public class InputManager : MonoBehaviour{
+public class InputManager : MonoBehaviour {
     public static InputManager Instance { get; private set; }
 
-    [Header("InputAction asset with all the _inputs")]
+    [Header("Input Action Asset")]
     [RequiredField, SerializeField] private InputActionAsset _inputs;
 
-    [Header("All the input actions and action maps to enable/disable them")]
-    //Action maps
-    private InputActionMap _playerMap;
-    private InputActionMap _aspiratorMap;
-    private InputActionMap _inventoryMap;
-    private InputActionMap _uIMap;
-    //InputActions
-    private InputAction _pauseGame;
-    private InputAction _wiki;
-    private InputAction _inventoryNavigation;
+    //Action Maps
+    private InputActionMap _ui;
+    private InputActionMap _player;
+    private InputActionMap _aspirator;
+    private InputActionMap _inventory;
+
+    [Header("UI Inputs")]
+    [RequiredField, SerializeField] private InputActionReference _rightClick;
+    [RequiredField, SerializeField] private InputActionReference _wikiOpen;
+
+    [Header("Player Inputs")]
+
+    [RequiredField, SerializeField] private InputActionReference _move;
+    [RequiredField, SerializeField] private InputActionReference _jump;
+    [RequiredField, SerializeField] private InputActionReference _look;
+    [RequiredField, SerializeField] private InputActionReference _interact;
+    [RequiredField, SerializeField] private InputActionReference _pauseGame;
+
+    [Header("Aspirator Inputs")]
+    [RequiredField, SerializeField] private InputActionReference _aspirate;
+    [RequiredField, SerializeField] private InputActionReference _launchObject;
+
+    [Header("Inventory Inputs")]
+    [RequiredField, SerializeField] private InputActionReference _inventoryNavigation;
+    [RequiredField, SerializeField] private InputActionReference _scroll;
 
 
-    public bool isPaused { get; private set; } = false;
-    public bool wikiOpen { get; private set; } = false;
-    private void Awake() {
-        //SINGLETON
-        if(Instance == null)
+    [HideInInspector] public bool IsJumpPressed { get; private set; }
+    [HideInInspector] public bool IsPaused;
+    [HideInInspector] public bool IsWikiOpen { get; private set; }
+
+    [HideInInspector] public UnityEvent OnJumpPerformed = new UnityEvent();
+    [HideInInspector] public UnityEvent OnPausePerformed = new UnityEvent();
+    [HideInInspector] public UnityEvent OnWikiPerformed = new UnityEvent();
+
+    public UnityEvent<float> OnInventoryScroll = new UnityEvent<float>();
+    public UnityEvent<int> OnInventorySlotKey = new UnityEvent<int>();
+    public UnityEvent OnInventoryRightClick = new UnityEvent();
+
+    private void Awake()
+    {
+        if (Instance == null)
             Instance = this;
         else
         {
             Destroy(this.gameObject);
             return;
         }
-            
 
-        //_inputs configuration
-        if (_inputs == null) return;
-        //Input Actions Map references
-        _playerMap = _inputs.FindActionMap("Player");
-        _aspiratorMap = _inputs.FindActionMap("Aspirator");
-        _inventoryMap = _inputs.FindActionMap("Inventory");
-        _uIMap = _inputs.FindActionMap("UI");
-
-        //Activate all the _inputs
-        _inputs.Enable();
+        InitializeInputActionMaps();
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        if (_inputs == null) return;
-        //Input Action references
-        _pauseGame = _uIMap.FindAction("PauseGame");
-        _wiki = _uIMap.FindAction("OpenWiki");
-        _inventoryNavigation = _inventoryMap.FindAction("InventoryNavigation");
-
-        _pauseGame.performed += OnPauseGame;
-        CheckPause(isPaused);
+        InitializeInputs();
+        SubscribeEvents();
     }
 
-    private void OnDisable() {
-        if (_pauseGame != null)
-            _pauseGame.performed -= OnPauseGame;
+    private void OnDisable()
+    {
+        DisableInputs();
+        UnSubscribeEvents();
     }
 
-    private void OnPauseGame(InputAction.CallbackContext ctx) {
-        if (wikiOpen)
-            return;
-        if (!ctx.performed) return;
-        SetPause(!isPaused);
+    private void InitializeInputActionMaps() {
+        _ui = _inputs.FindActionMap("UI");
+        _player = _inputs.FindActionMap("Player");
+        _aspirator = _inputs.FindActionMap("Aspirator");
+        _inventory = _inputs.FindActionMap("Inventory");
     }
-    public void SetPause(bool pause) {
-        isPaused = pause;
-        CheckPause(isPaused);
-        if (pause)
-            wikiOpen = false;
-        
+
+    public void InitializeInputs()
+    {
+        _ui.Enable();
+        _player.Enable();
+        _aspirator.Enable();
+        _inventory.Enable();
     }
-    public void SetWikiOpen(bool state) {
-        wikiOpen = state;
+
+    public void DisableInputs()
+    {
+        _ui.Disable();
+        _player.Disable();
+        _aspirator.Disable();
+        _inventory.Disable();
     }
-    public bool IsWikiOpen() { 
-        return wikiOpen;
+
+    private void SubscribeEvents()
+    {
+        _jump.action.performed += OnJump;
+        _pauseGame.action.performed += OnPauseGame;
+        _wikiOpen.action.performed += OnWikiOpen;
+
+        _scroll.action.performed += OnInventoryScrollPerformed;
+        _inventoryNavigation.action.performed += OnInventorySlotKeyPerformed;
+        _rightClick.action.performed += OnInventoryRightClickPerformed;
     }
-    private void CheckPause(bool isPaused) {
-        if (isPaused)
+    private void UnSubscribeEvents()
+    {
+        _jump.action.performed -= OnJump;
+        _pauseGame.action.performed -= OnPauseGame;
+        _wikiOpen.action.performed -= OnWikiOpen;
+
+        _scroll.action.performed -= OnInventoryScrollPerformed;
+        _inventoryNavigation.action.performed -= OnInventorySlotKeyPerformed;
+        _rightClick.action.performed -= OnInventoryRightClickPerformed;
+    }
+
+    private void OnJump(InputAction.CallbackContext ctx) {
+        IsJumpPressed = true;
+        OnJumpPerformed?.Invoke();
+    }
+
+    private void OnPauseGame(InputAction.CallbackContext ctx)
+    {
+        IsPaused = true;
+        OnPausePerformed?.Invoke();
+    }
+
+    private void OnWikiOpen(InputAction.CallbackContext ctx) {
+        IsWikiOpen = true;
+        OnWikiPerformed?.Invoke();
+    }
+
+    private void OnInventoryScrollPerformed(InputAction.CallbackContext ctx)
+    {
+        float scroll = ctx.ReadValue<Vector2>().y;
+        OnInventoryScroll?.Invoke(scroll);
+    }
+
+    private void OnInventorySlotKeyPerformed(InputAction.CallbackContext ctx)
+    {
+        // The control name will be "1", "2", "3", or "4"
+        if (ctx.control == null) return;
+
+        int slot = -1;
+        switch (ctx.control.name)
         {
-            Time.timeScale = 0f;
-            _playerMap.Disable();
+            case "1": slot = 0; break;
+            case "2": slot = 1; break;
+            case "3": slot = 2; break;
+            case "4": slot = 3; break;
         }
-        else
-        {
-            Time.timeScale = 1f;
-            _playerMap.Enable();
-        }
+
+        if (slot >= 0)
+            OnInventorySlotKey?.Invoke(slot);
+    }
+
+    private void OnInventoryRightClickPerformed(InputAction.CallbackContext ctx)
+    {
+        OnInventoryRightClick?.Invoke();
+    }
+    public void SetWikiOpen(bool state)
+    {
+        IsWikiOpen = state;
     }
 }
+
+    
+
+

@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Search;
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Windows;
@@ -81,4 +78,4 @@ public class PlayerMovement : MonoBehaviour
         _canJump = a;
     }
 }
-quiero que cuando este en el cielo so salte mas con la variable_canJump
+

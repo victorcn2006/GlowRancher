@@ -32,13 +32,13 @@ public class ActionButtonManager : MonoBehaviour{
             case BUTTONS.PLAY:
                 break;
             case BUTTONS.OPTIONS:
-                InputManager.Instance?.SetPause(false);
+                PauseManager.instance?.SetPause();
                 break;
             case BUTTONS.MAINMENU:
-                InputManager.Instance?.SetPause(false);
+                PauseManager.instance?.SetPause();
                 break;
             case BUTTONS.CONTINUE:
-                InputManager.Instance?.SetPause(false);
+                PauseManager.instance?.SetPause();
                 break;
             case BUTTONS.EXIT:
                 Application.Quit();
