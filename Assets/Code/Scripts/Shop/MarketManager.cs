@@ -4,6 +4,8 @@ using UnityEngine;
 public class MarketManager : MonoBehaviour
 {
     public static MarketManager Instance;
+    [Header("variables")]
+    private int _multi = 1;
 
     // Multiplicadors per a cada tipus de gemma
     private Dictionary<GemsPool.gemTypes, float> priceMultipliers = new Dictionary<GemsPool.gemTypes, float>();
@@ -11,9 +13,15 @@ public class MarketManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        priceMultipliers[GemsPool.gemTypes.BLUE_GEM] = 1.0f;
-        priceMultipliers[GemsPool.gemTypes.RED_GEM] = 1.0f;
-        priceMultipliers[GemsPool.gemTypes.REDBLUE_GEM] = 1.0f;
+        _multi = 1; //ens asegurem que comency en 1
+        InitMulti();
+    }
+
+    //inisialitzador de variables(multiplicador)
+    private void InitMulti() {
+        priceMultipliers[GemsPool.gemTypes.BLUE_GEM] = _multi;
+        priceMultipliers[GemsPool.gemTypes.RED_GEM] = _multi;
+        priceMultipliers[GemsPool.gemTypes.REDBLUE_GEM] = _multi;
     }
 
     // Aquesta funció calcula el preu actual basat en la pool de gemas

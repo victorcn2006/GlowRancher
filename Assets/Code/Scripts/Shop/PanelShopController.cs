@@ -6,20 +6,18 @@ using UnityEngine.UI;
 public class PanelShopController : MonoBehaviour
 {
     [Header("Refs")]
-    WalletCurrency wallet;
-
-    public GameObject incinerator;
-    public GameObject planter;
-    public GameObject SlimeCage;
-    public GameObject Silo;
-    public GameObject Hook;
+    [SerializeField] private GameObject incinerator;
+    [SerializeField] private GameObject planter;
+    [SerializeField] private GameObject SlimeCage;
+    [SerializeField] private GameObject Silo;
+    [SerializeField] private GameObject Hook;
 
     [Header("Buttons")]
-    [SerializeField]private Button _itemOne;
-    [SerializeField]private Button _itemPlanter;
-    [SerializeField]private Button _itemSlimeCage;
-    [SerializeField]private Button _itemSilo;
-    [SerializeField]private Button _itemHook;
+    [SerializeField] private Button _itemOne;
+    [SerializeField] private Button _itemPlanter;
+    [SerializeField] private Button _itemSlimeCage;
+    [SerializeField] private Button _itemSilo;
+    [SerializeField] private Button _itemHook;
 
     // Start is called before the first frame update
     void Start()
@@ -29,18 +27,17 @@ public class PanelShopController : MonoBehaviour
         SlimeCage.SetActive(false);
         Silo.SetActive(false);
         Hook.SetActive(false);
-
-        wallet = WalletCurrency.instance;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     #region Activates
-    public void ActivateItemOne() {
+    public void ActivateItemOne()
+    {
         incinerator.SetActive(true);
         planter.SetActive(false);
         SlimeCage.SetActive(false);
@@ -85,13 +82,14 @@ public class PanelShopController : MonoBehaviour
     }
     #endregion
 
-    public void BuyIncinerator() {
+    public void BuyIncinerator()
+    {
 
-        if (wallet.bank >= 5)
+        if (WalletCurrency.instance.bank >= 5)
         {
-            wallet.bank -= 5;
-            wallet.SaveMoney();
-            wallet.Score_txt.text = wallet.bank.ToString();
+            WalletCurrency.instance.bank -= 5;
+            WalletCurrency.instance.SaveMoney();
+            WalletCurrency.instance.Score_txt.text = WalletCurrency.instance.bank.ToString();
 
             Debug.Log("Incinerator purchased");
             incinerator.SetActive(true);
@@ -105,11 +103,11 @@ public class PanelShopController : MonoBehaviour
     public void BuyPlanter()
     {
 
-        if (wallet.bank >= 5)
+        if (WalletCurrency.instance.bank >= 5)
         {
-            wallet.bank -= 5;
-            wallet.SaveMoney();
-            wallet.Score_txt.text = wallet.bank.ToString();
+            WalletCurrency.instance.bank -= 5;
+            WalletCurrency.instance.SaveMoney();
+            WalletCurrency.instance.Score_txt.text = WalletCurrency.instance.bank.ToString();
 
             Debug.Log("Planter purchased");
         }
@@ -122,11 +120,11 @@ public class PanelShopController : MonoBehaviour
     public void BuySlimeCage()
     {
 
-        if (wallet.bank >= 5)
+        if (WalletCurrency.instance.bank >= 5)
         {
-            wallet.bank -= 5;
-            wallet.SaveMoney();
-            wallet.Score_txt.text = wallet.bank.ToString();
+            WalletCurrency.instance.bank -= 5;
+            WalletCurrency.instance.SaveMoney();
+            WalletCurrency.instance.Score_txt.text = WalletCurrency.instance.bank.ToString();
 
             Debug.Log("Slime Cage purchased");
         }
@@ -139,11 +137,11 @@ public class PanelShopController : MonoBehaviour
     public void BuySilo()
     {
 
-        if (wallet.bank >= 5)
+        if (WalletCurrency.instance.bank >= 5)
         {
-            wallet.bank -= 5;
-            wallet.SaveMoney();
-            wallet.Score_txt.text = wallet.bank.ToString();
+            WalletCurrency.instance.bank -= 5;
+            WalletCurrency.instance.SaveMoney();
+            WalletCurrency.instance.Score_txt.text = WalletCurrency.instance.bank.ToString();
 
             Debug.Log("Silo purchased");
         }
@@ -156,11 +154,11 @@ public class PanelShopController : MonoBehaviour
     public void BuyHook()
     {
 
-        if (wallet.bank >= 5)
+        if (WalletCurrency.instance.bank >= 5)
         {
-            wallet.bank -= 5;
-            wallet.SaveMoney();
-            wallet.Score_txt.text = wallet.bank.ToString();
+            WalletCurrency.instance.bank -= 5;
+            WalletCurrency.instance.SaveMoney();
+            WalletCurrency.instance.Score_txt.text = WalletCurrency.instance.bank.ToString();
 
             Debug.Log("Hook purchased");
         }
