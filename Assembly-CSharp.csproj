@@ -104,6 +104,7 @@
     <Compile Include="Assets\Code\Scripts\Systems\UIButtonClickBinder.cs" />
     <Compile Include="Assets\Code\Scripts\Menu\TextColorChanger.cs" />
     <Compile Include="Assets\Code\Scripts\Data\PlayerData.cs" />
+    <Compile Include="Assets\Code\Scripts\Shop\MarketManager.cs" />
     <Compile Include="Assets\Code\Scripts\Systems\SaveManager.cs" />
     <Compile Include="Assets\Code\Scripts\Ship\WinCondition.cs" />
     <Compile Include="Assets\Code\Scripts\Slimes\HungerSystem.cs" />
@@ -1118,6 +1119,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="FMODUnityEditor.csproj">
+      <Project>{E1D535FF-E99A-EB7B-DFFC-12BAC32C1A41}</Project>
+      <Name>FMODUnityEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="FMODUnityResonance.csproj">
+      <Project>{6EA65225-2DE4-2A5C-944B-628D07A5CCE5}</Project>
+      <Name>FMODUnityResonance</Name>
+    </ProjectReference>
+    <ProjectReference Include="FMODUnity.csproj">
+      <Project>{DD003EB6-2287-2978-F168-B7A60D4DAB1A}</Project>
+      <Name>FMODUnity</Name>
+    </ProjectReference>
+    <ProjectReference Include="FMODUnityResonanceEditor.csproj">
+      <Project>{59E6591F-A22E-D7A0-5830-2BB0E5EFD0F8}</Project>
+      <Name>FMODUnityResonanceEditor</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
