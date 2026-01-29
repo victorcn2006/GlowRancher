@@ -96,10 +96,10 @@ MonoBehaviour:
   Path: ../FMOD_Glow_Rancher-20260129T160358Z-3-001/FMOD_Glow_Rancher/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639053042729197198
+  lastModified: 639053108171699036
   FileSizes:
   - Name: Desktop
-    Value: 1094
+    Value: 1148
   Exists: 1
 --- !u!114 &-1833657086003422736
 MonoBehaviour:
@@ -136,10 +136,10 @@ MonoBehaviour:
   Path: ../FMOD_Glow_Rancher-20260129T160358Z-3-001/FMOD_Glow_Rancher/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639053042729774873
+  lastModified: 639053108171679026
   FileSizes:
   - Name: Desktop
-    Value: 1767456
+    Value: 1857440
   Exists: 1
 --- !u!114 &-336077240875559240
 MonoBehaviour:
@@ -188,13 +188,14 @@ MonoBehaviour:
   - {fileID: 4397599488378964485}
   - {fileID: 6935762200508966258}
   - {fileID: 2595936343810174391}
+  - {fileID: 298932077642343088}
   EditorParameters: []
   MasterBanks:
   - {fileID: -702332222197491719}
   StringsBanks:
   - {fileID: -2985521682455647781}
   cacheVersion: 131858
-  cacheTime: 639053042729774873
+  cacheTime: 639053108171699036
   SerializableEventsDict:
   - key: event:/SFX
     index: 0
@@ -204,6 +205,35 @@ MonoBehaviour:
     index: 2
   - key: event:/Music
     index: 3
+  - key: event:/Sonido_Salto
+    index: 4
+--- !u!114 &298932077642343088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sonido_Salto
+  m_EditorClassIdentifier: 
+  Path: event:/Sonido_Salto
+  Guid:
+    Data1: 153985143
+    Data2: 1108030533
+    Data3: -941902948
+    Data4: -1598844575
+  Banks:
+  - {fileID: -702332222197491719}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 960
 --- !u!114 &637163934687111811
 MonoBehaviour:
   m_ObjectHideFlags: 0

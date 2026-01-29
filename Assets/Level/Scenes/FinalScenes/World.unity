@@ -16134,7 +16134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 542831210}
   - component: {fileID: 542831212}
-  - component: {fileID: 542831211}
+  - component: {fileID: 542831213}
   m_Layer: 0
   m_Name: CameraMinimapa
   m_TagString: Untagged
@@ -16157,14 +16157,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1563374106}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!81 &542831211
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 542831209}
-  m_Enabled: 1
 --- !u!20 &542831212
 Camera:
   m_ObjectHideFlags: 0
@@ -16216,6 +16208,20 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &542831213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 542831209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nonRigidbodyVelocity: 0
+  attenuationObject: {fileID: 0}
 --- !u!1 &545431004 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1738390765565106150, guid: aaf5f0c1e594b854fb67e145c0d2e296, type: 3}
@@ -34182,6 +34188,26 @@ PrefabInstance:
     - target: {fileID: 2930511059146918418, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
       propertyPath: _canJump
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2930511059146918418, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
+      propertyPath: jumpSound.Path
+      value: event:/Sonido_Salto
+      objectReference: {fileID: 0}
+    - target: {fileID: 2930511059146918418, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
+      propertyPath: jumpSound.Guid.Data1
+      value: 153985143
+      objectReference: {fileID: 0}
+    - target: {fileID: 2930511059146918418, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
+      propertyPath: jumpSound.Guid.Data2
+      value: 1108030533
+      objectReference: {fileID: 0}
+    - target: {fileID: 2930511059146918418, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
+      propertyPath: jumpSound.Guid.Data3
+      value: -941902948
+      objectReference: {fileID: 0}
+    - target: {fileID: 2930511059146918418, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
+      propertyPath: jumpSound.Guid.Data4
+      value: -1598844575
       objectReference: {fileID: 0}
     - target: {fileID: 4073121894591536787, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
       propertyPath: m_Name
