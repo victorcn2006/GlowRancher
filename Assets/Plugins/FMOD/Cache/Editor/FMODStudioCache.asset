@@ -1,5 +1,25 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8603557967647183178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ../FMOD_Glow_Rancher-20260130T181513Z-3-001/FMOD_Glow_Rancher/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 639054021816385816
+  FileSizes:
+  - Name: Desktop
+    Value: 1857952
+  Exists: 1
 --- !u!114 &-8211333101733618541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47,6 +67,33 @@ MonoBehaviour:
     Data4: 1777678549
   Banks:
   - {fileID: -1833657086003422736}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 130063
+--- !u!114 &-6716651904956374724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music
+  m_EditorClassIdentifier: 
+  Path: event:/Music
+  Guid:
+    Data1: -1552742437
+    Data2: 1151022498
+    Data3: -1756065866
+    Data4: 1777678549
+  Banks:
+  - {fileID: -8603557967647183178}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -121,6 +168,80 @@ MonoBehaviour:
   - Name: Desktop
     Value: 1767456
   Exists: 1
+--- !u!114 &-1584510230396060654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/ButtonClick_Sound
+  m_EditorClassIdentifier: 
+  Path: event:/ButtonClick_Sound
+  Guid:
+    Data1: -1336906209
+    Data2: 1089311279
+    Data3: 39024041
+    Data4: -1664337932
+  Banks:
+  - {fileID: -8603557967647183178}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 179
+--- !u!114 &-1480738839109850145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sonido_Salto_Aterrizage
+  m_EditorClassIdentifier: 
+  Path: event:/Sonido_Salto_Aterrizage
+  Guid:
+    Data1: 280924654
+    Data2: 1128770363
+    Data3: -1389137004
+    Data4: 1849172335
+  Banks:
+  - {fileID: -8603557967647183178}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 240
+--- !u!114 &-1035740728094250232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: ../FMOD_Glow_Rancher-20260130T181513Z-3-001/FMOD_Glow_Rancher/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 639054021816405826
+  FileSizes:
+  - Name: Desktop
+    Value: 1200
+  Exists: 1
 --- !u!114 &-702332222197491719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,32 +302,35 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: -2985521682455647781}
-  - {fileID: -702332222197491719}
+  - {fileID: -1035740728094250232}
+  - {fileID: -8603557967647183178}
   EditorEvents:
-  - {fileID: -5899237411010425869}
-  - {fileID: 4397599488378964485}
-  - {fileID: 6935762200508966258}
-  - {fileID: 2595936343810174391}
-  - {fileID: 298932077642343088}
+  - {fileID: 7324080388866666017}
+  - {fileID: -1584510230396060654}
+  - {fileID: 2510983483495720027}
+  - {fileID: 4031582450941901696}
+  - {fileID: -6716651904956374724}
+  - {fileID: -1480738839109850145}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -702332222197491719}
+  - {fileID: -8603557967647183178}
   StringsBanks:
-  - {fileID: -2985521682455647781}
+  - {fileID: -1035740728094250232}
   cacheVersion: 131858
-  cacheTime: 639053108171699036
+  cacheTime: 639054021816405826
   SerializableEventsDict:
   - key: event:/SFX
     index: 0
   - key: event:/ButtonClick_Sound
     index: 1
-  - key: event:/Respawn_Sound
-    index: 2
-  - key: event:/Music
-    index: 3
   - key: event:/Sonido_Salto
+    index: 2
+  - key: event:/Respawn_Sound
+    index: 3
+  - key: event:/Music
     index: 4
+  - key: event:/Sonido_Salto_Aterrizage
+    index: 5
 --- !u!114 &298932077642343088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,6 +378,33 @@ MonoBehaviour:
   - Name: Desktop
     Value: 1094
   Exists: 1
+--- !u!114 &2510983483495720027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sonido_Salto
+  m_EditorClassIdentifier: 
+  Path: event:/Sonido_Salto
+  Guid:
+    Data1: 153985143
+    Data2: 1108030533
+    Data3: -941902948
+    Data4: -1598844575
+  Banks:
+  - {fileID: -8603557967647183178}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 340
 --- !u!114 &2511024106091748083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,6 +459,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 130063
+--- !u!114 &4031582450941901696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Respawn_Sound
+  m_EditorClassIdentifier: 
+  Path: event:/Respawn_Sound
+  Guid:
+    Data1: 1648347011
+    Data2: 1283330130
+    Data3: 2077353127
+    Data4: -1620131136
+  Banks:
+  - {fileID: -8603557967647183178}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 160
 --- !u!114 &4397599488378964485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,3 +540,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 160
+--- !u!114 &7324080388866666017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX
+  m_EditorClassIdentifier: 
+  Path: event:/SFX
+  Guid:
+    Data1: 1156364804
+    Data2: 1205092195
+    Data3: -2027637086
+    Data4: 986830432
+  Banks:
+  - {fileID: -8603557967647183178}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1384
