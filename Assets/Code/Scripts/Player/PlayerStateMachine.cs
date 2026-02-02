@@ -1,100 +1,109 @@
-using System.Collections;
-using System.Collections.Generic;
-using FMODUnity;
 using UnityEngine;
+using FMODUnity;
 
+[RequireComponent(typeof(PlayerMovement))]
 public class PlayerStateMachine : MonoBehaviour
 {
-    // --------------------------------------------LINKED SCRIPTS--------------------------------------------\\
+    private enum States { ON_FLOOR, ON_AIR };
+
+    [SerializeField] private States _currentState;
+
+    [Header("References")]
     private PlayerMovement _playerMovement;
 
     [Header("Configuración de Sonido")]
-    public EventReference jumpSound;
-    // --------------------------------------------RAYCAST SETTINGS--------------------------------------------\\
-    [Header("VALORES GROUNDED")]
-    private const float GROUND_CHECK_DISTANCE = 1.1f;
+    [SerializeField] private EventReference _landingSound;
+
+    [Header("Detection Settings")]
+    [SerializeField] private float _groundcheckdistance = 1.1f;
     [SerializeField] private LayerMask _groundLayer;
 
-    // --------------------------------------------STATES--------------------------------------------\\
-    private enum States { ON_FLOOR, ON_AIR };
-    private States _currentState;
+    // Propiedad para centralizar la detección del suelo
+    private bool _isGround => Physics.Raycast(transform.position, Vector3.down, _groundcheckdistance, _groundLayer);
+
+    private void Awake()
+    {
+        _playerMovement = GetComponent<PlayerMovement>();
+    }
 
     private void Start()
     {
-        _playerMovement = GetComponent<PlayerMovement>();
-        _currentState = States.ON_FLOOR;
+        // Inicialización basada en la física actual
+        _currentState = _isGround ? States.ON_FLOOR : States.ON_AIR;
+
+        // Sincronizar el estado inicial con el movimiento
+        _playerMovement.SetCanJump(_currentState == States.ON_FLOOR);
     }
 
-    void Update()
+    private void Update()
     {
-        // DEBUGS ESTADO Y SI PUEDE SALTAR
-        //Debug.Log(playerMovement.canJump);
-        //Debug.Log(currentState);
+        //Maquina de estados
+        HandleStateLogic();
+        //Funcion Para comprobar la trensicion del aire al suelo
+        CheckTransition();
+    }
+
+    private void HandleStateLogic()
+    {
+        switch (_currentState)
+        {
+            case States.ON_FLOOR:
+                // Lógica continua en el suelo (ej: recargar dash)
+                break;
+            case States.ON_AIR:
+                // Lógica continua en el aire (ej: gravedad progresiva)
+                break;
+        }
+    }
+
+    private void CheckTransition()
+    {
+        bool grounded = _isGround;
+
+        //comprueba de que si el estado es ON_FLOOR pero no esta en el suelo salta a la funcion TRSANSITIONTO y cambia de estado al ON_AIR
+        if (_currentState == States.ON_FLOOR && !grounded)
+        {
+            TransitionTo(States.ON_AIR);
+        }
+        //comprueba de que si el estado es ON_AIR pero no esta en el aire salta a la funcion TRSANSITIONTO y cambia de estado al ON_FLOOR
+        else if (_currentState == States.ON_AIR && grounded)
+        {
+            TransitionTo(States.ON_FLOOR);
+        }
+    }
+
+    private void TransitionTo(States newState)
+    {
+        //Hace los cambios necesarios del nuevo estado
+
+        _currentState = newState;
 
         switch (_currentState)
         {
             case States.ON_FLOOR:
-                OnFloor();
+                _playerMovement.SetCanJump(true);
+                PlayLandingSound();
                 break;
+
             case States.ON_AIR:
-                OnAir();
+                _playerMovement.SetCanJump(false);
                 break;
         }
     }
 
-    // STATES FUNCTIONS \\
-    private void OnFloor()
+    private void PlayLandingSound()
     {
-        ToOnAir();
-    }
-
-    private void OnAir()
-    {
-        ToOnFloor();
-    }
-
-    // STATES TRANSITIONS FUNCTIONS \\
-    private void ToOnFloor()
-    {
-        if (Grounded())
+        //Sonido del salto 
+        if (!_landingSound.IsNull)
         {
-            _currentState = States.ON_FLOOR;
-            _playerMovement.SetCanJump(true);
-
-            // EJECUTA EL SONIDO SOLO AL DETECTAR EL SUELO
-            if (!jumpSound.IsNull)
-            {
-                RuntimeManager.PlayOneShot(jumpSound, transform.position);
-            }
-        }
-        else
-        {
-            _playerMovement.SetCanJump(false);
+            RuntimeManager.PlayOneShot(_landingSound, transform.position);
         }
     }
 
-    private void ToOnAir()
-    {
-        if (!Grounded())
-        {
-            _currentState = States.ON_AIR;
-            _playerMovement.SetCanJump(false);
-        }
-        else _playerMovement.SetCanJump(true);
-    }
-
-    // OTHER FUNCTIONS \\
-    private bool Grounded()
-    {
-        // El Raycast solo debe informar si hay suelo o no
-        return Physics.Raycast(transform.position, Vector3.down, GROUND_CHECK_DISTANCE, _groundLayer);
-    }
-
-    // RAYCAST LINE (DEBUG) \\
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * GROUND_CHECK_DISTANCE);
-
+        //Dibuja la linea del RayCast cambiando el color del RayCast dependiendo del estado en el qual esta 
+        Gizmos.color = _isGround ? Color.green : Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * _groundcheckdistance);
     }
 }
