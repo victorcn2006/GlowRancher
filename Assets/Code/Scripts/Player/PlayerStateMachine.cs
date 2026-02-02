@@ -5,22 +5,22 @@ using UnityEngine;
 public class PlayerStateMachine : MonoBehaviour
 {
     // --------------------------------------------LINKED SCRIPTS--------------------------------------------\\
-    private PlayerMovement playerMovement;
+    private PlayerMovement _playerMovement;
 
 
     // --------------------------------------------RAYCAST SETTINGS--------------------------------------------\\
     [Header("VALORES GROUNDED")]
-    private const float groundCheckDistance = 1.1f;
-    [SerializeField] private LayerMask groundLayer;
+    private const float GROUND_CHECK_DISTANCE = 1.1f;
+    [SerializeField] private LayerMask _groundLayer;
 
     // --------------------------------------------STATES--------------------------------------------\\
     private enum States { ON_FLOOR, ON_AIR };
-    private States currentState;
+    private States _currentState;
 
     private void Start()
     {
-        playerMovement = GetComponent<PlayerMovement>();
-        currentState = States.ON_FLOOR;
+        _playerMovement = GetComponent<PlayerMovement>();
+        _currentState = States.ON_FLOOR;
     }
 
     void Update()
@@ -29,7 +29,7 @@ public class PlayerStateMachine : MonoBehaviour
         //Debug.Log(playerMovement.canJump);
         //Debug.Log(currentState);
 
-        switch (currentState)
+        switch (_currentState)
         {
             case States.ON_FLOOR:
                 OnFloor();
@@ -56,33 +56,33 @@ public class PlayerStateMachine : MonoBehaviour
     {
         if (Grounded())
         {
-            currentState = States.ON_FLOOR;
-            playerMovement.SetCanJump(true);
+            _currentState = States.ON_FLOOR;
+            _playerMovement.SetCanJump(true);
         }
-        else playerMovement.SetCanJump(false);
+        else _playerMovement.SetCanJump(false);
     }
 
     private void ToOnAir()
     {
         if (!Grounded())
         {
-            currentState = States.ON_AIR;
-            playerMovement.SetCanJump(false);
+            _currentState = States.ON_AIR;
+            _playerMovement.SetCanJump(false);
         }
-        else playerMovement.SetCanJump(true);
+        else _playerMovement.SetCanJump(true);
     }
 
     // OTHER FUNCTIONS \\
     private bool Grounded()
     {
-        return Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundLayer);
+        return Physics.Raycast(transform.position, Vector3.down, GROUND_CHECK_DISTANCE, _groundLayer);
     }
 
     // RAYCAST LINE (DEBUG) \\
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * groundCheckDistance);
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * GROUND_CHECK_DISTANCE);
 
     }
 }

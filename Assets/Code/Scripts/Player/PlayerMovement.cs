@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Windows;
@@ -9,35 +7,35 @@ public class PlayerMovement : MonoBehaviour
 {
 
 
-    // --------------------------------------------LINKED SCRIPTS--------------------------------------------\\
-    private PlayerStateMachine playerStateMachine;
-    private PlayerCameraMovement playerCameraMovement;
+    // --------------------------------------------LINKED SCRIPTS--------------------------------------------\\
+    private PlayerStateMachine _playerStateMachine;
+    private PlayerCameraMovement _playerCameraMovement;
 
 
-    // --------------------------------------------OTHERS--------------------------------------------\\
-    private Rigidbody rb;
+    // --------------------------------------------OTHERS--------------------------------------------\\
+    private Rigidbody _rb;
 
-    private bool canJump;
+    private bool _canJump;
 
     [Header("References")]
-    [SerializeField] private InputActionReference move;
+    [SerializeField] private InputActionReference _move;
 
-    private const float walkSpeed = 5f;
+    private const float WALK_SEED = 5f;
     private const float JUMP_FORCE = 5f;
 
-    private PlayerInput playerInput;
-    private Vector2 movementInput;
+    private PlayerInput _playerInput;
+    private Vector2 _movementInput;
 
 
 
     void Start()
     {
-        playerStateMachine = GetComponent<PlayerStateMachine>();
-        playerCameraMovement = GetComponent<PlayerCameraMovement>();
+        _playerStateMachine = GetComponent<PlayerStateMachine>();
+        _playerCameraMovement = GetComponent<PlayerCameraMovement>();
 
-        move.action.Enable();
-        rb = GetComponent<Rigidbody>();
-        playerInput = GetComponent<PlayerInput>();
+        _move.action.Enable();
+        _rb = GetComponent<Rigidbody>();
+        _playerInput = GetComponent<PlayerInput>();
     }
 
     private void FixedUpdate()
@@ -47,9 +45,9 @@ public class PlayerMovement : MonoBehaviour
 
     public void Move()
     {
-        movementInput = move.action.ReadValue<Vector2>();
+        _movementInput = _move.action.ReadValue<Vector2>();
 
-        Transform camTransform = playerCameraMovement.transform;
+        Transform camTransform = _playerCameraMovement.transform;
 
         Vector3 camForward = camTransform.forward;
         camForward.y = 0f;
@@ -59,23 +57,25 @@ public class PlayerMovement : MonoBehaviour
         camRight.y = 0f;
         camRight.Normalize();
 
-        Vector3 moveDirection = (camRight * movementInput.x + camForward * movementInput.y).normalized;
+        Vector3 moveDirection = (camRight * _movementInput.x + camForward * _movementInput.y).normalized;
 
-        Vector3 newVelocity = moveDirection * walkSpeed;
-        newVelocity.y = rb.velocity.y;
-        rb.velocity = newVelocity;
-        
+        Vector3 newVelocity = moveDirection * WALK_SEED;
+        newVelocity.y = _rb.velocity.y;
+        _rb.velocity = newVelocity;
+
     }
     public void Jump(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && canJump)
+        if (ctx.performed)
         {
-            rb.AddForce(new Vector3(0,1,0) * JUMP_FORCE, ForceMode.Impulse);
+
+            _rb.AddForce(new Vector3(0, 1, 0) * JUMP_FORCE, ForceMode.Impulse);
         }
     }
-    
+
     public void SetCanJump(bool a)
     {
-        canJump = a;
+        _canJump = a;
     }
 }
+

@@ -3,12 +3,12 @@ using System;
 using System.Collections;
 public class Enemy : Character, ISavable
 {
-    [Tooltip("Identificador único para guardar/cargar este enemigo.")]
-    [SerializeField] private string saveID;
+    [Tooltip("Identificador Ãºnico para guardar/cargar este enemigo.")]
+    [SerializeField] private string _saveID;
     private void OnValidate()
     {
-        if (string.IsNullOrEmpty(saveID))
-            saveID = Guid.NewGuid().ToString();
+        if (string.IsNullOrEmpty(_saveID))
+            _saveID = Guid.NewGuid().ToString();
     }
 
     protected override void Awake()
@@ -51,7 +51,7 @@ public class Enemy : Character, ISavable
         base.Die();
     }
     //===================== METODOS DE ISAVABLE =====================//
-    public string GetSaveID(){ return saveID; }
+    public string GetSaveID(){ return _saveID; }
     public object CaptureState()
     {
         return new EnemyData(this);

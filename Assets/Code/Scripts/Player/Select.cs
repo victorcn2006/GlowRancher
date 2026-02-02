@@ -5,19 +5,19 @@ using UnityEngine.InputSystem;
 
 public class Select : MonoBehaviour
 {
-    lightInteractionController lightContrll;
-    InteractiveShop interactiveShop;
+    private LightInteractionController _lightContrll;
+    private InteractiveShop _interactiveShop;
 
-    LayerMask mask;
+    private LayerMask _mask;
     public float distance = 1.5f;
 
-    [SerializeField] private InputAction interact;
+    [SerializeField] private InputAction _interact;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        mask = LayerMask.GetMask("Raycast layer");
+        _mask = LayerMask.GetMask("Raycast layer");
     }
 
     // Update is called once per frame
@@ -25,17 +25,17 @@ public class Select : MonoBehaviour
     {
         RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, distance, mask)) 
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, distance, _mask)) 
         {
             if (hit.collider.tag == "InteractuableObject" ) 
             {
-                hit.collider.transform.GetComponent<lightInteractionController>().ActivateObject();
+                hit.collider.transform.GetComponent<LightInteractionController>().ActivateObject();
             }
 
             if (hit.collider.tag == "InteractuableShop")
             {
                 Debug.Log("Shop.Entra");
-                hit.collider.transform.GetComponent<InteractiveShop>().ToggleShop(); // Canviem aquí
+                hit.collider.transform.GetComponent<InteractiveShop>().ToggleShop(); // Canviem aquÃ­
             }
             else
             {

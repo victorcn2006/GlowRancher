@@ -3,92 +3,42 @@ using UnityEngine.UI;
 
 public class WikiSlime : MonoBehaviour
 {
-    // Referencia al GameObject que contiene la UI de la wiki
-    [SerializeField] private GameObject wikiMenu;
-    // Referencias a los GameObjects de los slimes
-    [SerializeField] private GameObject slime1;
-    [SerializeField] private GameObject slime2;
-    // (Añadir más slimes si es necesario)
+    [SerializeField] private GameObject _wikiMenu;
+    [SerializeField] private GameObject _slime1;
+    [SerializeField] private GameObject _slime2;
+    [SerializeField] private Button _slime1Button;
+    [SerializeField] private Button _slime2Button;
 
-    // Referencia al GameObject actualmente activo
-    private GameObject currentActiveSlime;
+    private GameObject _currentActiveSlime;
 
-    // Referencias a los botones (si usas botones UI)
-    [SerializeField] private Button slime1Button;
-    [SerializeField] private Button slime2Button;
-    // (Añadir más botones si es necesario)
-
-    // Función para mostrar la UI de la wiki
-    public void ActiveWiki()
-    {
-        wikiMenu.SetActive(true);
-    }
-    // Función para ocultar la UI de la wiki
-    public void DesactiveWiki()
-    {
-        wikiMenu.SetActive(false);
-
-    }
     private void Start()
     {
-        // Asegúrate de que slime1 y slime2 no sean nulos
-        if (slime1 == null || slime2 == null)
-        {
-            Debug.LogError("¡Faltan asignaciones de slimes en el Inspector!");
-            return;
-        }
+        _wikiMenu.SetActive(false);
 
-        // Inicializa el primer slime activo
-        currentActiveSlime = slime1; // Esto lo puedes cambiar si otro slime es el primero por defecto
-        Debug.Log("Activando el slime inicial: " + slime1.name);
-        currentActiveSlime.SetActive(true); // Asegurarse de que el primer slime está activo al principio
+        _currentActiveSlime = _slime1;
+        _slime1.SetActive(true);
+        _slime2.SetActive(false);
 
-        // Desactivar otros slimes
-        if (slime2 != null)
-        {
-            Debug.Log("Desactivando slime2.");
-            slime2.SetActive(false);
-        }
-
-        // Asignar los listeners a los botones
-        if (slime1Button != null && slime2Button != null)
-        {
-            slime1Button.onClick.AddListener(ShowSlime1);
-            slime2Button.onClick.AddListener(ShowSlime2);
-        }
-        else
-        {
-            Debug.LogError("¡Faltan asignaciones de botones en el Inspector!");
-        }
+        _slime1Button.onClick.AddListener(() => SwitchSlime(_slime1));
+        _slime2Button.onClick.AddListener(() => SwitchSlime(_slime2));
     }
 
-    // Función para mostrar el slime 1
-    void ShowSlime1()
+    public void ActiveWiki()
     {
-        Debug.Log("Mostrar slime 1");
-        SwitchSlime(slime1);
+        _wikiMenu.SetActive(true);
     }
 
-    // Función para mostrar el slime 2
-    void ShowSlime2()
+    public void DesactiveWiki()
     {
-        Debug.Log("Mostrar slime 2");
-        SwitchSlime(slime2);
+        _wikiMenu.SetActive(false);
     }
 
-    // Función para manejar el cambio de slime
-    void SwitchSlime(GameObject newSlime)
+    private void SwitchSlime(GameObject newSlime)
     {
-        Debug.Log("Desactivando el slime actual: " + currentActiveSlime.name);
-        // Desactivar el slime actual
-        if (currentActiveSlime != null)
-        {
-            currentActiveSlime.SetActive(false);
-        }
+        if (_currentActiveSlime != null)
+            _currentActiveSlime.SetActive(false);
 
-        // Activar el nuevo slime
-        currentActiveSlime = newSlime;
-        Debug.Log("Activando el nuevo slime: " + newSlime.name);
-        currentActiveSlime.SetActive(true);
+        _currentActiveSlime = newSlime;
+        _currentActiveSlime.SetActive(true);
     }
 }

@@ -13,17 +13,17 @@ public class ActionButtonManager : MonoBehaviour{
     }
     public BUTTONS currentButton;
 
-    private Button button;
+    private Button _button;
 
     private void Awake() {
-        if (button == null) button = GetComponent<Button>();
+        if (_button == null) _button = GetComponent<Button>();
     }
 
     private void OnEnable() {
-        if (button != null) button.onClick.AddListener(OnButtonPressed);
+        if (_button != null) _button.onClick.AddListener(OnButtonPressed);
     }
     private void OnDisable() {
-        button.onClick.RemoveListener(OnButtonPressed);
+        _button.onClick.RemoveListener(OnButtonPressed);
     }
     private void OnButtonPressed() {
         UIAudioManager.Instance?.PlayClick();
@@ -32,13 +32,13 @@ public class ActionButtonManager : MonoBehaviour{
             case BUTTONS.PLAY:
                 break;
             case BUTTONS.OPTIONS:
-                InputManager.Instance?.SetPause(false);
+                PauseManager.instance?.SetPause();
                 break;
             case BUTTONS.MAINMENU:
-                InputManager.Instance?.SetPause(false);
+                PauseManager.instance?.SetPause();
                 break;
             case BUTTONS.CONTINUE:
-                InputManager.Instance?.SetPause(false);
+                PauseManager.instance?.SetPause();
                 break;
             case BUTTONS.EXIT:
                 Application.Quit();

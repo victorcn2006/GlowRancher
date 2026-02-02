@@ -1,0 +1,32 @@
+name: Code Format Check
+
+# Se ejecuta en cada PR y push a main
+on:
+  pull_request:
+  push:
+    branches: [ master ]
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      # Restaurar la solución explícitamente
+      - name: Restore solution
+        run: dotnet restore GlowRancher.sln
+
+      # Restaurar tools
+      - name: Restore .NET tools
+        run: dotnet tool restore
+
+      # Formatear la solución explícitamente
+      - name: Check code format
+        run: dotnet format GlowRancher.sln --verify-no-changes
+
+
