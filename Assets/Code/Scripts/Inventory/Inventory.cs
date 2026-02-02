@@ -61,7 +61,7 @@ public class Inventory : MonoBehaviour
 
     private void OnRightClick()
     {
-        QuitarUno();
+
     }
 
     private void ActualizarSeleccionVisual()

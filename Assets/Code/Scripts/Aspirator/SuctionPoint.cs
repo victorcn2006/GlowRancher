@@ -8,12 +8,9 @@ public class SuctionPoint : MonoBehaviour
     [SerializeField] private Inventory _inventory;
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Chuclando");
         if (other.gameObject.GetComponent<IAspirable>() != null && _canSuck)
         {
-            Debug.Log("Chuclando algo chucable");
             
-            Debug.Log(_inventory.gameObject.name);
             if (_inventory != null)
             {
                 ItemPickUp objectPickUp = other.GetComponent<ItemPickUp>();

@@ -24,7 +24,7 @@ public class ScaredSlimeMovement : MonoBehaviour
     private const float SCARED_JUMP_FORCE = 200f;
     private const float SCARED_JUMP_DISTANCE = 1.5f;
 
-    [Header("VALORES DE ROTACIÓN")]
+    [Header("VALORES DE ROTACIÃ“N")]
     private const float ROTATE_DURATION = 2f;
     private const float SCARED_ROTATE_DURATION = 0.2f;
 
@@ -58,7 +58,6 @@ public class ScaredSlimeMovement : MonoBehaviour
 
     private void Update()
     {
-        if (_scared) Debug.Log("Scared");
 
         if (Grounded() && !_beingAspired && !_isJumping)
         {
