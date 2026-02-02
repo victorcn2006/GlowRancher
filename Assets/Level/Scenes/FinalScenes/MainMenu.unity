@@ -271,8 +271,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoad:
-    _sceneAsset: {fileID: 102900000, guid: 11f0c1c63addd1b479e2bb1d63af9fa7, type: 3}
-    _sceneName: World
+    _sceneAsset: {fileID: 102900000, guid: 3e99a4db476d09e459c03e2d9451862c, type: 3}
+    _sceneName: FinalMap
 --- !u!114 &44059471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1822,6 +1822,7 @@ MonoBehaviour:
   _launchObject: {fileID: 8266952679875099490, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
   _inventoryNavigation: {fileID: -4489386230323612283, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
   _scroll: {fileID: 5078554399073276924, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
+  IsPaused: 0
   OnJumpPerformed:
     m_PersistentCalls:
       m_Calls: []
@@ -1829,6 +1830,15 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnWikiPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnInventoryScroll:
+    m_PersistentCalls:
+      m_Calls: []
+  OnInventorySlotKey:
+    m_PersistentCalls:
+      m_Calls: []
+  OnInventoryRightClick:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &1770851254
