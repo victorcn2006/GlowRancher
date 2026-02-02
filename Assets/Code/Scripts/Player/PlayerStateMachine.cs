@@ -48,10 +48,10 @@ public class PlayerStateMachine : MonoBehaviour
         switch (_currentState)
         {
             case States.ON_FLOOR:
-                // Lógica continua en el suelo (ej: recargar dash)
+                // Lógica continua en el suelo
                 break;
             case States.ON_AIR:
-                // Lógica continua en el aire (ej: gravedad progresiva)
+                // Lógica continua en el aire
                 break;
         }
     }
