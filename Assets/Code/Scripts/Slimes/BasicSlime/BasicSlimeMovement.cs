@@ -13,7 +13,7 @@ public class BasicSlimeMovement : MonoBehaviour
     private const float MAX_TIME = 10f;
 
     [Header("VALORES DEL SALTO")]
-    [SerializeField] private const float JUMP_FORCE = 3f;
+    [SerializeField] private const float JUMP_FORCE = 170f;
     [SerializeField] private const float JUMP_TIME = 1f;
     [SerializeField] private const float JUMP_DISTANCE = 1f;
 
