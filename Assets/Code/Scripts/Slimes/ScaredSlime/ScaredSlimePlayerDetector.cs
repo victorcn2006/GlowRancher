@@ -11,7 +11,6 @@ public class ScaredSlimePlayerDetector : MonoBehaviour
     private void Start()
     {
         _scaredSlimeMovement = GetComponentInParent<ScaredSlimeMovement>();
-        Debug.Log(_scaredSlimeMovement);
     }
 
     private void OnTriggerEnter(Collider other)
