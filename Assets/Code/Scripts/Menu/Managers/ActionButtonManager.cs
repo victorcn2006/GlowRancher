@@ -16,6 +16,7 @@ public class ActionButtonManager : MonoBehaviour
         OPTIONS,
         CONTINUE,
         MAINMENU,
+        CREDITS,
         EXIT
     }
     public BUTTONS currentButton;
@@ -54,6 +55,9 @@ public class ActionButtonManager : MonoBehaviour
             case BUTTONS.OPTIONS:
             case BUTTONS.MAINMENU:
             case BUTTONS.CONTINUE:
+                PauseManager.instance?.SetPause();
+                break;
+            case BUTTONS.CREDITS:
                 PauseManager.instance?.SetPause();
                 break;
             case BUTTONS.EXIT:
