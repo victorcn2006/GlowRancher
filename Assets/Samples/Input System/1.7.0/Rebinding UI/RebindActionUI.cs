@@ -415,6 +415,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
 
             return false;
         }
+
         protected void OnEnable()
         {
             if (s_RebindActionUIs == null)
