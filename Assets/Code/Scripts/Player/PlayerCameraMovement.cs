@@ -8,57 +8,57 @@ public class PlayerCameraMovement : MonoBehaviour
 {
 
     [Header("View")]
-    [HideInInspector] public float rotationSense = 10f;
-    private float _cameraVerticalAngle;
-    
-    [SerializeField] private Camera _playerCamera;
+    [SerializeField] private float _rotationSense = 15f;
+    [SerializeField] private float _minVerticalAngle = -70f;
+    [SerializeField] private float _maxVerticalAngle = 70f;
 
-    private InputAction _lookAction;
-    private Vector2 _rotationInput = Vector2.zero;
-    private PlayerInput _playerInput;
+    [Header("Rerences")]
+    [SerializeField] private Camera _playerCamera;
+    [SerializeField]private InputActionReference _lookAction;
+
+    private float _cameraVerticalAngle;
+    private Vector2 _rotationInput;
 
     private void Awake()
     {
-        if(_playerInput == null) _playerInput = GetComponent<PlayerInput>();
+        if(_playerCamera == null) _playerCamera = GetComponentInChildren<Camera>();
+
         Cursor.lockState = CursorLockMode.Locked;
-        _lookAction = _playerInput.actions["Look"];
+        Cursor.visible = false;
 
     }
 
-    private void OnEnable() {
-        _lookAction?.Enable();
-    }
-
-    private void OnDisable() {
-        _lookAction?.Disable();
-    }
+    private void OnEnable() =>_lookAction.action.Enable();
+    private void OnDisable() => _lookAction.action.Disable();
+    
 
 
     void Update()
     {
         ReadLookInput();
-        Look();
+        ApplyRotation();
     }
     private void ReadLookInput() {
         if (_lookAction != null)
         {
-            _rotationInput = _lookAction.ReadValue<Vector2>() * rotationSense * Time.deltaTime;
+            _rotationInput = _lookAction.action.ReadValue<Vector2>();
         }
     }
-    private void Look() {
-        _cameraVerticalAngle += _rotationInput.y;
-        _cameraVerticalAngle = Mathf.Clamp(_cameraVerticalAngle, -70f, 70f);
+    private void ApplyRotation()
+    {
+        float horizontalRotation = _rotationInput.x * _rotationSense * Time.deltaTime;
+        transform.Rotate(Vector3.up * horizontalRotation);
 
-        // Rota al jugador horizontalmente
-        transform.Rotate(Vector3.up * _rotationInput.x);
+        _cameraVerticalAngle -= _rotationInput.y * _rotationSense * Time.deltaTime;
+        _cameraVerticalAngle = Mathf.Clamp(_cameraVerticalAngle, _minVerticalAngle, _maxVerticalAngle);
 
         // Rota la cámara verticalmente
-        _playerCamera.transform.localRotation = Quaternion.Euler(-_cameraVerticalAngle, 0f, 0f);
+        _playerCamera.transform.localRotation = Quaternion.Euler(_cameraVerticalAngle, 0f, 0f);
     }
 
-    public Vector3 GetCameraRotation()
+    public Quaternion GetCameraRotation()
     {
-        return _playerCamera.transform.rotation.eulerAngles;
+        return _playerCamera.transform.rotation;
     }
 
 }
