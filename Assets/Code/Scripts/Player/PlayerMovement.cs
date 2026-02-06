@@ -1,83 +1,92 @@
-
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Windows;
 using FMODUnity;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Settings")]
+    [SerializeField] private float _walkSpeed = 5f;
+    [SerializeField] private float _jumpForce = 5f;
 
+    [Header("Audio")]
+    [SerializeField] private EventReference _jumpSound;
 
-    // --------------------------------------------LINKED SCRIPTS--------------------------------------------\\
-    private PlayerStateMachine _playerStateMachine;
-    private PlayerCameraMovement _playerCameraMovement;
+    [Header("Input References")]
+    [SerializeField] private InputActionReference _moveAction;
 
-    [Header("Configuración de Sonido")]
-    public EventReference jumpSound;
-    // --------------------------------------------OTHERS--------------------------------------------\\
-    private Rigidbody _rb;
+    // Componentes cacheados
+    private Rigidbody _rb;
+    private Transform _mainCameraTransform;
 
+    // Estado
+    private Vector2 _inputDirection;
     private bool _canJump;
 
-    [Header("References")]
-    [SerializeField] private InputActionReference _move;
-
-    private const float WALK_SEED = 5f;
-    private const float JUMP_FORCE = 5f;
-
-    private PlayerInput _playerInput;
-    private Vector2 _movementInput;
-
-
-
-    void Start()
+    private void Awake()
     {
-        _playerStateMachine = GetComponent<PlayerStateMachine>();
-        _playerCameraMovement = GetComponent<PlayerCameraMovement>();
-
-        _move.action.Enable();
         _rb = GetComponent<Rigidbody>();
-        _playerInput = GetComponent<PlayerInput>();
+
+        // Cacheamos la cámara principal (es más eficiente que buscarla siempre)
+        if (Camera.main != null)
+            _mainCameraTransform = Camera.main.transform;
+    }
+
+    private void OnEnable() => _moveAction.action.Enable();
+    private void OnDisable() => _moveAction.action.Disable();
+
+    private void Update()
+    {
+        // El input se lee en Update para mayor precisión de respuesta
+        _inputDirection = _moveAction.action.ReadValue<Vector2>();
     }
 
     private void FixedUpdate()
     {
-        Move();
+        ApplyMovement();
     }
 
-    public void Move()
+    private void ApplyMovement()
     {
-        _movementInput = _move.action.ReadValue<Vector2>();
+        if (_mainCameraTransform == null) return;
 
-        Transform camTransform = _playerCameraMovement.transform;
+        // Calculamos la dirección relativa a la cámara
+        Vector3 forward = _mainCameraTransform.forward;
+        Vector3 right = _mainCameraTransform.right;
 
-        Vector3 camForward = camTransform.forward;
-        camForward.y = 0f;
-        camForward.Normalize();
+        forward.y = 0;
+        right.y = 0;
+        forward.Normalize();
+        right.Normalize();
 
-        Vector3 camRight = camTransform.right;
-        camRight.y = 0f;
-        camRight.Normalize();
+        Vector3 moveDirection = (forward * _inputDirection.y + right * _inputDirection.x).normalized;
 
-        Vector3 moveDirection = (camRight * _movementInput.x + camForward * _movementInput.y).normalized;
+        // Aplicamos velocidad manteniendo la gravedad actual
+        Vector3 targetVelocity = moveDirection * _walkSpeed;
+        targetVelocity.y = _rb.velocity.y;
 
-        Vector3 newVelocity = moveDirection * WALK_SEED;
-        newVelocity.y = _rb.velocity.y;
-        _rb.velocity = newVelocity;
-
+        _rb.velocity = targetVelocity;
     }
+
+    /// <summary>
+    /// Este método se conecta desde el componente PlayerInput (Events)
+    /// </summary>
     public void Jump(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
+        if (!ctx.performed || !_canJump) return;
+
+        // Lógica de Salto
+        _rb.velocity = new Vector3(_rb.velocity.x, 0f, _rb.velocity.z); // Limpiamos velocidad vertical previa
+        _rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+
+        // Audio
+        if (!_jumpSound.IsNull)
         {
-            RuntimeManager.PlayOneShot(jumpSound, transform.position);
-            _rb.AddForce(new Vector3(0, 1, 0) * JUMP_FORCE, ForceMode.Impulse);
+            RuntimeManager.PlayOneShot(_jumpSound, transform.position);
         }
     }
 
-    public void SetCanJump(bool a)
+    public void SetCanJump(bool value)
     {
-        _canJump = a;
+        _canJump = value;
     }
 }
-
