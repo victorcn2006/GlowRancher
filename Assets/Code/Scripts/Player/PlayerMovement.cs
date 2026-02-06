@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Input References")]
     [SerializeField] private InputActionReference _moveAction;
 
-    // Componentes cacheados
+
     private Rigidbody _rb;
     private Transform _mainCameraTransform;
 
@@ -26,7 +26,6 @@ public class PlayerMovement : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
 
-        // Cacheamos la cámara principal (es más eficiente que buscarla siempre)
         if (Camera.main != null)
             _mainCameraTransform = Camera.main.transform;
     }
@@ -36,8 +35,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        // El input se lee en Update para mayor precisión de respuesta
-        _inputDirection = _moveAction.action.ReadValue<Vector2>();
+
+        _inputDirection = _moveAction.action.ReadValue<Vector2>(); 
     }
 
     private void FixedUpdate()
@@ -67,9 +66,6 @@ public class PlayerMovement : MonoBehaviour
         _rb.velocity = targetVelocity;
     }
 
-    /// <summary>
-    /// Este método se conecta desde el componente PlayerInput (Events)
-    /// </summary>
     public void Jump(InputAction.CallbackContext ctx)
     {
         if (!ctx.performed || !_canJump) return;
@@ -78,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
         _rb.velocity = new Vector3(_rb.velocity.x, 0f, _rb.velocity.z); // Limpiamos velocidad vertical previa
         _rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
 
-        // Audio
+        // Audio: Sonido del Salto
         if (!_jumpSound.IsNull)
         {
             RuntimeManager.PlayOneShot(_jumpSound, transform.position);
