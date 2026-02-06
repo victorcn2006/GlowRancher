@@ -114,7 +114,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5316250449291250590}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 5e25a039bbce5704792deaa1f1233a6e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5316250449291250590}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
@@ -302,6 +302,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24c230e846a673044bf89d33c9bd595d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   _move: {fileID: 0}
 --- !u!114 &1213622026763875800
 MonoBehaviour:
@@ -335,33 +342,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  _scrollAction:
-    m_Name: Scroll
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 00a29121-e719-4b55-b7dd-8a11c8a06124
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  _rightClickAction:
-    m_Name: Right Click
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: ec0b34f5-211f-4c43-8ff4-5f720189f6b8
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  _slotKeysAction:
-    m_Name: Slot Keys
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 2f5bb56f-af9d-4096-8868-ac575b918ffc
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
 --- !u!1 &6206571681669739011
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,6 +353,7 @@ GameObject:
   - component: {fileID: 3107569357727619604}
   - component: {fileID: 413016187931345622}
   - component: {fileID: 5315854678961662076}
+  - component: {fileID: 2938622955312132574}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -456,6 +437,20 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6206571681669739011}
   m_Enabled: 1
+--- !u!114 &2938622955312132574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6206571681669739011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nonRigidbodyVelocity: 0
+  attenuationObject: {fileID: 0}
 --- !u!1001 &3787868216515687724
 PrefabInstance:
   m_ObjectHideFlags: 0

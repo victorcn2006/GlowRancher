@@ -46,7 +46,7 @@ public class PoolManager : MonoBehaviour
 
         if (!poolsDictionary.ContainsKey(id))   
         {
-            Debug.Log("No existe pool con ID: " + id);
+            Debug.Log("No existe pool con ID: " + id);  
             return null;
         }
 
@@ -62,7 +62,7 @@ public class PoolManager : MonoBehaviour
             }
         }
 
-        // Si no hay libres, instanciamos uno nuevo din·micamente
+        // Si no hay libres, instanciamos uno nuevo din√°micamente
         GameObject newObj = Instantiate(actualPool.prefab);
         actualPool.objects.Add(newObj);
         newObj.SetActive(true);

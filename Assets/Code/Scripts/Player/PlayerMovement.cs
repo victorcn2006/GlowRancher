@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Windows;
+using FMODUnity;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -11,7 +12,8 @@ public class PlayerMovement : MonoBehaviour
     private PlayerStateMachine _playerStateMachine;
     private PlayerCameraMovement _playerCameraMovement;
 
-
+    [Header("Configuración de Sonido")]
+    public EventReference jumpSound;
     // --------------------------------------------OTHERS--------------------------------------------\\
     private Rigidbody _rb;
 
@@ -68,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (ctx.performed)
         {
-
+            RuntimeManager.PlayOneShot(jumpSound, transform.position);
             _rb.AddForce(new Vector3(0, 1, 0) * JUMP_FORCE, ForceMode.Impulse);
         }
     }
