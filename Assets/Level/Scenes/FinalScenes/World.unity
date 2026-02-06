@@ -15656,7 +15656,7 @@ GameObject:
   m_Component:
   - component: {fileID: 542831210}
   - component: {fileID: 542831212}
-  - component: {fileID: 542831211}
+  - component: {fileID: 542831213}
   m_Layer: 0
   m_Name: CameraMinimapa
   m_TagString: Untagged
@@ -15679,14 +15679,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1563374106}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!81 &542831211
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 542831209}
-  m_Enabled: 1
 --- !u!20 &542831212
 Camera:
   m_ObjectHideFlags: 0
@@ -15738,6 +15730,20 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &542831213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 542831209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nonRigidbodyVelocity: 0
+  attenuationObject: {fileID: 0}
 --- !u!1 &545431004 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1738390765565106150, guid: aaf5f0c1e594b854fb67e145c0d2e296, type: 3}
@@ -17416,10 +17422,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pools:
   - id: BasicSlime
-    prefab: {fileID: 289795039023549768, guid: f7f074f666834104ca9ee21fac6c4e84, type: 3}
+    prefab: {fileID: 7889468016814938335, guid: 3b0d015a21ee27c48880ab35de264aab, type: 3}
     objects: []
-  - id: EnemySlime
-    prefab: {fileID: 2056069734262012397, guid: 3c47bcf1bc22c5644b6abdd53464ca17, type: 3}
+  - id: ScaredSlime
+    prefab: {fileID: 2269027299037395860, guid: 6e6463b8dd25bf045ba7c17566bc74f3, type: 3}
     objects: []
 --- !u!1 &932593469
 GameObject:
@@ -22379,6 +22385,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &1315047308
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2269027299037395860, guid: 6e6463b8dd25bf045ba7c17566bc74f3, type: 3}
+      propertyPath: m_Name
+      value: ScaredSlime
+      objectReference: {fileID: 0}
+    - target: {fileID: 8364320678577038570, guid: 6e6463b8dd25bf045ba7c17566bc74f3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 14.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8364320678577038570, guid: 6e6463b8dd25bf045ba7c17566bc74f3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8364320678577038570, guid: 6e6463b8dd25bf045ba7c17566bc74f3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.2542963
+      objectReference: {fileID: 0}
+    - target: {fileID: 8364320678577038570, guid: 6e6463b8dd25bf045ba7c17566bc74f3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8364320678577038570, guid: 6e6463b8dd25bf045ba7c17566bc74f3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8364320678577038570, guid: 6e6463b8dd25bf045ba7c17566bc74f3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8364320678577038570, guid: 6e6463b8dd25bf045ba7c17566bc74f3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8364320678577038570, guid: 6e6463b8dd25bf045ba7c17566bc74f3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8364320678577038570, guid: 6e6463b8dd25bf045ba7c17566bc74f3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8364320678577038570, guid: 6e6463b8dd25bf045ba7c17566bc74f3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6e6463b8dd25bf045ba7c17566bc74f3, type: 3}
 --- !u!1 &1332759222
 GameObject:
   m_ObjectHideFlags: 0
@@ -32630,6 +32693,30 @@ PrefabInstance:
       propertyPath: rotationSense
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 1870519714781043508, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
+      propertyPath: jumpSound.Path
+      value: event:/Sonido_Salto_Aterrizage
+      objectReference: {fileID: 0}
+    - target: {fileID: 1870519714781043508, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
+      propertyPath: _groundLayer.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1870519714781043508, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
+      propertyPath: jumpSound.Guid.Data1
+      value: 280924654
+      objectReference: {fileID: 0}
+    - target: {fileID: 1870519714781043508, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
+      propertyPath: jumpSound.Guid.Data2
+      value: 1128770363
+      objectReference: {fileID: 0}
+    - target: {fileID: 1870519714781043508, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
+      propertyPath: jumpSound.Guid.Data3
+      value: -1389137004
+      objectReference: {fileID: 0}
+    - target: {fileID: 1870519714781043508, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
+      propertyPath: jumpSound.Guid.Data4
+      value: 1849172335
+      objectReference: {fileID: 0}
     - target: {fileID: 2930511059146918418, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
       propertyPath: move
       value: 
@@ -32641,6 +32728,26 @@ PrefabInstance:
     - target: {fileID: 2930511059146918418, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
       propertyPath: _canJump
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2930511059146918418, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
+      propertyPath: jumpSound.Path
+      value: event:/Sonido_Salto
+      objectReference: {fileID: 0}
+    - target: {fileID: 2930511059146918418, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
+      propertyPath: jumpSound.Guid.Data1
+      value: 153985143
+      objectReference: {fileID: 0}
+    - target: {fileID: 2930511059146918418, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
+      propertyPath: jumpSound.Guid.Data2
+      value: 1108030533
+      objectReference: {fileID: 0}
+    - target: {fileID: 2930511059146918418, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
+      propertyPath: jumpSound.Guid.Data3
+      value: -941902948
+      objectReference: {fileID: 0}
+    - target: {fileID: 2930511059146918418, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
+      propertyPath: jumpSound.Guid.Data4
+      value: -1598844575
       objectReference: {fileID: 0}
     - target: {fileID: 4073121894591536787, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
       propertyPath: m_Name
@@ -49213,3 +49320,4 @@ SceneRoots:
   - {fileID: 1199596606}
   - {fileID: 303496074}
   - {fileID: 500117364}
+  - {fileID: 1315047308}
