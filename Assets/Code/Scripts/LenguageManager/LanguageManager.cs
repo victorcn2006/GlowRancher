@@ -12,21 +12,38 @@ public class LanguageManager : MonoBehaviour
     private void Start()
     {
         int ID = PlayerPrefs.GetInt("LocalKey", 0);
-        //languageDropdown.value = ID;
         ChangeLanguage(ID);
-        //languageDropdown.onValueChanged.AddListener(ChangeLanguage);
+        _languageCarrousel.onValueChanged.AddListener(OnCarouselValueChanged);
     }
 
-    private void Update()
+    private void OnCarouselValueChanged()
     {
-        ChangeLanguage(0);
+        string languageValue = _languageCarrousel.GetValue();
+        int localeID = GetLocaleIDFromLanguageCode(languageValue);
+        ChangeLanguage(localeID);   
+    }
+
+    private int GetLocaleIDFromLanguageCode(string languageCode)
+    {
+        // Map your carousel values to locale IDs
+        // Adjust these based on your Available Locales order in Unity
+        switch (languageCode.ToLower())
+        {
+            case "english":
+            case "en":
+                return 0;
+            case "spanish":
+            case "es":
+                return 1;
+            default:
+                Debug.LogWarning($"Unknown language: {languageCode}, defaulting to 0");
+                return 0;
+        }
     }
 
     public void ChangeLanguage(int localeID)
     {
-        _language = _languageCarrousel.GetValue();
-        Debug.Log(_language);
-        if (active == true)
+        if (active)
             return;
         StartCoroutine(SetLocale(localeID));
     }

@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 public class UICarrousel : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class UICarrousel : MonoBehaviour
     [SerializeField] private Button _nextButton;
 
     [SerializeField] private const float TRANSITION_DURATION = 0.5f;
+
+    public UnityEvent onValueChanged;
 
     private int _currentIndex = 0;
     private bool _isTransitioning = false;
@@ -56,6 +59,8 @@ public class UICarrousel : MonoBehaviour
         _titleText.text = _items[index].title;
         _titleText.color = _items[index].textColor;
         _value = _items[index].title;
+
+        onValueChanged?.Invoke();
 
         // Fade in
         yield return StartCoroutine(FadeText(1f, TRANSITION_DURATION / 2));
