@@ -22,6 +22,7 @@ public class UICarrousel : MonoBehaviour
 
     private int _currentIndex = 0;
     private bool _isTransitioning = false;
+    private string _value;
 
     private void Start()
     {
@@ -54,6 +55,7 @@ public class UICarrousel : MonoBehaviour
         // Update content
         _titleText.text = _items[index].title;
         _titleText.color = _items[index].textColor;
+        _value = _items[index].title;
 
         // Fade in
         yield return StartCoroutine(FadeText(1f, TRANSITION_DURATION / 2));
@@ -84,7 +86,11 @@ public class UICarrousel : MonoBehaviour
         {
             _titleText.text = _items[_currentIndex].title;
             _titleText.color = _items[_currentIndex].textColor;
+            _value = _items[_currentIndex].title;
         }
     }
 
+    public string GetValue() {
+        return _value;
+    }
 }

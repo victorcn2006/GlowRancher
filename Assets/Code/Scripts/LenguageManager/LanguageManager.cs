@@ -1,32 +1,35 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 using UnityEngine.Localization.Settings;
 
-public class LenguageManager : MonoBehaviour
+public class LanguageManager : MonoBehaviour
 {
+    [SerializeField] private UICarrousel _languageCarrousel;
+    private bool _isChanging = false;
+
     private bool active = false;
-    public TMP_Dropdown languageDropdown;
-
-
+    private string _language;
     private void Start()
     {
         int ID = PlayerPrefs.GetInt("LocalKey", 0);
-        languageDropdown.value = ID;
+        //languageDropdown.value = ID;
         ChangeLanguage(ID);
-        languageDropdown.onValueChanged.AddListener(ChangeLanguage);
+        //languageDropdown.onValueChanged.AddListener(ChangeLanguage);
     }
+
+    private void Update()
+    {
+        ChangeLanguage(0);
+    }
+
     public void ChangeLanguage(int localeID)
     {
+        _language = _languageCarrousel.GetValue();
+        Debug.Log(_language);
         if (active == true)
-
             return;
-
         StartCoroutine(SetLocale(localeID));
-
     }
-
     IEnumerator SetLocale(int _localeID)
     {
         active = true;
