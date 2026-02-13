@@ -3928,14 +3928,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61ee8d86e7050534fbcf62126c0dc327, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _items:
-  - title: English
-    textColor: {r: 1, g: 1, b: 1, a: 1}
-  - title: "Espa\xF1ol"
-    textColor: {r: 1, g: 1, b: 1, a: 0}
-  _titleText: {fileID: 1137253724}
-  _prevButton: {fileID: 1222880716}
-  _nextButton: {fileID: 1146764100}
+  options:
+  - English
+  - Spanish
 --- !u!1 &1003412328
 GameObject:
   m_ObjectHideFlags: 0
@@ -5354,9 +5349,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1402851430}
-        m_TargetAssemblyTypeName: LanguageManager, Assembly-CSharp
-        m_MethodName: OnLanguageChanged
+      - m_Target: {fileID: 977352978}
+        m_TargetAssemblyTypeName: UICarrousel, Assembly-CSharp
+        m_MethodName: Next
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5873,7 +5868,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1222880714}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 977352978}
+        m_TargetAssemblyTypeName: UICarrousel, Assembly-CSharp
+        m_MethodName: Previous
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1251961695
 GameObject:
   m_ObjectHideFlags: 0
@@ -6437,7 +6444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d814dd43984c20644bf65aa50b25f230, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _languageCarrousel: {fileID: 977352978}
+  languageCarrousel: {fileID: 977352978}
 --- !u!1 &1415274433
 GameObject:
   m_ObjectHideFlags: 0
@@ -8228,9 +8235,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StringReference:
     m_TableReference:
-      m_TableCollectionName: 
+      m_TableCollectionName: GUID:31041833ef6574d4a9d41c4bd028bdb4
     m_TableEntryReference:
-      m_KeyId: 0
+      m_KeyId: 1239325583384576
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -8914,14 +8921,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61ee8d86e7050534fbcf62126c0dc327, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _items:
-  - title: Gamepad
-    textColor: {r: 1, g: 1, b: 1, a: 1}
-  - title: Keyboard
-    textColor: {r: 1, g: 1, b: 1, a: 1}
-  _titleText: {fileID: 1803646678}
-  _prevButton: {fileID: 1037813033}
-  _nextButton: {fileID: 1728221634}
+  options: []
 --- !u!1 &1750220535
 GameObject:
   m_ObjectHideFlags: 0

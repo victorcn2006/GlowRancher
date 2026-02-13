@@ -1,101 +1,85 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UI;
+
 public class UICarrousel : MonoBehaviour
 {
-    
-    [System.Serializable]
-    public class CarouselItem
-    {
-        public string title;
-        public Color textColor;
-    }
 
-    [Header("UI")]
-    [SerializeField] private CarouselItem[] _items;
-    [SerializeField] private TextMeshProUGUI _titleText;
-    [SerializeField] private Button _prevButton;
-    [SerializeField] private Button _nextButton;
+    public event Action<string> OnValueChanged;
 
-    [SerializeField] private const float TRANSITION_DURATION = 0.5f;
+    [Header("Settings")]
+    [SerializeField] private List<string> options;
 
-    public UnityEvent onValueChanged;
-
-    private int _currentIndex = 0;
-    private bool _isTransitioning = false;
-    private string _value;
+    private TextMeshProUGUI textToChange;
+    private int currentIndex = 0;
 
     private void Start()
     {
-        _prevButton.onClick.AddListener(Previous);
-        _nextButton.onClick.AddListener(Next);
-        UpdateDisplay();
+        textToChange = GetComponentInChildren<TextMeshProUGUI>();
+        UpdateText();
     }
 
     public void Next()
     {
-        if (_isTransitioning) return;
-        _currentIndex = (_currentIndex + 1) % _items.Length;
-        StartCoroutine(TransitionTo(_currentIndex));
+        if (options == null || options.Count == 0) return;
+
+        currentIndex++;
+        if (currentIndex >= options.Count)
+        {
+            currentIndex = 0; // Wrap around to the beginning
+        }
+        UpdateText();
     }
 
     public void Previous()
     {
-        if (_isTransitioning) return;
-        _currentIndex = (_currentIndex - 1 + _items.Length) % _items.Length;
-        StartCoroutine(TransitionTo(_currentIndex));
-    }
+        if (options == null || options.Count == 0) return;
 
-    private IEnumerator TransitionTo(int index)
-    {
-        _isTransitioning = true;
-
-        // Fade out
-        yield return StartCoroutine(FadeText(0f, TRANSITION_DURATION / 2));
-
-        // Update content
-        _titleText.text = _items[index].title;
-        _titleText.color = _items[index].textColor;
-        _value = _items[index].title;
-
-        onValueChanged?.Invoke();
-
-        // Fade in
-        yield return StartCoroutine(FadeText(1f, TRANSITION_DURATION / 2));
-
-        _isTransitioning = false;
-    }
-
-    private IEnumerator FadeText(float targetAlpha, float duration)
-    {
-        Color startColor = _titleText.color;
-        Color targetColor = new Color(startColor.r, startColor.g, startColor.b, targetAlpha);
-        float elapsed = 0f;
-
-        while (elapsed < duration)
+        currentIndex--;
+        if (currentIndex < 0)
         {
-            elapsed += Time.deltaTime;
-            float t = elapsed / duration;
-            _titleText.color = Color.Lerp(startColor, targetColor, t);
-            yield return null;
+            currentIndex = options.Count - 1; // Wrap around to the end
         }
-
-        _titleText.color = targetColor;
+        UpdateText();
     }
 
-    private void UpdateDisplay()
+    private void UpdateText()
     {
-        if (_items.Length > 0)
+        if (textToChange != null && options != null && options.Count > 0)
         {
-            _titleText.text = _items[_currentIndex].title;
-            _titleText.color = _items[_currentIndex].textColor;
-            _value = _items[_currentIndex].title;
+            textToChange.text = options[currentIndex];
+            OnValueChanged?.Invoke(options[currentIndex]);
         }
     }
 
-    public string GetValue() {
-        return _value;
+    // Helper methods to programmatically control the carousel
+    public void SetOptionByName(string optionName)
+    {
+        int index = options.IndexOf(optionName);
+        if (index >= 0)
+        {
+            currentIndex = index;
+            UpdateText();
+        }
+    }
+    public void SetOptionByIndex(int index)
+    {
+        if (index >= 0 && index < options.Count)
+        {
+            currentIndex = index;
+            UpdateText();
+        }
+    }
+
+    public string GetValue()
+    {
+        return textToChange.text;
+    }
+
+    public int GetCurrentIndex()
+    {
+        return currentIndex;
     }
 }
