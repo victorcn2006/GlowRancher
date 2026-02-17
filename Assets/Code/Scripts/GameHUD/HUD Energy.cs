@@ -15,7 +15,7 @@ public class HUDEnergy : MonoBehaviour
     private void Start()
     {
 
-        _stamina = _player.stamina;
+        _stamina = _player._stamina;
         _slider.maxValue = _stamina;
         _slider.value = _stamina;
         

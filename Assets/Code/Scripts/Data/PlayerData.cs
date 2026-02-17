@@ -11,10 +11,10 @@ public class PlayerData{
     public PlayerData(Player player) {
         characterName = player.GetCharacterName();
         description = player.GetDescription();
-        currentBiome = player.currentBiome;
+        currentBiome = player._currentBiome;
         health = player.GetCurrentHealth();
-        money = player.money;
-        stamina = player.stamina;
+        money = player._money;
+        stamina = player._stamina;
         maxHealth = player.GetMaxHealth();
         position[0] = player.transform.position.x;
         position[1] = player.transform.position.y;

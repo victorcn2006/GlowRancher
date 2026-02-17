@@ -5,9 +5,9 @@ using UnityEngine;
 public class Player : Character, ISavable{
 
     [Header("Estadísticas del Jugador")]
-    [SerializeField] private int _money = 0;
-    [SerializeField] private int _stamina = 100;
-    [SerializeField] private string _currentBiome = "Pradera";
+    [SerializeField] public int _money = 0;
+    [SerializeField] public int _stamina = 100;
+    [SerializeField] public string _currentBiome = "Pradera";
 
     public int Money => _money;
     public int Stamina => _stamina;
