@@ -4,21 +4,16 @@ public class Building : MonoBehaviour
 {
     [SerializeField] protected string buildingName;
     [SerializeField, TextArea] protected string description;
-    private int _numBuildings;
+
     protected Vector3 position;
     protected virtual void Awake(){
-        _numBuildings = 0;
         position = transform.position;
     }
-    protected virtual void Start(){ }
-    protected void AddBuilding(){
-        _numBuildings++;
-    }
+    protected virtual void Start() { }
     // ===================== GETTERS ===================== //
     public string GetBuildingName() => buildingName;
     public string GetDescription() => description;
     public Vector3 GetPosition() => position;
-    public int GetNumBuildings() => _numBuildings;
 
     // ===================== SETTERS ===================== //
     protected void SetBuildingName(string name) => buildingName = name;

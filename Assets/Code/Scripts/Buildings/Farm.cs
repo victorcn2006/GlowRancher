@@ -4,7 +4,6 @@ using UnityEngine;
 public class Farm : Building, ISavable{
     protected override void Awake() {
         StartCoroutine(_Awake());
-        AddBuilding();
     }
     protected override void Start()
     {

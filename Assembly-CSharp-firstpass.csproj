@@ -10,10 +10,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{1285AE2E-5DC2-A3EA-CE2A-C0D6AE623611}</ProjectGuid>
+    <ProjectGuid>{8447463B-3274-8AB5-4E02-BA9D80DB23CB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <AssemblyName>Assembly-CSharp-firstpass</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -50,7 +50,7 @@
     <UnityProjectGenerator>Package</UnityProjectGenerator>
     <UnityProjectGeneratorVersion>2.0.22</UnityProjectGeneratorVersion>
     <UnityProjectGeneratorStyle>Legacy</UnityProjectGeneratorStyle>
-    <UnityProjectType>Game:1</UnityProjectType>
+    <UnityProjectType>GamePlugins:3</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2022.3.45f1</UnityVersion>
   </PropertyGroup>
@@ -60,158 +60,41 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.45f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Code\Scripts\Slimes\ScaredSlime\ScaredSlimeMovement.cs" />
-    <Compile Include="Assets\Code\Scripts\Player\PlayerStateMachine.cs" />
-    <Compile Include="Assets\Code\Scripts\Menu\Settings\BrightnessManager.cs" />
-    <Compile Include="Assets\Code\Scripts\Food\Food.cs" />
-    <Compile Include="Assets\Code\Scripts\Systems\AutoSave.cs" />
-    <Compile Include="Assets\ImportAssets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleEPOOutline.cs" />
-    <Compile Include="Assets\Code\Scripts\Data\EnemyData.cs" />
-    <Compile Include="Assets\Code\Scripts\Aspirator\ObjectsDetector.cs" />
-    <Compile Include="Assets\ImportAssets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUI.cs" />
-    <Compile Include="Assets\ImportAssets\Plugins\Demigiant\DOTween\Modules\DOTweenModulePhysics2D.cs" />
-    <Compile Include="Assets\Code\Scripts\FMOD\FMODSliderController.cs" />
-    <Compile Include="Assets\Code\Scripts\Data\SaveData.cs" />
-    <Compile Include="Assets\Code\Scripts\Inventory\SlotUI.cs" />
-    <Compile Include="Assets\Code\Scripts\Shop\ShopController.cs" />
-    <Compile Include="Assets\Code\Scripts\Shop\InteractiveShop.cs" />
-    <Compile Include="Assets\ImportAssets\Plugins\Demigiant\DOTween\Modules\DOTweenModulePhysics.cs" />
-    <Compile Include="Assets\Code\Pools\PoolManager.cs" />
-    <Compile Include="Assets\Code\Scripts\Player\PlayerController.cs" />
-    <Compile Include="Assets\Code\Scripts\Buildings\Farm.cs" />
-    <Compile Include="Assets\Code\Scripts\Shop\PanelShopController.cs" />
-    <Compile Include="Assets\ImportAssets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUtils.cs" />
-    <Compile Include="Assets\Code\Scripts\Slimes\SlimeFunctions\GemSystem.cs" />
-    <Compile Include="Assets\Code\Scripts\LoseCondition.cs" />
-    <Compile Include="Assets\Code\Scripts\Aspirator\SuctionPoint.cs" />
-    <Compile Include="Assets\Code\Scripts\Data\FarmData.cs" />
-    <Compile Include="Assets\Code\Scripts\WikiSLime\WikiSlime.cs" />
-    <Compile Include="Assets\Code\Scripts\Menu\Settings\VolumeManager.cs" />
-    <Compile Include="Assets\Code\Scripts\UICarrousel.cs" />
-    <Compile Include="Assets\Code\Scripts\Interfaces\ISavable.cs" />
-    <Compile Include="Assets\Code\Scripts\PlugIns\ColorInHierarchy.cs" />
-    <Compile Include="Assets\Code\Scripts\Lights\lightRefrences.cs" />
-    <Compile Include="Assets\Code\Scripts\Drops\Gems\Gem.cs" />
-    <Compile Include="Assets\Code\Scripts\Buildings\Ranch\WallColliderPermision.cs" />
-    <Compile Include="Assets\Code\Scripts\Menu\Settings\ResolutionManager.cs" />
-    <Compile Include="Assets\Code\Pools\EnemiesSlimesPool.cs" />
-    <Compile Include="Assets\ImportAssets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleSprite.cs" />
-    <Compile Include="Assets\Code\Scripts\PlayerWallet\WalletCurrency.cs" />
-    <Compile Include="Assets\Code\Scripts\Systems\UnityEvents.cs" />
-    <Compile Include="Assets\Code\Scripts\Menu\Managers\EventSystemManager.cs" />
-    <Compile Include="Assets\Code\Scripts\Buildings\Building.cs" />
-    <Compile Include="Assets\Code\Scripts\Construction\ContructionInventoryManager.cs" />
-    <Compile Include="Assets\Code\Scripts\GameHUD\HUD Heath.cs" />
-    <Compile Include="Assets\Code\Map\ZoneRenderingController.cs" />
-    <Compile Include="Assets\Code\Scripts\Menu\Managers\PanelManager.cs" />
-    <Compile Include="Assets\Code\Scripts\Drops\Items\VegetableData.cs" />
-    <Compile Include="Assets\Code\Scripts\PlugIns\RequiredFieldAttribute.cs" />
-    <Compile Include="Assets\Code\Scripts\Slimes\BasicSlime\BasicSlimeMovement.cs" />
-    <Compile Include="Assets\ImportAssets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleAudio.cs" />
-    <Compile Include="Assets\Code\Scripts\Player\PlayerMovement.cs" />
-    <Compile Include="Assets\Code\Scripts\Systems\UIButtonClickBinder.cs" />
-    <Compile Include="Assets\Code\Scripts\Menu\TextColorChanger.cs" />
-    <Compile Include="Assets\Code\Scripts\Data\PlayerData.cs" />
-    <Compile Include="Assets\Code\Scripts\Slimes\ScaredSlime\ScaredSlimePlayerDetector.cs" />
-    <Compile Include="Assets\Code\Scripts\Shop\MarketManager.cs" />
-    <Compile Include="Assets\Code\Scripts\Systems\SaveManager.cs" />
-    <Compile Include="Assets\Code\Scripts\Ship\WinCondition.cs" />
-    <Compile Include="Assets\Code\Scripts\Slimes\SlimeFunctions\Mouth.cs" />
-    <Compile Include="Assets\Code\Scripts\Characters\Player.cs" />
-    <Compile Include="Assets\Code\Scripts\Interfaces\IAspirable.cs" />
-    <Compile Include="Assets\Code\Scripts\Lights\lightInteractionController.cs" />
-    <Compile Include="Assets\Code\Scripts\Slimes\SlimeSpawner\SlimeSpawner.cs" />
-    <Compile Include="Assets\Code\Scripts\Menu\Managers\ReturnManager.cs" />
-    <Compile Include="Assets\Code\Scripts\Player\Select.cs" />
-    <Compile Include="Assets\Code\Scripts\Player\PlayerCameraMovement.cs" />
-    <Compile Include="Assets\Code\Scripts\Slimes\ScaredSlime\ScaredSlime.cs" />
-    <Compile Include="Assets\Code\Scripts\Slimes\SlimeFunctions\HungerSystem.cs" />
-    <Compile Include="Assets\Code\Scripts\WikiSLime\WikManager.cs" />
-    <Compile Include="Assets\Code\Scripts\Drops\Items\Vegetable.cs" />
-    <Compile Include="Assets\Code\Scripts\Aspirator\Aspirator.cs" />
-    <Compile Include="Assets\Code\Pools\SlimesPool.cs" />
-    <Compile Include="Assets\Code\Scripts\Menu\Managers\ActionButtonManager.cs" />
-    <Compile Include="Assets\Code\Pools\GemsPool.cs" />
-    <Compile Include="Assets\ImportAssets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
-    <Compile Include="Assets\Code\Scripts\Systems\GameManager.cs" />
-    <Compile Include="Assets\Code\Scripts\Characters\Enemy.cs" />
-    <Compile Include="Assets\Code\Scripts\Buildings\Incinerator\Incinerator.cs" />
-    <Compile Include="Assets\Code\Scripts\Systems\Systems.cs" />
-    <Compile Include="Assets\Code\Scripts\Drops\Gems\GemData.cs" />
-    <Compile Include="Assets\Code\Scripts\Menu\EditorSceneScripts\SceneChanger.cs" />
-    <Compile Include="Assets\Code\Map\ZoneRenderingTrigger.cs" />
-    <Compile Include="Assets\Code\Scripts\Characters\Character.cs" />
-    <Compile Include="Assets\Code\Scripts\GameHUD\HUD Energy.cs" />
-    <Compile Include="Assets\Code\Scripts\Systems\UIAudioManager.cs" />
-    <Compile Include="Assets\Code\Scripts\Menu\Settings\FullScreen.cs" />
-    <Compile Include="Assets\Code\Scripts\Menu\EditorSceneScripts\SceneChangerButton.cs" />
-    <Compile Include="Assets\Code\Scripts\Inventory\ItemPickUp.cs" />
-    <Compile Include="Assets\Code\Inputs\Controls.cs" />
-    <Compile Include="Assets\Code\Scripts\Systems\InputManager.cs" />
-    <Compile Include="Assets\Code\Scripts\Menu\Managers\PauseManager.cs" />
-    <Compile Include="Assets\Code\Scripts\Slimes\BasicSlime\BasicSlime.cs" />
-    <Compile Include="Assets\Code\Scripts\Inventory\Inventory.cs" />
-    <Compile Include="Assets\Code\Scripts\Menu\EditorSceneScripts\SceneField.cs" />
-    <Compile Include="Assets\Code\Scripts\Menu\Managers\LayoutManager.cs" />
+    <Compile Include="Assets\Plugins\FMOD\src\FMODRuntimeManagerOnGUIHelper.cs" />
+    <Compile Include="Assets\Plugins\FMOD\src\PlatformPlayInEditor.cs" />
+    <Compile Include="Assets\Plugins\FMOD\src\StudioEventEmitter.cs" />
+    <Compile Include="Assets\Plugins\FMOD\src\PlatformGroup.cs" />
+    <Compile Include="Assets\Plugins\FMOD\src\EventRefAttribute.cs" />
+    <Compile Include="Assets\Plugins\FMOD\src\EventHandler.cs" />
+    <Compile Include="Assets\Plugins\FMOD\src\BankRefAttribute.cs" />
+    <Compile Include="Assets\Plugins\FMOD\src\StudioGlobalParameterTrigger.cs" />
+    <Compile Include="Assets\Plugins\FMOD\src\RuntimeUtils.cs" />
+    <Compile Include="Assets\Plugins\FMOD\src\ParamRefAttribute.cs" />
+    <Compile Include="Assets\Plugins\FMOD\src\Settings.cs" />
+    <Compile Include="Assets\Plugins\FMOD\src\PlatformMobileLow.cs" />
+    <Compile Include="Assets\Plugins\FMOD\src\RuntimeManager.cs" />
+    <Compile Include="Assets\Plugins\FMOD\src\EventReference.cs" />
+    <Compile Include="Assets\Plugins\FMOD\src\Platform.cs" />
+    <Compile Include="Assets\Plugins\FMOD\src\FMODEventPlayable.cs" />
+    <Compile Include="Assets\Plugins\FMOD\src\fmod_errors.cs" />
+    <Compile Include="Assets\Plugins\FMOD\src\StudioBankLoader.cs" />
+    <Compile Include="Assets\Plugins\FMOD\src\ParamRef.cs" />
+    <Compile Include="Assets\Plugins\FMOD\src\PlatformDefault.cs" />
+    <Compile Include="Assets\Plugins\FMOD\src\StudioListener.cs" />
+    <Compile Include="Assets\Plugins\FMOD\src\PlatformMobileHigh.cs" />
+    <Compile Include="Assets\Plugins\FMOD\src\fmod_studio.cs" />
+    <Compile Include="Assets\Plugins\FMOD\src\fmod.cs" />
+    <Compile Include="Assets\Plugins\FMOD\src\AutomatableSlots.cs" />
+    <Compile Include="Assets\Plugins\FMOD\src\StudioParameterTrigger.cs" />
+    <Compile Include="Assets\Plugins\FMOD\platforms\win\src\PlatformWindows.cs" />
+    <Compile Include="Assets\Plugins\FMOD\src\FMODEventTrack.cs" />
+    <Compile Include="Assets\Plugins\FMOD\src\fmod_dsp.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
-    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
-    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
-    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\SandboxFolder\{05dda10d-b98d-4b50-8e14-31abe061c767}.xml" />
-    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\Asset\{4d0bec7b-012e-4279-9cae-18a123a8791b}.xml" />
-    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\VCA\{8f0e78f2-615f-4cb8-b59c-f9237db4e580}.xml" />
-    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\Event\{b0506e1f-922f-40ed-a975-5302f437cc9c}.xml" />
-    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
-    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\VCA\{cb10c7b5-da64-44d9-8e6b-503a80cd4071}.xml" />
-    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\AudioFile\{76c32c1a-b96c-46be-9326-f8b9af951d03}.xml" />
-    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\Bank\{aa8c7256-4bb0-41b9-8991-5f6623698d6b}.xml" />
-    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
-    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\ProfilerFolder\{3e8183e8-03bd-46da-9c6a-1f4322d7b1b2}.xml" />
-    <None Include="Assets\ImportAssets\Plugins\Demigiant\DOTween\DOTween.XML" />
-    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
-    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\Event\{44ecba04-3f63-47d4-a2b6-248760d6d13a}.xml" />
-    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\AudioFile\{6fa64705-209a-4cfc-bc4e-806c05555b86}.xml" />
-    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\AudioFile\{27258a7d-b83e-4979-99aa-43dd922e22b1}.xml" />
-    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\Platform\{c64449f8-9299-4b9c-9bc9-86784a434ab2}.xml" />
-    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\AudioFile\{2d8f0f2a-231a-4b0c-a7d0-d1835ea4dde7}.xml" />
-    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\EncodingSetting\{8ff85afd-6ad7-406a-bcc0-7e329a8c7e79}.xml" />
-    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
-    <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
-    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
-    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
-    <None Include="Assets\ImportAssets\Plugins\Demigiant\DOTween\DOTween.dll" />
-    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
-    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\SnapshotGroup\{9631fba4-f942-4f46-b6ca-2c959978c19e}.xml" />
-    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
-    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
-    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
-    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\Mixer.xml" />
-    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\Workspace.xml" />
-    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\EventFolder\{7c2bf476-4eb7-4c7a-a77c-7bc8cbf22f8a}.xml" />
-    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\Event\{a37307db-35a2-449b-b68f-5497d538f569}.xml" />
-    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\BankFolder\{d587799b-5a76-4f33-b0b7-6736b1c7f8ad}.xml" />
-    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
-    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\Return\{2ead92ee-3e04-4cd1-899a-4fac88e6e20f}.xml" />
-    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\AudioFile\{7d4b2a5c-aeba-43e0-8a49-357f973858c2}.xml" />
-    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
-    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\Event\{10be91ee-ab3b-4347-9473-33ad6f21386e}.xml" />
-    <None Include="Assets\ImportAssets\Plugins\Demigiant\DOTween\readme.txt" />
-    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\EffectPresetFolder\{47482492-e9a6-401d-bec9-22acc12b3a22}.xml" />
-    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\Master.xml" />
-    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\ParameterPresetFolder\{810bffe3-8d95-4902-8f01-69899ab0afcb}.xml" />
-    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\Group\{412af656-bfd1-4d6b-86a4-7ac74119a709}.xml" />
-    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\AudioFile\{1e88f2e6-0851-4a37-884c-455022a3f6e2}.xml" />
-    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
-    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\Event\{623fc783-1052-4c7e-a7e4-d17bc0c26e9f}.xml" />
-    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
-    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\Event\{092da077-3445-420b-9cb3-dbc76191b3a0}.xml" />
-    <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
-    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
-    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\Group\{06f7fd5a-f03c-4517-b3d7-9397480b4588}.xml" />
-    <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
-    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\Tags.xml" />
-    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\VCA\{e61adadb-31de-455c-ac1e-bcea88df5e78}.xml" />
+    <None Include="Assets\Plugins\FMOD\platforms\win\lib\x86_64\fmodstudioL.dll" />
+    <None Include="Assets\Plugins\FMOD\README.txt" />
+    <None Include="Assets\Plugins\FMOD\platforms\win\lib\x86_64\resonanceaudio.dll" />
+    <None Include="Assets\Plugins\FMOD\platforms\win\lib\x86_64\fmod_haptics.dll" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -1175,18 +1058,6 @@
     <ProjectReference Include="FMODUnityEditor.csproj">
       <Project>{E1D535FF-E99A-EB7B-DFFC-12BAC32C1A41}</Project>
       <Name>FMODUnityEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="FMODUnityResonance.csproj">
-      <Project>{6EA65225-2DE4-2A5C-944B-628D07A5CCE5}</Project>
-      <Name>FMODUnityResonance</Name>
-    </ProjectReference>
-    <ProjectReference Include="FMODUnity.csproj">
-      <Project>{DD003EB6-2287-2978-F168-B7A60D4DAB1A}</Project>
-      <Name>FMODUnity</Name>
-    </ProjectReference>
-    <ProjectReference Include="FMODUnityResonanceEditor.csproj">
-      <Project>{59E6591F-A22E-D7A0-5830-2BB0E5EFD0F8}</Project>
-      <Name>FMODUnityResonanceEditor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
