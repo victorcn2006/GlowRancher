@@ -1,63 +1,83 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : Character, ISavable{
-    //Variables opcionales con Getter publico y setter privado
-    public string currentBiome { get; private set; } = "Pradera";
-    public int money { get; private set; } = 0;
-    public int stamina { get; private set; } = 100;
 
+    [Header("Estadísticas del Jugador")]
+    [SerializeField] private int _money = 0;
+    [SerializeField] private int _stamina = 100;
+    [SerializeField] private string _currentBiome = "Pradera";
 
-    //Override al Awake del Character para asignar valores a las variables
-    protected override void Awake() {
-        StartCoroutine(_Awake());
+    public int Money => _money;
+    public int Stamina => _stamina;
+    public string CurrentBiome => _currentBiome;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        //Inicializqación local
         currentHealth = maxHealth;
     }
-    IEnumerator _Awake() {
-        while (SaveManager.Instance == null || SaveManager.Instance.IsLoading)
-            yield return null;
-        base.Awake();
+
+   private void Start()
+    {
+        if (SaveManager.Instance != null)
+        {
+            SaveManager.Instance.RegisterSavable(this); 
+        }
     }
 
-    private void OnEnable()
+    private void OnDestroy()
     {
-        SaveManager.Instance?.RegisterSavable(this);
+        if(SaveManager.Instance != null)
+        {
+            SaveManager.Instance.UnregisterSavable(this);
+        }
     }
-    private void OnDisable()
-    {
-        SaveManager.Instance?.UnregisterSavable(this);
-    }
+
     //Override al attack cambiar por la logica nueva de la aspiradora
     protected override void Attack() {
+
+
         if (SaveManager.Instance != null && SaveManager.Instance.IsLoading)
             return;
+
         base.Attack();
     }
-    public void AddMoney(int amount) {
-        money += amount;
+
+    public override void TakeDamage (int damage)
+    {
+        base.TakeDamage(damage);
+        Debug.Log("Jugador a recibido daño");
+    } 
+    public void AddMoney(int amount)
+    {
+        _money += amount;
         // Notifica el SaveManager del canvi
     }
 
     // Metodo para gastar dinero
-    public void SpendMoney(int amount) {
-        money = Mathf.Max(0, money - amount);
+    public void SpendMoney(int amount)
+    {
+        _money = Mathf.Max(0, _money - amount);
     }
 
     // Quan el jugador puja de nivell
-    public void ChangeBiome(string biome) {
-        if(!string.IsNullOrEmpty(biome))
-            currentBiome = biome;
+    public void ChangeBiome(string biome)
+    {
+        if (!string.IsNullOrEmpty(biome))
+        {
+            _currentBiome = biome;
+        }
+           
     }
-
-    // Quan el jugador rep dany
-    public override void TakeDamage(int damage) {
-        base.TakeDamage(damage);
-    } 
 
     //===================== METODOS DE ISAVABLE =====================//
     public string GetSaveID()
     {
-        return "Player";
+        return "Player_Main_Data";
     }
     public object CaptureState()
     {
@@ -71,11 +91,13 @@ public class Player : Character, ISavable{
         {
             characterName = data.characterName;
             description = data.description;
-            currentBiome = data.currentBiome;
-            money = data.money;
             currentHealth = data.health;
-            maxHealth= data.maxHealth;
-            stamina = data.stamina;
+            maxHealth = data.maxHealth;
+
+            _currentBiome = data.currentBiome;
+            _money = data.money;
+            _stamina = data.stamina;
+
             transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
         }
         else
