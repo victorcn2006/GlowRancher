@@ -128,6 +128,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1384
+--- !u!114 &-5836698312678903906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sonido_Salto
+  m_EditorClassIdentifier: 
+  Path: event:/Sonido_Salto
+  Guid:
+    Data1: 153985143
+    Data2: 1108030533
+    Data3: -941902948
+    Data4: -1598844575
+  Banks:
+  - {fileID: 7064521172532407421}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 340
 --- !u!114 &-4148459110820786315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,6 +256,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 160
+--- !u!114 &-2481794906974992117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sonido_Salto_Aterrizage
+  m_EditorClassIdentifier: 
+  Path: event:/Sonido_Salto_Aterrizage
+  Guid:
+    Data1: 280924654
+    Data2: 1128770363
+    Data3: -1389137004
+    Data4: 1849172335
+  Banks:
+  - {fileID: 7064521172532407421}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 240
 --- !u!114 &-1833657086003422736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,6 +357,60 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 240
+--- !u!114 &-1467313752301793252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Respawn_Sound
+  m_EditorClassIdentifier: 
+  Path: event:/Respawn_Sound
+  Guid:
+    Data1: 1648347011
+    Data2: 1283330130
+    Data3: 2077353127
+    Data4: -1620131136
+  Banks:
+  - {fileID: 7064521172532407421}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 160
+--- !u!114 &-1390176090966468753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX
+  m_EditorClassIdentifier: 
+  Path: event:/SFX
+  Guid:
+    Data1: 1156364804
+    Data2: 1205092195
+    Data3: -2027637086
+    Data4: 986830432
+  Banks:
+  - {fileID: 7064521172532407421}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1384
 --- !u!114 &-1035740728094250232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,22 +491,22 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: 3178472657728942826}
-  - {fileID: 7253030849339047728}
+  - {fileID: 6472367824958842638}
+  - {fileID: 7064521172532407421}
   EditorEvents:
-  - {fileID: 2897711462453787182}
-  - {fileID: -4148459110820786315}
-  - {fileID: 4551479998732461316}
-  - {fileID: -2595450510425202216}
-  - {fileID: -3674303164690817568}
-  - {fileID: 2249125357999639865}
+  - {fileID: -1390176090966468753}
+  - {fileID: 6642860283369967472}
+  - {fileID: -5836698312678903906}
+  - {fileID: -1467313752301793252}
+  - {fileID: 5700489327914524612}
+  - {fileID: -2481794906974992117}
   EditorParameters: []
   MasterBanks:
-  - {fileID: 7253030849339047728}
+  - {fileID: 7064521172532407421}
   StringsBanks:
-  - {fileID: 3178472657728942826}
+  - {fileID: 6472367824958842638}
   cacheVersion: 131858
-  cacheTime: 639056572797538993
+  cacheTime: 639070319989933524
   SerializableEventsDict:
   - key: event:/SFX
     index: 0
@@ -695,6 +803,80 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 340
+--- !u!114 &5700489327914524612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music
+  m_EditorClassIdentifier: 
+  Path: event:/Music
+  Guid:
+    Data1: -1552742437
+    Data2: 1151022498
+    Data3: -1756065866
+    Data4: 1777678549
+  Banks:
+  - {fileID: 7064521172532407421}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 130063
+--- !u!114 &6472367824958842638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/FMOD/FMOD_Glow_Rancher/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 639070319989470089
+  FileSizes:
+  - Name: Desktop
+    Value: 1200
+  Exists: 1
+--- !u!114 &6642860283369967472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/ButtonClick_Sound
+  m_EditorClassIdentifier: 
+  Path: event:/ButtonClick_Sound
+  Guid:
+    Data1: -1336906209
+    Data2: 1089311279
+    Data3: 39024041
+    Data4: -1664337932
+  Banks:
+  - {fileID: 7064521172532407421}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 179
 --- !u!114 &6935762200508966258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -722,6 +904,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 160
+--- !u!114 &7064521172532407421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/FMOD/FMOD_Glow_Rancher/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 639070319989933524
+  FileSizes:
+  - Name: Desktop
+    Value: 1857952
+  Exists: 1
 --- !u!114 &7253030849339047728
 MonoBehaviour:
   m_ObjectHideFlags: 0
