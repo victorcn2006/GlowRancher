@@ -2,42 +2,62 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using FMODUnity; // 1. Importante añadir esto
 
-public class ActionButtonManager : MonoBehaviour{
-    public enum BUTTONS{
+public class ActionButtonManager : MonoBehaviour
+{
+
+    [Header("Configuración de Sonido")]
+    public EventReference clickSound; // 2. Variable para asignar el evento desde el Inspector
+
+    public enum BUTTONS
+    {
         PLAY,
         OPTIONS,
         CONTINUE,
         MAINMENU,
+        CREDITS,
         EXIT
     }
     public BUTTONS currentButton;
 
     private Button _button;
 
-    private void Awake() {
+    private void Awake()
+    {
         if (_button == null) _button = GetComponent<Button>();
     }
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
         if (_button != null) _button.onClick.AddListener(OnButtonPressed);
     }
-    private void OnDisable() {
-        _button.onClick.RemoveListener(OnButtonPressed);
+    private void OnDisable()
+    {
+        if (_button != null) _button.onClick.RemoveListener(OnButtonPressed);
     }
-    private void OnButtonPressed() {
+
+    private void OnButtonPressed()
+    {
+        // 3. Reproducir el sonido de FMOD
+        if (!clickSound.IsNull)
+        {
+            RuntimeManager.PlayOneShot(clickSound, transform.position);
+        }
+
+        // Tu lógica actual
         UIAudioManager.Instance?.PlayClick();
+
         switch (currentButton)
         {
             case BUTTONS.PLAY:
                 break;
             case BUTTONS.OPTIONS:
-                PauseManager.instance?.SetPause();
-                break;
             case BUTTONS.MAINMENU:
+            case BUTTONS.CONTINUE:
                 PauseManager.instance?.SetPause();
                 break;
-            case BUTTONS.CONTINUE:
+            case BUTTONS.CREDITS:
                 PauseManager.instance?.SetPause();
                 break;
             case BUTTONS.EXIT:
