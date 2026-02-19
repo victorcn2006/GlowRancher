@@ -271,8 +271,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoad:
-    _sceneAsset: {fileID: 102900000, guid: 3e99a4db476d09e459c03e2d9451862c, type: 3}
-    _sceneName: FinalMap
+    _sceneAsset: {fileID: 102900000, guid: 4db8b46149736dc4e83a7d67ae67795c, type: 3}
+    _sceneName: buildings
 --- !u!114 &44059471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -481,6 +481,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7caca753bb14bdb4e889b1f11e860fc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clickSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   currentButton: 1
 --- !u!114 &277881351
 MonoBehaviour:
@@ -1109,7 +1116,6 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194229}
-  - component: {fileID: 963194230}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
