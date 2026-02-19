@@ -42,10 +42,11 @@ public class InputManager : MonoBehaviour {
     [HideInInspector] public UnityEvent OnJumpPerformed = new UnityEvent();
     [HideInInspector] public UnityEvent OnPausePerformed = new UnityEvent();
     [HideInInspector] public UnityEvent OnWikiPerformed = new UnityEvent();
+    [HideInInspector] public UnityEvent OnInteract = new UnityEvent();
 
-    public UnityEvent<float> OnInventoryScroll = new UnityEvent<float>();
-    public UnityEvent<int> OnInventorySlotKey = new UnityEvent<int>();
-    public UnityEvent OnInventoryRightClick = new UnityEvent();
+    [HideInInspector] public UnityEvent<float> OnInventoryScroll = new UnityEvent<float>();
+    [HideInInspector] public UnityEvent<int> OnInventorySlotKey = new UnityEvent<int>();
+    [HideInInspector] public UnityEvent OnInventoryRightClick = new UnityEvent();
 
     private void Awake()
     {
@@ -106,6 +107,7 @@ public class InputManager : MonoBehaviour {
         _scroll.action.performed += OnInventoryScrollPerformed;
         _inventoryNavigation.action.performed += OnInventorySlotKeyPerformed;
         _rightClick.action.performed += OnInventoryRightClickPerformed;
+        _interact.action.performed += OnInteractPerformed;
     }
     private void UnSubscribeEvents()
     {
@@ -116,6 +118,7 @@ public class InputManager : MonoBehaviour {
         _scroll.action.performed -= OnInventoryScrollPerformed;
         _inventoryNavigation.action.performed -= OnInventorySlotKeyPerformed;
         _rightClick.action.performed -= OnInventoryRightClickPerformed;
+        _interact.action.performed -= OnInteractPerformed;
     }
 
     private void OnJump(InputAction.CallbackContext ctx) {
@@ -165,6 +168,10 @@ public class InputManager : MonoBehaviour {
     public void SetWikiOpen(bool state)
     {
         IsWikiOpen = state;
+    }
+
+    private void OnInteractPerformed(InputAction.CallbackContext ctx) {
+        OnInteract?.Invoke();
     }
 }
 
