@@ -32878,6 +32878,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8581981930015451809, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
+      propertyPath: _slotUI.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8581981930015451809, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
       propertyPath: scrollAction.m_Name
       value: Scroll
       objectReference: {fileID: 0}
@@ -32899,6 +32903,22 @@ PrefabInstance:
       objectReference: {fileID: 235455760}
     - target: {fileID: 8581981930015451809, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
       propertyPath: slotUI.Array.data[3]
+      value: 
+      objectReference: {fileID: 181172940}
+    - target: {fileID: 8581981930015451809, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
+      propertyPath: _slotUI.Array.data[0]
+      value: 
+      objectReference: {fileID: 145052296}
+    - target: {fileID: 8581981930015451809, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
+      propertyPath: _slotUI.Array.data[1]
+      value: 
+      objectReference: {fileID: 417663818}
+    - target: {fileID: 8581981930015451809, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
+      propertyPath: _slotUI.Array.data[2]
+      value: 
+      objectReference: {fileID: 235455760}
+    - target: {fileID: 8581981930015451809, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
+      propertyPath: _slotUI.Array.data[3]
       value: 
       objectReference: {fileID: 181172940}
     - target: {fileID: 8581981930015451809, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
@@ -33359,6 +33379,9 @@ MonoBehaviour:
   characterName: 
   description: 
   maxHealth: 100
+  _money: 0
+  _stamina: 100
+  _currentBiome: Pradera
 --- !u!114 &1563374120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33519,12 +33542,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3adce09f0c8ab348b15c5e4005450ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slots: []
-  slotUI:
-  - {fileID: 145052296}
-  - {fileID: 417663818}
-  - {fileID: 235455760}
-  - {fileID: 181172940}
+  _maxSlots: 4
+  _maxCantidadPorSlot: 20
+  _slotUI: []
 --- !u!1 &1695830669
 GameObject:
   m_ObjectHideFlags: 0

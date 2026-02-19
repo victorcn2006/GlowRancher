@@ -2,115 +2,84 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 
 public class Inventory : MonoBehaviour
 {
-    public List<SlotInventario> slots = new List<SlotInventario>();
-    private const int MAX_SLOT = 4;
-    private const int MAX_CANTIDAD_POR_SLOT = 20;
 
-    public SlotUI[] slotUI;
+    [Header("Configuración")]
+    [SerializeField] private int _maxSlots = 4;
+    [SerializeField] private int _maxCantidadPorSlot = 20;
 
+    [Header("Referencias UI")]
+    [SerializeField] private SlotUI[] _slotUI;
+
+    private List<SlotInventario> _slots;
     private int _slotSeleccionado = 0;
 
+    public SlotInventario SelectedSlot => (_slotSeleccionado < _slots.Count) ? _slots[_slotSeleccionado] : null;
 
-    void OnEnable()
+    private void Awake()
     {
-        InputManager.Instance.OnInventoryScroll.AddListener(OnScroll);
-        InputManager.Instance.OnInventorySlotKey.AddListener(OnSlotKey);
-        InputManager.Instance.OnInventoryRightClick.AddListener(OnRightClick);
+        InicializarInventario();
+    }
+
+    private void OnEnable()
+    {
+        if (InputManager.Instance == null) return;
+        InputManager.Instance.OnInventoryScroll.AddListener(HandleScroll);
+        InputManager.Instance.OnInventorySlotKey.AddListener(HandleSlotKey);
     }
 
     void OnDisable()
     {
-        InputManager.Instance.OnInventoryScroll.RemoveListener(OnScroll);
-        InputManager.Instance.OnInventorySlotKey.RemoveListener(OnSlotKey);
-        InputManager.Instance.OnInventoryRightClick.RemoveListener(OnRightClick);
+        if (InputManager.Instance == null) return;
+        InputManager.Instance.OnInventoryScroll.RemoveListener(HandleScroll);
+        InputManager.Instance.OnInventorySlotKey.RemoveListener(HandleSlotKey);
     }
 
-    void Start()
+    private void InicializarInventario()
     {
-        slots.Clear();
-        for (int i = 0; i < MAX_SLOT; i++)
+        _slots = new List<SlotInventario>(new SlotInventario[_maxSlots]);
+
+        for (int i = 0; i < _maxSlots; i++)
         {
-            slots.Add(null);
-            slotUI[i].ActualizarSlot(null);
+            ActualizarSlotEnUI(i);
         }
         ActualizarSeleccionVisual();
     }
 
-    // Movimiento de rueda del ratón
-    private void OnScroll(float scroll)
-    {
-        if (scroll > 0)
-            _slotSeleccionado = (_slotSeleccionado + 1) % MAX_SLOT;
-        else if (scroll < 0)
-            _slotSeleccionado = (_slotSeleccionado - 1 + MAX_SLOT) % MAX_SLOT;
+    #region Input Handling
 
+
+    private void HandleScroll(float scroll)
+    {
+        if (Mathf.Abs(scroll) < 0.1f) return;
+
+        int direccion = scroll > 0 ? 1 : -1;
+        _slotSeleccionado = (_slotSeleccionado + direccion + _maxSlots) % _maxSlots;
         ActualizarSeleccionVisual();
     }
 
-    // Selección con teclas 1,2,3,4
-    private void OnSlotKey(int slotIndex)
+    private void HandleSlotKey(int index)
     {
-        if (slotIndex < 0 || slotIndex >= MAX_SLOT) return;
-
-        _slotSeleccionado = slotIndex;
+        if (index < 0 || index >= _maxSlots) return;
+        _slotSeleccionado = index;
         ActualizarSeleccionVisual();
     }
-
-    private void OnRightClick()
-    {
-
-    }
-
-    private void ActualizarSeleccionVisual()
-    {
-        for (int i = 0; i < slotUI.Length; i++)
-            slotUI[i].SetSeleccionado(i == _slotSeleccionado);
-    }
-
-    public string QuitarUno()
-    {
-        string objectName = "NoName";
-
-        var slot = slots[_slotSeleccionado];
-        if (slot == null) return null;
-
-        if (slot.cantidad > 0)
-        {
-            slot.cantidad--; // Quita 1
-            objectName = slot.nombre;
-            slotUI[_slotSeleccionado].ActualizarSlot(slot);
-            if (slot.cantidad <= 0)
-            {
-                ExpulsarObjeto(_slotSeleccionado);
-            }
-        }
-
-        return objectName;
-    }
-
-    private void ExpulsarObjeto(int indice)
-    {
-        var slot = slots[indice];
-
-        slots[indice] = null;
-        slotUI[indice].ActualizarSlot(null);
-    }
-
-    // Añadir objetos
+    #endregion
+    #region Lógica del Item
     public bool AñadirAlInventario(Sprite icono, string nombre)
     {
         // Buscar si ya existe el objeto en algún slot
-        for (int i = 0; i < slots.Count; i++)
+        for (int i = 0; i < _maxSlots; i++)
         {
-            if (slots[i] != null && slots[i].nombre == nombre)
+            if (_slots[i] != null && _slots[i].nombre == nombre)
             {
-                if (slots[i].cantidad < MAX_CANTIDAD_POR_SLOT)
+                if (_slots[i].cantidad < _maxCantidadPorSlot)
                 {
-                    slots[i].cantidad++;
-                    slotUI[i].ActualizarSlot(slots[i]);
+                    _slots[i].cantidad++;
+                    _slotUI[i].ActualizarSlot(_slots[i]);
                     return true;
                 }
                 else
@@ -119,18 +88,65 @@ public class Inventory : MonoBehaviour
         }
 
         // Buscar un slot vacío
-        for (int i = 0; i < slots.Count; i++)
+        for (int i = 0; i < _maxSlots; i++)
         {
-            if (slots[i] == null)
+            if (_slots[i] == null)
             {
-                slots[i] = new SlotInventario(icono, nombre, 1);
-                slotUI[i].ActualizarSlot(slots[i]);
+                _slots[i] = new SlotInventario(icono, nombre, 1);
+                ActualizarSlotEnUI(i);
                 return true;
             }
         }
 
         return false;
     }
+    
+    public string UsarItemSeleccionado()
+    {
+        SlotInventario slot = _slots[_slotSeleccionado];
+        if (slot == null) return null;
+
+        string nombreItem = slot.nombre;
+        slot.cantidad--;
+
+        if (slot.cantidad <= 0)
+        {
+            VaciarSlot(_slotSeleccionado);
+        }
+        else
+        {
+            ActualizarSlotEnUI(_slotSeleccionado);
+        }
+        return nombreItem;
+    }
+
+
+    public void VaciarSlot(int index)
+    {
+        _slots[index] = null;
+        ActualizarSlotEnUI(index);
+    }
+    #endregion
+    #region Actualización de la UI
+
+    private void ActualizarSlotEnUI(int index)
+    {
+        if (index < _slotUI.Length)
+        {
+            _slotUI[index].ActualizarSlot(_slots[index]);
+        }
+    }
+
+    private void ActualizarSeleccionVisual()
+    {
+        for (int i = 0; i < _slotUI.Length; i++)
+        {
+            _slotUI[i].SetSeleccionado(i == _slotSeleccionado);
+        }
+    }
+
+    #endregion
+
 }
 
 [System.Serializable]
@@ -139,7 +155,6 @@ public class SlotInventario
     public Sprite icono;
     public string nombre;
     public int cantidad;
-    public GameObject slotObject;
 
     public SlotInventario(Sprite icono, string nombre, int cantidad)
     {
@@ -147,4 +162,6 @@ public class SlotInventario
         this.nombre = nombre;
         this.cantidad = cantidad;
     }
+
+    public bool EsMismoItem(string nombreItem) => nombre == nombreItem;
 }

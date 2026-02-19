@@ -79,7 +79,7 @@ public class Aspirator : MonoBehaviour
         {
             //codigo para disparar el objeto 
 
-            GameObject objectToLaunch = PoolManager.Instance.GetFirstAvailableObject(_inventory.QuitarUno());
+            GameObject objectToLaunch = PoolManager.Instance.GetFirstAvailableObject(_inventory.UsarItemSeleccionado());
             _objectsDetector.RemoveTargetFromAspirableObjectList(objectToLaunch);
             if (objectToLaunch == null)
             {
