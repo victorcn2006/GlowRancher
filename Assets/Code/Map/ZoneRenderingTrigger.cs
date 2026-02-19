@@ -9,7 +9,7 @@ public class ZoneRenderingTrigger : MonoBehaviour
 
     private void OnTriggerEnter()
     {
-        ZoneRenderingController.Instance.SetActiveZones(mapZonesToActive);
+        //ZoneRenderingController.Instance.SetActiveZones(mapZonesToActive);
     }
 
 
