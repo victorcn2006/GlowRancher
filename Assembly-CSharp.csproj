@@ -81,8 +81,8 @@
     <Compile Include="Assets\Code\Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\Code\Scripts\Buildings\Farm.cs" />
     <Compile Include="Assets\Code\Scripts\Shop\PanelShopController.cs" />
-    <Compile Include="Assets\Code\Scripts\Slimes\SlimeFunctions\GemSystem.cs" />
     <Compile Include="Assets\ImportAssets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUtils.cs" />
+    <Compile Include="Assets\Code\Scripts\Slimes\SlimeFunctions\GemSystem.cs" />
     <Compile Include="Assets\Code\Scripts\LoseCondition.cs" />
     <Compile Include="Assets\Code\Scripts\Aspirator\SuctionPoint.cs" />
     <Compile Include="Assets\Code\Scripts\Data\FarmData.cs" />
@@ -163,6 +163,7 @@
     <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\AudioFile\{76c32c1a-b96c-46be-9326-f8b9af951d03}.xml" />
     <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\Bank\{aa8c7256-4bb0-41b9-8991-5f6623698d6b}.xml" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
+    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\ProfilerFolder\{3e8183e8-03bd-46da-9c6a-1f4322d7b1b2}.xml" />
     <None Include="Assets\ImportAssets\Plugins\Demigiant\DOTween\DOTween.XML" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\Event\{44ecba04-3f63-47d4-a2b6-248760d6d13a}.xml" />
@@ -190,7 +191,13 @@
     <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\Return\{2ead92ee-3e04-4cd1-899a-4fac88e6e20f}.xml" />
     <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\AudioFile\{7d4b2a5c-aeba-43e0-8a49-357f973858c2}.xml" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\Event\{10be91ee-ab3b-4347-9473-33ad6f21386e}.xml" />
     <None Include="Assets\ImportAssets\Plugins\Demigiant\DOTween\readme.txt" />
+    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\EffectPresetFolder\{47482492-e9a6-401d-bec9-22acc12b3a22}.xml" />
+    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\Master.xml" />
+    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\ParameterPresetFolder\{810bffe3-8d95-4902-8f01-69899ab0afcb}.xml" />
+    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\Group\{412af656-bfd1-4d6b-86a4-7ac74119a709}.xml" />
+    <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\AudioFile\{1e88f2e6-0851-4a37-884c-455022a3f6e2}.xml" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\FMOD\FMOD_Glow_Rancher\Metadata\Event\{623fc783-1052-4c7e-a7e4-d17bc0c26e9f}.xml" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
@@ -539,12 +546,12 @@
       <HintPath>Library\PackageCache\com.unity.testtools.codecoverage@1.2.6\lib\ReportGenerator\ReportGeneratorMerged.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
-      <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.4\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="DOTween">
       <HintPath>Assets\ImportAssets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
+      <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.4\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
