@@ -87,6 +87,7 @@
     <Compile Include="Assets\Code\Scripts\Aspirator\SuctionPoint.cs" />
     <Compile Include="Assets\Code\Scripts\Data\FarmData.cs" />
     <Compile Include="Assets\Code\Scripts\WikiSLime\WikiSlime.cs" />
+    <Compile Include="Assets\Code\Scripts\Buildings\DoorSilo.cs" />
     <Compile Include="Assets\Code\Scripts\Menu\Settings\VolumeManager.cs" />
     <Compile Include="Assets\Code\Scripts\UICarrousel.cs" />
     <Compile Include="Assets\Code\Scripts\Interfaces\ISavable.cs" />
@@ -142,8 +143,8 @@
     <Compile Include="Assets\Code\Scripts\Menu\EditorSceneScripts\SceneChanger.cs" />
     <Compile Include="Assets\Code\Map\ZoneRenderingTrigger.cs" />
     <Compile Include="Assets\Code\Scripts\Characters\Character.cs" />
-    <Compile Include="Assets\Code\Scripts\GameHUD\HUD Energy.cs" />
     <Compile Include="Assets\Code\Scripts\Systems\UIAudioManager.cs" />
+    <Compile Include="Assets\Code\Scripts\GameHUD\HUD Energy.cs" />
     <Compile Include="Assets\Code\Scripts\Menu\Settings\FullScreen.cs" />
     <Compile Include="Assets\Code\Scripts\Buildings\Silo.cs" />
     <Compile Include="Assets\Code\Scripts\Menu\EditorSceneScripts\SceneChangerButton.cs" />
@@ -1092,16 +1093,16 @@
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.VisualScripting.Core.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
@@ -1124,12 +1125,12 @@
       <HintPath>Library\ScriptAssemblies\Unity.InputSystem.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.InputSystem.ForUI">
-      <HintPath>Library\ScriptAssemblies\Unity.InputSystem.ForUI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
       <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.InputSystem.ForUI">
+      <HintPath>Library\ScriptAssemblies\Unity.InputSystem.ForUI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
