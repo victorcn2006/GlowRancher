@@ -2,8 +2,6 @@ using TMPro;
 using UnityEngine;
 
 using System.Collections;
-using TMPro;
-using UnityEngine;
 using UnityEngine.UI;
 
 public class UICarrousel : MonoBehaviour
@@ -19,8 +17,8 @@ public class UICarrousel : MonoBehaviour
     [Header("UI")]
     [SerializeField] private CarouselItem[] _items;
     [SerializeField] private TextMeshProUGUI _titleText;
-    [SerializeField] private Button _prevButton;
-    [SerializeField] private Button _nextButton;
+     public Button _prevButton;
+     public Button _nextButton;
 
     [Header("Transition Settings")]
     [SerializeField] private float _transitionDuration = 0.5f;
@@ -37,6 +35,14 @@ public class UICarrousel : MonoBehaviour
         Scale
     }
 
+    public string GetValue()
+    {
+        if (_items.Length > 0 && _currentIndex >= 0 && _currentIndex < _items.Length)
+        {
+            return _items[_currentIndex].title;
+        }
+        return null;
+    }
     private void Start()
     {
         _prevButton.onClick.AddListener(Previous);
