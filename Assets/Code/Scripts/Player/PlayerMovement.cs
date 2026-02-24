@@ -12,29 +12,34 @@ public class PlayerMovement : MonoBehaviour
     [Header("Audio")]
     [SerializeField] private EventReference _jumpSound;
 
-    [Header("Input References")]
-    [SerializeField] private InputActionReference _moveAction;
-
     // Cache de componentes
     private Rigidbody _rb;
     private Transform _mainCamTransform;
 
     // Estado
     private bool _canJump = true;
-    private Vector2 _movementInput;
 
     private void Awake()
     {
-        // RequireComponent garantiza que esto no sea nulo
         _rb = GetComponent<Rigidbody>();
 
-        // Cacheamos la cámara principal (es más rápido que buscarla en cada frame)
         if (Camera.main != null)
             _mainCamTransform = Camera.main.transform;
     }
 
-    private void OnEnable() => _moveAction.action.Enable();
-    private void OnDisable() => _moveAction.action.Disable();
+    private void OnEnable()
+    {
+        // Nos suscribimos al evento de salto del InputManager
+        // Usamos una función lambda para llamar a nuestro método de salto
+        InputManager.Instance.OnJumpPerformed.AddListener(HandleJump);
+    }
+
+    private void OnDisable()
+    {
+        // Importante desuscribirse para evitar errores de memoria
+        if (InputManager.Instance != null)
+            InputManager.Instance.OnJumpPerformed.RemoveListener(HandleJump);
+    }
 
     private void FixedUpdate()
     {
@@ -43,11 +48,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void ApplyMovement()
     {
-        _movementInput = _moveAction.action.ReadValue<Vector2>();
+        // Obtenemos el input directamente del InputManager
+        Vector2 input = InputManager.Instance.MoveInput;
 
-        if (_movementInput.sqrMagnitude < 0.01f)
+        if (input.sqrMagnitude < 0.01f)
         {
-            // Si no hay input, mantenemos la velocidad vertical pero frenamos la horizontal
             _rb.velocity = new Vector3(0, _rb.velocity.y, 0);
             return;
         }
@@ -56,23 +61,25 @@ public class PlayerMovement : MonoBehaviour
         Vector3 camForward = Vector3.Scale(_mainCamTransform.forward, new Vector3(1, 0, 1)).normalized;
         Vector3 camRight = Vector3.Scale(_mainCamTransform.right, new Vector3(1, 0, 1)).normalized;
 
-        Vector3 moveDirection = (camRight * _movementInput.x + camForward * _movementInput.y).normalized;
+        Vector3 moveDirection = (camRight * input.x + camForward * input.y).normalized;
 
-        // Aplicamos velocidad manteniendo la inercia vertical (gravedad/salto)
+        // Aplicamos velocidad
         Vector3 targetVelocity = moveDirection * _walkSpeed;
         targetVelocity.y = _rb.velocity.y;
 
         _rb.velocity = targetVelocity;
     }
 
-    public void Jump(InputAction.CallbackContext ctx)
+    private void HandleJump()
     {
-        if (ctx.performed && _canJump)
+        if (_canJump)
         {
             // FMOD Sound
             RuntimeManager.PlayOneShot(_jumpSound, transform.position);
 
-            // Aplicamos fuerza hacia arriba ignorando la masa para una respuesta inmediata
+            // Aplicamos fuerza de salto
+            // Reseteamos la velocidad Y antes para que el salto siempre tenga la misma fuerza
+            _rb.velocity = new Vector3(_rb.velocity.x, 0, _rb.velocity.z);
             _rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
         }
     }

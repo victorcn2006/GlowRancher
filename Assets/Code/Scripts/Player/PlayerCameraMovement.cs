@@ -1,64 +1,57 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Animations;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(PlayerInput))]
 public class PlayerCameraMovement : MonoBehaviour
 {
+    [Header("Settings")]
+    [Tooltip("Sensibilidad ajustada para un movimiento fluido.")]
+    [SerializeField] private float _rotationSensitivity = 1.5f;
+    [SerializeField] private float _verticalLimit = 70f;
 
-    [Header("View")]
-    [HideInInspector] public float rotationSense = 10f;
-    private float _cameraVerticalAngle;
-    
-    [SerializeField] private Camera _playerCamera;
+    [Header("References")]
+    [SerializeField] private Transform _cameraTransform;
 
-    private InputAction _lookAction;
-    private Vector2 _rotationInput = Vector2.zero;
     private PlayerInput _playerInput;
+    private InputAction _lookAction;
+    private float _cameraVerticalAngle;
 
     private void Awake()
     {
-        if(_playerInput == null) _playerInput = GetComponent<PlayerInput>();
-        Cursor.lockState = CursorLockMode.Locked;
+        _playerInput = GetComponent<PlayerInput>();
         _lookAction = _playerInput.actions["Look"];
 
+        // Es mejor ocultar el cursor en Start o mediante un GameManager, 
+        // pero lo mantenemos aquí por funcionalidad.
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
-    private void OnEnable() {
-        _lookAction?.Enable();
-    }
-
-    private void OnDisable() {
-        _lookAction?.Disable();
-    }
-
-
-    void Update()
+    // Usamos LateUpdate para cámaras para asegurar que el movimiento 
+    // del jugador ya ocurrió en Update
+    private void LateUpdate()
     {
-        ReadLookInput();
-        Look();
-    }
-    private void ReadLookInput() {
-        if (_lookAction != null)
-        {
-            _rotationInput = _lookAction.ReadValue<Vector2>() * rotationSense * Time.deltaTime;
-        }
-    }
-    private void Look() {
-        _cameraVerticalAngle += _rotationInput.y;
-        _cameraVerticalAngle = Mathf.Clamp(_cameraVerticalAngle, -70f, 70f);
-
-        // Rota al jugador horizontalmente
-        transform.Rotate(Vector3.up * _rotationInput.x);
-
-        // Rota la cámara verticalmente
-        _playerCamera.transform.localRotation = Quaternion.Euler(-_cameraVerticalAngle, 0f, 0f);
+        HandleRotation();
     }
 
-    public Vector3 GetCameraRotation()
+    private void HandleRotation()
     {
-        return _playerCamera.transform.rotation.eulerAngles;
+        Vector2 input = _lookAction.ReadValue<Vector2>();
+
+        if (input == Vector2.zero) return;
+
+        // Multiplicamos por un factor base para que el valor de sensibilidad sea intuitivo
+        float mouseX = input.x * _rotationSensitivity;
+        float mouseY = input.y * _rotationSensitivity;
+
+        // 1. Rotación Vertical (Cámara)
+        _cameraVerticalAngle -= mouseY; // Invertido para que sea natural
+        _cameraVerticalAngle = Mathf.Clamp(_cameraVerticalAngle, -_verticalLimit, _verticalLimit);
+        _cameraTransform.localRotation = Quaternion.Euler(_cameraVerticalAngle, 0f, 0f);
+
+        // 2. Rotación Horizontal (Cuerpo del Jugador)
+        transform.Rotate(Vector3.up * mouseX);
     }
 
+    public Vector3 GetCameraRotation() => _cameraTransform.eulerAngles;
 }
