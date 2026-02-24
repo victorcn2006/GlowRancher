@@ -290,6 +290,13 @@ MonoBehaviour:
   _groundLayer:
     serializedVersion: 2
     m_Bits: 0
+  _landSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!114 &2930511059146918418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -302,14 +309,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24c230e846a673044bf89d33c9bd595d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpSound:
+  _walkSpeed: 5
+  _jumpForce: 5
+  _jumpSound:
     Guid:
       Data1: 0
       Data2: 0
       Data3: 0
       Data4: 0
     Path: 
-  _move: {fileID: 0}
+  _moveAction: {fileID: 4188637062435728261, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
 --- !u!114 &1213622026763875800
 MonoBehaviour:
   m_ObjectHideFlags: 0
