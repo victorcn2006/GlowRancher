@@ -1,54 +1,87 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class InteractiveShop : MonoBehaviour
 {
-    [Header("Refs")]
-    public GameObject ShopPanel;
+    [Header("Referencias de Interfaz")]
+    [SerializeField] private GameObject _shopUIContainer;    // El Canvas o Panel de la tienda
+    [SerializeField] private PanelShopController _panelShop; // El script que maneja los botones
 
+    [Header("Referencias de Control")]
+    [SerializeField] private PlayerCameraMovement _cameraControl; // El script de la cámara
 
-    private bool _isShopActive = false; // Variable per saber si la botiga està activa
+    private bool _isShopActive = false;
 
-    private void Update()
+    private void OnEnable()
     {
-        // Potser voldràs posar una altra condició per activar/desactivar la botiga (tecla específica).
+        if (InputManager.Instance != null)
+            InputManager.Instance.OnShopPerformed.AddListener(ToggleShop);
+    }
+
+    private void OnDisable()
+    {
+        if (InputManager.Instance != null)
+            InputManager.Instance.OnShopPerformed.RemoveListener(ToggleShop);
+    }
+
+    private void Start()
+    {
+        // Estado inicial: Tienda cerrada
+        _isShopActive = false;
+        CloseShop();
     }
 
     public void ToggleShop()
     {
-        if (_isShopActive)
+        // Si el juego está en pausa (menú principal de pausa), no abrir tienda
+        if (InputManager.Instance != null && InputManager.Instance.IsPaused) return;
+
+        _isShopActive = !_isShopActive;
+
+        if (_isShopActive) OpenShop();
+        else CloseShop();
+    }
+
+    public void OpenShop()
+    {
+        _isShopActive = true;
+
+        if (_shopUIContainer != null) _shopUIContainer.SetActive(true);
+        if (_panelShop != null) _panelShop.ActiveShop();
+
+        UpdateGameState(true);
+    }
+
+    public void CloseShop()
+    {
+        _isShopActive = false;
+
+        if (_shopUIContainer != null) _shopUIContainer.SetActive(false);
+        if (_panelShop != null) _panelShop.DesactiveShop();
+
+        UpdateGameState(false);
+    }
+
+    private void UpdateGameState(bool shopOpen)
+    {
+        // Pausar/Reanudar tiempo
+        Time.timeScale = shopOpen ? 0f : 1f;
+
+        // Controlar Cámara y Cursor
+        if (_cameraControl != null)
         {
-            DesActivateObject();
-            Cursor.visible = false;
+            _cameraControl.SetControlState(!shopOpen);
+        }
+
+        // Configuración del Cursor
+        if (shopOpen)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
         else
         {
-            ActivateObject();
-            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
-    }
-
-    public void ActivateObject()
-    {
-        Debug.Log("Shop activation");
-        ShopPanel.SetActive(true);
-
-        Cursor.lockState = CursorLockMode.None; // Mostra el cursor
-        Time.timeScale = 0;
-
-        _isShopActive = true; // Marquem que la botiga està activa
-    }
-
-    public void DesActivateObject()
-    {
-        Debug.Log("Shop desactivation");
-        ShopPanel.SetActive(false);
-
-        Cursor.lockState = CursorLockMode.Locked; // Oculta el cursor
-        Time.timeScale = 1;
-
-        _isShopActive = false; // Marquem que la botiga està desactivada
     }
 }

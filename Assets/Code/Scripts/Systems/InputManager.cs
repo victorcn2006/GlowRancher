@@ -38,12 +38,14 @@ public class InputManager : MonoBehaviour {
     [HideInInspector] public bool IsMove;
     [HideInInspector] public bool IsPaused;
     [HideInInspector] public bool IsWikiOpen { get; private set; }
+    [HideInInspector] public bool IsShopOpen { get; private set; }
 
 
     [HideInInspector] public UnityEvent OnJumpPerformed = new UnityEvent();
     [HideInInspector] public UnityEvent OnMovementPerformed = new UnityEvent();
     [HideInInspector] public UnityEvent OnPausePerformed = new UnityEvent();
     [HideInInspector] public UnityEvent OnWikiPerformed = new UnityEvent();
+    [HideInInspector] public UnityEvent OnShopPerformed = new UnityEvent();
 
     [HideInInspector] public UnityEvent<float> OnInventoryScroll = new UnityEvent<float>();
     [HideInInspector] public UnityEvent<int> OnInventorySlotKey = new UnityEvent<int>();
@@ -106,6 +108,7 @@ public class InputManager : MonoBehaviour {
         _pauseGame.action.performed += OnPauseGame;
         _wikiOpen.action.performed += OnWikiOpen;
         _move.action.performed += OnMovement;
+        _interact.action.performed += OnShopOpen;
 
         _scroll.action.performed += OnInventoryScrollPerformed;
         _inventoryNavigation.action.performed += OnInventorySlotKeyPerformed;
@@ -143,6 +146,11 @@ public class InputManager : MonoBehaviour {
     private void OnWikiOpen(InputAction.CallbackContext ctx) {
         IsWikiOpen = true;
         OnWikiPerformed?.Invoke();
+    }
+    private void OnShopOpen(InputAction.CallbackContext ctx)
+    {
+        IsShopOpen = true;
+        OnShopPerformed?.Invoke();
     }
 
     private void OnInventoryScrollPerformed(InputAction.CallbackContext ctx)
