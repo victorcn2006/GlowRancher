@@ -1,100 +1,89 @@
-using System.Collections;
-using System.Collections.Generic;
-using FMODUnity;
 using UnityEngine;
+using FMODUnity;
 
+[RequireComponent(typeof(PlayerMovement))]
 public class PlayerStateMachine : MonoBehaviour
 {
-    // --------------------------------------------LINKED SCRIPTS--------------------------------------------\\
-    private PlayerMovement _playerMovement;
+    private enum State { OnFloor, OnAir }
 
-    [Header("Configuración de Sonido")]
-    public EventReference jumpSound;
-    // --------------------------------------------RAYCAST SETTINGS--------------------------------------------\\
-    [Header("VALORES GROUNDED")]
-    private const float GROUND_CHECK_DISTANCE = 1.1f;
+    [Header("Detection Settings")]
     [SerializeField] private LayerMask _groundLayer;
+    private const float GROUND_CHECK_DISTANCE = 1.1f;
 
-    // --------------------------------------------STATES--------------------------------------------\\
-    private enum States { ON_FLOOR, ON_AIR };
-    private States _currentState;
+    [Header("Audio")]
+    [SerializeField] private EventReference _landSound;
+
+    // Referencias y Estado
+    private PlayerMovement _playerMovement;
+    private State _currentState;
+
+    private void Awake()
+    {
+        _playerMovement = GetComponent<PlayerMovement>();
+    }
 
     private void Start()
     {
-        _playerMovement = GetComponent<PlayerMovement>();
-        _currentState = States.ON_FLOOR;
+        // Inicialización basada en el estado real inicial
+        bool isGrounded = CheckIsGrounded();
+        _currentState = isGrounded ? State.OnFloor : State.OnAir;
+        _playerMovement.SetCanJump(isGrounded);
     }
 
-    void Update()
+    private void Update()
     {
-        // DEBUGS ESTADO Y SI PUEDE SALTAR
-        //Debug.Log(playerMovement.canJump);
-        //Debug.Log(currentState);
+        HandleStateLogic();
+    }
+
+    private void HandleStateLogic()
+    {
+        bool isGrounded = CheckIsGrounded();
 
         switch (_currentState)
         {
-            case States.ON_FLOOR:
-                OnFloor();
+            case State.OnFloor:
+                if (!isGrounded) TransitionTo(State.OnAir);
                 break;
-            case States.ON_AIR:
-                OnAir();
+
+            case State.OnAir:
+                if (isGrounded) TransitionTo(State.OnFloor);
                 break;
         }
     }
 
-    // STATES FUNCTIONS \\
-    private void OnFloor()
+    private void TransitionTo(State newState)
     {
-        ToOnAir();
-    }
+        _currentState = newState;
 
-    private void OnAir()
-    {
-        ToOnFloor();
-    }
-
-    // STATES TRANSITIONS FUNCTIONS \\
-    private void ToOnFloor()
-    {
-        if (Grounded())
+        switch (_currentState)
         {
-            _currentState = States.ON_FLOOR;
-            _playerMovement.SetCanJump(true);
+            case State.OnFloor:
+                _playerMovement.SetCanJump(true);
+                PlayLandingSound();
+                break;
 
-            // EJECUTA EL SONIDO SOLO AL DETECTAR EL SUELO
-            if (!jumpSound.IsNull)
-            {
-                RuntimeManager.PlayOneShot(jumpSound, transform.position);
-            }
-        }
-        else
-        {
-            _playerMovement.SetCanJump(false);
+            case State.OnAir:
+                _playerMovement.SetCanJump(false);
+                break;
         }
     }
 
-    private void ToOnAir()
+    private bool CheckIsGrounded()
     {
-        if (!Grounded())
-        {
-            _currentState = States.ON_AIR;
-            _playerMovement.SetCanJump(false);
-        }
-        else _playerMovement.SetCanJump(true);
-    }
-
-    // OTHER FUNCTIONS \\
-    private bool Grounded()
-    {
-        // El Raycast solo debe informar si hay suelo o no
         return Physics.Raycast(transform.position, Vector3.down, GROUND_CHECK_DISTANCE, _groundLayer);
     }
 
-    // RAYCAST LINE (DEBUG) \\
+    private void PlayLandingSound()
+    {
+        if (!_landSound.IsNull)
+        {
+            RuntimeManager.PlayOneShot(_landSound, transform.position);
+        }
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position, transform.position + Vector3.down * GROUND_CHECK_DISTANCE);
-
     }
 }
