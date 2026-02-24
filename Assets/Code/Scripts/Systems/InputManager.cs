@@ -19,7 +19,6 @@ public class InputManager : MonoBehaviour {
     [RequiredField, SerializeField] private InputActionReference _wikiOpen;
 
     [Header("Player Inputs")]
-
     [RequiredField, SerializeField] private InputActionReference _move;
     [RequiredField, SerializeField] private InputActionReference _jump;
     [RequiredField, SerializeField] private InputActionReference _look;
@@ -36,10 +35,13 @@ public class InputManager : MonoBehaviour {
 
 
     [HideInInspector] public bool IsJumpPressed { get; private set; }
+    [HideInInspector] public bool IsMove;
     [HideInInspector] public bool IsPaused;
     [HideInInspector] public bool IsWikiOpen { get; private set; }
 
+
     [HideInInspector] public UnityEvent OnJumpPerformed = new UnityEvent();
+    [HideInInspector] public UnityEvent OnMovementPerformed = new UnityEvent();
     [HideInInspector] public UnityEvent OnPausePerformed = new UnityEvent();
     [HideInInspector] public UnityEvent OnWikiPerformed = new UnityEvent();
 
@@ -102,6 +104,7 @@ public class InputManager : MonoBehaviour {
         _jump.action.performed += OnJump;
         _pauseGame.action.performed += OnPauseGame;
         _wikiOpen.action.performed += OnWikiOpen;
+        _move.action.performed += OnMovement;
 
         _scroll.action.performed += OnInventoryScrollPerformed;
         _inventoryNavigation.action.performed += OnInventorySlotKeyPerformed;
@@ -121,6 +124,12 @@ public class InputManager : MonoBehaviour {
     private void OnJump(InputAction.CallbackContext ctx) {
         IsJumpPressed = true;
         OnJumpPerformed?.Invoke();
+    }
+
+    private void OnMovement(InputAction.CallbackContext ctx)
+    {
+        IsMove = true;
+        OnMovementPerformed?.Invoke();
     }
 
     private void OnPauseGame(InputAction.CallbackContext ctx)
@@ -166,6 +175,9 @@ public class InputManager : MonoBehaviour {
     {
         IsWikiOpen = state;
     }
+    // Añade esto para poder leer la dirección desde PlayerMovement
+    public Vector2 MoveInput => _move.action.ReadValue<Vector2>();
+
 }
 
     
