@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ZoneRenderingTrigger : MonoBehaviour
@@ -7,10 +8,9 @@ public class ZoneRenderingTrigger : MonoBehaviour
 
     [SerializeField] private List<GameObject> mapZonesToActive = new List<GameObject>();
 
-    private void OnTriggerEnter()
+    private void OnTriggerEnter(Collider other)
     {
-        //ZoneRenderingController.Instance.SetActiveZones(mapZonesToActive);
+        if(other.CompareTag("Player")) ZoneRenderingController.Instance.SetActiveZones(mapZonesToActive);
     }
-
 
 }
