@@ -10,6 +10,7 @@ public class Select : MonoBehaviour
 
     private LayerMask _mask;
     public float distance = 1.5f;
+    bool ok = false;
 
     [SerializeField] private InputAction _interact;
 
@@ -34,6 +35,7 @@ public class Select : MonoBehaviour
 
             if (hit.collider.tag == "InteractuableShop")
             {
+                
                 Debug.Log("Shop.Entra");
                 hit.collider.transform.GetComponent<InteractiveShop>().ToggleShop(); // Canviem aquí
             }

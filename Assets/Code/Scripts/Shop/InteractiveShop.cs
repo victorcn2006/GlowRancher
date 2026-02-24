@@ -4,15 +4,17 @@ public class InteractiveShop : MonoBehaviour
 {
     [Header("Referencias de Interfaz")]
     [SerializeField] private GameObject _shopUIContainer;    // El Canvas o Panel de la tienda
-    [SerializeField] private PanelShopController _panelShop; // El script que maneja los botones
+    [SerializeField] private PanelShopController _panelShop; // El script que maneja los botones de compra
 
     [Header("Referencias de Control")]
-    [SerializeField] private PlayerCameraMovement _cameraControl; // El script de la cámara
+    [SerializeField] private PlayerCameraMovement _cameraControl; // El script de la cámara del jugador
 
     private bool _isShopActive = false;
+    private bool _shopInteractive = false;
 
     private void OnEnable()
     {
+        // Permitimos que también se cierre/abra con la tecla asignada en el InputManager
         if (InputManager.Instance != null)
             InputManager.Instance.OnShopPerformed.AddListener(ToggleShop);
     }
@@ -25,63 +27,56 @@ public class InteractiveShop : MonoBehaviour
 
     private void Start()
     {
-        // Estado inicial: Tienda cerrada
+        // Aseguramos que la tienda empiece cerrada
         _isShopActive = false;
         CloseShop();
     }
 
     public void ToggleShop()
     {
-        // Si el juego está en pausa (menú principal de pausa), no abrir tienda
-        if (InputManager.Instance != null && InputManager.Instance.IsPaused) return;
+        // Si el juego está en pausa general, no hacemos nada
+        if (InputManager.Instance.IsPaused) return;
 
         _isShopActive = !_isShopActive;
-
         if (_isShopActive) OpenShop();
         else CloseShop();
     }
 
     public void OpenShop()
     {
+        if ()
         _isShopActive = true;
-
-        if (_shopUIContainer != null) _shopUIContainer.SetActive(true);
-        if (_panelShop != null) _panelShop.ActiveShop();
-
+        _panelShop.ActiveShop();
         UpdateGameState(true);
     }
 
     public void CloseShop()
     {
         _isShopActive = false;
+        _shopUIContainer.SetActive(false);
 
-        if (_shopUIContainer != null) _shopUIContainer.SetActive(false);
-        if (_panelShop != null) _panelShop.DesactiveShop();
+        // Limpiamos la selección de ítems interna
+        if (_panelShop != null)
+        {
+            _panelShop.DesactiveShop();
+        }
 
         UpdateGameState(false);
     }
 
     private void UpdateGameState(bool shopOpen)
     {
-        // Pausar/Reanudar tiempo
+        // Pausar o reanudar el tiempo
         Time.timeScale = shopOpen ? 0f : 1f;
 
-        // Controlar Cámara y Cursor
+        // Bloquear/Desbloquear cámara y ratón
         if (_cameraControl != null)
         {
             _cameraControl.SetControlState(!shopOpen);
         }
-
-        // Configuración del Cursor
-        if (shopOpen)
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
         else
         {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            Debug.LogError("Falta referencia a PlayerCameraMovement en InteractiveShop.");
         }
     }
 }
