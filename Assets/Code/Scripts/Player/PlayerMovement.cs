@@ -1,83 +1,75 @@
-
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Windows;
 using FMODUnity;
 
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Settings")]
+    [SerializeField] private float _walkSpeed = 5f;
+    [SerializeField] private float _jumpForce = 5f;
 
+    [Header("Audio")]
+    [SerializeField] private EventReference _jumpSound;
 
-    // --------------------------------------------LINKED SCRIPTS--------------------------------------------\\
-    private PlayerStateMachine _playerStateMachine;
-    private PlayerCameraMovement _playerCameraMovement;
-
-    [Header("Configuración de Sonido")]
-    public EventReference jumpSound;
-    // --------------------------------------------OTHERS--------------------------------------------\\
-    private Rigidbody _rb;
-
+    private Rigidbody _rb;
+    private Transform _mainCamTransform;
     private bool _canJump;
 
-    [Header("References")]
-    [SerializeField] private InputActionReference _move;
-
-    private const float WALK_SEED = 5f;
-    private const float JUMP_FORCE = 5f;
-
-    private PlayerInput _playerInput;
-    private Vector2 _movementInput;
-
-
-
-    void Start()
+    private void Awake()
     {
-        _playerStateMachine = GetComponent<PlayerStateMachine>();
-        _playerCameraMovement = GetComponent<PlayerCameraMovement>();
-
-        _move.action.Enable();
         _rb = GetComponent<Rigidbody>();
-        _playerInput = GetComponent<PlayerInput>();
+
+        if (Camera.main != null)
+            _mainCamTransform = Camera.main.transform;
+    }
+
+    private void Update()
+    {
+        // Ya no necesitamos leer el input aquí manualmente, 
+        // lo pediremos directamente en el FixedUpdate desde el Manager.
     }
 
     private void FixedUpdate()
     {
-        Move();
+        ApplyMovement();
     }
 
-    public void Move()
+    private void ApplyMovement()
     {
-        _movementInput = _move.action.ReadValue<Vector2>();
+        if (_mainCamTransform == null) return;
 
-        Transform camTransform = _playerCameraMovement.transform;
+        // ACCESO AL MANAGER: Obtenemos el Vector2 directamente de la instancia global
+        Vector2 input = InputManager.Instance.MoveInput;
 
-        Vector3 camForward = camTransform.forward;
-        camForward.y = 0f;
-        camForward.Normalize();
+        // Calculamos direcciones relativas a la cámara
+        Vector3 forward = Vector3.ProjectOnPlane(_mainCamTransform.forward, Vector3.up).normalized;
+        Vector3 right = Vector3.ProjectOnPlane(_mainCamTransform.right, Vector3.up).normalized;
 
-        Vector3 camRight = camTransform.right;
-        camRight.y = 0f;
-        camRight.Normalize();
+        Vector3 moveDirection = (forward * input.y + right * input.x);
 
-        Vector3 moveDirection = (camRight * _movementInput.x + camForward * _movementInput.y).normalized;
+        // Aplicamos velocidad
+        Vector3 targetVelocity = moveDirection * _walkSpeed;
+        targetVelocity.y = _rb.velocity.y;
 
-        Vector3 newVelocity = moveDirection * WALK_SEED;
-        newVelocity.y = _rb.velocity.y;
-        _rb.velocity = newVelocity;
-
+        _rb.velocity = targetVelocity;
     }
-    public void Jump(InputAction.CallbackContext ctx)
+
+    // Este método se activa por el evento del PlayerInput que ya tienes configurado
+    public void Jump(InputAction.CallbackContext context)
     {
-        if (ctx.performed)
+        if (context.performed && _canJump)
         {
-            RuntimeManager.PlayOneShot(jumpSound, transform.position);
-            _rb.AddForce(new Vector3(0, 1, 0) * JUMP_FORCE, ForceMode.Impulse);
+            _rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+            PlayJumpSound();
         }
     }
 
-    public void SetCanJump(bool a)
+    public void SetCanJump(bool value) => _canJump = value;
+
+    private void PlayJumpSound()
     {
-        _canJump = a;
+        if (!_jumpSound.IsNull)
+            RuntimeManager.PlayOneShot(_jumpSound, transform.position);
     }
 }
-
