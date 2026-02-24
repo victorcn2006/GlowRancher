@@ -3,6 +3,7 @@ using UnityEngine;
 
 using System.Collections;
 using UnityEngine.UI;
+using System;
 
 public class UICarrousel : MonoBehaviour
 {
@@ -15,9 +16,10 @@ public class UICarrousel : MonoBehaviour
     }
 
     [Header("UI")]
-    [SerializeField] private CarouselItem[] _items;
+    [SerializeField] public CarouselItem[] _items;
     [SerializeField] private TextMeshProUGUI _titleText;
-     public Button _prevButton;
+    public event Action<string> OnValueChanged; //aquest event s'utilitzara per a fer el canvi de idioma
+    public Button _prevButton;
      public Button _nextButton;
 
     [Header("Transition Settings")]
@@ -35,14 +37,7 @@ public class UICarrousel : MonoBehaviour
         Scale
     }
 
-    public string GetValue()
-    {
-        if (_items.Length > 0 && _currentIndex >= 0 && _currentIndex < _items.Length)
-        {
-            return _items[_currentIndex].title;
-        }
-        return null;
-    }
+    
     private void Start()
     {
         _prevButton.onClick.AddListener(Previous);
@@ -53,6 +48,14 @@ public class UICarrousel : MonoBehaviour
         UpdateDisplay();
     }
 
+    public string GetValue()
+    {
+        if (_items.Length > 0 && _currentIndex >= 0 && _currentIndex < _items.Length)
+        {
+            return _items[_currentIndex].title;
+        }
+        return null;
+    }
     private void InitializePanels()
     {
         // Add CanvasGroup to all panels if using fade/scale animations
@@ -96,6 +99,9 @@ public class UICarrousel : MonoBehaviour
     private IEnumerator TransitionTo(int index, bool forward)
     {
         _isTransitioning = true;
+        _currentIndex = index;
+        OnValueChanged?.Invoke(_items[index].title);
+
 
         GameObject currentPanel = _items[_currentIndex].panel;
         GameObject nextPanel = _items[index].panel;
@@ -118,7 +124,6 @@ public class UICarrousel : MonoBehaviour
         // Fade in text
         yield return StartCoroutine(FadeText(1f, _transitionDuration / 2));
 
-        _currentIndex = index;
         _isTransitioning = false;
     }
 

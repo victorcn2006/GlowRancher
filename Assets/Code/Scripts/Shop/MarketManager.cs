@@ -48,7 +48,7 @@ public class MarketManager : MonoBehaviour
         // Si hi ha menys de 5, el preu puja.
         if (activeCount > 10)
             priceMultipliers[type] = 0.7f; // Abundància: preu baix
-        else if (activeCount < 3)
+        else if (activeCount < 1)
             priceMultipliers[type] = 1.5f; // Escassetat: preu alt
         else
             priceMultipliers[type] = 1.0f; // Normal

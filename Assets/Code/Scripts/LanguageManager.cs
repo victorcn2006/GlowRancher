@@ -2,6 +2,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 using System.Collections;
+using static UnityEditor.Progress;
 
 public class LanguageManager : MonoBehaviour
 {
@@ -22,16 +23,16 @@ public class LanguageManager : MonoBehaviour
             return;
         }
 
-        // Subscribe to carousel button events
-        languageCarrousel._prevButton.onClick.AddListener(OnCarouselChanged);
-        languageCarrousel._nextButton.onClick.AddListener(OnCarouselChanged);
+        languageCarrousel.OnValueChanged += OnLanguageSelected;
 
-        // Load saved language
         string savedLanguage = PlayerPrefs.GetString(LANGUAGE_PREF_KEY, DEFAULT_LANGUAGE);
-        SetCarouselToLanguage(savedLanguage);
         StartCoroutine(UpdateLocalization(savedLanguage));
     }
 
+    private void OnLanguageSelected(string newLanguage)
+    {
+        OnLanguageChanged(newLanguage);
+    }
     private void OnLanguageChanged(string newLanguage)
     {
         PlayerPrefs.SetString(LANGUAGE_PREF_KEY, newLanguage);
@@ -41,7 +42,14 @@ public class LanguageManager : MonoBehaviour
 
     private void SetCarouselToLanguage(string languageName)
     {
-        
+        for (int i = 0; i < languageCarrousel._items.Length; i++)
+        {
+            if (languageCarrousel._items[i].title == languageName)
+            {
+                languageCarrousel.GoToIndex(i);
+                break;
+            }
+        }
     }
 
     private IEnumerator UpdateLocalization(string languageName)
@@ -81,8 +89,7 @@ public class LanguageManager : MonoBehaviour
         // Unsubscribe to prevent memory leaks
         if (languageCarrousel != null)
         {
-            languageCarrousel._prevButton.onClick.RemoveListener(OnCarouselChanged);
-            languageCarrousel._nextButton.onClick.RemoveListener(OnCarouselChanged);
+            languageCarrousel.OnValueChanged -= OnLanguageSelected;
         }
     }
 
