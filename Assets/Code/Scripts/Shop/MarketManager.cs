@@ -42,13 +42,16 @@ public class MarketManager : MonoBehaviour
     private void UpdateTypeMultiplier(GemsPool.gemTypes type, List<GameObject> list)
     {
         int activeCount = 0;
+
+        int numberOfGemesForHighValue = 1;
+        int NumberOfGemesForDevalue = 10;
         foreach (var g in list) if (g.activeInHierarchy) activeCount++;
 
         // Lògica simple: si hi ha més de 10, el preu baixa un 5% per cada gemma extra
         // Si hi ha menys de 5, el preu puja.
-        if (activeCount > 10)
+        if (activeCount > NumberOfGemesForDevalue)
             priceMultipliers[type] = 0.7f; // Abundància: preu baix
-        else if (activeCount < 3)
+        else if (activeCount < numberOfGemesForHighValue)
             priceMultipliers[type] = 1.5f; // Escassetat: preu alt
         else
             priceMultipliers[type] = 1.0f; // Normal
