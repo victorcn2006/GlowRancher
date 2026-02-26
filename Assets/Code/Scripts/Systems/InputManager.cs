@@ -49,10 +49,10 @@ public class InputManager : MonoBehaviour {
     [HideInInspector] public UnityEvent OnLookPerformed = new UnityEvent();
 
 
+
     [HideInInspector] public UnityEvent<float> OnInventoryScroll = new UnityEvent<float>();
     [HideInInspector] public UnityEvent<int> OnInventorySlotKey = new UnityEvent<int>();
     [HideInInspector] public UnityEvent OnInventoryRightClick = new UnityEvent();
-    [HideInInspector] public UnityEvent OnInteract = new UnityEvent();
 
     private void Awake()
     {
@@ -110,19 +110,20 @@ public class InputManager : MonoBehaviour {
         _pauseGame.action.performed += OnPauseGame;
         _wikiOpen.action.performed += OnWikiOpen;
         _move.action.performed += OnMovement;
-        _interact.action.performed += OnShopOpen;
+        _interact.action.performed += OnInteract;
 
         _look.action.performed += OnLook;
         _scroll.action.performed += OnInventoryScrollPerformed;
         _inventoryNavigation.action.performed += OnInventorySlotKeyPerformed;
         _rightClick.action.performed += OnInventoryRightClickPerformed;
-        _interact.action.performed += OnInteractPerformed;
+
     }
     private void UnSubscribeEvents()
     {
         _jump.action.performed -= OnJump;
         _pauseGame.action.performed -= OnPauseGame;
         _wikiOpen.action.performed -= OnWikiOpen;
+        _interact.action.performed -= OnInteract;
 
         _scroll.action.performed -= OnInventoryScrollPerformed;
         _inventoryNavigation.action.performed -= OnInventorySlotKeyPerformed;
@@ -158,7 +159,7 @@ public class InputManager : MonoBehaviour {
         IsWikiOpen = true;
         OnWikiPerformed?.Invoke();
     }
-    private void OnShopOpen(InputAction.CallbackContext ctx)
+    private void OnInteract(InputAction.CallbackContext ctx)
     {
        // IsShopOpen = true;
         OnInteractPerformed?.Invoke();
@@ -170,9 +171,6 @@ public class InputManager : MonoBehaviour {
         OnInventoryScroll?.Invoke(scroll);
     }
 
-    private void OnInteractPerformed(InputAction.CallbackContext ctx) {
-        OnInteract?.Invoke();
-    }
     private void OnInventorySlotKeyPerformed(InputAction.CallbackContext ctx)
     {
         // The control name will be "1", "2", "3", or "4"
