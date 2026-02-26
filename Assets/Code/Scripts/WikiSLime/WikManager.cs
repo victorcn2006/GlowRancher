@@ -10,8 +10,8 @@ public class WikiManager : MonoBehaviour
     [Tooltip("Arrastra aquí el objeto que tiene el script PlayerCameraMovement")]
     [SerializeField] private PlayerCameraMovement _cameraControl;
 
-    private bool _isWikiActive;
-  
+    private bool _isWikiActive = false;
+
 
     private void OnEnable()
     {

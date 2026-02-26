@@ -45,7 +45,9 @@ public class InputManager : MonoBehaviour {
     [HideInInspector] public UnityEvent OnMovementPerformed = new UnityEvent();
     [HideInInspector] public UnityEvent OnPausePerformed = new UnityEvent();
     [HideInInspector] public UnityEvent OnWikiPerformed = new UnityEvent();
-    [HideInInspector] public UnityEvent OnShopPerformed = new UnityEvent();
+    [HideInInspector] public UnityEvent OnInteractPerformed = new UnityEvent();
+    [HideInInspector] public UnityEvent OnLookPerformed = new UnityEvent();
+
 
     [HideInInspector] public UnityEvent<float> OnInventoryScroll = new UnityEvent<float>();
     [HideInInspector] public UnityEvent<int> OnInventorySlotKey = new UnityEvent<int>();
@@ -110,6 +112,7 @@ public class InputManager : MonoBehaviour {
         _move.action.performed += OnMovement;
         _interact.action.performed += OnShopOpen;
 
+        _look.action.performed += OnLook;
         _scroll.action.performed += OnInventoryScrollPerformed;
         _inventoryNavigation.action.performed += OnInventorySlotKeyPerformed;
         _rightClick.action.performed += OnInventoryRightClickPerformed;
@@ -125,6 +128,14 @@ public class InputManager : MonoBehaviour {
         _inventoryNavigation.action.performed -= OnInventorySlotKeyPerformed;
         _rightClick.action.performed -= OnInventoryRightClickPerformed;
     }
+
+    private void OnLook(InputAction.CallbackContext ctx)
+    {
+
+        OnLookPerformed?.Invoke();
+    }
+
+
 
     private void OnJump(InputAction.CallbackContext ctx) {
         IsJumpPressed = true;
@@ -149,8 +160,8 @@ public class InputManager : MonoBehaviour {
     }
     private void OnShopOpen(InputAction.CallbackContext ctx)
     {
-        IsShopOpen = true;
-        OnShopPerformed?.Invoke();
+       // IsShopOpen = true;
+        OnInteractPerformed?.Invoke();
     }
 
     private void OnInventoryScrollPerformed(InputAction.CallbackContext ctx)
@@ -190,6 +201,7 @@ public class InputManager : MonoBehaviour {
     }
     // Añade esto para poder leer la dirección desde PlayerMovement
     public Vector2 MoveInput => _move.action.ReadValue<Vector2>();
+    public Vector2 LookInput => _look.action.ReadValue<Vector2>();
 
 }
 
