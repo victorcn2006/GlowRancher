@@ -103,8 +103,8 @@
     <Compile Include="Assets\Code\Scripts\Buildings\Incinerator\Incinerator.cs" />
     <Compile Include="Assets\Code\Scripts\Systems\Systems.cs" />
     <Compile Include="Assets\Code\Scripts\Menu\EditorSceneScripts\SceneChanger.cs" />
-    <Compile Include="Assets\Code\Scripts\GameHUD\HUD Energy.cs" />
     <Compile Include="Assets\Code\Scripts\Systems\UIAudioManager.cs" />
+    <Compile Include="Assets\Code\Scripts\GameHUD\HUD Energy.cs" />
     <Compile Include="Assets\Code\Scripts\Menu\Settings\FullScreen.cs" />
     <Compile Include="Assets\Code\Scripts\Menu\EditorSceneScripts\SceneChangerButton.cs" />
     <Compile Include="Assets\Code\Scripts\Systems\InputManager.cs" />
@@ -1121,12 +1121,12 @@
       <HintPath>Library\ScriptAssemblies\Unity.Performance.Profile-Analyzer.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.TestTools.CodeCoverage.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.TestTools.CodeCoverage.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.PlasticSCM.Editor">
