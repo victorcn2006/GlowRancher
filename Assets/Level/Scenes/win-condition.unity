@@ -325,7 +325,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c6a842751b7b1940a26316d21d0f1d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pausePanel: {fileID: 524967181}
+  _pausePanel: {fileID: 0}
+  _hud: {fileID: 0}
+  _gamePanel: {fileID: 0}
+  _firstButton: {fileID: 0}
 --- !u!1 &330524091
 GameObject:
   m_ObjectHideFlags: 0
@@ -694,16 +697,6 @@ PrefabInstance:
 --- !u!224 &524967179 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2809461122072277292, guid: a32dda7229243ec40800834364594d97, type: 3}
-  m_PrefabInstance: {fileID: 524967178}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &524967180 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5162921842783312134, guid: a32dda7229243ec40800834364594d97, type: 3}
-  m_PrefabInstance: {fileID: 524967178}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &524967181 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7565716055498506130, guid: a32dda7229243ec40800834364594d97, type: 3}
   m_PrefabInstance: {fileID: 524967178}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &624949442
@@ -1172,11 +1165,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 1.5
-  interact:
-    m_Name: Interact
+  _interact:
+    m_Name: 
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 54db6017-4a2c-41d9-8795-2a01494d8a5c
+    m_Id: 26581cb5-4b95-48af-b54a-f0ecc8386431
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -1871,8 +1864,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 912b64d08c04d5e4b90b30becb4610e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  winConditionPanel: {fileID: 459633611}
-  player: {fileID: 661484940}
+  _winConditionPanel: {fileID: 0}
+  _player: {fileID: 0}
 --- !u!65 &769789643
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1970,7 +1963,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dbec47c0b2cc184fa7a5bb9eeaccf9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputs: {fileID: -944628639613478452, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
+  _inputs: {fileID: 0}
+  _rightClick: {fileID: 0}
+  _wikiOpen: {fileID: 0}
+  _move: {fileID: 0}
+  _jump: {fileID: 0}
+  _look: {fileID: 0}
+  _interact: {fileID: 0}
+  _pauseGame: {fileID: 0}
+  _aspirate: {fileID: 0}
+  _launchObject: {fileID: 0}
+  _inventoryNavigation: {fileID: 0}
+  _scroll: {fileID: 0}
+  IsPaused: 0
+  OnJumpPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPausePerformed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnWikiPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnInventoryScroll:
+    m_PersistentCalls:
+      m_Calls: []
+  OnInventorySlotKey:
+    m_PersistentCalls:
+      m_Calls: []
+  OnInventoryRightClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &873164275
 GameObject:
   m_ObjectHideFlags: 0
@@ -2052,7 +2075,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastSelectedObject: {fileID: 0}
-  initialFocusObject: {fileID: 524967180}
 --- !u!114 &901982484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2142,10 +2164,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d9e01afcff081d458517594da1216f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slimePrefab: {fileID: 8298210703844466560, guid: 2f4a3d1e052fc5b468a5d6e1cda56063, type: 3}
-  slimesQuantity: 5
-  launchRange: 8
-  launchUpForce: 25
+  _slimesQuantity: 0
+  _launchRange: 0
+  _launchUpForce: 0
 --- !u!1 &1069055242
 GameObject:
   m_ObjectHideFlags: 0
@@ -2355,7 +2376,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2741,8 +2762,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 912b64d08c04d5e4b90b30becb4610e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  winConditionPanel: {fileID: 0}
-  player: {fileID: 0}
+  _winConditionPanel: {fileID: 0}
+  _player: {fileID: 0}
 --- !u!65 &1709647404
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2997,8 +3018,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 912b64d08c04d5e4b90b30becb4610e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  winConditionPanel: {fileID: 0}
-  player: {fileID: 0}
+  _winConditionPanel: {fileID: 0}
+  _player: {fileID: 0}
 --- !u!1 &1967097410
 GameObject:
   m_ObjectHideFlags: 0

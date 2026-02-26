@@ -432,9 +432,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77613c64275c24342a7cec00bf9f1b41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sliderType: 0
-  imageMute: {fileID: 1884801011}
-  mixer: {fileID: 24100000, guid: 26c5e59eb3ca8b44ebc3a0b4e969f6dc, type: 2}
+  _sliderType: 0
+  _imageMute: {fileID: 0}
+  _mixer: {fileID: 0}
 --- !u!1 &109164657
 GameObject:
   m_ObjectHideFlags: 0
@@ -866,7 +866,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -1551,7 +1552,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d87d8b2e147b4f34e80a2c44a6de393e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  brightnessPanel: {fileID: 754589236}
+  _brighnessPanel: {fileID: 0}
 --- !u!1 &522285607
 GameObject:
   m_ObjectHideFlags: 0
@@ -2672,9 +2673,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77613c64275c24342a7cec00bf9f1b41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sliderType: 1
-  imageMute: {fileID: 1956575154}
-  mixer: {fileID: 24100000, guid: 26c5e59eb3ca8b44ebc3a0b4e969f6dc, type: 2}
+  _sliderType: 0
+  _imageMute: {fileID: 0}
+  _mixer: {fileID: 0}
 --- !u!1 &754589234
 GameObject:
   m_ObjectHideFlags: 0
@@ -3460,7 +3461,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -4712,9 +4714,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77613c64275c24342a7cec00bf9f1b41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sliderType: 2
-  imageMute: {fileID: 858205931}
-  mixer: {fileID: 24100000, guid: 26c5e59eb3ca8b44ebc3a0b4e969f6dc, type: 2}
+  _sliderType: 0
+  _imageMute: {fileID: 0}
+  _mixer: {fileID: 0}
 --- !u!1 &1320058724
 GameObject:
   m_ObjectHideFlags: 0
@@ -4765,7 +4767,7 @@ MonoBehaviour:
   - {fileID: 1416768965}
   - {fileID: 1709220742}
   buttons: []
-  buttonsParent: {fileID: 1940375390}
+  _buttonsParent: {fileID: 0}
 --- !u!1 &1340933687
 GameObject:
   m_ObjectHideFlags: 0
@@ -5600,7 +5602,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -5734,7 +5737,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -6110,7 +6114,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -7974,7 +7979,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastSelectedObject: {fileID: 0}
-  initialFocusObject: {fileID: 1048534625}
 --- !u!114 &1975870893
 MonoBehaviour:
   m_ObjectHideFlags: 0
