@@ -1,82 +1,111 @@
+using System.Collections;
 using UnityEngine;
 
 public class InteractiveShop : MonoBehaviour
 {
     [Header("Referencias de Interfaz")]
-    [SerializeField] private GameObject _shopUIContainer;    // El Canvas o Panel de la tienda
-    [SerializeField] private PanelShopController _panelShop; // El script que maneja los botones de compra
+    [SerializeField] private GameObject _shopUIContainer;
+    [SerializeField] private PanelShopController _panelShop;
 
     [Header("Referencias de Control")]
-    [SerializeField] private PlayerCameraMovement _cameraControl; // El script de la cámara del jugador
+    [SerializeField] private PlayerCameraMovement _cameraControl;
 
     private bool _isShopActive = false;
-    private bool _shopInteractive = false;
+
+    float timeSinceLastOpenedClosed = 0.16f;
+    const float timeBetweenOpenClose = 0.16f;
 
     private void OnEnable()
     {
-        // Permitimos que también se cierre/abra con la tecla asignada en el InputManager
+        // Suscribimos al evento global de teclado
         if (InputManager.Instance != null)
-            InputManager.Instance.OnShopPerformed.AddListener(ToggleShop);
+            InputManager.Instance.OnInteractPerformed.AddListener(HandleKeyboardToggle);
+        InputManager.Instance.OnPausePerformed.AddListener(CloseShop);
     }
 
     private void OnDisable()
     {
         if (InputManager.Instance != null)
-            InputManager.Instance.OnShopPerformed.RemoveListener(ToggleShop);
+            InputManager.Instance.OnInteractPerformed.RemoveListener(HandleKeyboardToggle);
+        InputManager.Instance.OnPausePerformed.RemoveListener(CloseShop);
     }
 
     private void Start()
     {
-        // Aseguramos que la tienda empiece cerrada
-        _isShopActive = false;
-        CloseShop();
+        CloseShop(); // Empezar siempre cerrada
     }
 
-    public void ToggleShop()
+    // Este método solo se dispara cuando presionas la tecla de Shop (ej. ESC o E)
+    private void HandleKeyboardToggle()
     {
-        // Si el juego está en pausa general, no hacemos nada
-        if (InputManager.Instance.IsPaused) return;
+        //if (InputManager.Instance.IsPaused) return;
 
-        _isShopActive = !_isShopActive;
-        if (_isShopActive) OpenShop();
-        else CloseShop();
+        // IMPORTANTE: Solo permitimos cerrar con el teclado si ya está abierta.
+        // Esto evita que la tienda se abra desde lejos.
+        if (_isShopActive)
+        {
+            CloseShop();
+        }
     }
 
     public void OpenShop()
     {
-        if ()
-        _isShopActive = true;
-        _panelShop.ActiveShop();
-        UpdateGameState(true);
+        if (timeSinceLastOpenedClosed >= timeBetweenOpenClose)
+        {
+            if (_isShopActive) return; // Ya está abierta, no hacemos nada
+            timeSinceLastOpenedClosed = 0;
+            Debug.Log("Abriendo Tienda...");
+            _isShopActive = true;
+
+            if (_shopUIContainer != null) _shopUIContainer.SetActive(true);
+            if (_panelShop != null) _panelShop.ActiveShop();
+
+            UpdateGameState(true);
+            StartCoroutine(_InputDelay());
+        }
     }
 
     public void CloseShop()
     {
-        _isShopActive = false;
-        _shopUIContainer.SetActive(false);
 
-        // Limpiamos la selección de ítems interna
-        if (_panelShop != null)
+        if (timeSinceLastOpenedClosed >= timeBetweenOpenClose)
         {
-            _panelShop.DesactiveShop();
-        }
+            if (!_isShopActive) return; // Ya está abierta, no hacemos nada
+            timeSinceLastOpenedClosed = 0;
 
-        UpdateGameState(false);
+            Debug.Log("Cerrando Tienda...");
+            _isShopActive = false;
+
+            if (_shopUIContainer != null) _shopUIContainer.SetActive(false);
+            if (_panelShop != null) _panelShop.DesactiveShop();
+
+            UpdateGameState(false);
+            StartCoroutine(_InputDelay());
+        }
+    }
+
+    IEnumerator _InputDelay()
+    {
+        while (timeSinceLastOpenedClosed < timeBetweenOpenClose)
+        {
+            timeSinceLastOpenedClosed += Time.unscaledDeltaTime;
+            yield return null;
+        }
     }
 
     private void UpdateGameState(bool shopOpen)
     {
-        // Pausar o reanudar el tiempo
+        // Pausar el tiempo solo si la tienda está abierta
         Time.timeScale = shopOpen ? 0f : 1f;
 
-        // Bloquear/Desbloquear cámara y ratón
+        // Controlar el cursor y la cámara
         if (_cameraControl != null)
         {
             _cameraControl.SetControlState(!shopOpen);
         }
-        else
-        {
-            Debug.LogError("Falta referencia a PlayerCameraMovement en InteractiveShop.");
-        }
+
+        // Mostrar/Ocultar el mouse según el estado
+        Cursor.visible = shopOpen;
+        Cursor.lockState = shopOpen ? CursorLockMode.None : CursorLockMode.Locked;
     }
 }
