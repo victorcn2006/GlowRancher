@@ -15,12 +15,12 @@ public class Silo : Building
 
     private void OnEnable()
     {
-        InputManager.Instance.OnInteract.AddListener(ActiveInventoryPanel);
+        InputManager.Instance.OnInteractPerformed.AddListener(ActiveInventoryPanel);
     }
 
     private void OnDisable()
     {
-        InputManager.Instance.OnInteract.RemoveListener(ActiveInventoryPanel);
+        InputManager.Instance.OnInteractPerformed.RemoveListener(ActiveInventoryPanel);
     }
 
     public void SetPlayerInside(bool value)

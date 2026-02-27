@@ -1,54 +1,111 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class InteractiveShop : MonoBehaviour
 {
-    [Header("Refs")]
-    public GameObject ShopPanel;
+    [Header("Referencias de Interfaz")]
+    [SerializeField] private GameObject _shopUIContainer;
+    [SerializeField] private PanelShopController _panelShop;
 
+    [Header("Referencias de Control")]
+    [SerializeField] private PlayerCameraMovement _cameraControl;
 
-    private bool _isShopActive = false; // Variable per saber si la botiga està activa
+    private bool _isShopActive = false;
 
-    private void Update()
+    float timeSinceLastOpenedClosed = 0.16f;
+    const float timeBetweenOpenClose = 0.16f;
+
+    private void OnEnable()
     {
-        // Potser voldràs posar una altra condició per activar/desactivar la botiga (tecla específica).
+        // Suscribimos al evento global de teclado
+        if (InputManager.Instance != null)
+            InputManager.Instance.OnInteractPerformed.AddListener(HandleKeyboardToggle);
+        InputManager.Instance.OnPausePerformed.AddListener(CloseShop);
     }
 
-    public void ToggleShop()
+    private void OnDisable()
     {
+        if (InputManager.Instance != null)
+            InputManager.Instance.OnInteractPerformed.RemoveListener(HandleKeyboardToggle);
+        InputManager.Instance.OnPausePerformed.RemoveListener(CloseShop);
+    }
+
+    private void Start()
+    {
+        CloseShop(); // Empezar siempre cerrada
+    }
+
+    // Este método solo se dispara cuando presionas la tecla de Shop (ej. ESC o E)
+    private void HandleKeyboardToggle()
+    {
+        //if (InputManager.Instance.IsPaused) return;
+
+        // IMPORTANTE: Solo permitimos cerrar con el teclado si ya está abierta.
+        // Esto evita que la tienda se abra desde lejos.
         if (_isShopActive)
         {
-            DesActivateObject();
-            Cursor.visible = false;
+            CloseShop();
         }
-        else
+    }
+
+    public void OpenShop()
+    {
+        if (timeSinceLastOpenedClosed >= timeBetweenOpenClose)
         {
-            ActivateObject();
-            Cursor.visible = true;
+            if (_isShopActive) return; // Ya está abierta, no hacemos nada
+            timeSinceLastOpenedClosed = 0;
+            Debug.Log("Abriendo Tienda...");
+            _isShopActive = true;
+
+            if (_shopUIContainer != null) _shopUIContainer.SetActive(true);
+            if (_panelShop != null) _panelShop.ActiveShop();
+
+            UpdateGameState(true);
+            StartCoroutine(_InputDelay());
         }
     }
 
-    public void ActivateObject()
+    public void CloseShop()
     {
-        Debug.Log("Shop activation");
-        ShopPanel.SetActive(true);
 
-        Cursor.lockState = CursorLockMode.None; // Mostra el cursor
-        Time.timeScale = 0;
+        if (timeSinceLastOpenedClosed >= timeBetweenOpenClose)
+        {
+            if (!_isShopActive) return; // Ya está abierta, no hacemos nada
+            timeSinceLastOpenedClosed = 0;
 
-        _isShopActive = true; // Marquem que la botiga està activa
+            Debug.Log("Cerrando Tienda...");
+            _isShopActive = false;
+
+            if (_shopUIContainer != null) _shopUIContainer.SetActive(false);
+            if (_panelShop != null) _panelShop.DesactiveShop();
+
+            UpdateGameState(false);
+            StartCoroutine(_InputDelay());
+        }
     }
 
-    public void DesActivateObject()
+    IEnumerator _InputDelay()
     {
-        Debug.Log("Shop desactivation");
-        ShopPanel.SetActive(false);
+        while (timeSinceLastOpenedClosed < timeBetweenOpenClose)
+        {
+            timeSinceLastOpenedClosed += Time.unscaledDeltaTime;
+            yield return null;
+        }
+    }
 
-        Cursor.lockState = CursorLockMode.Locked; // Oculta el cursor
-        Time.timeScale = 1;
+    private void UpdateGameState(bool shopOpen)
+    {
+        // Pausar el tiempo solo si la tienda está abierta
+        Time.timeScale = shopOpen ? 0f : 1f;
 
-        _isShopActive = false; // Marquem que la botiga està desactivada
+        // Controlar el cursor y la cámara
+        if (_cameraControl != null)
+        {
+            _cameraControl.SetControlState(!shopOpen);
+        }
+
+        // Mostrar/Ocultar el mouse según el estado
+        Cursor.visible = shopOpen;
+        Cursor.lockState = shopOpen ? CursorLockMode.None : CursorLockMode.Locked;
     }
 }
