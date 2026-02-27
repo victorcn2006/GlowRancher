@@ -160,7 +160,6 @@ public class AmbienceController : MonoBehaviour
         }
     }
 
-
     private IEnumerator CheckFogAfterTransition()
     {
         // Espera el tiempo de transición más un pequeño buffer
