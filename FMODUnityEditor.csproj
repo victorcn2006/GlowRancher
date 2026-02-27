@@ -992,55 +992,55 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.45f1\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\Facades\System.Xml.XPath.XDocument.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.Timeline.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Timeline">
-      <HintPath>Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Core">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Core.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Flow.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.ScriptableBuildPipeline.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.ScriptableBuildPipeline.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.InputSystem">
-      <HintPath>Library\ScriptAssemblies\Unity.InputSystem.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEditor.UI">
-      <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEditor.TestRunner">
-      <HintPath>Library\ScriptAssemblies\UnityEditor.TestRunner.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.TestRunner">
-      <HintPath>Library\ScriptAssemblies\UnityEngine.TestRunner.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="FMODUnity.csproj">
       <Project>{DD003EB6-2287-2978-F168-B7A60D4DAB1A}</Project>
       <Name>FMODUnity</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Timeline.Editor.csproj">
+      <Project>{9E1C4548-61E4-87C7-107C-B68A27BEFD94}</Project>
+      <Name>Unity.Timeline.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Timeline.csproj">
+      <Project>{181D8F9C-50B4-88E0-43A1-AA242B2AC485}</Project>
+      <Name>Unity.Timeline</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.VisualScripting.Core.csproj">
+      <Project>{2369A022-F4D3-6C18-2D1A-C2300E25C02B}</Project>
+      <Name>Unity.VisualScripting.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.VisualScripting.Core.Editor.csproj">
+      <Project>{F908CC59-1086-0BCF-CE76-3F3ADC3A247C}</Project>
+      <Name>Unity.VisualScripting.Core.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.VisualScripting.Flow.Editor.csproj">
+      <Project>{DE704187-6BC6-15C9-8B32-C5E78E3B93DA}</Project>
+      <Name>Unity.VisualScripting.Flow.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.ScriptableBuildPipeline.Editor.csproj">
+      <Project>{A5340506-D349-71BA-20E0-7B85022988D5}</Project>
+      <Name>Unity.ScriptableBuildPipeline.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.InputSystem.csproj">
+      <Project>{1138B856-DA22-6827-B258-ACD610D3BF2B}</Project>
+      <Name>Unity.InputSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEditor.UI.csproj">
+      <Project>{5D52E955-7DBC-4EC2-CB4B-CEF4FBC7DC88}</Project>
+      <Name>UnityEditor.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.UI.csproj">
+      <Project>{A4E4E3D8-6506-37B4-1E38-0BF51D985509}</Project>
+      <Name>UnityEngine.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEditor.TestRunner.csproj">
+      <Project>{EB446E05-4A63-B1AC-D07B-E5043FE79553}</Project>
+      <Name>UnityEditor.TestRunner</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.TestRunner.csproj">
+      <Project>{7F7D12C0-2D83-9CDB-F431-5A3CBF6AED8C}</Project>
+      <Name>UnityEngine.TestRunner</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

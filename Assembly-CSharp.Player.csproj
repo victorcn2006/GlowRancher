@@ -55,7 +55,7 @@
     <UnityVersion>2022.3.45f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Program Files\Microsoft Visual Studio\18\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.45f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.45f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
@@ -73,18 +73,21 @@
     <Compile Include="Assets\Code\Scripts\Shop\PanelShopController.cs" />
     <Compile Include="Assets\Code\Scripts\LanguageManager.cs" />
     <Compile Include="Assets\ImportAssets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUtils.cs" />
+    <Compile Include="Assets\Code\Map\Ambience\AmbienceController.cs" />
     <Compile Include="Assets\Code\Scripts\Aspirator\SuctionPoint.cs" />
     <Compile Include="Assets\Code\Scripts\Interfaces\ISavable.cs" />
     <Compile Include="Assets\Code\Scripts\PlugIns\ColorInHierarchy.cs" />
     <Compile Include="Assets\Code\Scripts\Buildings\Ranch\WallColliderPermision.cs" />
     <Compile Include="Assets\Code\Scripts\Menu\Settings\ResolutionManager.cs" />
     <Compile Include="Assets\Code\Pools\EnemiesSlimesPool.cs" />
+    <Compile Include="Assets\Code\Map\Render\ZoneRenderingController.cs" />
     <Compile Include="Assets\Code\Scripts\Systems\UnityEvents.cs" />
     <Compile Include="Assets\Code\Scripts\Menu\Managers\EventSystemManager.cs" />
     <Compile Include="Assets\Code\Scripts\Buildings\Building.cs" />
     <Compile Include="Assets\Code\Scripts\Gems\GemData.cs" />
     <Compile Include="Assets\Code\Scripts\GameHUD\HUD Heath.cs" />
     <Compile Include="Assets\Code\Scripts\Menu\Managers\PanelManager.cs" />
+    <Compile Include="Assets\Code\Map\Render\ZoneRenderingTrigger.cs" />
     <Compile Include="Assets\Code\Scripts\Slimes\BasicSlime\BasicSlimeMovement.cs" />
     <Compile Include="Assets\Code\Scripts\Systems\UIButtonClickBinder.cs" />
     <Compile Include="Assets\Code\Scripts\Menu\TextColorChanger.cs" />
@@ -128,8 +131,8 @@
     <Compile Include="Assets\Code\Scripts\Lights\lightRefrences.cs" />
     <Compile Include="Assets\ImportAssets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleSprite.cs" />
     <Compile Include="Assets\Code\Scripts\PlayerWallet\WalletCurrency.cs" />
+    <Compile Include="Assets\Art\Materials\SkyBoxes\TestAmbienceTransitions.cs" />
     <Compile Include="Assets\Code\Scripts\Construction\ContructionInventoryManager.cs" />
-    <Compile Include="Assets\Code\Map\ZoneRenderingController.cs" />
     <Compile Include="Assets\Code\Scripts\PlugIns\RequiredFieldAttribute.cs" />
     <Compile Include="Assets\ImportAssets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleAudio.cs" />
     <Compile Include="Assets\Code\Scripts\Player\PlayerMovement.cs" />
@@ -144,7 +147,6 @@
     <Compile Include="Assets\Code\Pools\SlimesPool.cs" />
     <Compile Include="Assets\Code\Scripts\Menu\Managers\ActionButtonManager.cs" />
     <Compile Include="Assets\Code\Scripts\Characters\Enemy.cs" />
-    <Compile Include="Assets\Code\Map\ZoneRenderingTrigger.cs" />
     <Compile Include="Assets\Code\Scripts\Characters\Character.cs" />
     <Compile Include="Assets\Code\Scripts\Inventory\ItemPickUp.cs" />
     <Compile Include="Assets\Code\Inputs\Controls.cs" />
@@ -1003,6 +1005,10 @@
       <Project>{C1BD89DB-2BF3-E0CD-671F-A6FDAD718760}</Project>
       <Name>Unity.RenderPipelines.Universal.Config.Runtime.Player</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.Formats.Fbx.Runtime.Player.csproj">
+      <Project>{4D17B72D-55C8-8450-D84B-DD56A70BDE75}</Project>
+      <Name>Unity.Formats.Fbx.Runtime.Player</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.VisualScripting.Flow.Player.csproj">
       <Project>{88B37376-6816-3537-8983-966F09868235}</Project>
       <Name>Unity.VisualScripting.Flow.Player</Name>
@@ -1058,6 +1064,10 @@
     <ProjectReference Include="Unity.InputSystem.ForUI.Player.csproj">
       <Project>{24ED7EDB-6ECC-1B80-1BF5-32316348E1C0}</Project>
       <Name>Unity.InputSystem.ForUI.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="Autodesk.Fbx.Player.csproj">
+      <Project>{E7027D75-9951-F9D4-C09C-8264EE5F368B}</Project>
+      <Name>Autodesk.Fbx.Player</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.Mathematics.Player.csproj">
       <Project>{91B751A1-A6D2-5654-D512-098230E14632}</Project>

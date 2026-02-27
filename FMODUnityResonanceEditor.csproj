@@ -963,27 +963,27 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.45f1\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\Facades\System.Xml.XPath.XDocument.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEditor.UI">
-      <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEditor.TestRunner">
-      <HintPath>Library\ScriptAssemblies\UnityEditor.TestRunner.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.TestRunner">
-      <HintPath>Library\ScriptAssemblies\UnityEngine.TestRunner.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="FMODUnityResonance.csproj">
       <Project>{6EA65225-2DE4-2A5C-944B-628D07A5CCE5}</Project>
       <Name>FMODUnityResonance</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEditor.UI.csproj">
+      <Project>{5D52E955-7DBC-4EC2-CB4B-CEF4FBC7DC88}</Project>
+      <Name>UnityEditor.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.UI.csproj">
+      <Project>{A4E4E3D8-6506-37B4-1E38-0BF51D985509}</Project>
+      <Name>UnityEngine.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEditor.TestRunner.csproj">
+      <Project>{EB446E05-4A63-B1AC-D07B-E5043FE79553}</Project>
+      <Name>UnityEditor.TestRunner</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.TestRunner.csproj">
+      <Project>{7F7D12C0-2D83-9CDB-F431-5A3CBF6AED8C}</Project>
+      <Name>UnityEngine.TestRunner</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
