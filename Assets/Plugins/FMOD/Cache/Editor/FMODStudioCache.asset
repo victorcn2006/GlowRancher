@@ -94,6 +94,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 130063
+--- !u!114 &-7345618243835151617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sonido_Salto_Aterrizage
+  m_EditorClassIdentifier: 
+  Path: event:/Sonido_Salto_Aterrizage
+  Guid:
+    Data1: 280924654
+    Data2: 1128770363
+    Data3: -1389137004
+    Data4: 1849172335
+  Banks:
+  - {fileID: -5975674624175205442}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 240
 --- !u!114 &-6750903481475545525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,6 +168,53 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 130063
+--- !u!114 &-6702388386855631652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sonido_Salto
+  m_EditorClassIdentifier: 
+  Path: event:/Sonido_Salto
+  Guid:
+    Data1: 153985143
+    Data2: 1108030533
+    Data3: -941902948
+    Data4: -1598844575
+  Banks:
+  - {fileID: -5975674624175205442}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 340
+--- !u!114 &-5975674624175205442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/FMOD/FMOD_Glow_Rancher/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 639078775501786505
+  FileSizes:
+  - Name: Desktop
+    Value: 1857952
+  Exists: 1
 --- !u!114 &-5899237411010425869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -316,6 +390,33 @@ MonoBehaviour:
   - Name: Desktop
     Value: 1767456
   Exists: 1
+--- !u!114 &-1632085319578849924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/ButtonClick_Sound
+  m_EditorClassIdentifier: 
+  Path: event:/ButtonClick_Sound
+  Guid:
+    Data1: -1336906209
+    Data2: 1089311279
+    Data3: 39024041
+    Data4: -1664337932
+  Banks:
+  - {fileID: -5975674624175205442}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 179
 --- !u!114 &-1584510230396060654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -477,22 +578,22 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: -6750903481475545525}
-  - {fileID: -8898445864388349149}
+  - {fileID: 8650467507716406956}
+  - {fileID: -5975674624175205442}
   EditorEvents:
-  - {fileID: -5482826253076517334}
-  - {fileID: 4211479882625863754}
-  - {fileID: 434211976265071795}
-  - {fileID: -51967890929184509}
-  - {fileID: 1876711785839896193}
-  - {fileID: 3394198758105634028}
+  - {fileID: 1273304504122023010}
+  - {fileID: -1632085319578849924}
+  - {fileID: -6702388386855631652}
+  - {fileID: 5097569550803190663}
+  - {fileID: 6838841265606892286}
+  - {fileID: -7345618243835151617}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -8898445864388349149}
+  - {fileID: -5975674624175205442}
   StringsBanks:
-  - {fileID: -6750903481475545525}
+  - {fileID: 8650467507716406956}
   cacheVersion: 131858
-  cacheTime: 639075477986549819
+  cacheTime: 639078775501800125
   SerializableEventsDict:
   - key: event:/SFX
     index: 0
@@ -580,6 +681,33 @@ MonoBehaviour:
   - Name: Desktop
     Value: 1094
   Exists: 1
+--- !u!114 &1273304504122023010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX
+  m_EditorClassIdentifier: 
+  Path: event:/SFX
+  Guid:
+    Data1: 1156364804
+    Data2: 1205092195
+    Data3: -2027637086
+    Data4: 986830432
+  Banks:
+  - {fileID: -5975674624175205442}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1384
 --- !u!114 &1876711785839896193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -897,6 +1025,60 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 340
+--- !u!114 &5097569550803190663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Respawn_Sound
+  m_EditorClassIdentifier: 
+  Path: event:/Respawn_Sound
+  Guid:
+    Data1: 1648347011
+    Data2: 1283330130
+    Data3: 2077353127
+    Data4: -1620131136
+  Banks:
+  - {fileID: -5975674624175205442}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 160
+--- !u!114 &6838841265606892286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music
+  m_EditorClassIdentifier: 
+  Path: event:/Music
+  Guid:
+    Data1: -1552742437
+    Data2: 1151022498
+    Data3: -1756065866
+    Data4: 1777678549
+  Banks:
+  - {fileID: -5975674624175205442}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 130063
 --- !u!114 &6935762200508966258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -971,3 +1153,23 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1384
+--- !u!114 &8650467507716406956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/FMOD/FMOD_Glow_Rancher/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 639078775501800125
+  FileSizes:
+  - Name: Desktop
+    Value: 1200
+  Exists: 1
