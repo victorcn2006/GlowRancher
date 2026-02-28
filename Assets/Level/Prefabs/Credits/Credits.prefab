@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 1279904234130756930}
   - component: {fileID: 3532828172744520486}
   m_Layer: 0
-  m_Name: Text (TMP) (1)
+  m_Name: Game Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -204,6 +204,7 @@ GameObject:
   - component: {fileID: 5466611996573491259}
   - component: {fileID: 1997626940855782482}
   - component: {fileID: 5403281612687858083}
+  - component: {fileID: 7453512678180666336}
   m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -258,8 +259,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\nDevTeam\n\nGame Programers\n\nAlan Rodr\xEDguez\nVictor Navarro\nPau
-    Cepeda\nGerard Valls\n\nMap Designer\nAlan Rodr\xEDguez\n\nVersion Controll\nVictor
+  m_text: "\nDevTeam\n\nGame Programers\n\nAlan Rodr\xEDguez\nVictor Carrillo\nPau
+    Cepeda\nGerard Valls\n\nMap Designer\nAlan Rodr\xEDguez\n\nVersion Control\nVictor
     Carrillo\n\nUI Designer\nPau Cepeda\nVictor Carrillo\n\nSound \nPau Cepeda\n\nDesign
     and art Team\n\nAleix Picall\xF3\nDaniel Moreno\nPau Sangenis\nYeray Gonzalez\n"
   m_isRightToLeft: 0
@@ -330,3 +331,43 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7453512678180666336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7545498563645959526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:20cbd8734186ac7418931ae17891ed01
+    m_TableEntryReference:
+      m_KeyId: 639766821531648
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5403281612687858083}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds: []
