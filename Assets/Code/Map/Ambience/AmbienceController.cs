@@ -76,7 +76,7 @@ public class AmbienceController : MonoBehaviour
     {
         _directionalLight = _directionalLightGO.GetComponent<Light>();
         RenderSettings.fogColor = _fogColor;
-        SetAmbience(AmbienceStates.CORRUPTED);
+        SetAmbience(AmbienceStates.ALIVE);
     }
 
     
