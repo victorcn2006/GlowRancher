@@ -37,6 +37,19 @@ public class PoolManager : MonoBehaviour
         }
     }
 
+    public void AddPool(string id, GameObject prefab)
+    {
+        if (poolsDictionary.ContainsKey(id)) return;
+
+        Pool newPool = new Pool
+        {
+            id = id,
+            prefab = prefab,
+            objects = new List<GameObject>()
+        };
+        poolsDictionary.Add(id, newPool);
+    }
+
     public GameObject GetFirstAvailableObject(string id)
     {
         if (id == null)

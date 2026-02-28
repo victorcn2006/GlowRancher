@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6644554761907261307}
   - component: {fileID: 3108703657192898320}
   - component: {fileID: 266272542265875821}
+  - component: {fileID: 936713464171242259}
   m_Layer: 0
   m_Name: RedSlimeStone 1
   m_TagString: Gem
@@ -64,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 6256114be4730e541901d9dee6b3912c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -122,7 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 460414f88e700f04e8f9bd4d62aad52c, type: 2}
-  type: 0
+  type: 1
 --- !u!54 &266272542265875821
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -150,3 +151,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &936713464171242259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5097261789379587870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1790124a44ec2f14588dc92bca8dc184, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icono: {fileID: 21300000, guid: 2738f89a9c6c4984f9bc438963e80fac, type: 3}
+  nombre: RedGem
