@@ -54,7 +54,6 @@ public class InteractiveShop : MonoBehaviour
         {
             if (_isShopActive) return; // Ya está abierta, no hacemos nada
             timeSinceLastOpenedClosed = 0;
-            Debug.Log("Abriendo Tienda...");
             _isShopActive = true;
 
             if (_shopUIContainer != null) _shopUIContainer.SetActive(true);
@@ -73,7 +72,6 @@ public class InteractiveShop : MonoBehaviour
             if (!_isShopActive) return; // Ya está abierta, no hacemos nada
             timeSinceLastOpenedClosed = 0;
 
-            Debug.Log("Cerrando Tienda...");
             _isShopActive = false;
 
             if (_shopUIContainer != null) _shopUIContainer.SetActive(false);
