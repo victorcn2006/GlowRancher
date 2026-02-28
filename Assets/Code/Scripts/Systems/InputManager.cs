@@ -173,7 +173,6 @@ public class InputManager : MonoBehaviour {
 
     private void OnInventorySlotKeyPerformed(InputAction.CallbackContext ctx)
     {
-        // The control name will be "1", "2", "3", or "4"
         if (ctx.control == null) return;
 
         int slot = -1;
@@ -183,6 +182,8 @@ public class InputManager : MonoBehaviour {
             case "2": slot = 1; break;
             case "3": slot = 2; break;
             case "4": slot = 3; break;
+            case "left": OnScroll?.Invoke(-1); return;
+            case "right": OnScroll?.Invoke(1); return;
         }
 
         if (slot >= 0)
