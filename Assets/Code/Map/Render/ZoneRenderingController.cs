@@ -17,7 +17,6 @@ public class ZoneRenderingController : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
     }
     public void SetActiveZones(List<GameObject> zonesToActive)
     {
