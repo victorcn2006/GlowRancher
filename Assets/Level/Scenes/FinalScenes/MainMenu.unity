@@ -1447,7 +1447,7 @@ MonoBehaviour:
   m_UpdateString:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 526914548}
+      - m_Target: {fileID: 1009509273}
         m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
         m_MethodName: set_text
         m_Mode: 0
@@ -2188,21 +2188,31 @@ MonoBehaviour:
   _wikiOpen: {fileID: -752228897096943169, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
   _move: {fileID: 4188637062435728261, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
   _jump: {fileID: -8404440847952596146, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
-  _look: {fileID: -8404440847952596146, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
+  _look: {fileID: -4880297091499603506, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
   _interact: {fileID: -1435672595644193247, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
   _pauseGame: {fileID: 3820728662531952595, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
   _aspirate: {fileID: 6501401278561469931, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
   _launchObject: {fileID: 8266952679875099490, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
   _inventoryNavigation: {fileID: -4489386230323612283, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
   _scroll: {fileID: 5078554399073276924, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
+  IsMove: 0
   IsPaused: 0
   OnJumpPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnMovementPerformed:
     m_PersistentCalls:
       m_Calls: []
   OnPausePerformed:
     m_PersistentCalls:
       m_Calls: []
   OnWikiPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnInteractPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnLookPerformed:
     m_PersistentCalls:
       m_Calls: []
   OnInventoryScroll:
@@ -2368,7 +2378,7 @@ MonoBehaviour:
       Data3: 39024041
       Data4: -1664337932
     Path: event:/ButtonClick_Sound
-  currentButton: 4
+  currentButton: 5
 --- !u!1 &1796240191
 GameObject:
   m_ObjectHideFlags: 0
@@ -2844,7 +2854,7 @@ MonoBehaviour:
   m_UpdateString:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 526914548}
+      - m_Target: {fileID: 1984471601}
         m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
         m_MethodName: set_text
         m_Mode: 0

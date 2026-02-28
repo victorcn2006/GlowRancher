@@ -39,6 +39,27 @@ public class GemsPool : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        RegisterGem(BlueGemPrefab, "BlueGem");
+        RegisterGem(RedGemPrefab, "RedSlimeGem");
+        RegisterGem(RedBlueGemPrefab, "RedBlueGem");
+    }
+
+    private void RegisterGem(GameObject prefab, string defaultName)
+    {
+        if (prefab == null) return;
+        
+        string name = defaultName;
+        ItemPickUp pickUp = prefab.GetComponent<ItemPickUp>();
+        if (pickUp != null && !string.IsNullOrEmpty(pickUp.nombre))
+        {
+            name = pickUp.nombre;
+        }
+        
+        PoolManager.Instance.AddPool(name, prefab);
+    }
+
     public GameObject GetGem(gemTypes gemTypeRequested)
     {
         List<GameObject> currentGemList = new List<GameObject>();
