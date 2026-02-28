@@ -15465,14 +15465,24 @@ MonoBehaviour:
   _launchObject: {fileID: 0}
   _inventoryNavigation: {fileID: 0}
   _scroll: {fileID: 0}
+  IsMove: 0
   IsPaused: 0
   OnJumpPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnMovementPerformed:
     m_PersistentCalls:
       m_Calls: []
   OnPausePerformed:
     m_PersistentCalls:
       m_Calls: []
   OnWikiPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnInteractPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnLookPerformed:
     m_PersistentCalls:
       m_Calls: []
   OnInventoryScroll:
@@ -33268,6 +33278,7 @@ MonoBehaviour:
   characterName: 
   description: 
   maxHealth: 100
+  _uiInventory: {fileID: 0}
 --- !u!114 &1563374120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33281,15 +33292,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 1.5
-  _interact:
-    m_Name: Interact
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 927cebc8-78a4-4e3a-9992-8c4c893144f1
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
 --- !u!114 &1563374121 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8581981930015451809, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
@@ -48893,6 +48895,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _wikiMenu: {fileID: 0}
+  _panelShop: {fileID: 0}
+  _cameraControl: {fileID: 0}
 --- !u!1 &2088218759
 GameObject:
   m_ObjectHideFlags: 0
