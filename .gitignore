@@ -39,9 +39,6 @@ journal/
 # Ignore the Cache folder since it is updated locally.
 /[Aa]ssets/Plugins/FMOD/Cache/*
 
-# Ignore bank files in the StreamingAssets folder.
-/[Aa]ssets/StreamingAssets/**/*.bank
-/[Aa]ssets/StreamingAssets/**/*.bank.meta
 
 # If the source bank files are kept outside of the StreamingAssets folder then these can be ignored.
 # Log files can be ignored.
@@ -60,4 +57,13 @@ Builds/*
 
 Assembly-CSharp.csproj
 
-Assets/Plugins/FMOD/Cache/Editor/*
+# FMOD caches
+Assets/FMOD/FMOD_Glow_Rancher/.cache/
+Assets/FMOD/FMOD_Glow_Rancher/.unsaved/
+Assets/FMOD/FMOD_Glow_Rancher/Build/
+
+# FMOD editor cache
+Assets/Plugins/FMOD/Cache/*
+
+*.csproj
+*.sln
