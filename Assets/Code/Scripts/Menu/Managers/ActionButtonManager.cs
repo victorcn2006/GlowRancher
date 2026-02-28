@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using FMODUnity; // 1. Importante añadir esto
+using FMODUnity;
+using UnityEditor; // 1. Importante añadir esto
 
 public class ActionButtonManager : MonoBehaviour
 {
@@ -61,7 +62,11 @@ public class ActionButtonManager : MonoBehaviour
                 PauseManager.instance?.SetPause();
                 break;
             case BUTTONS.EXIT:
-                Application.Quit();
+                #if UNITY_EDITOR
+                    EditorApplication.isPlaying = false; // Detiene el juego en el editor
+                #else
+                    Application.Quit(); // Cierra la build final
+                #endif
                 break;
         }
     }
