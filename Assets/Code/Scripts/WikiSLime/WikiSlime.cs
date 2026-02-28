@@ -13,7 +13,6 @@ public class WikiSlime : MonoBehaviour
 
     private void Start()
     {
-        _wikiMenu.SetActive(false);
 
         _currentActiveSlime = _slime1;
         _slime1.SetActive(true);

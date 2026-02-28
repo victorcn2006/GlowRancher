@@ -1,64 +1,67 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Animations;
 using UnityEngine.InputSystem;
+
 
 public class PlayerCameraMovement : MonoBehaviour
 {
+    [Header("Settings")]
+    [Tooltip("Sensibilidad (Sugerido: 0.1 a 0.5 para Input System)")]
+    [SerializeField] private float _rotationSensitivity = 0.2f;
+    [SerializeField] private float _verticalLimit = 70f;
 
-    [Header("View")]
-    [HideInInspector] public float rotationSense = 10f;
+    [Header("References")]
+    [SerializeField] private Transform _cameraTransform;
+
     private float _cameraVerticalAngle;
-    
-    [SerializeField] private Camera _playerCamera;
 
-    private InputAction _lookAction;
-    private Vector2 _rotationInput = Vector2.zero;
-    private PlayerInput _playerInput;
+    // Controlado por otros sistemas (ej. WikiManager)
+    public bool CanControlCamera { get; private set; } = true;
 
     private void Awake()
     {
-        if(_playerInput == null) _playerInput = GetComponent<PlayerInput>();
-        Cursor.lockState = CursorLockMode.Locked;
-        _lookAction = _playerInput.actions["Look"];
+        // Si no se asignó en el inspector, intenta buscar la cámara en los hijos
+        if (_cameraTransform == null)
+            _cameraTransform = GetComponentInChildren<Camera>().transform;
 
+        SetControlState(true);
     }
 
-    private void OnEnable() {
-        _lookAction?.Enable();
-    }
-
-    private void OnDisable() {
-        _lookAction?.Disable();
-    }
-
-
-    void Update()
+    private void LateUpdate()
     {
-        ReadLookInput();
-        Look();
-    }
-    private void ReadLookInput() {
-        if (_lookAction != null)
-        {
-            _rotationInput = _lookAction.ReadValue<Vector2>() * rotationSense * Time.deltaTime;
-        }
-    }
-    private void Look() {
-        _cameraVerticalAngle += _rotationInput.y;
-        _cameraVerticalAngle = Mathf.Clamp(_cameraVerticalAngle, -70f, 70f);
+        // Si el control está desactivado, no procesamos la rotación
+        if (!CanControlCamera) return;
 
-        // Rota al jugador horizontalmente
-        transform.Rotate(Vector3.up * _rotationInput.x);
-
-        // Rota la cámara verticalmente
-        _playerCamera.transform.localRotation = Quaternion.Euler(-_cameraVerticalAngle, 0f, 0f);
+        HandleRotation();
     }
 
-    public Vector3 GetCameraRotation()
+    private void HandleRotation()
     {
-        return _playerCamera.transform.rotation.eulerAngles;
+        // Leemos directamente del InputManager
+        Vector2 input = InputManager.Instance.LookInput;
+
+        if (input == Vector2.zero) return;
+
+        // Multiplicamos por sensibilidad
+        float mouseX = input.x * _rotationSensitivity;
+        float mouseY = input.y * _rotationSensitivity;
+
+        // 1. Rotación Vertical (Cámara) - Usamos resta para que el eje Y no esté invertido
+        _cameraVerticalAngle -= mouseY;
+        _cameraVerticalAngle = Mathf.Clamp(_cameraVerticalAngle, -_verticalLimit, _verticalLimit);
+        _cameraTransform.localRotation = Quaternion.Euler(_cameraVerticalAngle, 0f, 0f);
+
+        // 2. Rotación Horizontal (Cuerpo del Player)
+        transform.Rotate(Vector3.up * mouseX);
     }
 
+    public void SetControlState(bool isEnabled)
+    {
+        CanControlCamera = isEnabled;
+
+        // Gestión centralizada del cursor
+        Cursor.lockState = isEnabled ? CursorLockMode.Locked : CursorLockMode.None;
+        Cursor.visible = !isEnabled;
+    }
+
+    public Vector3 GetCameraRotation() => _cameraTransform.eulerAngles;
 }
