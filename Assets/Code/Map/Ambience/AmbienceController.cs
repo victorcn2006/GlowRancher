@@ -16,6 +16,9 @@ public class AmbienceController : MonoBehaviour
         ALIVE
     }
 
+    [Header("AMBIENCE START")]
+    [SerializeField] private AmbienceStates startingAmbience;
+
     [Header("GAME OBJECTS NEEDED")]
     [SerializeField, RequiredField] private GameObject _directionalLightGO;
     [SerializeField, RequiredField] private GameObject _skySphereGO;
@@ -76,7 +79,9 @@ public class AmbienceController : MonoBehaviour
     {
         _directionalLight = _directionalLightGO.GetComponent<Light>();
         RenderSettings.fogColor = _fogColor;
-        SetAmbience(AmbienceStates.ALIVE);
+
+        SetAmbience(startingAmbience);
+
     }
 
     
