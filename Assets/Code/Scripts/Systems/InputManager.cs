@@ -50,7 +50,7 @@ public class InputManager : MonoBehaviour {
 
 
 
-    [HideInInspector] public UnityEvent<float> OnInventoryScroll = new UnityEvent<float>();
+    [HideInInspector] public UnityEvent<float> OnScroll = new UnityEvent<float>();
     [HideInInspector] public UnityEvent<int> OnInventorySlotKey = new UnityEvent<int>();
     [HideInInspector] public UnityEvent OnInventoryRightClick = new UnityEvent();
 
@@ -113,7 +113,7 @@ public class InputManager : MonoBehaviour {
         _interact.action.performed += OnInteract;
 
         _look.action.performed += OnLook;
-        _scroll.action.performed += OnInventoryScrollPerformed;
+        _scroll.action.performed += OnScrollPerformed;
         _inventoryNavigation.action.performed += OnInventorySlotKeyPerformed;
         _rightClick.action.performed += OnInventoryRightClickPerformed;
 
@@ -125,7 +125,7 @@ public class InputManager : MonoBehaviour {
         _wikiOpen.action.performed -= OnWikiOpen;
         _interact.action.performed -= OnInteract;
 
-        _scroll.action.performed -= OnInventoryScrollPerformed;
+        _scroll.action.performed -= OnScrollPerformed;
         _inventoryNavigation.action.performed -= OnInventorySlotKeyPerformed;
         _rightClick.action.performed -= OnInventoryRightClickPerformed;
     }
@@ -165,15 +165,14 @@ public class InputManager : MonoBehaviour {
         OnInteractPerformed?.Invoke();
     }
 
-    private void OnInventoryScrollPerformed(InputAction.CallbackContext ctx)
+    private void OnScrollPerformed(InputAction.CallbackContext ctx)
     {
         float scroll = ctx.ReadValue<Vector2>().y;
-        OnInventoryScroll?.Invoke(scroll);
+        OnScroll?.Invoke(scroll);
     }
 
     private void OnInventorySlotKeyPerformed(InputAction.CallbackContext ctx)
     {
-        // The control name will be "1", "2", "3", or "4"
         if (ctx.control == null) return;
 
         int slot = -1;
@@ -183,6 +182,8 @@ public class InputManager : MonoBehaviour {
             case "2": slot = 1; break;
             case "3": slot = 2; break;
             case "4": slot = 3; break;
+            case "left": OnScroll?.Invoke(-1); return;
+            case "right": OnScroll?.Invoke(1); return;
         }
 
         if (slot >= 0)
