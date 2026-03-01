@@ -2,7 +2,6 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 using System.Collections;
-using static UnityEditor.Progress;
 
 public class LanguageManager : MonoBehaviour
 {
