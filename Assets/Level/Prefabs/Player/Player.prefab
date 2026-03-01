@@ -168,13 +168,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b8c6d2a808821f48945d991da9f3b7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpSound:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
   _groundLayer:
     serializedVersion: 2
     m_Bits: 0
@@ -206,7 +199,6 @@ MonoBehaviour:
       Data3: 0
       Data4: 0
     Path: 
-  _moveAction: {fileID: 4188637062435728261, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
 --- !u!114 &1213622026763875800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,8 +211,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 663231bf9b42b974f80366f1900d3a2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSense: 300
-  _playerCamera: {fileID: 0}
+  _rotationSensitivity: 0.2
+  _verticalLimit: 70
+  _cameraTransform: {fileID: 0}
 --- !u!114 &8581981930015451809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -356,6 +349,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3107569357727619604}
     m_Modifications:
+    - target: {fileID: 2975426167319592241, guid: 523fc2f63ce365e4ea711bacc8984683, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3623755191139163364, guid: 523fc2f63ce365e4ea711bacc8984683, type: 3}
       propertyPath: m_Name
       value: GunPrototype
