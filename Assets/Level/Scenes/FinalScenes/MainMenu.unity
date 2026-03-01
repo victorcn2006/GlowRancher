@@ -671,6 +671,54 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &494019809
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 494019810}
+  - component: {fileID: 494019811}
+  m_Layer: 0
+  m_Name: SliderSave
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &494019810
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 494019809}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1838507752}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &494019811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 494019809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7ad4a66a87002e4696134564f681c01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vcaPaths:
+  - vca:/General
+  - vca:/Music
+  - vca:/SFX
 --- !u!1 &526914546
 GameObject:
   m_ObjectHideFlags: 0
@@ -1770,6 +1818,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6379104499450642660, guid: 17d982f16127e6d418ad023742259aab, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1623114399}
+    - targetCorrespondingSourceObject: {fileID: 6379104499450642660, guid: 17d982f16127e6d418ad023742259aab, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 494019810}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 765488798403800077, guid: 17d982f16127e6d418ad023742259aab, type: 3}
       insertIndex: -1
@@ -2215,7 +2266,7 @@ MonoBehaviour:
   OnLookPerformed:
     m_PersistentCalls:
       m_Calls: []
-  OnInventoryScroll:
+  OnScroll:
     m_PersistentCalls:
       m_Calls: []
   OnInventorySlotKey:
