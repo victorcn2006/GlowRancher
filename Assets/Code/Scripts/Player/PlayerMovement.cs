@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private float _walkSpeed = 5f;
     [SerializeField] private float _jumpForce = 5f;
+    [SerializeField] private float _doubleJumpForce = 8f; // Fuerza mayor para el segundo salto
 
     [Header("Audio")]
     [SerializeField] private EventReference _jumpSound;
@@ -17,7 +18,9 @@ public class PlayerMovement : MonoBehaviour
     private Transform _mainCamTransform;
 
     // Estado
-    private bool _canJump = true;
+    private bool _canJump = true;          // ¿Está en el suelo?
+    private bool _hasDoubleJumpItem = false; // ¿Ha recogido el ítem?
+    private bool _didDoubleJump = false;    // ¿Ya usó el doble salto en el aire?
 
     private void Awake()
     {
@@ -29,14 +32,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnEnable()
     {
-        // Nos suscribimos al evento de salto del InputManager
-        // Usamos una función lambda para llamar a nuestro método de salto
-        InputManager.Instance.OnJumpPerformed.AddListener(HandleJump);
+        // Suscripción al evento de salto del InputManager
+        if (InputManager.Instance != null)
+            InputManager.Instance.OnJumpPerformed.AddListener(HandleJump);
     }
 
     private void OnDisable()
     {
-        // Importante desuscribirse para evitar errores de memoria
         if (InputManager.Instance != null)
             InputManager.Instance.OnJumpPerformed.RemoveListener(HandleJump);
     }
@@ -48,7 +50,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void ApplyMovement()
     {
-        // Obtenemos el input directamente del InputManager
         Vector2 input = InputManager.Instance.MoveInput;
 
         if (input.sqrMagnitude < 0.01f)
@@ -57,13 +58,11 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        // Calculamos direcciones basadas en la cámara
         Vector3 camForward = Vector3.Scale(_mainCamTransform.forward, new Vector3(1, 0, 1)).normalized;
         Vector3 camRight = Vector3.Scale(_mainCamTransform.right, new Vector3(1, 0, 1)).normalized;
 
         Vector3 moveDirection = (camRight * input.x + camForward * input.y).normalized;
 
-        // Aplicamos velocidad
         Vector3 targetVelocity = moveDirection * _walkSpeed;
         targetVelocity.y = _rb.velocity.y;
 
@@ -72,17 +71,42 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleJump()
     {
+        // 1. SALTO NORMAL (Desde el suelo)
         if (_canJump)
         {
-            // FMOD Sound
-            RuntimeManager.PlayOneShot(_jumpSound, transform.position);
-
-            // Aplicamos fuerza de salto
-            // Reseteamos la velocidad Y antes para que el salto siempre tenga la misma fuerza
-            _rb.velocity = new Vector3(_rb.velocity.x, 0, _rb.velocity.z);
-            _rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+            PerformJump(_jumpForce);
+            _didDoubleJump = false; // Resetear el uso del doble salto al saltar desde el suelo
+        }
+        // 2. DOBLE SALTO (En el aire, si tiene el item y no lo ha usado aún)
+        else if (_hasDoubleJumpItem && !_didDoubleJump)
+        {
+            _didDoubleJump = true;
+            PerformJump(_doubleJumpForce); // Usamos la fuerza potenciada
         }
     }
 
-    public void SetCanJump(bool value) => _canJump = value;
+    private void PerformJump(float force)
+    {
+        // Sonido FMOD
+        RuntimeManager.PlayOneShot(_jumpSound, transform.position);
+
+        // Reset de velocidad vertical para que el salto sea siempre igual de potente
+        _rb.velocity = new Vector3(_rb.velocity.x, 0, _rb.velocity.z);
+
+        // Aplicar fuerza hacia arriba
+        _rb.AddForce(Vector3.up * force, ForceMode.Impulse);
+    }
+
+    // Métodos para ser llamados desde otros scripts
+    public void SetCanJump(bool value)
+    {
+        _canJump = value;
+        if (_canJump) _didDoubleJump = false; // Reset al tocar suelo
+    }
+
+    public void EnableDoubleJumpItem()
+    {
+        _hasDoubleJumpItem = true;
+        Debug.Log("¡Habilidad de Doble Salto desbloqueada!");
+    }
 }
