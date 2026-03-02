@@ -20860,89 +20860,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1cd6178735b452b448096d21150ccb48, type: 3}
---- !u!1 &862284299
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 862284300}
-  - component: {fileID: 862284303}
-  - component: {fileID: 862284302}
-  m_Layer: 0
-  m_Name: SkySphere
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &862284300
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 862284299}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 383, y: 0, z: 352}
-  m_LocalScale: {x: 858.85675, y: 858.85675, z: 858.85675}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1953237417}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &862284302
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 862284299}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 0c3d38ebeb397dc45a779ef17904c181, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &862284303
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 862284299}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &868407844
 GameObject:
   m_ObjectHideFlags: 0
@@ -39703,15 +39620,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8749309372716423319, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 594.1
+      value: 542.8
       objectReference: {fileID: 0}
     - target: {fileID: 8749309372716423319, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 26.3
+      value: 26.47
       objectReference: {fileID: 0}
     - target: {fileID: 8749309372716423319, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 201.6
+      value: 294
       objectReference: {fileID: 0}
     - target: {fileID: 8749309372716423319, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -57088,7 +57005,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 502566348}
-  - {fileID: 862284300}
   m_Father: {fileID: 2088218760}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1953237418
@@ -57105,7 +57021,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingAmbience: 1
   _directionalLightGO: {fileID: 502566347}
-  _skySphereGO: {fileID: 862284299}
+  _skySphereGO: {fileID: 0}
   _transitionBetweenAmbienceTime: 2
   _easeTransitionType: 9
   _directionalLightCorruptedColor: {r: 0.121715896, g: 0.12826946, b: 0.24528301, a: 0}
