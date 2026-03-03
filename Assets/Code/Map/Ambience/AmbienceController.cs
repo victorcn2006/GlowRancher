@@ -131,21 +131,21 @@ public class AmbienceController : MonoBehaviour
 
         _directionalLight.shadows = LightShadows.Hard;
 
-        DOTween.To(() => _directionalLight.shadowStrength, x => _directionalLight.shadowStrength = x, targetShadowStrength, _transitionBetweenAmbienceTime).SetEase(Ease.OutQuad);
+        DOTween.To(() => _directionalLight.shadowStrength, x => _directionalLight.shadowStrength = x, targetShadowStrength, _transitionBetweenAmbienceTime).SetEase(_easeTransitionType);
 
         StartCoroutine(CheckShadowAfterTransition());
 
 
         //============= SKYBOX =============\\
-        DOTween.To(() => RenderSettings.skybox.GetFloat("_AtmosphereThickness"), x => RenderSettings.skybox.SetFloat("_AtmosphereThickness", x), targetSkyBoxAtmosphereThickness, _transitionBetweenAmbienceTime).SetEase(Ease.OutQuad);
-        DOTween.To(() => RenderSettings.skybox.GetFloat("_Exposure"), x => RenderSettings.skybox.SetFloat("_Exposure", x), targetSkyBoxExposure, _transitionBetweenAmbienceTime).SetEase(Ease.OutQuad);
+        DOTween.To(() => RenderSettings.skybox.GetFloat("_AtmosphereThickness"), x => RenderSettings.skybox.SetFloat("_AtmosphereThickness", x), targetSkyBoxAtmosphereThickness, _transitionBetweenAmbienceTime).SetEase(_easeTransitionType);
+        DOTween.To(() => RenderSettings.skybox.GetFloat("_Exposure"), x => RenderSettings.skybox.SetFloat("_Exposure", x), targetSkyBoxExposure, _transitionBetweenAmbienceTime).SetEase(_easeTransitionType);
         RenderSettings.skybox.DOColor(targetSkyBoxColor, "_SkyTint" , _transitionBetweenAmbienceTime).SetEase(_easeTransitionType);
 
 
         //============= FOG =============\\
         RenderSettings.fog = true;
 
-        DOTween.To(() => RenderSettings.fogDensity, x => RenderSettings.fogDensity = x, targetFogDensity, _transitionBetweenAmbienceTime).SetEase(Ease.OutQuad);
+        DOTween.To(() => RenderSettings.fogDensity, x => RenderSettings.fogDensity = x, targetFogDensity, _transitionBetweenAmbienceTime).SetEase(_easeTransitionType);
 
         StartCoroutine(CheckFogAfterTransition());
 
@@ -175,5 +175,8 @@ public class AmbienceController : MonoBehaviour
             RenderSettings.fog = false;
         }
     }
+
+    public float GetTransitionBetweenAmbienceTime => _transitionBetweenAmbienceTime;
+    public Ease GetEaseTransitionType => _easeTransitionType;
 
 }
