@@ -1,90 +1,69 @@
 using System.Collections;
 using UnityEngine;
 
-public class Player : Character, ISavable{
-    //Variables opcionales con Getter publico y setter privado
+public class Player : Character, ISavable
+{
     public string currentBiome { get; private set; } = "Pradera";
     public int money { get; private set; } = 0;
     public int stamina { get; private set; } = 100;
     private SiloInventory _inventory;
-    //[SerializeField] private UI_Inventory _uiInventory;
 
-
-    //Override al Awake del Character para asignar valores a las variables
-    protected override void Awake() {
+    protected override void Awake()
+    {
         StartCoroutine(_Awake());
+        // Inicializamos la vida si no viene de un guardado previo
         currentHealth = maxHealth;
         _inventory = new SiloInventory();
-        //_uiInventory.SetInventory(_inventory);
     }
-    IEnumerator _Awake() {
+
+    IEnumerator _Awake()
+    {
         while (SaveManager.Instance == null || SaveManager.Instance.IsLoading)
             yield return null;
         base.Awake();
     }
 
-    private void OnEnable()
+    // --- LÓGICA DE SALUD ---
+
+    public void Heal(int amount)
     {
-        SaveManager.Instance?.RegisterSavable(this);
+        currentHealth += amount;
+
+        // Limitar la curación para que no sobrepase el máximo
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
     }
-    private void OnDisable()
+
+    public int GetCurrentHealth() => currentHealth;
+    public int GetMaxHealth() => maxHealth;
+
+    public override void TakeDamage(int damage)
     {
-        SaveManager.Instance?.UnregisterSavable(this);
-    }
-    //Override al attack cambiar por la logica nueva de la aspiradora
-    protected override void Attack() {
-        if (SaveManager.Instance != null && SaveManager.Instance.IsLoading)
-            return;
-        base.Attack();
-    }
-    public void AddMoney(int amount) {
-        money += amount;
-        // Notifica el SaveManager del canvi
-    }
-
-    // Metodo para gastar dinero
-    public void SpendMoney(int amount) {
-        money = Mathf.Max(0, money - amount);
-    }
-
-    // Quan el jugador puja de nivell
-    public void ChangeBiome(string biome) {
-        if(!string.IsNullOrEmpty(biome))
-            currentBiome = biome;
-    }
-
-    // Quan el jugador rep dany
-    public override void TakeDamage(int damage) {
         base.TakeDamage(damage);
-    } 
+        // Aquí podrías añadir lógica de muerte si currentHealth <= 0
+    }
 
-    //===================== METODOS DE ISAVABLE =====================//
-    public string GetSaveID()
-    {
-        return "Player";
-    }
-    public object CaptureState()
-    {
-        return new PlayerData(this);
-    }
+    // --- SISTEMA DE GUARDADO (ISAVABLE) ---
+
+    private void OnEnable() => SaveManager.Instance?.RegisterSavable(this);
+    private void OnDisable() => SaveManager.Instance?.UnregisterSavable(this);
+
+    public string GetSaveID() => "Player";
+    public object CaptureState() => new PlayerData(this);
+
     public void RestoreState(object state)
     {
-        /*Si el objeto que me pasas es del tipo PlayerData usa data para restaurar 
-        el estado ya que tiene toda la info*/
         if (state is PlayerData data)
         {
             characterName = data.characterName;
-            description = data.description;
             currentBiome = data.currentBiome;
             money = data.money;
             currentHealth = data.health;
-            maxHealth= data.maxHealth;
+            maxHealth = data.maxHealth;
             stamina = data.stamina;
             transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
-        }
-        else
-        {
-            Debug.LogWarning("RestoreState: el objeto no es de tipo PlayerData para " + GetSaveID());
         }
     }
 }

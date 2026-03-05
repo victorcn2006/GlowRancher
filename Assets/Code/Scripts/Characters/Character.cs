@@ -10,7 +10,7 @@ public class Character : MonoBehaviour {
     [SerializeField] protected int maxHealth;
     protected Vector3 position;
     //Se va actualizando y es protected accesible para los hijos
-    protected int currentHealth;
+    /*protected*/ public int currentHealth;
     //Velocidad de la entidad, override para sobreescribir, por eso es virtual
     protected virtual void Awake(){
         currentHealth = maxHealth;
