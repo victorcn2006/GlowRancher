@@ -7,6 +7,8 @@ public class DoubleJumpItem : MonoBehaviour
     [SerializeField] private float _floatAmplitude = 0.5f;
     [SerializeField] private float _floatFrequency = 1f;
 
+    private bool _playerDoubleJump = false;
+
     private Vector3 _startPos;
 
     private void Start()
@@ -27,10 +29,12 @@ public class DoubleJumpItem : MonoBehaviour
         // Intentar obtener el componente de movimiento del jugador
         if (other.TryGetComponent<PlayerMovement>(out PlayerMovement player))
         {
+            _playerDoubleJump = true;
             player.EnableDoubleJumpItem();
 
             // Aquí puedes añadir un efecto de sonido o partículas antes de destruir
             Destroy(gameObject);
         }
+
     }
 }

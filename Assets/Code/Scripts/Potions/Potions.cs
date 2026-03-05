@@ -7,6 +7,7 @@ public class Potions : ScriptableObject
 {
     public string potionName;
     public string description;
+    public int cure;
     public string id;
 
 }
