@@ -19372,11 +19372,19 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1563374114}
     - target: {fileID: 2542492029176538642, guid: aaf5f0c1e594b854fb67e145c0d2e296, type: 3}
+      propertyPath: slider
+      value: 
+      objectReference: {fileID: 570671250}
+    - target: {fileID: 2542492029176538642, guid: aaf5f0c1e594b854fb67e145c0d2e296, type: 3}
       propertyPath: _player
       value: 
       objectReference: {fileID: 1563374114}
     - target: {fileID: 2542492029176538642, guid: aaf5f0c1e594b854fb67e145c0d2e296, type: 3}
       propertyPath: _slider
+      value: 
+      objectReference: {fileID: 570671250}
+    - target: {fileID: 2542492029176538642, guid: aaf5f0c1e594b854fb67e145c0d2e296, type: 3}
+      propertyPath: energySlider
       value: 
       objectReference: {fileID: 570671250}
     - target: {fileID: 2543951968262090980, guid: aaf5f0c1e594b854fb67e145c0d2e296, type: 3}
@@ -40136,7 +40144,14 @@ MonoBehaviour:
   characterName: 
   description: 
   maxHealth: 100
+  maxEnergy: 100
   currentHealth: 80
+  currentEnergy: 0
+  _maxEnergy: 100
+  _currentEnergy: 100
+  _energyBurnRate: 25
+  _energyRegenRate: 15
+  _regenDelay: 3
 --- !u!114 &1563374120
 MonoBehaviour:
   m_ObjectHideFlags: 0

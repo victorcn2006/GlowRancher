@@ -4,7 +4,8 @@ public class PlayerData{
     [Header("Character Info")]
     public string characterName, description, currentBiome;
     [Header("Character Stats")]
-    public int health, money, stamina, maxHealth;
+    public int health, money, maxHealth;
+    public float stamina;
     [Header("Transform Data")]
     public float[] position = new float[3];
     
@@ -14,7 +15,7 @@ public class PlayerData{
         currentBiome = player.currentBiome;
         health = player.GetCurrentHealth();
         money = player.money;
-        stamina = player.stamina;
+        stamina = player.GetCurrentEnergy();                        
         maxHealth = player.GetMaxHealth();
         position[0] = player.transform.position.x;
         position[1] = player.transform.position.y;
