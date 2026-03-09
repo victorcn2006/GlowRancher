@@ -11,9 +11,9 @@ public class Player : Character, ISavable
     [SerializeField] private float _maxEnergy = 100f;
     [SerializeField] private float _currentEnergy = 100f;
     [SerializeField] private float _energyBurnRate = 25f;
-    [SerializeField] private float _energyRegenRate = 20f;
-    [SerializeField] private float _walkRegenMultiplier = 0.4f;
-    [SerializeField] private float _regenDelay = 3f;
+    [SerializeField] private float _energyRegenRate = 45f;
+    [SerializeField] private float _walkRegenMultiplier = 0.5f;
+    [SerializeField] private float _regenDelay = 1f;
 
     private Coroutine _regenCoroutine;
     private SiloInventory _inventory;

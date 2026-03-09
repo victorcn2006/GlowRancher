@@ -39562,6 +39562,10 @@ PrefabInstance:
       propertyPath: _jumpSound.Guid.Data4
       value: -1598844575
       objectReference: {fileID: 0}
+    - target: {fileID: 3970167334782335905, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: f237da1709f2cbc4598c799fe7949383, type: 2}
     - target: {fileID: 4073121894591536787, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
       propertyPath: m_Name
       value: SuckPoint
@@ -40147,10 +40151,13 @@ MonoBehaviour:
   maxEnergy: 100
   currentHealth: 80
   currentEnergy: 0
+  currentBiome: Pradera
+  money: 0
   _maxEnergy: 100
   _currentEnergy: 100
   _energyBurnRate: 25
   _energyRegenRate: 15
+  _walkRegenMultiplier: 0.5
   _regenDelay: 3
 --- !u!114 &1563374120
 MonoBehaviour:
