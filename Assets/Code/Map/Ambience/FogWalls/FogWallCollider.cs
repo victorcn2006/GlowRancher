@@ -4,28 +4,14 @@ using UnityEngine;
 
 public class FogWallCollider : MonoBehaviour
 {
-    [Header("AMBIENCE START")]
-    [SerializeField] private ColliderType _colliderType;
-
-
     [Header("SCRIPTS NEEDED")]
     [SerializeField] private FogWallSet _fogWallSet;
 
-    public enum ColliderType
-    {
-        ENTRY,
-        EXIT
-    }
+    [Header("SCRIPTS NEEDED")]
+    [SerializeField] private AmbienceController.AmbienceStates _ambience;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (_colliderType == ColliderType.ENTRY)
-        {
-            _fogWallSet.OnFogEntry();
-        }
-        else
-        {
-            _fogWallSet.OnFogExit();
-        }
+        _fogWallSet.OnFogPass(_ambience);
     }
 }

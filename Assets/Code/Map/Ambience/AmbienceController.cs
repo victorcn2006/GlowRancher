@@ -13,7 +13,8 @@ public class AmbienceController : MonoBehaviour
     public enum AmbienceStates
     {
         CORRUPTED,
-        ALIVE
+        ALIVE,
+        ICY
     }
 
     [Header("AMBIENCE START")]
@@ -30,22 +31,22 @@ public class AmbienceController : MonoBehaviour
     private Light _directionalLight;
 
     //=====================CORRUPTED SETTINGS=====================\\
-    [Space(7)]
+    [Space(10)]
     [Header("CORRUPTED SETTINGS")]
     [Header("Directional Light")]  //DONE
     [SerializeField] private Color _directionalLightCorruptedColor;
     [SerializeField] private float _directionalLightCorruptedIntensity;
 
-    [Space(5)]
+    [Space(2)]
     [Header("SkyBox")]
     [SerializeField] private float _skyBoxCorruptedAtmosphereThickness;
     [SerializeField] private float _skyBoxCorruptedExposure;
     [SerializeField] private Color _skyBoxCorruptedTint;
 
-    [Space(5)]
+    [Space(2)]
     [Header("Fog")]
-    [SerializeField] private float _fogCorruptedDensity;
-    [SerializeField] private Color _fogColor;
+    [SerializeField] private float _corruptedFogDensity;
+    [SerializeField] private Color _corruptedFogColor;
 
 
     //=====================ALIVE SETTINGS=====================\\
@@ -56,12 +57,29 @@ public class AmbienceController : MonoBehaviour
     [SerializeField] private float _directionalLightAliveIntensity;
     // ShadowType "No Shadows";
 
-    [Space(5)]
+    [Space(2)]
     [Header("SkyBox")]
     [SerializeField] private float _skyBoxAliveAtmosphereThickness;
     [SerializeField] private float _skyBoxAliveExposure;
     [SerializeField] private Color _skyBoxAliveTint;
 
+    //=====================ICY SETTINGS=====================\\
+    [Space(10)]
+    [Header("ICY SETTINGS")]
+    [Header("Directional Light")]  //DONE
+    [SerializeField] private Color _directionalLightIcyColor;
+    [SerializeField] private float _directionalLightIcyIntensity;
+
+    [Space(2)]
+    [Header("SkyBox")]
+    [SerializeField] private float _skyBoxIcyAtmosphereThickness;
+    [SerializeField] private float _skyBoxIcyExposure;
+    [SerializeField] private Color _skyBoxIcyTint;
+
+    [Space(2)]
+    [Header("Fog")]
+    [SerializeField] private float _icyFogDensity;
+    [SerializeField] private Color _icyFogColor;
 
     private void Awake()
     {
@@ -77,7 +95,7 @@ public class AmbienceController : MonoBehaviour
     private void Start()
     {
         _directionalLight = _directionalLightGO.GetComponent<Light>();
-        RenderSettings.fogColor = _fogColor;
+        RenderSettings.fogColor = _corruptedFogColor;
 
         SetAmbience(startingAmbience);
 
@@ -99,6 +117,7 @@ public class AmbienceController : MonoBehaviour
         Color targetSkyBoxColor;
 
         float targetFogDensity;
+        Color targetFogColor; //falta programarlo
 
 
         if (ambienceState == AmbienceStates.CORRUPTED)
@@ -111,9 +130,10 @@ public class AmbienceController : MonoBehaviour
             targetSkyBoxAtmosphereThickness = _skyBoxCorruptedAtmosphereThickness;
             targetSkyBoxExposure = _skyBoxCorruptedExposure;
             targetSkyBoxColor = _skyBoxCorruptedTint;
-            targetFogDensity = _fogCorruptedDensity;
+            targetFogDensity = _corruptedFogDensity;
+            targetFogColor = _corruptedFogColor;
         }
-        else
+        else if(ambienceState == AmbienceStates.ALIVE)
         {
             targetLightColor = _directionalLightAliveColor;
             targetLightIntensity = _directionalLightAliveIntensity;
@@ -123,6 +143,20 @@ public class AmbienceController : MonoBehaviour
             targetSkyBoxExposure = _skyBoxAliveExposure;
             targetSkyBoxColor = _skyBoxAliveTint;
             targetFogDensity = 0f;
+            targetFogColor = new Color(1f, 1f, 1f, 0f);
+        }
+        else // es ICY por descarte
+        {
+
+            targetLightColor = _directionalLightIcyColor;
+            targetLightIntensity = _directionalLightIcyIntensity;
+            targetShadowStrength = 1f;
+
+            targetSkyBoxAtmosphereThickness = _skyBoxIcyAtmosphereThickness;
+            targetSkyBoxExposure = _skyBoxIcyExposure;
+            targetSkyBoxColor = _skyBoxIcyTint;
+            targetFogDensity = _icyFogDensity;
+            targetFogColor = _icyFogColor;
         }
 
         //============= LIGHT =============\\
@@ -146,6 +180,8 @@ public class AmbienceController : MonoBehaviour
         RenderSettings.fog = true;
 
         DOTween.To(() => RenderSettings.fogDensity, x => RenderSettings.fogDensity = x, targetFogDensity, _transitionBetweenAmbienceTime).SetEase(_easeTransitionType);
+        DOTween.To(() => RenderSettings.fogColor, x => RenderSettings.fogColor = x, targetFogColor, _transitionBetweenAmbienceTime).SetEase(_easeTransitionType);
+
 
         StartCoroutine(CheckFogAfterTransition());
 

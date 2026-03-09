@@ -6,8 +6,6 @@ using UnityEngine;
 public class FogWallSet : MonoBehaviour
 {
 
-    [Header("No vision Walls")]
-    [SerializeField] private List<GameObject> _noVisionWalls = new List<GameObject>();
 
     private float _transitionTime;
     private Ease _easeType;
@@ -18,27 +16,9 @@ public class FogWallSet : MonoBehaviour
         _easeType = AmbienceController.Instance.GetEaseTransitionType;
     }
 
-    public void OnFogEntry()
+    public void OnFogPass(AmbienceController.AmbienceStates ambience)
     {
-        foreach (var wall in _noVisionWalls)
-        {
-            Renderer wallRenderer = wall.GetComponent<Renderer>();
-            wallRenderer.material.DOFade(0f, _transitionTime).SetEase(_easeType);
-
-            AmbienceController.Instance.SetAmbience(AmbienceController.AmbienceStates.CORRUPTED);
-        }
-    }
-
-    public void OnFogExit()
-    {
-        foreach (var wall in _noVisionWalls)
-        {
-
-            Renderer wallRenderer = wall.GetComponent<Renderer>();
-            wallRenderer.material.DOFade(1f, _transitionTime).SetEase(_easeType);
-
-            AmbienceController.Instance.SetAmbience(AmbienceController.AmbienceStates.ALIVE);
-        }
+            AmbienceController.Instance.SetAmbience(ambience);
     }
 
 
