@@ -6,15 +6,15 @@ public class MarketEvent : MonoBehaviour
 {
     #region Timer
     [Header("Timer")]
-    private float _MaxTiempoEvento = 10;
-    private float _MinTiempoEvento = 0;
+    private float _MaxTiempoEvento = 1800;
+    private float _MinTiempoEvento = 1000;
     public float _tiempoRestante = 0;
     #endregion
 
     #region Event
     [Header("Event")]
-    private float _MaxDuracionEvento = 10;
-    private float _MinDuracionEvento = 1;
+    private float _MaxDuracionEvento = 300;
+    private float _MinDuracionEvento = 100;
     private float _tiempoEvento = 0;
     private bool _eventoActivo = false;
     #endregion
@@ -39,7 +39,6 @@ public class MarketEvent : MonoBehaviour
         if (_tiempoRestante < 0)
         {
             _tiempoRestante = Random.Range(_MinTiempoEvento, _MaxTiempoEvento);         //Generem el temps de l'espera per l'event
-            Debug.Log("In Espera");
         }
 
 
@@ -51,7 +50,6 @@ public class MarketEvent : MonoBehaviour
             }
             else
             {
-                Debug.Log("Out Espera");
                 _tiempoRestante = 0;
                 _eventoActivo = true;
                 _tiempoEvento = Random.Range(_MaxDuracionEvento, _MinDuracionEvento);       //generem el temps de l'event
@@ -66,21 +64,16 @@ public class MarketEvent : MonoBehaviour
         if (_eventoActivo)
         {
             //aqui aniria el multiplayer de valor de la slimestone
-            Debug.Log("Millora de preu");
             marketManager.EconomyEvent();
             if (_tiempoEvento > 0)
             {
-                Debug.Log("EventUnderway");
                 _tiempoEvento -= Time.deltaTime;
                 _tiempoEvento = 0;
-
             }
             else
             {
-                Debug.Log("Out Event");
                 _eventoActivo = false;
                 _tiempoRestante = 0;
-                Debug.Log("Preu torna a la normalitat");
             }
         }
     }
