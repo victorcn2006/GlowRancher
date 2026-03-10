@@ -6,8 +6,8 @@ public class MarketEvent : MonoBehaviour
 {
     #region Timer
     [Header("Timer")]
-    private float _MaxTiempoEvento = 1800;
-    private float _MinTiempoEvento = 1000;
+    private float _MaxTiempoEvento = 1000;
+    private float _MinTiempoEvento = 800;
     public float _tiempoRestante = 0;
     #endregion
 
