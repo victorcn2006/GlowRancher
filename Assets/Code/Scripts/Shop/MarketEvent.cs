@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class MarketEvent : MonoBehaviour
 {
+    [Header("Gloabal")]
+    private int _timeZero = 0;
+
     #region Timer
     [Header("Timer")]
-    private float _MaxTiempoEvento = 1000;
-    private float _MinTiempoEvento = 800;
+    private const float MAXTIEMPO_EVENTO = 1000;
+    private const float MINTIEMPO_EVENTO = 800;
     public float _tiempoRestante = 0;
     #endregion
 
     #region Event
     [Header("Event")]
-    private float _MaxDuracionEvento = 300;
-    private float _MinDuracionEvento = 100;
+    private const float MAXDURACION_EVENTO = 300;
+    private const float MINDURACION_EVENTO = 100;
     private float _tiempoEvento = 0;
     private bool _eventoActivo = false;
     #endregion
@@ -36,15 +39,15 @@ public class MarketEvent : MonoBehaviour
 
     private void TimeToEvent()
     {
-        if (_tiempoRestante < 0)
+        if (_tiempoRestante < _timeZero)
         {
-            _tiempoRestante = Random.Range(_MinTiempoEvento, _MaxTiempoEvento);         //Generem el temps de l'espera per l'event
+            _tiempoRestante = Random.Range(MINTIEMPO_EVENTO, MAXTIEMPO_EVENTO);         //Generem el temps de l'espera per l'event
         }
 
 
         if (!_eventoActivo)
         {
-            if (_tiempoRestante > 0)
+            if (_tiempoRestante > _timeZero)
             {
                 _tiempoRestante -= Time.deltaTime; //temps restant
             }
@@ -52,7 +55,7 @@ public class MarketEvent : MonoBehaviour
             {
                 _tiempoRestante = 0;
                 _eventoActivo = true;
-                _tiempoEvento = Random.Range(_MaxDuracionEvento, _MinDuracionEvento);       //generem el temps de l'event
+                _tiempoEvento = Random.Range(MAXDURACION_EVENTO, MINDURACION_EVENTO);       //generem el temps de l'event
                 Event();
             }
         }
@@ -65,7 +68,7 @@ public class MarketEvent : MonoBehaviour
         {
             //aqui aniria el multiplayer de valor de la slimestone
             marketManager.EconomyEvent();
-            if (_tiempoEvento > 0)
+            if (_tiempoEvento > _timeZero)
             {
                 _tiempoEvento -= Time.deltaTime;
                 _tiempoEvento = 0;
