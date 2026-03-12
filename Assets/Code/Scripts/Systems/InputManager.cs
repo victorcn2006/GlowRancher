@@ -24,6 +24,7 @@ public class InputManager : MonoBehaviour {
     [RequiredField, SerializeField] private InputActionReference _look;
     [RequiredField, SerializeField] private InputActionReference _interact;
     [RequiredField, SerializeField] private InputActionReference _pauseGame;
+    [RequiredField, SerializeField] private InputActionReference _build;
 
     [Header("Aspirator Inputs")]
     [RequiredField, SerializeField] private InputActionReference _aspirate;
@@ -39,6 +40,8 @@ public class InputManager : MonoBehaviour {
     [HideInInspector] public bool IsPaused;
     [HideInInspector] public bool IsWikiOpen { get; private set; }
     [HideInInspector] public bool IsShopOpen { get; private set; }
+    [HideInInspector] public bool IsBuildingPressed;
+
 
 
     [HideInInspector] public UnityEvent OnJumpPerformed = new UnityEvent();
@@ -47,7 +50,7 @@ public class InputManager : MonoBehaviour {
     [HideInInspector] public UnityEvent OnWikiPerformed = new UnityEvent();
     [HideInInspector] public UnityEvent OnInteractPerformed = new UnityEvent();
     [HideInInspector] public UnityEvent OnLookPerformed = new UnityEvent();
-
+    [HideInInspector] public UnityEvent OnBuildPerformed = new UnityEvent();
 
 
     [HideInInspector] public UnityEvent<float> OnScroll = new UnityEvent<float>();
@@ -110,6 +113,7 @@ public class InputManager : MonoBehaviour {
         _wikiOpen.action.performed += OnWikiOpen;
         _move.action.performed += OnMovement;
         _interact.action.performed += OnInteract;
+        _build.action.performed += OnBuild;
 
         _look.action.performed += OnLook;
         _scroll.action.performed += OnScrollPerformed;
@@ -123,10 +127,15 @@ public class InputManager : MonoBehaviour {
         _pauseGame.action.performed -= OnPauseGame;
         _wikiOpen.action.performed -= OnWikiOpen;
         _interact.action.performed -= OnInteract;
+        _build.action.performed -= OnBuild;
 
         _scroll.action.performed -= OnScrollPerformed;
         _inventoryNavigation.action.performed -= OnInventorySlotKeyPerformed;
         _rightClick.action.performed -= OnInventoryRightClickPerformed;
+    }
+
+    private void OnBuild(InputAction.CallbackContext ctx) {
+        OnBuildPerformed.Invoke();
     }
 
     private void OnLook(InputAction.CallbackContext ctx)
@@ -134,8 +143,6 @@ public class InputManager : MonoBehaviour {
 
         OnLookPerformed?.Invoke();
     }
-
-
 
     private void OnJump(InputAction.CallbackContext ctx) {
         IsJumpPressed = true;
