@@ -5,7 +5,7 @@ using UnityEngine;
 public class FusionerController : MonoBehaviour
 {
     [Header("Position")]
-    Transform _spawnLocalization;
+    public Transform _spawnLocalization;
 
     [Header("Var")]
     private string _firstCollision = null;
