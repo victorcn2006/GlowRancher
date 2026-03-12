@@ -8,6 +8,8 @@ public class EditBuilding : MonoBehaviour
 {
     [SerializeField] private GameObject _hologram;
     [SerializeField] private GameObject _building;
+    [SerializeField] private MainCameraPosition _mainCamera;
+    private Vector3 _cameraPosition;
 
     private bool _contact = false;
 
@@ -21,6 +23,11 @@ public class EditBuilding : MonoBehaviour
         if (_building == null) return;
         if(_hologram == null) return;
         ActiveBuilding();
+    }
+
+    private void Update() {
+        _cameraPosition = _mainCamera.GetCameraPosition();
+        Debug.Log(_cameraPosition);
     }
 
     private void OnDisable()
