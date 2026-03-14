@@ -355,7 +355,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -670,6 +671,54 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &494019809
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 494019810}
+  - component: {fileID: 494019811}
+  m_Layer: 0
+  m_Name: SliderSave
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &494019810
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 494019809}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1838507752}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &494019811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 494019809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7ad4a66a87002e4696134564f681c01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vcaPaths:
+  - vca:/General
+  - vca:/Music
+  - vca:/SFX
 --- !u!1 &526914546
 GameObject:
   m_ObjectHideFlags: 0
@@ -732,7 +781,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -953,6 +1003,7 @@ GameObject:
   - component: {fileID: 705507995}
   - component: {fileID: 705507994}
   - component: {fileID: 705507996}
+  - component: {fileID: 705507997}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -1050,6 +1101,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: e67188a531e723e4d92537ac59d00dee, type: 3}
+--- !u!114 &705507997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705507993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &832532549
 GameObject:
   m_ObjectHideFlags: 0
@@ -1134,7 +1208,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1346,7 +1420,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -1444,7 +1519,7 @@ MonoBehaviour:
   m_UpdateString:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 526914548}
+      - m_Target: {fileID: 1009509273}
         m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
         m_MethodName: set_text
         m_Mode: 0
@@ -1618,7 +1693,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -1766,6 +1842,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6379104499450642660, guid: 17d982f16127e6d418ad023742259aab, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1623114399}
+    - targetCorrespondingSourceObject: {fileID: 6379104499450642660, guid: 17d982f16127e6d418ad023742259aab, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 494019810}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 765488798403800077, guid: 17d982f16127e6d418ad023742259aab, type: 3}
       insertIndex: -1
@@ -2184,15 +2263,19 @@ MonoBehaviour:
   _wikiOpen: {fileID: -752228897096943169, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
   _move: {fileID: 4188637062435728261, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
   _jump: {fileID: -8404440847952596146, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
-  _look: {fileID: -8404440847952596146, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
+  _look: {fileID: -4880297091499603506, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
   _interact: {fileID: -1435672595644193247, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
   _pauseGame: {fileID: 3820728662531952595, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
   _aspirate: {fileID: 6501401278561469931, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
   _launchObject: {fileID: 8266952679875099490, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
   _inventoryNavigation: {fileID: -4489386230323612283, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
   _scroll: {fileID: 5078554399073276924, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
+  IsMove: 0
   IsPaused: 0
   OnJumpPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnMovementPerformed:
     m_PersistentCalls:
       m_Calls: []
   OnPausePerformed:
@@ -2201,7 +2284,13 @@ MonoBehaviour:
   OnWikiPerformed:
     m_PersistentCalls:
       m_Calls: []
-  OnInventoryScroll:
+  OnInteractPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnLookPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnScroll:
     m_PersistentCalls:
       m_Calls: []
   OnInventorySlotKey:
@@ -2364,7 +2453,7 @@ MonoBehaviour:
       Data3: 39024041
       Data4: -1664337932
     Path: event:/ButtonClick_Sound
-  currentButton: 4
+  currentButton: 5
 --- !u!1 &1796240191
 GameObject:
   m_ObjectHideFlags: 0
@@ -2465,7 +2554,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2741,7 +2830,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -2839,7 +2929,7 @@ MonoBehaviour:
   m_UpdateString:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 526914548}
+      - m_Target: {fileID: 1984471601}
         m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
         m_MethodName: set_text
         m_Mode: 0

@@ -16,14 +16,14 @@ public class Inventory : MonoBehaviour
 
     void OnEnable()
     {
-        InputManager.Instance.OnInventoryScroll.AddListener(OnScroll);
+        InputManager.Instance.OnScroll.AddListener(OnScroll);
         InputManager.Instance.OnInventorySlotKey.AddListener(OnSlotKey);
         InputManager.Instance.OnInventoryRightClick.AddListener(OnRightClick);
     }
 
     void OnDisable()
     {
-        InputManager.Instance.OnInventoryScroll.RemoveListener(OnScroll);
+        InputManager.Instance.OnScroll.RemoveListener(OnScroll);
         InputManager.Instance.OnInventorySlotKey.RemoveListener(OnSlotKey);
         InputManager.Instance.OnInventoryRightClick.RemoveListener(OnRightClick);
     }

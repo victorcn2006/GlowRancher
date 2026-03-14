@@ -56,4 +56,14 @@ public class MarketManager : MonoBehaviour
         else
             priceMultipliers[type] = 1.0f; // Normal
     }
+
+    public void EconomyEvent()
+    {
+        const float MAX_PRICE = 2;
+        const float MIN_PRICE = 0.1f;
+        float _randPriceMulti = Random.Range(MAX_PRICE, MIN_PRICE);
+        priceMultipliers[GemsPool.gemTypes.BLUE_GEM] = _randPriceMulti;
+        priceMultipliers[GemsPool.gemTypes.RED_GEM] = _randPriceMulti;
+        priceMultipliers[GemsPool.gemTypes.REDBLUE_GEM] = _randPriceMulti;
+    }
 }

@@ -1,54 +1,58 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Select : MonoBehaviour
 {
-    private LightInteractionController _lightContrll;
-    private InteractiveShop _interactiveShop;
-
     private LayerMask _mask;
-    public float distance = 1.5f;
+    public float distance = 2.5f; // Aumentado un poco para mejor sensación
 
-    [SerializeField] private InputAction _interact;
-
-
-    // Start is called before the first frame update
-    void Start()
+    private void OnEnable()
     {
-        _mask = LayerMask.GetMask("Raycast layer");
-    }
-
-    // Update is called once per frame
-    private void InteractFilter()
-    {
-        RaycastHit hit;
-
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, distance, _mask)) 
+        if (InputManager.Instance != null)
         {
-            if (hit.collider.tag == "InteractuableObject" ) 
-            {
-                hit.collider.transform.GetComponent<LightInteractionController>().ActivateObject();
-            }
-
-            if (hit.collider.tag == "InteractuableShop")
-            {
-                Debug.Log("Shop.Entra");
-                hit.collider.transform.GetComponent<InteractiveShop>().ToggleShop(); // Canviem aquí
-            }
-            else
-            {
-                Debug.Log("Error");
-            }
+            InputManager.Instance.OnInteractPerformed.AddListener(HandleInteraction);
         }
     }
 
-    public void Interact(InputAction.CallbackContext ctx)
+    private void OnDisable()
     {
-        if (ctx.performed)
+        if (InputManager.Instance != null)
         {
-            InteractFilter();
+            InputManager.Instance.OnInteractPerformed.RemoveListener(HandleInteraction);
+        }
+    }
+
+    void Start()
+    {
+        // Asegúrate de que los objetos tengan la capa "Raycast layer"
+        if (_mask == 0)
+            _mask = LayerMask.GetMask("Raycast layer");
+    }
+
+    private void HandleInteraction()
+    {
+        RaycastHit hit;
+        // Debug visual del rayo
+        Debug.DrawRay(transform.position, transform.forward * distance, Color.red, 0.5f);
+
+        if (Physics.Raycast(transform.position, transform.forward, out hit, distance, _mask))
+        {            
+            // Caso 2: La Tienda
+            if (hit.collider.CompareTag("InteractuableShop"))
+            {
+                Debug.Log("Interacción con tienda detectada.");
+                if (hit.collider.TryGetComponent<InteractiveShop>(out var shop))
+                {
+                    shop.OpenShop();
+                }
+            }
+        }
+        else
+        {
+            Debug.Log("El rayo no impactó con ningún objeto interactuable.");
         }
     }
 }

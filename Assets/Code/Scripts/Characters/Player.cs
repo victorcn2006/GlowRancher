@@ -6,12 +6,16 @@ public class Player : Character, ISavable{
     public string currentBiome { get; private set; } = "Pradera";
     public int money { get; private set; } = 0;
     public int stamina { get; private set; } = 100;
+    private SiloInventory _inventory;
+    //[SerializeField] private UI_Inventory _uiInventory;
 
 
     //Override al Awake del Character para asignar valores a las variables
     protected override void Awake() {
         StartCoroutine(_Awake());
         currentHealth = maxHealth;
+        _inventory = new SiloInventory();
+        //_uiInventory.SetInventory(_inventory);
     }
     IEnumerator _Awake() {
         while (SaveManager.Instance == null || SaveManager.Instance.IsLoading)

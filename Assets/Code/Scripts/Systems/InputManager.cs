@@ -19,7 +19,6 @@ public class InputManager : MonoBehaviour {
     [RequiredField, SerializeField] private InputActionReference _wikiOpen;
 
     [Header("Player Inputs")]
-
     [RequiredField, SerializeField] private InputActionReference _move;
     [RequiredField, SerializeField] private InputActionReference _jump;
     [RequiredField, SerializeField] private InputActionReference _look;
@@ -36,22 +35,29 @@ public class InputManager : MonoBehaviour {
 
 
     [HideInInspector] public bool IsJumpPressed { get; private set; }
+    [HideInInspector] public bool IsMove;
     [HideInInspector] public bool IsPaused;
     [HideInInspector] public bool IsWikiOpen { get; private set; }
+    [HideInInspector] public bool IsShopOpen { get; private set; }
+
 
     [HideInInspector] public UnityEvent OnJumpPerformed = new UnityEvent();
+    [HideInInspector] public UnityEvent OnMovementPerformed = new UnityEvent();
     [HideInInspector] public UnityEvent OnPausePerformed = new UnityEvent();
     [HideInInspector] public UnityEvent OnWikiPerformed = new UnityEvent();
+    [HideInInspector] public UnityEvent OnInteractPerformed = new UnityEvent();
+    [HideInInspector] public UnityEvent OnLookPerformed = new UnityEvent();
 
-    public UnityEvent<float> OnInventoryScroll = new UnityEvent<float>();
-    public UnityEvent<int> OnInventorySlotKey = new UnityEvent<int>();
-    public UnityEvent OnInventoryRightClick = new UnityEvent();
+
+
+    [HideInInspector] public UnityEvent<float> OnScroll = new UnityEvent<float>();
+    [HideInInspector] public UnityEvent<int> OnInventorySlotKey = new UnityEvent<int>();
+    [HideInInspector] public UnityEvent OnInventoryRightClick = new UnityEvent();
 
     private void Awake()
     {
         if (Instance == null) {
             Instance = this;
-            DontDestroyOnLoad(this.gameObject);
         }
         else
         {
@@ -102,25 +108,44 @@ public class InputManager : MonoBehaviour {
         _jump.action.performed += OnJump;
         _pauseGame.action.performed += OnPauseGame;
         _wikiOpen.action.performed += OnWikiOpen;
+        _move.action.performed += OnMovement;
+        _interact.action.performed += OnInteract;
 
-        _scroll.action.performed += OnInventoryScrollPerformed;
+        _look.action.performed += OnLook;
+        _scroll.action.performed += OnScrollPerformed;
         _inventoryNavigation.action.performed += OnInventorySlotKeyPerformed;
         _rightClick.action.performed += OnInventoryRightClickPerformed;
+
     }
     private void UnSubscribeEvents()
     {
         _jump.action.performed -= OnJump;
         _pauseGame.action.performed -= OnPauseGame;
         _wikiOpen.action.performed -= OnWikiOpen;
+        _interact.action.performed -= OnInteract;
 
-        _scroll.action.performed -= OnInventoryScrollPerformed;
+        _scroll.action.performed -= OnScrollPerformed;
         _inventoryNavigation.action.performed -= OnInventorySlotKeyPerformed;
         _rightClick.action.performed -= OnInventoryRightClickPerformed;
     }
 
+    private void OnLook(InputAction.CallbackContext ctx)
+    {
+
+        OnLookPerformed?.Invoke();
+    }
+
+
+
     private void OnJump(InputAction.CallbackContext ctx) {
         IsJumpPressed = true;
         OnJumpPerformed?.Invoke();
+    }
+
+    private void OnMovement(InputAction.CallbackContext ctx)
+    {
+        IsMove = true;
+        OnMovementPerformed?.Invoke();
     }
 
     private void OnPauseGame(InputAction.CallbackContext ctx)
@@ -133,16 +158,20 @@ public class InputManager : MonoBehaviour {
         IsWikiOpen = true;
         OnWikiPerformed?.Invoke();
     }
+    private void OnInteract(InputAction.CallbackContext ctx)
+    {
+       // IsShopOpen = true;
+        OnInteractPerformed?.Invoke();
+    }
 
-    private void OnInventoryScrollPerformed(InputAction.CallbackContext ctx)
+    private void OnScrollPerformed(InputAction.CallbackContext ctx)
     {
         float scroll = ctx.ReadValue<Vector2>().y;
-        OnInventoryScroll?.Invoke(scroll);
+        OnScroll?.Invoke(scroll);
     }
 
     private void OnInventorySlotKeyPerformed(InputAction.CallbackContext ctx)
     {
-        // The control name will be "1", "2", "3", or "4"
         if (ctx.control == null) return;
 
         int slot = -1;
@@ -152,6 +181,8 @@ public class InputManager : MonoBehaviour {
             case "2": slot = 1; break;
             case "3": slot = 2; break;
             case "4": slot = 3; break;
+            case "left": OnScroll?.Invoke(-1); return;
+            case "right": OnScroll?.Invoke(1); return;
         }
 
         if (slot >= 0)
@@ -166,6 +197,10 @@ public class InputManager : MonoBehaviour {
     {
         IsWikiOpen = state;
     }
+    // Añade esto para poder leer la dirección desde PlayerMovement
+    public Vector2 MoveInput => _move.action.ReadValue<Vector2>();
+    public Vector2 LookInput => _look.action.ReadValue<Vector2>();
+
 }
 
     

@@ -6,11 +6,12 @@ using UnityEngine.UI;
 public class PanelShopController : MonoBehaviour
 {
     [Header("Refs")]
-    [SerializeField] private GameObject incinerator;
-    [SerializeField] private GameObject planter;
-    [SerializeField] private GameObject SlimeCage;
-    [SerializeField] private GameObject Silo;
-    [SerializeField] private GameObject Hook;
+    [SerializeField] private GameObject _shopPanel;
+    [SerializeField] private GameObject _incinerator;
+    [SerializeField] private GameObject _planter;
+    [SerializeField] private GameObject _slimeCage;
+    [SerializeField] private GameObject _silo;
+    [SerializeField] private GameObject _hook;
 
     [Header("Buttons")]
     [SerializeField] private Button _itemOne;
@@ -22,11 +23,11 @@ public class PanelShopController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        incinerator.SetActive(false);
-        planter.SetActive(false);
-        SlimeCage.SetActive(false);
-        Silo.SetActive(false);
-        Hook.SetActive(false);
+        _incinerator.SetActive(false);
+        _planter.SetActive(false);
+        _slimeCage.SetActive(false);
+        _silo.SetActive(false);
+        _hook.SetActive(false);
     }
 
     // Update is called once per frame
@@ -38,47 +39,47 @@ public class PanelShopController : MonoBehaviour
     #region Activates
     public void ActivateItemOne()
     {
-        incinerator.SetActive(true);
-        planter.SetActive(false);
-        SlimeCage.SetActive(false);
-        Silo.SetActive(false);
-        Hook.SetActive(false);
+        _incinerator.SetActive(true);
+        _planter.SetActive(false);
+        _slimeCage.SetActive(false);
+        _silo.SetActive(false);
+        _hook.SetActive(false);
     }
 
     public void ActivatePlanter()
     {
-        planter.SetActive(true);
-        incinerator.SetActive(false);
-        SlimeCage.SetActive(false);
-        Silo.SetActive(false);
-        Hook.SetActive(false);
+        _planter.SetActive(true);
+        _incinerator.SetActive(false);
+        _slimeCage.SetActive(false);
+        _silo.SetActive(false);
+        _hook.SetActive(false);
     }
 
     public void ActivateSlimeCage()
     {
-        SlimeCage.SetActive(true);
-        incinerator.SetActive(false);
-        planter.SetActive(false);
-        Silo.SetActive(false);
-        Hook.SetActive(false);
+        _slimeCage.SetActive(true);
+        _incinerator.SetActive(false);
+        _planter.SetActive(false);
+        _silo.SetActive(false);
+        _hook.SetActive(false);
     }
 
     public void ActivateSilo()
     {
-        Silo.SetActive(true);
-        incinerator.SetActive(false);
-        planter.SetActive(false);
-        SlimeCage.SetActive(false);
-        Hook.SetActive(false);
+        _silo.SetActive(true);
+        _incinerator.SetActive(false);
+        _planter.SetActive(false);
+        _slimeCage.SetActive(false);
+        _hook.SetActive(false);
     }
 
     public void ActivateHook()
     {
-        Hook.SetActive(true);
-        incinerator.SetActive(false);
-        planter.SetActive(false);
-        SlimeCage.SetActive(false);
-        Silo.SetActive(false);
+        _hook.SetActive(true);
+        _incinerator.SetActive(false);
+        _planter.SetActive(false);
+        _slimeCage.SetActive(false);
+        _silo.SetActive(false);
     }
     #endregion
 
@@ -92,7 +93,7 @@ public class PanelShopController : MonoBehaviour
             WalletCurrency.instance.Score_txt.text = WalletCurrency.instance.bank.ToString();
 
             Debug.Log("Incinerator purchased");
-            incinerator.SetActive(true);
+            _incinerator.SetActive(true);
         }
         else
         {
@@ -166,5 +167,17 @@ public class PanelShopController : MonoBehaviour
         {
             Debug.Log("Not enough money");
         }
+    }
+    // --- SECCIÓN DE ACTIVACIÓN VISUAL ---
+
+    // Esta función sirve para activar un ítem específico desde fuera
+    public void ActiveShop()
+    {
+        _shopPanel.SetActive(true);
+    }
+
+    public void DesactiveShop()
+    {
+        _shopPanel.SetActive(false);
     }
 }
