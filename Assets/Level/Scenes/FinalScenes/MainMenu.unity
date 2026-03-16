@@ -136,7 +136,6 @@ GameObject:
   - component: {fileID: 44059466}
   - component: {fileID: 44059471}
   - component: {fileID: 44059469}
-  - component: {fileID: 44059470}
   m_Layer: 0
   m_Name: Play Button
   m_TagString: Untagged
@@ -207,7 +206,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 44059467}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 948771047}
+        m_TargetAssemblyTypeName: LoadSceneName, Assembly-CSharp
+        m_MethodName: ScenaWorld
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: World
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &44059467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,21 +269,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c75a4433206744f41b276ae1bf5de9a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &44059470
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 44059464}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f50e22384034304eb5e5f3a2deaf4c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneToLoad:
-    _sceneAsset: {fileID: 102900000, guid: 11f0c1c63addd1b479e2bb1d63af9fa7, type: 3}
-    _sceneName: World
 --- !u!114 &44059471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -482,7 +478,6 @@ GameObject:
   - component: {fileID: 277881354}
   - component: {fileID: 277881353}
   - component: {fileID: 277881352}
-  - component: {fileID: 277881351}
   - component: {fileID: 277881350}
   m_Layer: 0
   m_Name: Creadits Button
@@ -531,21 +526,6 @@ MonoBehaviour:
       Data4: 0
     Path: 
   currentButton: 1
---- !u!114 &277881351
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 277881348}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f50e22384034304eb5e5f3a2deaf4c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneToLoad:
-    _sceneAsset: {fileID: 102900000, guid: d84db4560129c874498ce9afc57d0f2f, type: 3}
-    _sceneName: CreditScene
 --- !u!114 &277881352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -601,7 +581,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 277881354}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 948771047}
+        m_TargetAssemblyTypeName: LoadSceneName, Assembly-CSharp
+        m_MethodName: ScenaCredit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: CreditScene
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &277881354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1261,6 +1253,50 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &948771046
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 948771048}
+  - component: {fileID: 948771047}
+  m_Layer: 0
+  m_Name: LoadSceneName
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &948771047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 948771046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49a221840912e8b4dba312f930db97dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &948771048
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 948771046}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1958531453}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1845,6 +1881,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6379104499450642660, guid: 17d982f16127e6d418ad023742259aab, type: 3}
       insertIndex: -1
       addedObject: {fileID: 494019810}
+    - targetCorrespondingSourceObject: {fileID: 6379104499450642660, guid: 17d982f16127e6d418ad023742259aab, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1663349801}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 765488798403800077, guid: 17d982f16127e6d418ad023742259aab, type: 3}
       insertIndex: -1
@@ -1954,7 +1993,6 @@ GameObject:
   - component: {fileID: 1549357012}
   - component: {fileID: 1549357011}
   - component: {fileID: 1549357014}
-  - component: {fileID: 1549357015}
   - component: {fileID: 1549357016}
   m_Layer: 0
   m_Name: Options Button
@@ -2026,7 +2064,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1549357012}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 948771047}
+        m_TargetAssemblyTypeName: LoadSceneName, Assembly-CSharp
+        m_MethodName: ScenaOptions
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: OptionsMenu
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1549357012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2077,21 +2127,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c75a4433206744f41b276ae1bf5de9a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1549357015
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1549357009}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f50e22384034304eb5e5f3a2deaf4c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneToLoad:
-    _sceneAsset: {fileID: 102900000, guid: d63ead7897518c149b9409dc5dfe52f5, type: 3}
-    _sceneName: OptionsMenu
 --- !u!114 &1549357016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2300,6 +2335,50 @@ MonoBehaviour:
   OnInventoryRightClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &1663349799
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1663349801}
+  - component: {fileID: 1663349802}
+  m_Layer: 0
+  m_Name: LoaderScene
+  m_TagString: LoderScene
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1663349801
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1663349799}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1838507752}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1663349802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1663349799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9046bebe3924f643b04d2efafb969c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1770851254
 GameObject:
   m_ObjectHideFlags: 0
@@ -2675,6 +2754,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1959229220}
+  - {fileID: 948771048}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1959229219
