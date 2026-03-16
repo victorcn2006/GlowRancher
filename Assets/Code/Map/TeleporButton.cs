@@ -1,4 +1,5 @@
 using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 
 public class TeleporButton : MonoBehaviour
@@ -9,6 +10,8 @@ public class TeleporButton : MonoBehaviour
     [SerializeField] private Transform _teleport;
     [SerializeField] private float _delayTime = 2.0f;
     Coroutine _coroutine;
+   
+
     public void OnButtonClick()
     {
         // IMPORTANTE: La lógica debe estar DENTRO de la corrutina
@@ -17,63 +20,50 @@ public class TeleporButton : MonoBehaviour
             _coroutine = GameManager.Instance.StartCoroutine(TeleportSequence());
         }
     }
-
-    //IEnumerator TeleportSequence()
-    //{
-    //    Debug.Log("Esperando " + _delayTime + " segundos...");
-
-    //    yield return new WaitForSeconds(_delayTime);
-
-    //    if (_player != null && _teleport != null)
-    //    {
-    //        // Intentar obtener el CharacterController
-    //        CharacterController cc = _player.GetComponent<CharacterController>();
-
-    //        // Si tiene CharacterController, hay que apagarlo un milisegundo
-    //        if (cc != null) cc.enabled = false;
-
-    //        // Teletransporte
-    //        _player.transform.position = _teleport.position;
-    //        _player.transform.rotation = _teleport.rotation;
-
-    //        // Lo volvemos a encender
-    //        if (cc != null) cc.enabled = true;
-
-    //        Debug.Log("¡Teletransportado!");
-    //    }
-
-    //    // Cerramos el mapa después de movernos
-    //    if (_map != null) _map.SetActive(false);
-    //    if (_update != null) _update.UpdateGameState(false);
-    //}
-
-
     public IEnumerator TeleportSequence()
     {
-        Debug.Log("A");
         _map.SetActive(false);
-        yield return new WaitForSecondsRealtime(2.0f);
+        DoAnimationRotate();
+        yield return new WaitForSecondsRealtime(_delayTime);
+        Teleport();
+        UpdateGame();
 
-        Debug.Log("BA");
+
+;
+    }
+
+    public void Teleport()
+    {
         if (_player != null && _teleport != null)
         {
-        Debug.Log("B");
+
             // Mueve la posición
             _player.transform.position = _teleport.position;
 
             // Aplica la rotación completa (es la forma correcta)
             _player.transform.rotation = _teleport.rotation;
         }
+    }
 
-        Debug.Log("C");
-
+    private void UpdateGame()
+    {
         if (_update != null)
         {
-        Debug.Log("D");
+            ;
             _update.UpdateGameState(false);
         }
         _coroutine = null;
     }
 
-
+    private void DoAnimationRotate()
+    {
+        if (_player != null && _teleport != null)
+        {
+            // Usamos DORotate para que la rotación del jugador coincida 
+            // exactamente con la rotación del objeto destino (_teleport)
+            _player.transform.DORotate(_teleport.eulerAngles, _delayTime)
+                .SetEase(Ease.InOutSine)
+                .SetUpdate(UpdateType.Normal, true);
+        }
+    }
 }
