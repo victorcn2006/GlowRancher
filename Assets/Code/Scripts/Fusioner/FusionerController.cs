@@ -12,42 +12,65 @@ public class FusionerController : MonoBehaviour
     [Tooltip("variable que servira per enmagatzemar el name una gema i fer la fusio")]
     private string _secondCollision = null;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
-        string obj = collision.gameObject.GetComponent<Gem>().GetName();//agafem el nom de la gema
-        if (collision.collider.tag == "Gem" && _firstCollision == null)
+        
+        try
         {
-            _firstCollision = obj;
-            Debug.Log($"Has oferit {collision.gameObject.GetComponent<Gem>().data.gemName}");
-            collision.gameObject.SetActive(false);
+            if (collision.CompareTag("Gem")) {
+                string obj = collision.gameObject.GetComponent<Gem>().GetName();//agafem el nom de la gema
+                if (collision.CompareTag("Gem") && _firstCollision == null)
+                {
+                    _firstCollision = obj;
+                    Debug.Log($"Has oferit {collision.gameObject.GetComponent<Gem>().data.gemName}");
+                    collision.gameObject.SetActive(false);
+                }
+                else if (collision.CompareTag("Gem") && _secondCollision == null && obj != _firstCollision)
+                {
+                    _secondCollision = obj;
+                    collision.gameObject.SetActive(false);
+                    string result = CheckFusions(_firstCollision, _secondCollision);
+                    if (result != null)
+                    {
+                        Debug.Log("Resultat: " + result);
+                    }
+                    else
+                    {
+                        Debug.Log("Combinació no reconeguda");
+                    }
 
-        }else if (collision.collider.tag == "Gem" && _secondCollision == null && obj != _firstCollision)
+                    _firstCollision = null;             //fem reset de les dos variables
+                    _secondCollision = null;
+                }
+            }
+            
+            
+
+        }catch(System.Exception e)
         {
-            _secondCollision = obj;
-            string result = CheckFusions(_firstCollision, _secondCollision);
-            if (result != null) {
-                Debug.Log("Resultat: " + result);
-            }
-            else
-            {
-                Debug.Log("Combinació no reconeguda");
-            }
-
-            _firstCollision = null;             //fem reset de les dos variables
-            _secondCollision = null;
+            Debug.Log(e);
         }
     }
-
     private string CheckFusions(string _firstGem, string _secondGem)
     {
         if ((_firstGem == "BlueSlimestone" && _secondGem == "RedSlimeStone") ||
-           (_firstGem == "RedSlimeStone" && _secondGem == "BlueSlimestone")){
-            GameObject gem = GemsPool.Instance.GetGem(GemsPool.gemTypes.REDBLUE_GEM);
-            gem.transform.position = _spawnLocalization.position;
+           (_firstGem == "RedSlimeStone" && _secondGem == "BlueSlimestone"))
+        {
+
+            StartCoroutine(DelayTime());
+
             return "Red and Blue SlimeStone";
         }
-        else {
+        else
+        {
             return null;
-        }  
+        }
+    }
+    IEnumerator DelayTime()
+    {
+        yield return new WaitForSeconds(5f);
+        GameObject gem = GemsPool.Instance.GetGem(GemsPool.gemTypes.REDBLUE_GEM);
+        gem.SetActive(true);
+        gem.transform.position = _spawnLocalization.position;
     }
 }
