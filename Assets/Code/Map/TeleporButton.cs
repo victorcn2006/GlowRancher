@@ -24,6 +24,7 @@ public class TeleporButton : MonoBehaviour
     {
         _map.SetActive(false);
         DoAnimationRotate();
+        yield return new WaitForSecondsRealtime(2f);
         yield return new WaitForSecondsRealtime(_delayTime);
         Teleport();
         UpdateGame();
