@@ -5,41 +5,64 @@ using UnityEngine;
 
 public class IANarratorManager : MonoBehaviour
 {
-    [SerializeField] List<Dialogue> _GeneralDialogs = new List<Dialogue>();
+
+    private static IANarratorManager instance;
+
+    [SerializeField] private List<Dialogue> _generalDialogs = new List<Dialogue>();
+    [SerializeField] private GameObject _dialogueGO;
+
     private Dialogue _currentDialogue;
     private int _currentLineIndex;
 
     private bool _dialogDisplaying;
-    private IATextNarrator _iATextNarrator;
-    //private IASoundNarrator _iASoundNarrator;
+    private bool _dialogLineFinished;
 
-    float testTimer = 7;
+    private IATextNarrator _iATextNarrator;
+
+
+    private void OnEnable()
+    {
+        InputManager.Instance.OnEnterPerformed.AddListener(NextLineDialog);
+    }
+
+    private void OnDisable()
+    {
+        InputManager.Instance.OnEnterPerformed.RemoveListener(NextLineDialog);
+    }
 
     void Awake()
     {
+
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+
         _iATextNarrator = GetComponent<IATextNarrator>();
-        //_iASoundNarrator = GetComponent<IASoundNarrator>();
     }
 
     private void Start()
     {
-        StartNewDialog(_GeneralDialogs[0]);
+        _dialogueGO.SetActive(false);
+        StartCoroutine(A());
     }
 
-    private void Update()
+    private IEnumerator A()
     {
-        testTimer -= Time.deltaTime;
-        if (_dialogDisplaying && testTimer <= 0) // en vez de testTimer tiene que ser el input de "Enter", para que confirme el _dialogDisplaying y el input
-        {
-            testTimer = 20;
-            _currentLineIndex++;
-            if (_currentLineIndex >= _currentDialogue.lines.Count) FinishDialog();
-            else StartCoroutine(_iATextNarrator.NarrateLine(_currentDialogue.lines[_currentLineIndex]));
-        }
+        yield return new WaitForSeconds(3f);
+        StartNewDialog(_generalDialogs[0]);
     }
 
     public void StartNewDialog(Dialogue newDialog)
     {
+
+        _dialogueGO.SetActive(true);
+        _dialogLineFinished = false;
         _currentDialogue = newDialog; //asigo el dialogo actual
         _currentLineIndex = 0; //seteo el indice de la linea actual del dialogo a 0 (la primera linea)
         _dialogDisplaying = true; //marco el booleano de qu se está mostrando un texto a true
@@ -47,21 +70,23 @@ public class IANarratorManager : MonoBehaviour
         StartCoroutine(_iATextNarrator.NarrateLine(_currentDialogue.lines[_currentLineIndex])); //llamo a la corrutina de NarrateText para empezar a mostrar el texto 
     }
 
+    private void NextLineDialog()
+    {
+        if (_dialogDisplaying && _dialogLineFinished) // en vez de testTimer tiene que ser el input de "Enter", para que confirme el _dialogDisplaying y el input
+        {
+            _dialogLineFinished = false;
+            _currentLineIndex++;
+            if (_currentLineIndex >= _currentDialogue.lines.Count) FinishDialog();
+            else StartCoroutine(_iATextNarrator.NarrateLine(_currentDialogue.lines[_currentLineIndex]));
+        }
+    }
+
     private void FinishDialog()
     {
         _dialogDisplaying = false;
-    }
-    /*
-    public void MakeSound(char character)
-    {
-        _iASoundNarrator.Narrate(character);
+        _dialogueGO.SetActive(false);
     }
 
-    public List<char> GetErrorCharacters()
-    {
-        return _iATextNarrator.GetErrorCharacters();
-    }*/
-    
-
+    public void DialogueLineFinished() => _dialogLineFinished = true;
 
 }

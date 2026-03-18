@@ -21,7 +21,6 @@ public class IASoundNarrator : MonoBehaviour
     }
 
 
-
     //hacer que si llegan letras de "error" suene diferente
 
 

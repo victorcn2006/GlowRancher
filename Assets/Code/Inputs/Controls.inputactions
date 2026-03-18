@@ -627,6 +627,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "NextDialog",
+                    "type": "Button",
+                    "id": "4c5f5913-b360-45ab-ba01-bdeecd83e31c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -825,6 +834,17 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "PauseGame",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5a79f13e-d5bb-4691-80cb-b9c419821b0d",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "NextDialog",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
