@@ -12,8 +12,8 @@ public class InteractiveMap : MonoBehaviour
 
     private bool _isMapActive = false;
 
-    float timeSinceLastOpenedClosed = 0.16f;
-    const float timeBetweenOpenClose = 0.16f;
+    private float _timeSinceLastOpenedClosed = 0.16f;
+    private const float TIMEBETWEENOPENCLOSE = 0.16f;
 
     private void OnEnable()
     {
@@ -50,10 +50,10 @@ public class InteractiveMap : MonoBehaviour
 
     public void OpenMap()
     {
-        if (timeSinceLastOpenedClosed >= timeBetweenOpenClose)
+        if (_timeSinceLastOpenedClosed >= TIMEBETWEENOPENCLOSE)
         {
             if (_isMapActive) return; // Ya está abierta, no hacemos nada
-            timeSinceLastOpenedClosed = 0;
+            _timeSinceLastOpenedClosed = 0;
             Debug.Log("Abriendo Mapa...");
             _isMapActive = true;
 
@@ -68,10 +68,10 @@ public class InteractiveMap : MonoBehaviour
     public void CloseMap()
     {
 
-        if (timeSinceLastOpenedClosed >= timeBetweenOpenClose)
+        if (_timeSinceLastOpenedClosed >= TIMEBETWEENOPENCLOSE)
         {
             if (!_isMapActive) return; // Ya está abierta, no hacemos nada
-            timeSinceLastOpenedClosed = 0;
+            _timeSinceLastOpenedClosed = 0;
 
             Debug.Log("Cerrando Mapa...");
             _isMapActive = false;
@@ -86,9 +86,9 @@ public class InteractiveMap : MonoBehaviour
 
     IEnumerator _InputDelay()
     {
-        while (timeSinceLastOpenedClosed < timeBetweenOpenClose)
+        while (_timeSinceLastOpenedClosed < TIMEBETWEENOPENCLOSE)
         {
-            timeSinceLastOpenedClosed += Time.unscaledDeltaTime;
+            _timeSinceLastOpenedClosed += Time.unscaledDeltaTime;
             yield return null;
         }
     }

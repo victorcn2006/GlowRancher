@@ -12,7 +12,7 @@ public class TeleporButton : MonoBehaviour
     [SerializeField] private Transform _teleport;
     [SerializeField] private Transform _moveTp;
     [SerializeField] private float _delayTime = 2.0f;
-    Coroutine _coroutine;
+    private Coroutine _coroutine;
 
     public void OnButtonClick()
     {
