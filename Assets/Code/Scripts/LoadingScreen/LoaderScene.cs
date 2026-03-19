@@ -18,21 +18,7 @@ public class LoaderScene : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-            
-
-        /* LoaderScene[] objs = FindObjectsByType<LoaderScene>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-
-         if (objs.Length > 1)
-         {
-             Destroy(gameObject);
-         }
-         else
-         {
-             Instance = this;
-             transform.parent = null;
-             DontDestroyOnLoad(gameObject);
-
-         }*/
+           
     }
     public void LoadScene(string nameScene)
     {
