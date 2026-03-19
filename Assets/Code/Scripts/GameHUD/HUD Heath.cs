@@ -1,32 +1,28 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Serialization;
 
 public class HUDHealth : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Player player;
     [SerializeField] private Slider slider;
-    
-    private int maxHealth;
-    private int currentHealth;
 
     private void Start()
     {
-        // Inicializar maxHealth y currentHealth
-        maxHealth = player.GetMaxHealth();
-        
-        // Establecer el valor máximo del slider y el valor inicial
-        slider.maxValue = maxHealth;
+        if (player != null && slider != null)
+        {
+            // Configuramos el valor máximo del Slider al inicio
+            slider.maxValue = player.GetMaxHealth();
+            slider.value = player.GetCurrentHealth();
+        }
     }
 
     private void Update()
     {
-        // Actualizar el valor del slider cada vez que la salud del jugador cambie
-        currentHealth = player.GetCurrentHealth();
-        slider.value = currentHealth;
+        if (player != null && slider != null)
+        {
+            // El slider se actualiza cada frame reflejando la vida actual del Player
+            slider.value = player.GetCurrentHealth();
+        }
     }
 }

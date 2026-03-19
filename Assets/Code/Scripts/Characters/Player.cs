@@ -1,90 +1,121 @@
 using System.Collections;
 using UnityEngine;
 
-public class Player : Character, ISavable{
-    //Variables opcionales con Getter publico y setter privado
-    public string currentBiome { get; private set; } = "Pradera";
-    public int money { get; private set; } = 0;
-    public int stamina { get; private set; } = 100;
+public class Player : Character, ISavable
+{
+    [Header("Configuración de Bioma y Economía")]
+    public string currentBiome = "Pradera";
+    public int money = 0;
+
+    [Header("Sistema de Energía (Stamina)")]
+    [SerializeField] private const float MAXENERGY = 100f;
+    [SerializeField] private float _currentEnergy = 100f;
+    [SerializeField] private float _energyBurnRate = 25f;
+    [SerializeField] private float _energyRegenRate = 45f;
+    [SerializeField] private float _walkRegenMultiplier = 0.5f;
+    [SerializeField] private const float REGENDELAY = 1f;
+
+    private Coroutine _regenCoroutine;
     private SiloInventory _inventory;
-    //[SerializeField] private UI_Inventory _uiInventory;
 
-
-    //Override al Awake del Character para asignar valores a las variables
-    protected override void Awake() {
-        StartCoroutine(_Awake());
+    protected override void Awake()
+    {
+        // Importante: Si la clase base (Character) tiene un Awake, 
+        // a veces es mejor llamarlo después de nuestras referencias.
+        _currentEnergy = MAXENERGY;
         currentHealth = maxHealth;
         _inventory = new SiloInventory();
-        //_uiInventory.SetInventory(_inventory);
+
+        StartCoroutine(_AwakeRoutine());
     }
-    IEnumerator _Awake() {
+
+    // Cambié el nombre para evitar confusiones con Awake()
+    private IEnumerator _AwakeRoutine()
+    {
         while (SaveManager.Instance == null || SaveManager.Instance.IsLoading)
-            yield return null;
-        base.Awake();
-    }
-
-    private void OnEnable()
-    {
-        SaveManager.Instance?.RegisterSavable(this);
-    }
-    private void OnDisable()
-    {
-        SaveManager.Instance?.UnregisterSavable(this);
-    }
-    //Override al attack cambiar por la logica nueva de la aspiradora
-    protected override void Attack() {
-        if (SaveManager.Instance != null && SaveManager.Instance.IsLoading)
-            return;
-        base.Attack();
-    }
-    public void AddMoney(int amount) {
-        money += amount;
-        // Notifica el SaveManager del canvi
-    }
-
-    // Metodo para gastar dinero
-    public void SpendMoney(int amount) {
-        money = Mathf.Max(0, money - amount);
-    }
-
-    // Quan el jugador puja de nivell
-    public void ChangeBiome(string biome) {
-        if(!string.IsNullOrEmpty(biome))
-            currentBiome = biome;
-    }
-
-    // Quan el jugador rep dany
-    public override void TakeDamage(int damage) {
-        base.TakeDamage(damage);
-    } 
-
-    //===================== METODOS DE ISAVABLE =====================//
-    public string GetSaveID()
-    {
-        return "Player";
-    }
-    public object CaptureState()
-    {
-        return new PlayerData(this);
-    }
-    public void RestoreState(object state)
-    {
-        /*Si el objeto que me pasas es del tipo PlayerData usa data para restaurar 
-        el estado ya que tiene toda la info*/
-        if (state is PlayerData data)
         {
-            characterName = data.characterName;
-            description = data.description;
-            currentBiome = data.currentBiome;
-            money = data.money;
-            currentHealth = data.health;
-            maxHealth= data.maxHealth;
-            stamina = data.stamina;
-            transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
+            yield return null;
+        }
+        // Si tu clase Character tiene lógica en Awake, asegúrate de que sea accesible o virtual
+    }
+
+    private void Update()
+    {
+        HandleEnergyLogic();
+    }
+
+    private void HandleEnergyLogic()
+    {
+        bool isMoving = InputManager.Instance.MoveInput.magnitude > 0.1f;
+        // Solo corre si pulsa el botón, se mueve y tiene energía
+        bool isRunning = InputManager.Instance.IsRunning && isMoving && _currentEnergy > 0;
+
+        if (isRunning)
+        {
+            if (_regenCoroutine != null)
+            {
+                StopCoroutine(_regenCoroutine);
+                _regenCoroutine = null;
+            }
+            _currentEnergy -= _energyBurnRate * Time.deltaTime;
         }
         else
         {
-            Debug.LogWarning("RestoreState: el objeto no es de tipo PlayerData para " + GetSaveID());
+            if (_currentEnergy < MAXENERGY && _regenCoroutine == null)
+            {
+                _regenCoroutine = StartCoroutine(RegenEnergyRoutine());
+            }
+        }
+
+        _currentEnergy = Mathf.Clamp(_currentEnergy, 0, MAXENERGY);
+    }
+
+    private IEnumerator RegenEnergyRoutine()
+    {
+        yield return new WaitForSeconds(REGENDELAY);
+
+        while (_currentEnergy < MAXENERGY)
+        {
+            bool isMoving = InputManager.Instance.MoveInput.magnitude > 0.1f;
+
+            // Si el jugador intenta correr de nuevo, paramos la regeneración
+            if (InputManager.Instance.IsRunning && isMoving && _currentEnergy > 0)
+                break;
+
+            float currentRegenSpeed = isMoving ? (_energyRegenRate * _walkRegenMultiplier) : _energyRegenRate;
+
+            _currentEnergy += currentRegenSpeed * Time.deltaTime;
+            _currentEnergy = Mathf.Clamp(_currentEnergy, 0, MAXENERGY);
+
+            yield return null;
+        }
+
+        _regenCoroutine = null;
+    }
+
+    public float GetCurrentEnergy() => _currentEnergy;
+    public float GetMaxEnergy() => MAXENERGY;
+
+    // Propiedad que lee PlayerMovement
+    public bool CanRun => InputManager.Instance.IsRunning && _currentEnergy > 0 && InputManager.Instance.MoveInput.magnitude > 0.1f;
+
+    public void Heal(int amount) => currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
+
+    public override void TakeDamage(int damage) => base.TakeDamage(damage);
+
+    // --- IMPLEMENTATION ---
+    private void OnEnable() => SaveManager.Instance?.RegisterSavable(this);
+    private void OnDisable() => SaveManager.Instance?.UnregisterSavable(this);
+    public string GetSaveID() => "Player";
+    public object CaptureState() => new PlayerData(this);
+    public void RestoreState(object state)
+    {
+        if (state is PlayerData data)
+        {
+            currentBiome = data.currentBiome;
+            money = data.money;
+            currentHealth = data.health;
+            transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
         }
     }
 }
