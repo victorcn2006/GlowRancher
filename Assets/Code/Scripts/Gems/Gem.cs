@@ -34,9 +34,4 @@ public class Gem : MonoBehaviour, IAspirable
 
     }
 
-    public string GetName()
-    {
-        return data.gemName;
-    }
-
 }
