@@ -49,14 +49,8 @@ public class IANarratorManager : MonoBehaviour
     private void Start()
     {
         _dialogueGO.SetActive(false);
-        StartCoroutine(A());
     }
 
-    private IEnumerator A()
-    {
-        yield return new WaitForSeconds(3f);
-        StartNewDialog(_generalDialogs[0]);
-    }
 
     public void StartNewDialog(Dialogue newDialog)
     {
