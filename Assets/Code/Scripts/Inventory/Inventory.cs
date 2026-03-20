@@ -42,6 +42,7 @@ public class Inventory : MonoBehaviour
     // Movimiento de rueda del ratón
     private void OnScroll(float scroll)
     {
+        scroll *= -1;
         if (scroll > 0)
             _slotSeleccionado = (_slotSeleccionado + 1) % MAX_SLOT;
         else if (scroll < 0)

@@ -1,10 +1,25 @@
+using DG.Tweening.Core.Easing;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance { get; private set; }
+    static GameManager gameManager;
+    public static GameManager Instance { get { return RequestGameManager(); } }
 
-    public void Exit() {
+    static GameManager RequestGameManager()
+    {
+        if (gameManager == null)
+        {
+            GameObject gameManagerObj = new GameObject("GameManager");
+            gameManager = gameManagerObj.AddComponent<GameManager>();
+
+        }
+        return gameManager;
+
+    }
+    public void Exit()
+    {
         Application.Quit();
-    } 
+
+    }
 }
