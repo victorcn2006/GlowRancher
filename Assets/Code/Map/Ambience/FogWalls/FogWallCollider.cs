@@ -12,6 +12,9 @@ public class FogWallCollider : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        _fogWallSet.OnFogPass(_ambience);
+        if (other.CompareTag("Player"))
+        {
+            _fogWallSet.OnFogPass(_ambience);
+        }
     }
 }
