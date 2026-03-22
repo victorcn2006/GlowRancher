@@ -6,7 +6,7 @@ public class FogWallsSetsManager : MonoBehaviour
 {
     public static FogWallsSetsManager Instance;
 
-    [SerializeField] private int _fogSet;
+    [SerializeField] private int _fogSet; //Guardar para saber que fogSet se tiene que mostrar al iniciar la escena
 
     [SerializeField] private List<GameObject> _fogWallSets = new List<GameObject>();
     private void Awake()
@@ -28,8 +28,9 @@ public class FogWallsSetsManager : MonoBehaviour
         //UpdateFogSet(_fogSet); //descomentar para debugear
     }
 
-    public void UpdateFogSet(int fogSet)
+    public void UpdateFogSet(int fogSet) //Llamar al cargar el mapa
     {
+        _fogSet = fogSet;
         foreach (GameObject fogWallSet in _fogWallSets)
         {
             if (fogWallSet.gameObject == _fogWallSets[fogSet].gameObject)

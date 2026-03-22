@@ -10,20 +10,21 @@ public class MonolitoManager : MonoBehaviour
 
     private bool _activated = false;
 
-    //OnTigger es para debuguear, se tiene que quitar
-    private void OnTriggerEnter(Collider other)
-    {
-        ActivateMonolito();
-    }
-
     public void ActivateMonolito()
     {
-        _activated = true;
-        AmbienceController.Instance.SetAmbience(_ambience);
-        FogWallsSetsManager.Instance.UpdateFogSet(_fogSetOnActive);
-        
-        //agregar animación de cristal y cinematica
+        Debug.Log("Monolito Activado");
+
+        if (!_activated)
+        {
+            _activated = true;
+            AmbienceController.Instance.SetAmbience(_ambience);
+            FogWallsSetsManager.Instance.UpdateFogSet(_fogSetOnActive);
+            //agregar animación de cristal y cinematica
+
+        }
 
     }
+
+
 
 }

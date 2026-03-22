@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _walkSpeed = 5f;
     [SerializeField] private float _runSpeed = 9f; // Nueva velocidad de carrera
     [SerializeField] private float _jumpForce = 5f;
-    [SerializeField] private float _doubleJumpForce = 8f;
+    [SerializeField] private float _doubleJumpForce = 13f;
 
     [Header("Audio")]
     [SerializeField] private EventReference _jumpSound;
@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
 
     // Estado
     private bool _canJump = true;
-    private bool _hasDoubleJumpItem = false;
+    private bool _hasDoubleJumpItem = true;
     private bool _didDoubleJump = false;
 
     private void Awake()

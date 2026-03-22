@@ -105,7 +105,7 @@ public class AmbienceController : MonoBehaviour
     public void SetAmbience(AmbienceStates ambienceState)
     {
 
-        Debug.Log("SetAmbience");
+        
 
         //Target Variables
         Color targetLightColor;
@@ -117,7 +117,9 @@ public class AmbienceController : MonoBehaviour
         Color targetSkyBoxColor;
 
         float targetFogDensity;
-        Color targetFogColor; //falta programarlo
+        Color targetFogColor;
+
+        float targetSkySphereTransparency;
 
 
         if (ambienceState == AmbienceStates.CORRUPTED)
@@ -127,11 +129,14 @@ public class AmbienceController : MonoBehaviour
             targetLightIntensity = _directionalLightCorruptedIntensity;
             targetShadowStrength = 0f;
 
+            targetSkySphereTransparency = 1f;
+
             targetSkyBoxAtmosphereThickness = _skyBoxCorruptedAtmosphereThickness;
             targetSkyBoxExposure = _skyBoxCorruptedExposure;
             targetSkyBoxColor = _skyBoxCorruptedTint;
             targetFogDensity = _corruptedFogDensity;
             targetFogColor = _corruptedFogColor;
+
         }
         else if(ambienceState == AmbienceStates.ALIVE)
         {
@@ -139,11 +144,13 @@ public class AmbienceController : MonoBehaviour
             targetLightIntensity = _directionalLightAliveIntensity;
             targetShadowStrength = 1f;
 
+            targetSkySphereTransparency = 0f;
+
             targetSkyBoxAtmosphereThickness = _skyBoxAliveAtmosphereThickness;
             targetSkyBoxExposure = _skyBoxAliveExposure;
             targetSkyBoxColor = _skyBoxAliveTint;
             targetFogDensity = 0f;
-            targetFogColor = new Color(1f, 1f, 1f, 0f);
+            targetFogColor = RenderSettings.fogColor;
         }
         else // es ICY por descarte
         {
@@ -151,6 +158,8 @@ public class AmbienceController : MonoBehaviour
             targetLightColor = _directionalLightIcyColor;
             targetLightIntensity = _directionalLightIcyIntensity;
             targetShadowStrength = 1f;
+
+            targetSkySphereTransparency = 0f;
 
             targetSkyBoxAtmosphereThickness = _skyBoxIcyAtmosphereThickness;
             targetSkyBoxExposure = _skyBoxIcyExposure;
@@ -175,6 +184,8 @@ public class AmbienceController : MonoBehaviour
         DOTween.To(() => RenderSettings.skybox.GetFloat("_Exposure"), x => RenderSettings.skybox.SetFloat("_Exposure", x), targetSkyBoxExposure, _transitionBetweenAmbienceTime).SetEase(_easeTransitionType);
         RenderSettings.skybox.DOColor(targetSkyBoxColor, "_SkyTint" , _transitionBetweenAmbienceTime).SetEase(_easeTransitionType);
 
+        //============= SKY_SPHERE =============\\
+        _skySphereGO.GetComponent<Renderer>().material.DOFade(targetSkySphereTransparency, _transitionBetweenAmbienceTime).SetEase(_easeTransitionType);
 
         //============= FOG =============\\
         RenderSettings.fog = true;
