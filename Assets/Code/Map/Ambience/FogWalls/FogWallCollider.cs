@@ -7,7 +7,7 @@ public class FogWallCollider : MonoBehaviour
     [Header("SCRIPTS NEEDED")]
     [SerializeField] private FogWallSet _fogWallSet;
 
-    [Header("SCRIPTS NEEDED")]
+    [Header("AMBIENCE TO ACTIVATE")]
     [SerializeField] private AmbienceController.AmbienceStates _ambience;
 
     private void OnTriggerEnter(Collider other)
