@@ -49,6 +49,15 @@ public class Select : MonoBehaviour
                     shop.OpenShop();
                 }
             }
+            // Caso 3: Mapa
+            if (hit.collider.CompareTag("Monolito"))
+            {
+                Debug.Log("Interacción con Monolito detectada.");
+                if (hit.collider.TryGetComponent<InteractiveMap>(out var map))
+                {
+                    map.OpenMap();
+                }
+            }
         }
         else
         {

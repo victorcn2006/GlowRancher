@@ -24,6 +24,8 @@ public class InputManager : MonoBehaviour {
     [RequiredField, SerializeField] private InputActionReference _look;
     [RequiredField, SerializeField] private InputActionReference _interact;
     [RequiredField, SerializeField] private InputActionReference _pauseGame;
+    [RequiredField, SerializeField] private InputActionReference _nextDialog;
+    [RequiredField, SerializeField] private InputActionReference _run;
 
     [Header("Aspirator Inputs")]
     [RequiredField, SerializeField] private InputActionReference _aspirate;
@@ -35,6 +37,7 @@ public class InputManager : MonoBehaviour {
 
 
     [HideInInspector] public bool IsJumpPressed { get; private set; }
+    [HideInInspector] public bool IsRunning { get; private set; }
     [HideInInspector] public bool IsMove;
     [HideInInspector] public bool IsPaused;
     [HideInInspector] public bool IsWikiOpen { get; private set; }
@@ -47,6 +50,7 @@ public class InputManager : MonoBehaviour {
     [HideInInspector] public UnityEvent OnWikiPerformed = new UnityEvent();
     [HideInInspector] public UnityEvent OnInteractPerformed = new UnityEvent();
     [HideInInspector] public UnityEvent OnLookPerformed = new UnityEvent();
+    [HideInInspector] public UnityEvent OnEnterPerformed = new UnityEvent();
 
 
 
@@ -110,6 +114,9 @@ public class InputManager : MonoBehaviour {
         _wikiOpen.action.performed += OnWikiOpen;
         _move.action.performed += OnMovement;
         _interact.action.performed += OnInteract;
+        _nextDialog.action.performed += OnEnter;
+        _run.action.performed += OnRunStarted;
+        _run.action.canceled += OnRunCanceled;
 
         _look.action.performed += OnLook;
         _scroll.action.performed += OnScrollPerformed;
@@ -123,10 +130,18 @@ public class InputManager : MonoBehaviour {
         _pauseGame.action.performed -= OnPauseGame;
         _wikiOpen.action.performed -= OnWikiOpen;
         _interact.action.performed -= OnInteract;
+        _nextDialog.action.performed -= OnEnter;
+        _run.action.performed -= OnRunStarted;
+        _run.action.canceled -= OnRunCanceled;
 
         _scroll.action.performed -= OnScrollPerformed;
         _inventoryNavigation.action.performed -= OnInventorySlotKeyPerformed;
         _rightClick.action.performed -= OnInventoryRightClickPerformed;
+    }
+
+    private void OnEnter(InputAction.CallbackContext ctx)
+    {
+        OnEnterPerformed?.Invoke();
     }
 
     private void OnLook(InputAction.CallbackContext ctx)
@@ -170,6 +185,8 @@ public class InputManager : MonoBehaviour {
         OnScroll?.Invoke(scroll);
     }
 
+    private void OnRunStarted(InputAction.CallbackContext ctx) => IsRunning = true;
+    private void OnRunCanceled(InputAction.CallbackContext ctx) => IsRunning = false;
     private void OnInventorySlotKeyPerformed(InputAction.CallbackContext ctx)
     {
         if (ctx.control == null) return;
