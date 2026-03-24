@@ -9,9 +9,6 @@ public class Select : MonoBehaviour
     private LayerMask _mask;
     public float distance = 2.5f; // Aumentado un poco para mejor sensación
 
-    [SerializeField] private GameObject _keyboardSprite;
-    [SerializeField] private GameObject _controllerSprite;
-
     private void OnEnable()
     {
         if (InputManager.Instance != null)
@@ -26,6 +23,7 @@ public class Select : MonoBehaviour
         {
             InputManager.Instance.OnInteractPerformed.RemoveListener(HandleInteraction);
         }
+
     }
 
     void Start()
@@ -43,8 +41,6 @@ public class Select : MonoBehaviour
 
         if (Physics.Raycast(transform.position, transform.forward, out hit, distance, _mask))
         {
-
-            _keyboardSprite.SetActive(true);
 
             // Caso 2: La Tienda
             if (hit.collider.CompareTag("InteractuableShop"))
@@ -67,8 +63,8 @@ public class Select : MonoBehaviour
         }
         else
         {
-            _keyboardSprite.SetActive(false);
             Debug.Log("El rayo no impactó con ningún objeto interactuable.");
         }
     }
+
 }
