@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class InteractiveShop : MonoBehaviour
+public class InteractiveShop : MonoBehaviour, IInteractive
 {
     [Header("Referencias de Interfaz")]
     [SerializeField] private GameObject _shopUIContainer;
@@ -14,6 +14,8 @@ public class InteractiveShop : MonoBehaviour
 
     float timeSinceLastOpenedClosed = 0.16f;
     const float timeBetweenOpenClose = 0.16f;
+
+
 
     private void OnEnable()
     {
@@ -107,5 +109,10 @@ public class InteractiveShop : MonoBehaviour
         // Mostrar/Ocultar el mouse según el estado
         Cursor.visible = shopOpen;
         Cursor.lockState = shopOpen ? CursorLockMode.None : CursorLockMode.Locked;
+    }
+
+    public void OnInteract()
+    {
+        OpenShop();
     }
 }

@@ -7,6 +7,7 @@ public class MonolitoManager : MonoBehaviour
 
     [SerializeField] private AmbienceController.AmbienceStates _ambience;
     [SerializeField] private int _fogSetOnActive;
+    [SerializeField] private int _puzzleNumber;
 
     private bool _activated = false;
 
@@ -19,11 +20,13 @@ public class MonolitoManager : MonoBehaviour
             _activated = true;
             AmbienceController.Instance.SetAmbience(_ambience);
             FogWallsSetsManager.Instance.UpdateFogSet(_fogSetOnActive);
+            BigWallsManager.Instance.PuzzleCompleted(_puzzleNumber);
             //agregar animación de cristal y cinematica
 
         }
 
     }
+
 
 
 
