@@ -39,7 +39,13 @@ public class Select : MonoBehaviour
         Debug.DrawRay(transform.position, transform.forward * distance, Color.red, 0.5f);
 
         if (Physics.Raycast(transform.position, transform.forward, out hit, distance, _mask))
-        {            
+        {
+            if (hit.collider.TryGetComponent<IInteractive>(out var InteractiveElement))
+            {
+                InteractiveElement.OnInteract();
+            }
+            /*
+
             // Caso 2: La Tienda
             if (hit.collider.CompareTag("InteractuableShop"))
             {
@@ -48,6 +54,7 @@ public class Select : MonoBehaviour
                 {
                     shop.OpenShop();
                 }
+
             }
             // Caso 3: Mapa
             if (hit.collider.CompareTag("Monolito"))
@@ -58,6 +65,8 @@ public class Select : MonoBehaviour
                     map.OpenMap();
                 }
             }
+            */
+
         }
         else
         {

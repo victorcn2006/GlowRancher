@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractiveMap : MonoBehaviour
+public class InteractiveMap : MonoBehaviour, IInteractive
 {
     [Header("Referencias de Interfaz")]
     [SerializeField] private GameObject _mapUIContainer;
@@ -107,5 +107,10 @@ public class InteractiveMap : MonoBehaviour
         // Mostrar/Ocultar el mouse según el estado
         Cursor.visible = shopOpen;
         Cursor.lockState = shopOpen ? CursorLockMode.None : CursorLockMode.Locked;
+    }
+
+    public void OnInteract()
+    {
+        OpenMap();
     }
 }

@@ -33,11 +33,14 @@ public class MagicRock : MonoBehaviour
     private void ActiveRock()
     {
         transform.DOMoveY(initialYPosition + _succedYOffset, _succedMovementTime).SetEase(Ease.InOutSine).OnComplete(() => _magicPuzzle.AddActiveRock(this.gameObject));
+        GetComponent<SphereCollider>().enabled = false;  
     }
 
     public void DeactivateRock()
     {
-        transform.DOMoveY(initialYPosition, _succedMovementTime);
+        transform.DOMoveY(initialYPosition, _succedMovementTime).SetEase(Ease.InExpo);
+        GetComponent<SphereCollider>().enabled = true;
+
     }
 
 

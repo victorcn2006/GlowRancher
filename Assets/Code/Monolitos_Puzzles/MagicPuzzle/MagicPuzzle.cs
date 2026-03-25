@@ -25,11 +25,11 @@ public class MagicPuzzle : MonoBehaviour
         int index = _activeMagicRocks.Count - 1;
         if (_magicRocksOrderList[index] != _activeMagicRocks[index])
         {
-            _activeMagicRocks.Clear();
             foreach(GameObject rock in _activeMagicRocks)
             {
                 rock.GetComponent<MagicRock>().DeactivateRock();
             }
+            _activeMagicRocks.Clear();
         }
 
         if (_activeMagicRocks.Count == _magicRocksOrderList.Count)

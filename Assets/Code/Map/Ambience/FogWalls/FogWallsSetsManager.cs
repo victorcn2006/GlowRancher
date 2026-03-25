@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FogWallsSetsManager : MonoBehaviour
@@ -23,10 +24,18 @@ public class FogWallsSetsManager : MonoBehaviour
         }
 
     }
+
+    private void Start()
+    {
+        UpdateFogSet(_fogSet);
+
+    }
+
     private void Update()
     {
-        //UpdateFogSet(_fogSet); //descomentar para debugear
+        UpdateFogSet(_fogSet); //descomentar para debugear
     }
+
 
     public void UpdateFogSet(int fogSet) //Llamar al cargar el mapa
     {
