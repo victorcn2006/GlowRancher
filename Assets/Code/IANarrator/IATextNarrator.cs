@@ -1,20 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
-using FMOD;
 using TMPro;
 using UnityEngine;
 
 public class IATextNarrator : MonoBehaviour
 {
-    //iconos de error: #@%
-
     [SerializeField] private TextMeshProUGUI _iAText;
-    [SerializeField] private List<char> _errorCharacters;
-    [SerializeField] private float _timeBetweenCharacters;
-    [SerializeField] private float _errorTimeBetweenCharacters;
-
-    [SerializeField, Tooltip("Indica entre que cantidad de letras puede aparecer un 'glitch' Ejemplo: errorProbability = 10, hay 1 posibilidad entre 10 de que 'glitchee'.")]
-    private int _errorProbability;
+    [SerializeField] private float _timeBetweenCharacters = 0.05f;
+    [SerializeField] private List<char> _errorCharacters = new List<char> { '#', '@', '%' };
+    [SerializeField] private float _errorTimeBetweenCharacters = 0.02f;
+    [SerializeField, Range(0, 50)] private int _errorProbability = 10;
 
     private IANarratorManager _iANarratorManager;
     private IASoundNarrator _iASoundNarrator;
@@ -30,11 +25,9 @@ public class IATextNarrator : MonoBehaviour
         _iAText.text = "";
         foreach(char character in textToNarrate)
         {
-
-            if (Random.Range(0, _errorProbability) == 0 && character != ' ')
+            if (_errorProbability > 0 && Random.Range(0, _errorProbability) == 0 && character != ' ')
             {
                 char errorCharacter = _errorCharacters[Random.Range(0, _errorCharacters.Count)];
-
                 WriteLetter(errorCharacter);
                 yield return new WaitForSeconds(_errorTimeBetweenCharacters);
             }
@@ -42,21 +35,16 @@ public class IATextNarrator : MonoBehaviour
             {
                 WriteLetter(character);
                 yield return new WaitForSeconds(_timeBetweenCharacters);
-            } 
+            }
         }
         _iANarratorManager.DialogueLineFinished();
-
     }
-    
+
     private void WriteLetter(char character)
     {
         _iAText.text += character.ToString();
-        _iASoundNarrator.Narrate(character);
+        if (_iASoundNarrator != null) _iASoundNarrator.Narrate(character);
     }
 
-    public List<char> GetErrorCharacters()
-    {
-        return _errorCharacters;
-    }
-
+    public List<char> GetErrorCharacters() => _errorCharacters;
 }
