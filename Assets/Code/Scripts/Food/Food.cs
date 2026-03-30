@@ -5,7 +5,7 @@ using UnityEngine;
 public class Food : MonoBehaviour, IAspirable
 {
     public string foodName;
-
+    public bool isBeingEaten = false;
     Rigidbody rb;
     private void Start()
     {

@@ -23,6 +23,7 @@ public class Select : MonoBehaviour
         {
             InputManager.Instance.OnInteractPerformed.RemoveListener(HandleInteraction);
         }
+
     }
 
     void Start()
@@ -39,7 +40,8 @@ public class Select : MonoBehaviour
         Debug.DrawRay(transform.position, transform.forward * distance, Color.red, 0.5f);
 
         if (Physics.Raycast(transform.position, transform.forward, out hit, distance, _mask))
-        {            
+        {
+
             // Caso 2: La Tienda
             if (hit.collider.CompareTag("InteractuableShop"))
             {
@@ -64,4 +66,5 @@ public class Select : MonoBehaviour
             Debug.Log("El rayo no impactó con ningún objeto interactuable.");
         }
     }
+
 }
