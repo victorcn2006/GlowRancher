@@ -196,6 +196,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FireSlime
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4d520823fb70db941b28a5f665ccbdbf, type: 3}
+      propertyPath: m_TagString
+      value: Slime
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -233,6 +237,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4d520823fb70db941b28a5f665ccbdbf, type: 3}
       insertIndex: -1
       addedObject: {fileID: 458854614321744526}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4d520823fb70db941b28a5f665ccbdbf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8997456195258938582}
   m_SourcePrefab: {fileID: 100100000, guid: 4d520823fb70db941b28a5f665ccbdbf, type: 3}
 --- !u!4 &67009346739055228 stripped
 Transform:
@@ -392,6 +399,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _armature: {fileID: 8961817975907220194}
   _lockedLocalRotation: {x: -90, y: 0, z: 90}
+--- !u!114 &8997456195258938582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 839288053946347718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d5c6b569e0d2b74a9ab2a492591ff69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 20
 --- !u!4 &8961817975907220194 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8879528566716807029, guid: 4d520823fb70db941b28a5f665ccbdbf, type: 3}
