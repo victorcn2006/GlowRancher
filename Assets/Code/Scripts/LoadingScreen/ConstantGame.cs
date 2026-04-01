@@ -9,4 +9,5 @@ public static class ConstantGame
     public const string WORLD = "World";
     public const string CREDITSCENE = "CreditScene";
     public const string OPTIONSMENU = "OptionsMenu";
+    public const string MAPDECORATION = "FinalMap_Decoration";
 }

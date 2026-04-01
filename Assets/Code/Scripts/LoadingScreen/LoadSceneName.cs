@@ -13,6 +13,11 @@ public class LoadSceneName : MonoBehaviour
     {
         LoaderScene.Instance.LoadScene(ConstantGame.WORLD);
     }
+    
+    public void ScenaMapDecoration()
+    {
+        LoaderScene.Instance.LoadScene(ConstantGame.MAPDECORATION);
+    }
 
     public void ScenaCredit()
     {
