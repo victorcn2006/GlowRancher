@@ -33,7 +33,7 @@ public class FogWallsSetsManager : MonoBehaviour
 
     private void Update()
     {
-        UpdateFogSet(_fogSet); //descomentar para debugear
+        //UpdateFogSet(_fogSet); //descomentar para debugear
     }
 
 
