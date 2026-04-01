@@ -7,11 +7,11 @@ public class ItemPickUp : MonoBehaviour, IAspirable
 
     public void BeingAspired()
     {
-        throw new System.NotImplementedException();
+
     }
 
     public void StopBeingAspired()
     {
-        throw new System.NotImplementedException();
+
     }
 }

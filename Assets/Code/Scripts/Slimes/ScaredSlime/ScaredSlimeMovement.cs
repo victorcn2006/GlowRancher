@@ -10,23 +10,23 @@ public class ScaredSlimeMovement : MonoBehaviour
     // --------------------------------------------MOVEMENT PARAMETERS-------------------------------------------- \\
 
     [Header("RANGO DE TIEMPO ENTRE SALTOS")]
-    private const float MIN_TIME = 5f;
-    private const float MAX_TIME = 10f;
+    [SerializeField] private float minTime = 5f;
+    [SerializeField] private float maxTime = 10f;
 
     [Header("RANGO DE TIEMPO ENTRE SALTOS ASUSTADO")]
-    private const float SCARED_JUMP_TIME = 0.2f;
+    [SerializeField] private float scaredJumpTime = 0.01f;
 
     [Header("VALORES DEL SALTO")]
-    private const float JUMP_FORCE = 170f;
-    private const float JUMP_DISTANCE = 1f;
+    [SerializeField] private float jumpForce = 170f;
+    [SerializeField] private float jumpDistance = 1f;
 
     [Header("VALORES DEL SALTO ASUSTADO")]
-    private const float SCARED_JUMP_FORCE = 200f;
-    private const float SCARED_JUMP_DISTANCE = 1.5f;
+    [SerializeField] private float scaredJumpForce = 120f;
+    [SerializeField] private float scaredJumpDistance = 0.5f;
 
     [Header("VALORES DE ROTACIÓN")]
-    private const float ROTATE_DURATION = 2f;
-    private const float SCARED_ROTATE_DURATION = 0.2f;
+    [SerializeField] private float rotateDuration = 2f;
+    [SerializeField] private float scaredRotateDuration = 0.01f;
 
     // --------------------------------------------PRIVATE VARIABLES--------------------------------------------\\
     private float _jumpTimer;
@@ -42,7 +42,7 @@ public class ScaredSlimeMovement : MonoBehaviour
 
     // --------------------------------------------RAYCAST SETTINGS--------------------------------------------\\
     [Header("VALORES GROUNDED")]
-    float groundCheckDistance = 0.35f;
+    [SerializeField] private float groundCheckDistance = 0.35f;
 
     private void Awake()
     {
@@ -53,7 +53,7 @@ public class ScaredSlimeMovement : MonoBehaviour
     void Start()
     {
         _ScaredSlime = GetComponent<ScaredSlime>();
-        _jumpTimer = Random.Range(MIN_TIME, MAX_TIME);
+        _jumpTimer = Random.Range(minTime, maxTime);
     }
 
     private void Update()
@@ -80,24 +80,36 @@ public class ScaredSlimeMovement : MonoBehaviour
                 
         if (_scared)
         {
-            destination = transform.position + (_ScaredSlime.playerDetector.GetPlayerTransform().position - transform.position ).normalized * -1;
-            //destination *= SCARED_JUMP_DISTANCE;
+            Transform player = _ScaredSlime.playerDetector.GetPlayerTransform();
+            if (player != null)
+            {
+                Vector3 fleeDirection = (transform.position - player.position).normalized;
+                fleeDirection.y = 0;
+                if (fleeDirection == Vector3.zero) fleeDirection = -transform.forward;
+                destination = transform.position + fleeDirection * scaredJumpDistance;
+            }
+            else
+            {
+                Vector3 randomDir = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
+                destination = transform.position + randomDir * jumpDistance;
+            }
         }
         else
         {
             Vector3 randomDir = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
-            destination = transform.position + randomDir;
+            destination = transform.position + randomDir * jumpDistance;
         }
-            destination *= JUMP_DISTANCE;
 
 
         Vector3 direction = destination - transform.position;
         direction.y = 0;
 
-        Quaternion lookRotation = Quaternion.LookRotation(direction);
-
-        if(_scared) seq.Append(transform.DORotateQuaternion(lookRotation, SCARED_ROTATE_DURATION).SetEase(Ease.OutSine));
-        else seq.Append(transform.DORotateQuaternion(lookRotation, ROTATE_DURATION).SetEase(Ease.OutSine));
+        if (direction != Vector3.zero)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            if (_scared) seq.Append(transform.DORotateQuaternion(lookRotation, scaredRotateDuration).SetEase(Ease.OutSine));
+            else seq.Append(transform.DORotateQuaternion(lookRotation, rotateDuration).SetEase(Ease.OutSine));
+        }
         
 
         StartCoroutine(Jump());
@@ -108,20 +120,20 @@ public class ScaredSlimeMovement : MonoBehaviour
     {
         if (_scared)
         {
-            yield return new WaitForSeconds(SCARED_ROTATE_DURATION);
-            _rb.AddForce((transform.up + transform.forward) * SCARED_JUMP_FORCE);
+            yield return new WaitForSeconds(scaredRotateDuration);
+            _rb.AddForce((transform.up + transform.forward) * scaredJumpForce);
         }
         else
         {
-            yield return new WaitForSeconds(ROTATE_DURATION);
-            _rb.AddForce((transform.up + transform.forward) * JUMP_FORCE);
+            yield return new WaitForSeconds(rotateDuration);
+            _rb.AddForce((transform.up + transform.forward) * jumpForce);
         }
     }
 
     private void ResetJumpTimer()
     {
-        if (_scared) _jumpTimer = SCARED_JUMP_TIME;
-        else _jumpTimer = Random.Range(MIN_TIME, MAX_TIME);
+        if (_scared) _jumpTimer = scaredJumpTime;
+        else _jumpTimer = Random.Range(minTime, maxTime);
     }
 
     private bool Grounded()
@@ -149,9 +161,9 @@ public class ScaredSlimeMovement : MonoBehaviour
 
     public void SetScared(bool state)
     {
+        if (_scared == state) return;
         _scared = state;
         ResetJumpTimer();
-
     }
 
 }
