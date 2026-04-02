@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 44059466}
   - component: {fileID: 44059471}
   - component: {fileID: 44059469}
+  - component: {fileID: 44059472}
   m_Layer: 0
   m_Name: Play Button
   m_TagString: Untagged
@@ -207,9 +208,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 948771047}
-        m_TargetAssemblyTypeName: LoadSceneName, Assembly-CSharp
-        m_MethodName: ScenaWorld
+      - m_Target: {fileID: 44059472}
+        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
+        m_MethodName: ChangeScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -289,6 +290,21 @@ MonoBehaviour:
       Data4: -1664337932
     Path: event:/ButtonClick_Sound
   currentButton: 0
+--- !u!114 &44059472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44059464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9242fdc9c05bfb41ab9291231ad2bf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneToLoad:
+    _sceneAsset: {fileID: 102900000, guid: 11f0c1c63addd1b479e2bb1d63af9fa7, type: 3}
+    _sceneName: World
 --- !u!1 &57745451
 GameObject:
   m_ObjectHideFlags: 0
@@ -2303,6 +2319,7 @@ MonoBehaviour:
   _pauseGame: {fileID: 3820728662531952595, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
   _nextDialog: {fileID: 2274616954005545242, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
   _run: {fileID: 2274616954005545242, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
+  _buildPerformed: {fileID: 5967558730159387155, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
   _aspirate: {fileID: 6501401278561469931, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
   _launchObject: {fileID: 8266952679875099490, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
   _inventoryNavigation: {fileID: -4489386230323612283, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
@@ -2328,6 +2345,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnEnterPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBuildPerformed:
     m_PersistentCalls:
       m_Calls: []
   OnScroll:

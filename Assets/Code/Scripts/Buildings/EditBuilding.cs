@@ -1,171 +1,180 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 using System.Collections.Generic;
 
+/// <summary>
+/// Manages the building editing system, allowing players to move and reposition buildings via a hologram.
+/// This script should be attached to a "BuildingSystem" parent GameObject that acts as the root.
+/// </summary>
 public class EditBuilding : MonoBehaviour
 {
-    [Header("Models Hologram and Bulding")]
-    [SerializeField] private GameObject _hologram;
-    [SerializeField] private GameObject _building;
+    [Header("Hierarchy References")]
+    [Tooltip("The actual static building model/container.")]
+    [FormerlySerializedAs("_building")]
+    [SerializeField] private GameObject _buildingModel;
+    [Tooltip("The hologram model used for positioning.")]
+    [FormerlySerializedAs("_hologram")]
+    [SerializeField] private GameObject _hologramModel;
 
-    [Header("Hologram Visuals")]
+    [Header("Visual Feedback")]
     [SerializeField] private MeshRenderer _hologramRenderer;
-    [SerializeField] private Material _invalidMaterial;
+    [FormerlySerializedAs("_invalidMaterial")]
+    [SerializeField] private Material _invalidPlacementMaterial;
 
-    [Header("Player Camera")]
-    [SerializeField] private MainCameraPosition _mainCamera;
-    [SerializeField] private float _placeDistance = 20f;
+    [Header("Placement Settings")]
+    [FormerlySerializedAs("_placeDistance")]
+    [SerializeField] private float _maxPlaceDistance = 20f;
     [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private LayerMask _obstructionLayer;
 
-    private Material _originalMaterial;
-    private float _initialY;
-    private bool _isBuilding = false;
+    private Material _originalHologramMaterial;
+    private float _lockedY;
+    private bool _isEditing = false;
     private bool _isValidPlacement = true;
+    private MainCameraPosition _mainCamera;
 
-    // Use a HashSet to track unique colliders to handle multiple colliders on the player
+    // Tracks player colliders within the trigger to allow interaction
     private HashSet<Collider> _playerColliders = new HashSet<Collider>();
-    private bool _contact => _playerColliders.Count > 0;
+    private bool _isPlayerInside => _playerColliders.Count > 0;
 
     private void OnEnable()
     {
-        if(InputManager.Instance != null) InputManager.Instance.OnBuildPerformed.AddListener(OnBuildInput);
+        if (InputManager.Instance != null)
+        {
+            InputManager.Instance.OnBuildPerformed.AddListener(HandleBuildInput);
+        }
     }
+
     private void OnDisable()
     {
-        if (InputManager.Instance != null) InputManager.Instance.OnBuildPerformed.RemoveListener(OnBuildInput);
+        if (InputManager.Instance != null)
+        {
+            InputManager.Instance.OnBuildPerformed.RemoveListener(HandleBuildInput);
+        }
         _playerColliders.Clear();
     }
+
     private void Start()
     {
-        if (_building == null || _hologram == null) return;
+        _mainCamera = FindObjectOfType<MainCameraPosition>();
         
+        if (_buildingModel == null || _hologramModel == null)
+        {
+            Debug.LogError($"[EditBuilding] Missing model references on {gameObject.name}", this);
+            return;
+        }
+
         if (_hologramRenderer != null)
         {
-            _originalMaterial = _hologramRenderer.sharedMaterial;
+            _originalHologramMaterial = _hologramRenderer.sharedMaterial;
         }
 
-        _initialY = transform.position.y; //Don't move y offset
-        ActiveBuilding();
+        _lockedY = transform.position.y;
+        SetState(false); // Start in static building mode
     }
 
-    private void Update() {
-        if (_hologram.activeSelf)
+    private void Update()
+    {
+        if (_isEditing)
         {
-            UpdateHologramPosition();
-            CheckPlacementValidity();
+            UpdateHologramPlacement();
+            ValidatePlacement();
         }
     }
 
-    private void UpdateHologramPosition()
+    private void UpdateHologramPlacement()
     {
         if (_mainCamera == null) return;
 
         Ray ray = new Ray(_mainCamera.transform.position, _mainCamera.transform.forward);
-        RaycastHit hit;
         Vector3 targetPosition;
 
-        if (Physics.Raycast(ray, out hit, _placeDistance, _groundLayer))
+        if (Physics.Raycast(ray, out var hit, _maxPlaceDistance, _groundLayer))
         {
             targetPosition = hit.point;
-            Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.green);
         }
         else
         {
-            targetPosition = ray.GetPoint(_placeDistance);
-            Debug.DrawRay(ray.origin, ray.direction * _placeDistance, Color.red);
+            targetPosition = ray.GetPoint(_maxPlaceDistance);
         }
 
-        // Lock the Y position to the initial height
-        targetPosition.y = _initialY;
-        _hologram.transform.position = targetPosition;
+        // Keep the building at its original height
+        targetPosition.y = _lockedY;
+        _hologramModel.transform.position = targetPosition;
     }
 
-    private void CheckPlacementValidity()
+    private void ValidatePlacement()
     {
-        // We use halfExtents because OverlapBox measures from center to edge.
-        // If your model scale is (1,1,1) but it's physically bigger, you might need to adjust this value.
-        Vector3 halfExtents = _hologram.transform.localScale / 2f;
+        // Use halfExtents for OverlapBox (measures from center to edge)
+        Vector3 halfExtents = _hologramModel.transform.localScale / 2f;
         
         Collider[] hitColliders = Physics.OverlapBox(
-            _hologram.transform.position, 
+            _hologramModel.transform.position, 
             halfExtents, 
-            _hologram.transform.rotation, 
+            _hologramModel.transform.rotation, 
             _obstructionLayer,
             QueryTriggerInteraction.Collide
         );
 
         _isValidPlacement = (hitColliders.Length == 0);
 
-        // Update Material based on validity
+        // Update visual feedback
         if (_hologramRenderer != null)
         {
-            _hologramRenderer.material = _isValidPlacement ? _originalMaterial : _invalidMaterial;
+            _hologramRenderer.material = _isValidPlacement ? _originalHologramMaterial : _invalidPlacementMaterial;
         }
     }
 
-    // Visualizes the detection box in the Unity Editor Scene View
-    private void OnDrawGizmos()
+    private void HandleBuildInput()
     {
-        if (_hologram == null || !_hologram.activeSelf) return;
-
-        Gizmos.color = _isValidPlacement ? new Color(0, 1, 0, 0.5f) : new Color(1, 0, 0, 0.5f);
-        Gizmos.matrix = Matrix4x4.TRS(_hologram.transform.position, _hologram.transform.rotation, _hologram.transform.lossyScale);
-        Gizmos.DrawWireCube(Vector3.zero, Vector3.one);
-        Gizmos.DrawCube(Vector3.zero, Vector3.one); // semi-transparent solid box
+        if (_isEditing)
+        {
+            TryFinalizePlacement();
+        }
+        else if (_isPlayerInside)
+        {
+            StartEditing();
+        }
     }
 
-    private void OnBuildInput()
+    private void StartEditing()
     {
-        // BLOCK: If trying to FINISH building but placement is INVALID, do nothing
-        if (_isBuilding && !_isValidPlacement) 
+        _isEditing = true;
+        _lockedY = transform.position.y;
+        InputManager.Instance.IsBuildingPressed = true;
+        SetState(true);
+    }
+
+    private void TryFinalizePlacement()
+    {
+        if (!_isValidPlacement)
         {
-            Debug.Log("Invalid placement: Building obstructed!");
-            return; 
+            Debug.Log("<color=red>Invalid placement: Building obstructed!</color>");
+            return;
         }
 
-        // Allow starting ONLY if in contact. Allow finishing REGARDLESS of contact.
-        if (!_contact && !_isBuilding) return;
+        // Apply new position to the root object
+        transform.position = _hologramModel.transform.position;
+        
+        // Reset building model local position
+        _buildingModel.transform.localPosition = Vector3.zero;
 
-        _isBuilding = !_isBuilding;
-        InputManager.Instance.IsBuildingPressed = _isBuilding;
+        _isEditing = false;
+        InputManager.Instance.IsBuildingPressed = false;
+        SetState(false);
+    }
 
-        if (_isBuilding)
-        {
-            _initialY = transform.position.y; // Update Y based on the parent's position
-            ActiveHologram();
-        }
-        else
-        {
-            // Move the parent to the hologram's position so the trigger moves with it
-            transform.position = _hologram.transform.position;
-            
-            // Ensure the building model is centered relative to the parent
-            _building.transform.localPosition = Vector3.zero;
-            
-            ActiveBuilding();
-        }
+    private void SetState(bool editing)
+    {
+        _buildingModel.SetActive(!editing);
+        _hologramModel.SetActive(editing);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            if (_playerColliders.Add(other))
-            {
-                Debug.Log($"ENTER: {other.name}. Total: {_playerColliders.Count}");
-            }
-        }
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            if (!_playerColliders.Contains(other))
-            {
-                _playerColliders.Add(other);
-                Debug.Log($"STAY (Recovered): {other.name}. Total: {_playerColliders.Count}");
-            }
+            _playerColliders.Add(other);
         }
     }
 
@@ -173,26 +182,23 @@ public class EditBuilding : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (_playerColliders.Remove(other))
-            {
-                Debug.Log($"EXIT: {other.name}. Total: {_playerColliders.Count}");
-            }
+            _playerColliders.Remove(other);
             
-            // If we are NOT building, just make sure the building is active.
-            if (!_contact && !_isBuilding)
+            // If the player leaves while NOT editing, ensure we stay in static mode
+            if (!_isEditing)
             {
-                ActiveBuilding();
+                SetState(false);
             }
         }
     }
 
-    private void ActiveBuilding() {
-        _building.SetActive(true);
-        _hologram.SetActive(false);
-    }
+    private void OnDrawGizmos()
+    {
+        if (!_isEditing || _hologramModel == null) return;
 
-    private void ActiveHologram() {
-        _building.SetActive(false);
-        _hologram.SetActive(true);
+        Gizmos.color = _isValidPlacement ? new Color(0, 1, 0, 0.3f) : new Color(1, 0, 0, 0.3f);
+        Gizmos.matrix = Matrix4x4.TRS(_hologramModel.transform.position, _hologramModel.transform.rotation, _hologramModel.transform.lossyScale);
+        Gizmos.DrawCube(Vector3.zero, Vector3.one);
+        Gizmos.DrawWireCube(Vector3.zero, Vector3.one);
     }
 }
