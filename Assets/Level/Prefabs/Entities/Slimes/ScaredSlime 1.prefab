@@ -33,7 +33,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 809123657047631041}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 582.86, y: 20.448044, z: 183.58554}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -192,6 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7490dd475da77c4bb4ff105105c7da1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  detectionRange: 5
 --- !u!114 &2546225550473761132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,6 +205,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 722fedbde392fe64e8ec81595f15c649, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minTime: 5
+  maxTime: 10
+  scaredJumpTime: 0.01
+  jumpForce: 170
+  jumpDistance: 1
+  scaredJumpForce: 120
+  scaredJumpDistance: 0.5
+  rotateDuration: 2
+  scaredRotateDuration: 0.01
+  groundCheckDistance: 0.35
 --- !u!1 &828816751968619511
 GameObject:
   m_ObjectHideFlags: 0
@@ -1252,7 +1263,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -2813467912831258332, guid: bfacf2317044bf24d97f60c3f2a338ff, type: 3}
+  - {fileID: 2100000, guid: d5ae75f9668962247a6c9ed160ce1d9c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
