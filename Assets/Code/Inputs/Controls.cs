@@ -651,9 +651,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""NextDialog"",
+                    ""name"": ""Build"",
                     ""type"": ""Button"",
-                    ""id"": ""4c5f5913-b360-45ab-ba01-bdeecd83e31c"",
+                    ""id"": ""5c01515d-a07b-49f7-bf8f-e62e0db51024"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -861,23 +861,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""5a79f13e-d5bb-4691-80cb-b9c419821b0d"",
-                    ""path"": ""<Keyboard>/enter"",
+                    ""id"": ""3b5401b1-339b-4e99-af10-99262c2834de"",
+                    ""path"": ""<Keyboard>/c"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""NextDialog"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""917b3270-4578-46ad-b499-6dd002e9a481"",
-                    ""path"": ""<Keyboard>/leftShift"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Run"",
+                    ""action"": ""Build"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1134,7 +1123,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_PauseGame = m_Player.FindAction("PauseGame", throwIfNotFound: true);
-        m_Player_NextDialog = m_Player.FindAction("NextDialog", throwIfNotFound: true);
+        m_Player_Build = m_Player.FindAction("Build", throwIfNotFound: true);
         // Aspirator
         m_Aspirator = asset.FindActionMap("Aspirator", throwIfNotFound: true);
         m_Aspirator_Aspirate = m_Aspirator.FindAction("Aspirate", throwIfNotFound: true);
@@ -1344,7 +1333,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_PauseGame;
-    private readonly InputAction m_Player_NextDialog;
+    private readonly InputAction m_Player_Build;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -1354,7 +1343,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @PauseGame => m_Wrapper.m_Player_PauseGame;
-        public InputAction @NextDialog => m_Wrapper.m_Player_NextDialog;
+        public InputAction @Build => m_Wrapper.m_Player_Build;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1379,9 +1368,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @PauseGame.started += instance.OnPauseGame;
             @PauseGame.performed += instance.OnPauseGame;
             @PauseGame.canceled += instance.OnPauseGame;
-            @NextDialog.started += instance.OnNextDialog;
-            @NextDialog.performed += instance.OnNextDialog;
-            @NextDialog.canceled += instance.OnNextDialog;
+            @Build.started += instance.OnBuild;
+            @Build.performed += instance.OnBuild;
+            @Build.canceled += instance.OnBuild;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1401,9 +1390,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @PauseGame.started -= instance.OnPauseGame;
             @PauseGame.performed -= instance.OnPauseGame;
             @PauseGame.canceled -= instance.OnPauseGame;
-            @NextDialog.started -= instance.OnNextDialog;
-            @NextDialog.performed -= instance.OnNextDialog;
-            @NextDialog.canceled -= instance.OnNextDialog;
+            @Build.started -= instance.OnBuild;
+            @Build.performed -= instance.OnBuild;
+            @Build.canceled -= instance.OnBuild;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1577,7 +1566,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnPauseGame(InputAction.CallbackContext context);
-        void OnNextDialog(InputAction.CallbackContext context);
+        void OnBuild(InputAction.CallbackContext context);
     }
     public interface IAspiratorActions
     {

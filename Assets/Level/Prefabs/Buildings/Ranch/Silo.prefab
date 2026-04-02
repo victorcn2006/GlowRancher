@@ -12,10 +12,9 @@ GameObject:
   - component: {fileID: 3069256997088937366}
   - component: {fileID: 140230987188639640}
   - component: {fileID: 7680159907818922639}
-  - component: {fileID: 2541885221345073539}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Inventory Door
-  m_TagString: Untagged
+  m_TagString: InteractuableSilo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,27 +100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5d3ee42fb6976e469b0d623aa8d2305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!135 &2541885221345073539
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3249744949725063064}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.61301047
-  m_Center: {x: -0.0000009462902, y: -0.00000025480662, z: -0.20235094}
 --- !u!1 &5930866089243490819
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,11 +111,10 @@ GameObject:
   - component: {fileID: 3515153269867989847}
   - component: {fileID: 8843731861616297651}
   - component: {fileID: 6224420119534644982}
-  - component: {fileID: 7947271219267909237}
   - component: {fileID: 2032692203383865380}
   m_Layer: 0
   m_Name: Silo
-  m_TagString: Untagged
+  m_TagString: InteractuableSilo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -186,7 +163,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: b2edf9b9f21cd974485350bdfbb9dd4e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -208,27 +185,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7947271219267909237
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5930866089243490819}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2032692203383865380
 MonoBehaviour:
   m_ObjectHideFlags: 0
