@@ -6,7 +6,11 @@ public class BuildingManager : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private InteractiveShop _shop;
-    // Start is called before the first frame update
+    [SerializeField] private Transform _spawnPlace;
+
+    [Header("Prefs")]
+    [SerializeField] private GameObject _incineratorHologram;
+
     void Start()
     {
         
@@ -25,8 +29,6 @@ public class BuildingManager : MonoBehaviour
     {
         _shop.HandleKeyboardToggle();
 
-        /*
-         Aqui anira el holograma quan estigui fet, pero per ara es desactivara el panell i es activara el holograma del incinerador.
-         */
+        Instantiate(_incineratorHologram, _spawnPlace.position, _spawnPlace.rotation);
     }
 }
