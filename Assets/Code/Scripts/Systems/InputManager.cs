@@ -26,6 +26,7 @@ public class InputManager : MonoBehaviour {
     [RequiredField, SerializeField] private InputActionReference _pauseGame;
     [RequiredField, SerializeField] private InputActionReference _nextDialog;
     [RequiredField, SerializeField] private InputActionReference _run;
+    [RequiredField, SerializeField] private InputActionReference _buildPerformed;
 
     [Header("Aspirator Inputs")]
     [RequiredField, SerializeField] private InputActionReference _aspirate;
@@ -38,6 +39,7 @@ public class InputManager : MonoBehaviour {
 
     [HideInInspector] public bool IsJumpPressed { get; private set; }
     [HideInInspector] public bool IsRunning { get; private set; }
+    [HideInInspector] public bool IsBuildingPressed { get; set; }
     [HideInInspector] public bool IsMove;
     [HideInInspector] public bool IsPaused;
     [HideInInspector] public bool IsWikiOpen { get; private set; }
@@ -51,6 +53,7 @@ public class InputManager : MonoBehaviour {
     [HideInInspector] public UnityEvent OnInteractPerformed = new UnityEvent();
     [HideInInspector] public UnityEvent OnLookPerformed = new UnityEvent();
     [HideInInspector] public UnityEvent OnEnterPerformed = new UnityEvent();
+    [HideInInspector] public UnityEvent OnBuildPerformed = new UnityEvent();
 
 
 
@@ -117,6 +120,7 @@ public class InputManager : MonoBehaviour {
         _nextDialog.action.performed += OnEnter;
         _run.action.performed += OnRunStarted;
         _run.action.canceled += OnRunCanceled;
+        _buildPerformed.action.performed += OnBuild;
 
         _look.action.performed += OnLook;
         _scroll.action.performed += OnScrollPerformed;
@@ -133,10 +137,16 @@ public class InputManager : MonoBehaviour {
         _nextDialog.action.performed -= OnEnter;
         _run.action.performed -= OnRunStarted;
         _run.action.canceled -= OnRunCanceled;
+        _buildPerformed.action.performed -= OnBuild;
 
         _scroll.action.performed -= OnScrollPerformed;
         _inventoryNavigation.action.performed -= OnInventorySlotKeyPerformed;
         _rightClick.action.performed -= OnInventoryRightClickPerformed;
+    }
+
+    private void OnBuild(InputAction.CallbackContext ctx)
+    {
+        OnBuildPerformed?.Invoke();
     }
 
     private void OnEnter(InputAction.CallbackContext ctx)
