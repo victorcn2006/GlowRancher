@@ -52,7 +52,7 @@ public class Character : MonoBehaviour, IDamageable
 
     protected virtual void Die()
     {
-        if (gameObject.activeSelf) gameObject.SetActive(false);
+        
     }
 
     public void UpdatePosition() => position = transform.position;
