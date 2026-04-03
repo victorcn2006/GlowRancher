@@ -52,8 +52,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22465626db8b5b64686acc760625c43d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _generalDialogs:
-  - {fileID: 11400000, guid: 8daa34af82192f740ad4f64a6ded4ce6, type: 2}
   _dialogueGO: {fileID: 7699837472273342535}
 --- !u!114 &3187421896159118275
 MonoBehaviour:
@@ -67,11 +65,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8989ca0e8a270d344a8217bc33a9535e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _iaSounds:
-  - {fileID: 8300000, guid: 7c006032c159bf8478f8201e299378b7, type: 3}
-  _iaErrorSounds:
-  - {fileID: 8300000, guid: 9df587aba814c074faffb63b7ba60463, type: 3}
-  _audioSource: {fileID: 9194118059979707970}
+  _fmodNormalSound:
+    Guid:
+      Data1: 828536241
+      Data2: 1194309833
+      Data3: 1856826778
+      Data4: 116581098
+    Path: event:/sfx/ui/text/speech_ai
+  _fmodErrorSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  _pitchVariation: 0.12
 --- !u!114 &412771948912354840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,8 +93,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _iAText: {fileID: 1243124824595174945}
-  _errorCharacters: 230040002500
   _timeBetweenCharacters: 0.07
+  _errorCharacters: 230040002500
   _errorTimeBetweenCharacters: 0.2
   _errorProbability: 30
 --- !u!82 &9194118059979707970

@@ -1,50 +1,48 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
+using FMODUnity; // Necesario para EventReference y RuntimeManager
+using FMOD.Studio;
 
 public class IASoundNarrator : MonoBehaviour
 {
-
-    //private IANarratorManager _iANarratorManager;
     private IATextNarrator _iATextNarrator;
 
-    [SerializeField] private List<AudioClip> _iaSounds = new List<AudioClip>();
-    [SerializeField] private List<AudioClip> _iaErrorSounds = new List<AudioClip>();
+    [Header("Referencias desde los Banks")]
+    [SerializeField] private EventReference _fmodNormalSound;
+    [SerializeField] private EventReference _fmodErrorSound;
 
-    [SerializeField] private AudioSource _audioSource;
+    [Header("Ajustes de Audio")]
+    [Range(0f, 0.5f)]
+    [SerializeField] private float _pitchVariation = 0.12f;
+
     void Awake()
     {
-        //_iANarratorManager = GetComponent<IANarratorManager>();
         _iATextNarrator = GetComponent<IATextNarrator>();
     }
 
-
-    //hacer que si llegan letras de "error" suene diferente
-
-
     public void Narrate(char character)
     {
-        if (!_iATextNarrator.GetErrorCharacters().Contains(character)) MakeSound(character); // si no es un character de error emite un sonido normal
-        else MakeErrorSound(); // si es un sonido de error emite un sonido de error
+        // Ignorar espacios y puntos
+        if (character == ' ' || character == '.') return;
+
+        // Seleccionar la referencia según el tipo de carácter
+        EventReference selectedEvent = _iATextNarrator.GetErrorCharacters().Contains(character)
+            ? _fmodErrorSound : _fmodNormalSound;
+
+        // Verificar si la referencia es válida (si no está vacía)
+        if (selectedEvent.IsNull) return;
+
+        PlayFMODEvent(selectedEvent);
     }
 
-    private void MakeSound(char character)
+    private void PlayFMODEvent(EventReference eventRef)
     {
-        if (_iaSounds.Count <= 0) return;
+        // Crear instancia desde la referencia detectada en los Banks
+        EventInstance instance = RuntimeManager.CreateInstance(eventRef);
 
-        if (character == ' ' || character == '.') return; // si es un espacio o un punto no genera sonido
-        else _audioSource.PlayOneShot(_iaSounds[Random.Range(0, _iaSounds.Count)]); // si no es un espacio o punto emite un sonido
+        // Pitch aleatorio para que no suene robótico
+        instance.setPitch(Random.Range(1f - _pitchVariation, 1f + _pitchVariation));
 
+        instance.start();
+        instance.release();
     }
-
-    private void MakeErrorSound()
-    {
-        if (_iaErrorSounds.Count <= 0) return;
-
-        else _audioSource.PlayOneShot(_iaErrorSounds[Random.Range(0, _iaErrorSounds.Count)]);
-
-    }
-
 }
