@@ -13,10 +13,15 @@ public class IANarratorManager : MonoBehaviour
     private bool _dialogDisplaying;
     private bool _dialogLineFinished;
     private IATextNarrator _iATextNarrator;
+    public Dialogue text;
 
     private void OnEnable() { if (InputManager.Instance != null) InputManager.Instance.OnEnterPerformed.AddListener(NextLineDialog); }
     private void OnDisable() { if (InputManager.Instance != null) InputManager.Instance.OnEnterPerformed.RemoveListener(NextLineDialog); }
 
+    private void Start()
+    {
+        StartNewDialog(text);
+    }
     void Awake()
     {
         if (instance == null) instance = this;
