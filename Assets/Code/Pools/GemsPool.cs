@@ -10,6 +10,8 @@ public class GemsPool : MonoBehaviour
     [Header("BASIC GEMS")]
     [SerializeField] private GameObject BlueGemPrefab;
     [SerializeField] private GameObject RedGemPrefab;
+    [SerializeField] private GameObject FireGemPrefab;
+    [SerializeField] private GameObject ScaredGemPrefab;
 
     [Header("FUSION GEMS")]
     [SerializeField] private GameObject RedBlueGemPrefab;
@@ -18,6 +20,8 @@ public class GemsPool : MonoBehaviour
     [Header("BASIC GEMS POOLS")]
     public List<GameObject> blueGemsList = new List<GameObject>();
     public List<GameObject> redGemsList = new List<GameObject>();
+    public List<GameObject> fireGemsList = new List<GameObject>();
+    public List<GameObject> scaredGemsList = new List<GameObject>();
 
     [Header("FUSION GEMS POOLS")]
     public List<GameObject> redblueGemsList = new List<GameObject>();
@@ -25,7 +29,7 @@ public class GemsPool : MonoBehaviour
     private GameObject currentGemPrefab;
 
 
-    public enum gemTypes { BLUE_GEM, RED_GEM, REDBLUE_GEM};
+    public enum gemTypes { BLUE_GEM, RED_GEM, FIRE_GEM, SCARED_GEM, REDBLUE_GEM};
 
     private void Awake()
     {
@@ -44,6 +48,8 @@ public class GemsPool : MonoBehaviour
         RegisterGem(BlueGemPrefab, "BlueGem");
         RegisterGem(RedGemPrefab, "RedSlimeGem");
         RegisterGem(RedBlueGemPrefab, "RedBlueGem");
+        RegisterGem(RedBlueGemPrefab, "FireGem");
+        RegisterGem(RedBlueGemPrefab, "ScaredGem");
     }
 
     private void RegisterGem(GameObject prefab, string defaultName)
@@ -85,6 +91,18 @@ public class GemsPool : MonoBehaviour
                 currentGemList = redblueGemsList;
                 gemToRetrun = GetFirstAvailableObject(currentGemList);
                 redblueGemsList = currentGemList;
+                return gemToRetrun;
+            case gemTypes.FIRE_GEM:
+                currentGemPrefab = FireGemPrefab;
+                currentGemList = fireGemsList;
+                gemToRetrun = GetFirstAvailableObject(currentGemList);
+                fireGemsList = currentGemList;
+                return gemToRetrun;
+            case gemTypes.SCARED_GEM:
+                currentGemPrefab = ScaredGemPrefab;
+                currentGemList = scaredGemsList;
+                gemToRetrun = GetFirstAvailableObject(currentGemList);
+                scaredGemsList = currentGemList;
                 return gemToRetrun;
         }
         return null;
