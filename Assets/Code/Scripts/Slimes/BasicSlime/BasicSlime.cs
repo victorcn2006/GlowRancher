@@ -11,6 +11,7 @@ public class BasicSlime : MonoBehaviour, IAspirable
     public GemSystem gemSystem;
     public Mouth mouth;
     public BasicSlimeMovement movementbehaviour;
+    public Animator animator;
 
     public void BeingAspired()
     {

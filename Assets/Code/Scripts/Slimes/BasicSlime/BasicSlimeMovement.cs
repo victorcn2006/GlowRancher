@@ -9,16 +9,17 @@ public class BasicSlimeMovement : MonoBehaviour
 
     // --------------------------------------------MOVEMENT PARAMETERS-------------------------------------------- \\
     [Header("RANGO DE TIEMPO ENTRE SALTOS")]
-    private const float MIN_TIME = 5f;
-    private const float MAX_TIME = 10f;
+    [SerializeField] private float MIN_TIME = 1f;
+    [SerializeField] private float MAX_TIME = 3f;
 
     [Header("VALORES DEL SALTO")]
-    [SerializeField] private const float JUMP_FORCE = 170f;
-    [SerializeField] private const float JUMP_TIME = 1f;
-    [SerializeField] private const float JUMP_DISTANCE = 1f;
+    [SerializeField] private float JUMP_FORCE = 170f;
+    [SerializeField] private float JUMP_TIME = 1f;
+    [SerializeField] private float JUMP_DISTANCE = 1f;
 
-    [Header("VALORES DE ROTACIÓN")]
-    [SerializeField] private const float ROTATE_DURATION = 2f;
+    [Header("VALORES DE ROTACIÃ“N")]
+    [SerializeField] private float ROTATE_DURATION = 0.5f;
+
 
     // --------------------------------------------PRIVATE VARIABLES--------------------------------------------\\
     private float _jumpTimer;
@@ -28,6 +29,7 @@ public class BasicSlimeMovement : MonoBehaviour
     private bool _beingAspired = false;
 
     private Vector3 jumpDirection;
+    [SerializeField] private Transform groundChecker;
 
 
     // --------------------------------------------RAYCAST SETTINGS--------------------------------------------\\
@@ -48,7 +50,6 @@ public class BasicSlimeMovement : MonoBehaviour
 
     private void Update()
     {
-
         if (Grounded() && !_beingAspired)
         {
             _jumpTimer -= Time.deltaTime;
@@ -62,40 +63,46 @@ public class BasicSlimeMovement : MonoBehaviour
 
     private void GoJump()
     {
-
-        Vector3 destination = Vector3.zero;
-        Sequence seq = DOTween.Sequence();
-
+        _BasicSlime.animator.SetBool("Jump", true);
+        
         Vector3 randomDir = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
-        destination = transform.position + randomDir;
-
-        destination *= JUMP_DISTANCE;
+        Vector3 destination = transform.position + randomDir * JUMP_DISTANCE;
 
         Vector3 direction = destination - transform.position;
         direction.y = 0;
 
-        Quaternion lookRotation = Quaternion.LookRotation(direction);
-
-        seq.Append(transform.DORotateQuaternion(lookRotation, ROTATE_DURATION).SetEase(Ease.OutSine));
-
-        StartCoroutine(Jump());
-
+        if (direction != Vector3.zero)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            transform.DORotateQuaternion(lookRotation, ROTATE_DURATION).SetEase(Ease.OutSine).OnComplete(() => 
+            {
+                _rb.AddForce((transform.up + transform.forward) * JUMP_FORCE);
+                StartCoroutine(WaitToLand());
+            });
+        }
+        else
+        {
+            _rb.AddForce(transform.up * JUMP_FORCE);
+            StartCoroutine(WaitToLand());
+        }
     }
 
-    private IEnumerator Jump()
+    private IEnumerator WaitToLand()
     {
-        yield return new WaitForSeconds(ROTATE_DURATION);
-        _rb.AddForce((transform.up + transform.forward) * JUMP_FORCE);
+        yield return new WaitForSeconds(0.2f); // Give it time to leave the ground
+        yield return new WaitUntil(() => Grounded());
+        _BasicSlime.animator.SetBool("Jump", false);
     }
 
     private void ResetJumpTimer()
     {
         _jumpTimer = Random.Range(MIN_TIME, MAX_TIME);
+        
     }
 
     private bool Grounded()
     {
-        return Physics.Raycast(transform.position, Vector3.down, groundCheckDistance);
+        return Physics.Raycast(groundChecker.position, Vector3.down, groundCheckDistance);
     }
     void OnDrawGizmos()
     {

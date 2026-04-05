@@ -6,6 +6,7 @@ public class Mouth : MonoBehaviour
 {
     [Header("LINKED SCRIPTS")]
     private HungerSystem hungerSystem;
+    [SerializeField] private BasicSlime _basicSlime;
     private void Start()
     {
         hungerSystem = GetComponentInParent<HungerSystem>();
@@ -14,8 +15,13 @@ public class Mouth : MonoBehaviour
     {
         if (other.CompareTag("Food") && hungerSystem.IsHungry())
         {
-            hungerSystem.Feed(other.gameObject);
-            other.gameObject.SetActive(false);
+            if (other.TryGetComponent<Food>(out Food food))
+            {
+                if (food.isBeingEaten) return;
+                
+                food.isBeingEaten = true;
+                hungerSystem.Feed(food.gameObject);
+            }
         }
     }
 }
