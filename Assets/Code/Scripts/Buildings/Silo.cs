@@ -31,6 +31,16 @@ public class Silo : Building
             _inventoryPanel.SetActive(false);
     }
 
+    public void ToggleInventory()
+    {
+        if (_playerInside)
+        {
+            _inventoryPanel.SetActive(!_inventoryPanel.activeSelf);
+            if (_inventoryPanel.activeSelf)
+                EventSystem.current.SetSelectedGameObject(_firstSlot);
+        }
+    }
+
     private void ActiveInventoryPanel()
     {
         if (_playerInside)

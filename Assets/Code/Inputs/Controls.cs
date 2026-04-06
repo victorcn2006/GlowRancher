@@ -658,6 +658,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Build"",
+                    ""type"": ""Button"",
+                    ""id"": ""aca7e58d-2ade-47f2-96da-ce2c586b628a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -878,6 +887,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Run"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9915f8f3-3bf5-4b0a-9291-3c989282f0fa"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Build"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1135,6 +1155,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_PauseGame = m_Player.FindAction("PauseGame", throwIfNotFound: true);
         m_Player_NextDialog = m_Player.FindAction("NextDialog", throwIfNotFound: true);
+        m_Player_Build = m_Player.FindAction("Build", throwIfNotFound: true);
         // Aspirator
         m_Aspirator = asset.FindActionMap("Aspirator", throwIfNotFound: true);
         m_Aspirator_Aspirate = m_Aspirator.FindAction("Aspirate", throwIfNotFound: true);
@@ -1345,6 +1366,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_PauseGame;
     private readonly InputAction m_Player_NextDialog;
+    private readonly InputAction m_Player_Build;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -1355,6 +1377,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @PauseGame => m_Wrapper.m_Player_PauseGame;
         public InputAction @NextDialog => m_Wrapper.m_Player_NextDialog;
+        public InputAction @Build => m_Wrapper.m_Player_Build;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1382,6 +1405,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @NextDialog.started += instance.OnNextDialog;
             @NextDialog.performed += instance.OnNextDialog;
             @NextDialog.canceled += instance.OnNextDialog;
+            @Build.started += instance.OnBuild;
+            @Build.performed += instance.OnBuild;
+            @Build.canceled += instance.OnBuild;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1404,6 +1430,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @NextDialog.started -= instance.OnNextDialog;
             @NextDialog.performed -= instance.OnNextDialog;
             @NextDialog.canceled -= instance.OnNextDialog;
+            @Build.started -= instance.OnBuild;
+            @Build.performed -= instance.OnBuild;
+            @Build.canceled -= instance.OnBuild;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1578,6 +1607,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnPauseGame(InputAction.CallbackContext context);
         void OnNextDialog(InputAction.CallbackContext context);
+        void OnBuild(InputAction.CallbackContext context);
     }
     public interface IAspiratorActions
     {

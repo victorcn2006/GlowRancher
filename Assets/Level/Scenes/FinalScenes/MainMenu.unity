@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 44059466}
   - component: {fileID: 44059471}
   - component: {fileID: 44059469}
+  - component: {fileID: 44059472}
   m_Layer: 0
   m_Name: Play Button
   m_TagString: Untagged
@@ -207,9 +208,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 948771047}
-        m_TargetAssemblyTypeName: LoadSceneName, Assembly-CSharp
-        m_MethodName: ScenaWorld
+      - m_Target: {fileID: 44059472}
+        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
+        m_MethodName: ChangeScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -289,6 +290,21 @@ MonoBehaviour:
       Data4: -1664337932
     Path: event:/ButtonClick_Sound
   currentButton: 0
+--- !u!114 &44059472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44059464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9242fdc9c05bfb41ab9291231ad2bf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneToLoad:
+    _sceneAsset: {fileID: 102900000, guid: 11f0c1c63addd1b479e2bb1d63af9fa7, type: 3}
+    _sceneName: World
 --- !u!1 &57745451
 GameObject:
   m_ObjectHideFlags: 0
@@ -1308,6 +1324,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194229}
+  - component: {fileID: 963194230}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1394,6 +1411,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 8ce32ccfc366bb041abde27a49dd9b04, type: 3}
+--- !u!114 &963194230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!1 &1009509271
 GameObject:
   m_ObjectHideFlags: 0
@@ -1952,11 +2013,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: -1552742437
-      Data2: 1151022498
-      Data3: -1756065866
-      Data4: 1777678549
-    Path: event:/Muisc_Rancho
+      Data1: 828536241
+      Data2: 1194309833
+      Data3: 1856826778
+      Data4: 116581098
+    Path: event:/sfx/ui/text/speech_ai
   Event: 
   EventPlayTrigger: 1
   EventStopTrigger: 0
@@ -2303,6 +2364,7 @@ MonoBehaviour:
   _pauseGame: {fileID: 3820728662531952595, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
   _nextDialog: {fileID: 2274616954005545242, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
   _run: {fileID: 2274616954005545242, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
+  _buildPerformed: {fileID: 5967558730159387155, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
   _aspirate: {fileID: 6501401278561469931, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
   _launchObject: {fileID: 8266952679875099490, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
   _inventoryNavigation: {fileID: -4489386230323612283, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
@@ -2328,6 +2390,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnEnterPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBuildPerformed:
     m_PersistentCalls:
       m_Calls: []
   OnScroll:
