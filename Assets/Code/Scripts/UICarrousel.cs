@@ -140,9 +140,9 @@ public class UICarrousel : MonoBehaviour
         // Setup initial states
         switch (_panelTransition)
         {
-            case TransitionType.Instant:
+            /*case TransitionType.Instant:
                 currentPanel.SetActive(false);
-                yield break;
+                yield break;*/
 
             case TransitionType.Fade:
                 nextCG.alpha = 0f;
