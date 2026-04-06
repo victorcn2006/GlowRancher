@@ -27,6 +27,8 @@ public class EditBuilding : MonoBehaviour
     [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private LayerMask _obstructionLayer;
 
+    private bool _isNewBuilding;
+
     private Material _originalHologramMaterial;
     private float _lockedY;
     private bool _isEditing = false;
@@ -137,19 +139,25 @@ public class EditBuilding : MonoBehaviour
         }
     }
 
-    private void StartEditing()
+    public void StartEditing(bool isNew = false)
     {
-        _isEditing = true;
+         _isEditing = true;
+         _isNewBuilding = isNew;
+    
+        // If it's an existing building, lock to its current Y
+        // If it's new, we'll set it in the first UpdateHologramPlacement
         _lockedY = transform.position.y;
-        InputManager.Instance.IsBuildingPressed = true;
-        SetState(true);
+   
+       InputManager.Instance.IsBuildingPressed = true;
+       SetState(true);
     }
 
-    private void TryFinalizePlacement()
+private void TryFinalizePlacement()
     {
         if (!_isValidPlacement)
         {
             Debug.Log("<color=red>Invalid placement: Building obstructed!</color>");
+            CancelPlacement();
             return;
         }
 
@@ -162,6 +170,20 @@ public class EditBuilding : MonoBehaviour
         _isEditing = false;
         InputManager.Instance.IsBuildingPressed = false;
         SetState(false);
+    }
+
+    private void CancelPlacement(){
+        if (_isNewBuilding)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+             // Revert to original state
+            _isEditing = false;
+             InputManager.Instance.IsBuildingPressed = false;
+             SetState(true);
+        }
     }
 
     private void SetState(bool editing)

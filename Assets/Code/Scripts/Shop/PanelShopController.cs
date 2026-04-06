@@ -111,7 +111,7 @@ public class PanelShopController : MonoBehaviour
             WalletCurrency.instance.bank -= 5;
             WalletCurrency.instance.SaveMoney();
             WalletCurrency.instance.Score_txt.text = WalletCurrency.instance.bank.ToString();
-
+            //_buildingManager.PlanterBuyed();
             Debug.Log("Planter purchased");
         }
         else
@@ -128,7 +128,7 @@ public class PanelShopController : MonoBehaviour
             WalletCurrency.instance.bank -= 5;
             WalletCurrency.instance.SaveMoney();
             WalletCurrency.instance.Score_txt.text = WalletCurrency.instance.bank.ToString();
-
+            //_buildingManager.CageBuyed();
             Debug.Log("Slime Cage purchased");
         }
         else
@@ -145,7 +145,7 @@ public class PanelShopController : MonoBehaviour
             WalletCurrency.instance.bank -= 5;
             WalletCurrency.instance.SaveMoney();
             WalletCurrency.instance.Score_txt.text = WalletCurrency.instance.bank.ToString();
-
+            //_buildingManager.SiloBuyed();
             Debug.Log("Silo purchased");
         }
         else
