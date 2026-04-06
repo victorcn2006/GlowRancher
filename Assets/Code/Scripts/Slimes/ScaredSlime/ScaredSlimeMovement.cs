@@ -96,8 +96,24 @@ public class ScaredSlimeMovement : MonoBehaviour
         }
         else
         {
-            Vector3 randomDir = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
-            destination = transform.position + randomDir * jumpDistance;
+            // If not scared, check for food
+            if (_ScaredSlime.hungerSystem != null && _ScaredSlime.hungerSystem.IsHungry() && _ScaredSlime.foodDetector != null)
+            {
+                Transform closestFood = _ScaredSlime.foodDetector.GetClosestFood(transform.position);
+                if (closestFood != null)
+                {
+                    Vector3 foodDirection = (closestFood.position - transform.position).normalized;
+                    foodDirection.y = 0;
+                    destination = transform.position + foodDirection * jumpDistance;
+                }
+            }
+
+            // If no food found or not hungry, random jump
+            if (destination == Vector3.zero)
+            {
+                Vector3 randomDir = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
+                destination = transform.position + randomDir * jumpDistance;
+            }
         }
 
 

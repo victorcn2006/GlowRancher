@@ -6,7 +6,6 @@ public class Mouth : MonoBehaviour
 {
     [Header("LINKED SCRIPTS")]
     private HungerSystem hungerSystem;
-    [SerializeField] private BasicSlime _basicSlime;
     private void Start()
     {
         hungerSystem = GetComponentInParent<HungerSystem>();

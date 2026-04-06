@@ -1,5 +1,50 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &398079368562502524
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2408237013795315254}
+  - component: {fileID: 5268864360778402284}
+  m_Layer: 0
+  m_Name: PlayerDetector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2408237013795315254
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398079368562502524}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 31882544156786299}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5268864360778402284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398079368562502524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7490dd475da77c4bb4ff105105c7da1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectionRange: 5
 --- !u!1 &809123657047631041
 GameObject:
   m_ObjectHideFlags: 0
@@ -19,7 +64,7 @@ GameObject:
   - component: {fileID: 3927103875215319948}
   - component: {fileID: 2546225550473761132}
   m_Layer: 0
-  m_Name: ScaredSlime 1
+  m_Name: ScaredSlime
   m_TagString: Slime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,8 +78,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 809123657047631041}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 582.86, y: 20.448044, z: 183.58554}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -50,6 +95,8 @@ Transform:
   - {fileID: 7578698799027454548}
   - {fileID: 3484517563913419675}
   - {fileID: 6244665637188996322}
+  - {fileID: 2491107390444995285}
+  - {fileID: 2408237013795315254}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &2653262663390888192
@@ -147,6 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf5155dada168554ca86993a48211fed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gemSystem: {fileID: 2384844571179870570}
   hungerTimeReset: 90
   hungry: 1
 --- !u!114 &4165792998179981799
@@ -175,11 +223,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2649b984f51b45418dd6ae31f1fb39a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hungerSystem: {fileID: 5333685649500796454}
-  gemSystem: {fileID: 2384844571179870570}
-  mouth: {fileID: 4888518333568143106}
-  movementbehaviour: {fileID: 2546225550473761132}
-  playerDetector: {fileID: 3927103875215319948}
+  _hungerSystem: {fileID: 5333685649500796454}
+  _foodDetector: {fileID: 819528610192874673}
+  _gemSystem: {fileID: 2384844571179870570}
+  _mouth: {fileID: 4888518333568143106}
+  _movementBehaviour: {fileID: 2546225550473761132}
+  _playerDetector: {fileID: 5268864360778402284}
+  _animator: {fileID: 5680054598787933131}
 --- !u!114 &3927103875215319948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,6 +242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7490dd475da77c4bb4ff105105c7da1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  detectionRange: 5
 --- !u!114 &2546225550473761132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,6 +255,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 722fedbde392fe64e8ec81595f15c649, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minTime: 5
+  maxTime: 10
+  scaredJumpTime: 0.01
+  jumpForce: 170
+  jumpDistance: 1
+  scaredJumpForce: 120
+  scaredJumpDistance: 0.5
+  rotateDuration: 2
+  scaredRotateDuration: 0.01
+  groundCheckDistance: 0.35
 --- !u!1 &828816751968619511
 GameObject:
   m_ObjectHideFlags: 0
@@ -799,7 +860,7 @@ Transform:
   m_GameObject: {fileID: 3839278804600834775}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.057006836, y: 0.29199982, z: 0.34199524}
+  m_LocalPosition: {x: 0.057006836, y: 0.29199982, z: 0.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -824,8 +885,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.13235474
-  m_Center: {x: -0.038676467, y: 0.00010454655, z: -0.0004812777}
+  m_Radius: 0.16356659
+  m_Center: {x: -0.03867647, y: -0.032068253, z: -0.0004812777}
 --- !u!114 &4888518333568143106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -838,7 +899,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c49b33196c51645ae7a1079f424e9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _basicSlime: {fileID: 0}
 --- !u!1 &3935046993023329059
 GameObject:
   m_ObjectHideFlags: 0
@@ -963,6 +1023,72 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.000043209526, y: 0.0050868313, z: 0.0002247428}
     m_Extent: {x: 0.00076889736, y: 0.0011984674, z: 0.007477658}
   m_DirtyAABB: 0
+--- !u!1 &5840980766871805999
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2491107390444995285}
+  - component: {fileID: 819528610192874673}
+  - component: {fileID: 9112514922768189627}
+  m_Layer: 0
+  m_Name: FoodDetector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2491107390444995285
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5840980766871805999}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 31882544156786299}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &819528610192874673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5840980766871805999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47da066d7a441074886258019d02960e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!135 &9112514922768189627
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5840980766871805999}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6143882298884447106
 GameObject:
   m_ObjectHideFlags: 0
@@ -1007,8 +1133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c255fab9f69f464e8db1e6f7f6670ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gemTypeToDrop: 0
-  _basicSlime: {fileID: 0}
+  _gemTypeToDrop: 3
 --- !u!1 &6644108113133834363
 GameObject:
   m_ObjectHideFlags: 0

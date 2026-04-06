@@ -39,7 +39,8 @@ public class PlayerCameraMovement : MonoBehaviour
         // Leemos directamente del InputManager
         Vector2 input = InputManager.Instance.LookInput;
 
-        if (input == Vector2.zero) return;
+        // Añadimos un pequeño threshold para evitar drift/movimientos fantasmas
+        if (input.magnitude < 0.01f) return;
 
         // Multiplicamos por sensibilidad
         float mouseX = input.x * _rotationSensitivity;
