@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PanelShopController : MonoBehaviour
 {
     [Header("Refs")]
+    [SerializeField] private BuildingManager _buildingManager;
     [SerializeField] private GameObject _shopPanel;
     [SerializeField] private GameObject _incinerator;
     [SerializeField] private GameObject _planter;
@@ -86,7 +87,7 @@ public class PanelShopController : MonoBehaviour
     public void BuyIncinerator()
     {
 
-        if (WalletCurrency.instance.bank >= 5)
+        if (WalletCurrency.instance.bank >= 0)
         {
             WalletCurrency.instance.bank -= 5;
             WalletCurrency.instance.SaveMoney();
@@ -94,6 +95,7 @@ public class PanelShopController : MonoBehaviour
 
             Debug.Log("Incinerator purchased");
             _incinerator.SetActive(true);
+            _buildingManager.IncineratorBuyed();
         }
         else
         {
