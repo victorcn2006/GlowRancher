@@ -19,6 +19,10 @@ public class GemsPool : MonoBehaviour
 
     [Header("FUSION GEMS")]
     [SerializeField] private GameObject RedBlueGemPrefab;
+    [SerializeField] private GameObject FrozenRockGemPrefab;
+    [SerializeField] private GameObject BurningMushGemPrefab;
+    [SerializeField] private GameObject ScaredCatGemPrefab;
+    [SerializeField] private GameObject obsidianGemPrefab;
 
 
     [Header("BASIC GEMS POOLS")]
@@ -34,11 +38,15 @@ public class GemsPool : MonoBehaviour
 
     [Header("FUSION GEMS POOLS")]
     public List<GameObject> redblueGemsList = new List<GameObject>();
+    public List<GameObject> frozenRockGemsList = new List<GameObject>();
+    public List<GameObject> burningMushGemsList = new List<GameObject>();
+    public List<GameObject> scaredCatGemsList = new List<GameObject>();
+    public List<GameObject> obsidianGemsList = new List<GameObject>();
 
     private GameObject currentGemPrefab;
 
 
-    public enum gemTypes { BLUE_GEM, RED_GEM, FIRE_GEM, SCARED_GEM, ICE_GEM, MUSHROOM_GEM, CAT_GEM, ROCK_GEM, REDBLUE_GEM};
+    public enum gemTypes { BLUE_GEM, RED_GEM, FIRE_GEM, SCARED_GEM, ICE_GEM, MUSHROOM_GEM, CAT_GEM, ROCK_GEM, REDBLUE_GEM, FROZENROCK_GEM, BURNINGMUSH_GEM, SCAREDCAT_GEM, OBSIDIAN_GEM};
 
     private void Awake()
     {
@@ -63,6 +71,10 @@ public class GemsPool : MonoBehaviour
         RegisterGem(MushroomGemPrefab, "MushroomGem");
         RegisterGem(CatGemPrefab, "CatGem");
         RegisterGem(RockGemPrefab, "RockGem");
+        RegisterGem(FrozenRockGemPrefab, "FrozenRockGem");
+        RegisterGem(BurningMushGemPrefab, "BurningMushGem");
+        RegisterGem(BurningMushGemPrefab, "ScaredCatGem");
+        RegisterGem(BurningMushGemPrefab, "ObsidianGem");
     }
 
     private void RegisterGem(GameObject prefab, string defaultName)
@@ -146,6 +158,30 @@ public class GemsPool : MonoBehaviour
                 currentGemList = rockGemsList;
                 gemToReturn = GetFirstAvailableObject(currentGemList);
                 rockGemsList = currentGemList;
+                return gemToReturn;
+            case gemTypes.FROZENROCK_GEM:
+                currentGemPrefab = FrozenRockGemPrefab;
+                currentGemList = frozenRockGemsList;
+                gemToReturn = GetFirstAvailableObject(currentGemList);
+                frozenRockGemsList = currentGemList;
+                return gemToReturn;
+            case gemTypes.BURNINGMUSH_GEM:
+                currentGemPrefab = BurningMushGemPrefab;
+                currentGemList = burningMushGemsList;
+                gemToReturn = GetFirstAvailableObject(currentGemList);
+                burningMushGemsList = currentGemList;
+                return gemToReturn;
+            case gemTypes.SCAREDCAT_GEM:
+                currentGemPrefab = ScaredCatGemPrefab;
+                currentGemList = scaredCatGemsList;
+                gemToReturn = GetFirstAvailableObject(currentGemList);
+                scaredCatGemsList = currentGemList;
+                return gemToReturn;
+            case gemTypes.OBSIDIAN_GEM:
+                currentGemPrefab = obsidianGemPrefab;
+                currentGemList = obsidianGemsList;
+                gemToReturn = GetFirstAvailableObject(currentGemList);
+                obsidianGemsList = currentGemList;
                 return gemToReturn;
         }
         return null;
