@@ -3954,6 +3954,7 @@ MonoBehaviour:
   _ambience: 1
   _fogSetOnActive: 2
   _puzzleNumber: 3
+  _monolitoUnlocked: 0
 --- !u!135 &193931888
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -19543,6 +19544,7 @@ MonoBehaviour:
   _ambience: 1
   _fogSetOnActive: 3
   _puzzleNumber: 0
+  _monolitoUnlocked: 0
 --- !u!135 &884542585
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -19914,10 +19916,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BlueGemPrefab: {fileID: 0}
   RedGemPrefab: {fileID: 5097261789379587870, guid: b8167ae71f7ed084487204e9c9e5f763, type: 3}
+  FireGemPrefab: {fileID: 0}
+  ScaredGemPrefab: {fileID: 0}
+  IceGemPrefab: {fileID: 0}
+  MushroomGemPrefab: {fileID: 0}
+  CatGemPrefab: {fileID: 0}
+  RockGemPrefab: {fileID: 0}
   RedBlueGemPrefab: {fileID: 0}
+  FrozenRockGemPrefab: {fileID: 0}
+  BurningMushGemPrefab: {fileID: 0}
+  ScaredCatGemPrefab: {fileID: 0}
+  obsidianGemPrefab: {fileID: 0}
   blueGemsList: []
   redGemsList: []
+  fireGemsList: []
+  scaredGemsList: []
+  iceGemsList: []
+  mushroomGemsList: []
+  catGemsList: []
+  rockGemsList: []
   redblueGemsList: []
+  frozenRockGemsList: []
+  burningMushGemsList: []
+  scaredCatGemsList: []
+  obsidianGemsList: []
 --- !u!114 &908038398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38639,6 +38661,7 @@ MonoBehaviour:
   _ambience: 1
   _fogSetOnActive: 0
   _puzzleNumber: 1
+  _monolitoUnlocked: 0
 --- !u!135 &1704497395
 SphereCollider:
   m_ObjectHideFlags: 0
