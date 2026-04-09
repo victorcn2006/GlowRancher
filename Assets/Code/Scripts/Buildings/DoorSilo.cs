@@ -9,19 +9,11 @@ public class DoorSilo : MonoBehaviour
         _silo = GetComponentInParent<Silo>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void Interact()
     {
-        if (other.CompareTag("Player"))
+        if (_silo != null)
         {
-            _silo.SetPlayerInside(true);
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            _silo.SetPlayerInside(false);
+            _silo.ToggleInventory();
         }
     }
 }

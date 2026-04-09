@@ -12,11 +12,18 @@ public class LavaHazard : MonoBehaviour
             return;
         }
 
+        if (other.gameObject.CompareTag("Player"))
+        {
+            DeathScript.instance.Die();
+            return;
+        }
+
         // Apply damage if the entity is damageable
         IDamageable damageable = other.GetComponent<IDamageable>();
         if (damageable != null)
         {
             damageable.TakeDamage(damageAmount);
+            
         }
         else
         {

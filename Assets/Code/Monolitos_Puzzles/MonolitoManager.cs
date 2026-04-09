@@ -8,6 +8,7 @@ public class MonolitoManager : MonoBehaviour
     [SerializeField] private AmbienceController.AmbienceStates _ambience;
     [SerializeField] private int _fogSetOnActive;
     [SerializeField] private int _puzzleNumber;
+    [SerializeField] private bool _monolitoUnlocked;
 
     private bool _activated = false;
 
@@ -22,9 +23,9 @@ public class MonolitoManager : MonoBehaviour
             FogWallsSetsManager.Instance.UpdateFogSet(_fogSetOnActive);
             BigWallsManager.Instance.PuzzleCompleted(_puzzleNumber);
             //agregar animación de cristal y cinematica
-
+            _monolitoUnlocked = true;
+            if (this.gameObject.CompareTag("FirstMonolito")) DeathScript.instance.firstMonolitoUnlocked = true;
         }
-
     }
 
 
