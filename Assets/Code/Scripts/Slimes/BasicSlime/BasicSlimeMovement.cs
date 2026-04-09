@@ -1,4 +1,5 @@
 using DG.Tweening;
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,9 @@ public class BasicSlimeMovement : MonoBehaviour
 
     [Header("VALORES DE ROTACIÓN")]
     [SerializeField] private float ROTATE_DURATION = 0.5f;
+
+    [Header("AUDIO")]
+    [SerializeField] private EventReference _landSoundSlime;
 
 
     // --------------------------------------------PRIVATE VARIABLES--------------------------------------------\\
@@ -104,6 +108,7 @@ public class BasicSlimeMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(0.2f); // Give it time to leave the ground
         yield return new WaitUntil(() => Grounded());
+        PlayLandingSound();
         _BasicSlime.animator.SetBool("Jump", false);
     }
 
@@ -116,6 +121,7 @@ public class BasicSlimeMovement : MonoBehaviour
     private bool Grounded()
     {
         return Physics.Raycast(groundChecker.position, Vector3.down, groundCheckDistance);
+        
     }
     void OnDrawGizmos()
     {
@@ -131,5 +137,13 @@ public class BasicSlimeMovement : MonoBehaviour
     public void SetGravity(bool state)
     {
         _rb.useGravity = state;
+    }
+
+    private void PlayLandingSound()
+    {
+        if (!_landSoundSlime.IsNull)
+        {
+            RuntimeManager.PlayOneShot(_landSoundSlime, transform.position);
+        }
     }
 }

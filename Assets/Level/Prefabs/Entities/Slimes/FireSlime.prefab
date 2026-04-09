@@ -146,6 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf5155dada168554ca86993a48211fed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gemSystem: {fileID: 0}
   hungerTimeReset: 90
   hungry: 1
 --- !u!114 &7993395566574913341
@@ -166,6 +167,13 @@ MonoBehaviour:
   JUMP_TIME: 1
   JUMP_DISTANCE: 1
   ROTATE_DURATION: 0.5
+  _landSoundSlime:
+    Guid:
+      Data1: -1746834499
+      Data2: 1316020304
+      Data3: 1173717946
+      Data4: -1606751673
+    Path: event:/sfx/slime/normal/jump_land
   groundChecker: {fileID: 4311179933767478691}
   groundCheckDistance: 0.4
 --- !u!114 &1485042742539602296
@@ -180,11 +188,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f9eb95cfaab6ec4389b3c0f630242bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hungerSystem: {fileID: 1055142548560343825}
-  gemSystem: {fileID: 4481010487037154642}
-  mouth: {fileID: 66751346501692310}
-  movementbehaviour: {fileID: 7993395566574913341}
-  animator: {fileID: 2318632662104089185}
+  _hungerSystem: {fileID: 0}
+  _foodDetector: {fileID: 0}
+  _gemSystem: {fileID: 0}
+  _mouth: {fileID: 0}
+  _movementBehaviour: {fileID: 0}
+  _animator: {fileID: 0}
 --- !u!114 &458854614321744526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -744,7 +753,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c49b33196c51645ae7a1079f424e9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _basicSlime: {fileID: 1485042742539602296}
 --- !u!1 &4963682945166676065
 GameObject:
   m_ObjectHideFlags: 0
@@ -1325,4 +1333,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gemTypeToDrop: 0
-  _basicSlime: {fileID: 1485042742539602296}

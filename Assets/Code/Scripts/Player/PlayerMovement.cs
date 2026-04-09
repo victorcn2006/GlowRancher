@@ -7,17 +7,17 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] private float _walkSpeed = 5f;
-    [SerializeField] private float _runSpeed = 9f; // Nueva velocidad de carrera
+    [SerializeField] private float _runSpeed = 9f;
     [SerializeField] private float _jumpForce = 5f;
     [SerializeField] private float _doubleJumpForce = 13f;
 
     [Header("Audio")]
     [SerializeField] private EventReference _jumpSound;
 
-    // Cache de componentes
+    // Componentes
     private Rigidbody _rb;
     private Transform _mainCamTransform;
-    private Player _player; // Referencia al script de lógica del jugador
+    private Player _player;
 
     // Estado
     private bool _canJump = true;
@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
-        _player = GetComponent<Player>(); // Obtenemos la referencia al Player
+        _player = GetComponent<Player>();
 
         if (Camera.main != null)
             _mainCamTransform = Camera.main.transform;
@@ -53,6 +53,7 @@ public class PlayerMovement : MonoBehaviour
     private void ApplyMovement()
     {
         Vector2 input = InputManager.Instance.MoveInput;
+
         if (input.sqrMagnitude < 0.01f)
         {
             _rb.velocity = new Vector3(0, _rb.velocity.y, 0);
@@ -63,7 +64,6 @@ public class PlayerMovement : MonoBehaviour
         Vector3 camRight = Vector3.Scale(_mainCamTransform.right, new Vector3(1, 0, 1)).normalized;
         Vector3 moveDirection = (camRight * input.x + camForward * input.y).normalized;
 
-        // Aquí está la clave:
         float currentSpeed = (_player != null && _player.CanRun) ? _runSpeed : _walkSpeed;
 
         Vector3 targetVelocity = moveDirection * currentSpeed;
