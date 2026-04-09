@@ -65,15 +65,28 @@ public class BasicSlimeMovement : MonoBehaviour
     {
         _BasicSlime.animator.SetBool("Jump", true);
         
-        Vector3 randomDir = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
-        Vector3 destination = transform.position + randomDir * JUMP_DISTANCE;
+        Vector3 jumpDir = Vector3.zero;
 
-        Vector3 direction = destination - transform.position;
-        direction.y = 0;
-
-        if (direction != Vector3.zero)
+        // Check if we should move towards food
+        if (_BasicSlime.hungerSystem != null && _BasicSlime.hungerSystem.IsHungry() && _BasicSlime.foodDetector != null)
         {
-            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            Transform closestFood = _BasicSlime.foodDetector.GetClosestFood(transform.position);
+            if (closestFood != null)
+            {
+                jumpDir = (closestFood.position - transform.position).normalized;
+                jumpDir.y = 0;
+            }
+        }
+
+        // If no food target, jump in random direction
+        if (jumpDir == Vector3.zero)
+        {
+            jumpDir = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
+        }
+
+        if (jumpDir != Vector3.zero)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(jumpDir);
             transform.DORotateQuaternion(lookRotation, ROTATE_DURATION).SetEase(Ease.OutSine).OnComplete(() => 
             {
                 _rb.AddForce((transform.up + transform.forward) * JUMP_FORCE);
