@@ -23,6 +23,7 @@ public class BasicSlimeMovement : MonoBehaviour
 
     [Header("AUDIO")]
     [SerializeField] private EventReference _landSoundSlime;
+    [SerializeField] private EventReference _jumpSoundSlime;
 
 
     // --------------------------------------------PRIVATE VARIABLES--------------------------------------------\\
@@ -67,6 +68,7 @@ public class BasicSlimeMovement : MonoBehaviour
 
     private void GoJump()
     {
+        StartCoroutine(Jump());
         _BasicSlime.animator.SetBool("Jump", true);
         
         Vector3 jumpDir = Vector3.zero;
@@ -85,11 +87,13 @@ public class BasicSlimeMovement : MonoBehaviour
         // If no food target, jump in random direction
         if (jumpDir == Vector3.zero)
         {
+         
             jumpDir = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
         }
 
         if (jumpDir != Vector3.zero)
         {
+            
             Quaternion lookRotation = Quaternion.LookRotation(jumpDir);
             transform.DORotateQuaternion(lookRotation, ROTATE_DURATION).SetEase(Ease.OutSine).OnComplete(() => 
             {
@@ -106,10 +110,16 @@ public class BasicSlimeMovement : MonoBehaviour
 
     private IEnumerator WaitToLand()
     {
-        yield return new WaitForSeconds(0.2f); // Give it time to leave the ground
+        yield return new WaitForSeconds(0.7f); // Give it time to leave the ground
         yield return new WaitUntil(() => Grounded());
         PlayLandingSound();
         _BasicSlime.animator.SetBool("Jump", false);
+    }
+    private IEnumerator Jump()
+    {
+        yield return new WaitForSeconds(0.7f); // Give it time to leave the ground
+        PlayJumpSound();
+
     }
 
     private void ResetJumpTimer()
@@ -140,6 +150,13 @@ public class BasicSlimeMovement : MonoBehaviour
     }
 
     private void PlayLandingSound()
+    {
+        if (!_landSoundSlime.IsNull)
+        {
+            RuntimeManager.PlayOneShot(_landSoundSlime, transform.position);
+        }
+    }
+    private void PlayJumpSound()
     {
         if (!_landSoundSlime.IsNull)
         {
