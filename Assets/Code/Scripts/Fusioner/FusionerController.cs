@@ -63,25 +63,25 @@ public class FusionerController : MonoBehaviour
                  (_firstGem == "IceGemSlimeStone" && _secondGem == "RockSlimeStone"))
         {
             StartCoroutine(DelayTime(GemsPool.gemTypes.FROZENROCK_GEM));
-            return "Red and Green SlimeStone";
+            return "Frozen rock Slimestone";
         }
         else if ((_firstGem == "FireGemSlimeStone" && _secondGem == "MushroomSlimeStone") ||
                  (_firstGem == "MushroomSlimeStone" && _secondGem == "FireGemSlimeStone"))
         {
             StartCoroutine(DelayTime(GemsPool.gemTypes.BURNINGMUSH_GEM));
-            return "Red and Green SlimeStone";
+            return "BurningMush Slimestone";
         }
         else if ((_firstGem == "CatSlimeStone" && _secondGem == "ScaredSlimeStone") ||
                  (_firstGem == "ScaredSlimeStone" && _secondGem == "CatSlimeStone"))
         {
             StartCoroutine(DelayTime(GemsPool.gemTypes.SCAREDCAT_GEM));
-            return "Red and Green SlimeStone";
+            return "Scared Cat Slimestone";
         }
         else if ((_firstGem == "IceGemSlimeStone" && _secondGem == "FireGemSlimeStone") ||
                  (_firstGem == "FireGemSlimeStone" && _secondGem == "IceGemSlimeStone"))
         {
             StartCoroutine(DelayTime(GemsPool.gemTypes.OBSIDIAN_GEM));
-            return "Red and Green SlimeStone";
+            return "ObsidianSlimestone";
         }
         else
         {
