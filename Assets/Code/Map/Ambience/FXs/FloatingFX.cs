@@ -29,9 +29,9 @@ public class FloatingFX : MonoBehaviour
 
         if (_rotation)
         {
-            if (!_rotateToRight)transform.DORotate(new Vector3(0, -360, 0), _fullRotationTime, RotateMode.FastBeyond360).SetEase(Ease.Linear).SetLoops(-1, LoopType.Restart);
+            if (!_rotateToRight) this.transform.DORotate(new Vector3(0, -360, 0), _fullRotationTime, RotateMode.FastBeyond360).SetEase(Ease.Linear).SetLoops(-1, LoopType.Restart);
 
-            else transform.DORotate(new Vector3(0, 360, 0), _fullRotationTime, RotateMode.FastBeyond360).SetEase(Ease.Linear).SetLoops(-1, LoopType.Restart);
+            else this.transform.DORotate(new Vector3(0, 360, 0), _fullRotationTime, RotateMode.FastBeyond360).SetEase(Ease.Linear).SetLoops(-1, LoopType.Restart);
         }
 
     }
