@@ -16,6 +16,7 @@ public class CorruptSlimeMovement : MonoBehaviour
     [SerializeField] private float JUMP_FORCE = 180f; // Slightly more force
     [SerializeField] private float JUMP_TIME = 1f;
     [SerializeField] private float JUMP_DISTANCE = 1.2f;
+    [SerializeField] private float MAX_PHYSICS_JUMP_DISTANCE = 3.5f; // CALIBRATE THIS
 
     [Header("VALORES DE ROTACIÓN")]
     [SerializeField] private float ROTATE_DURATION = 0.3f; // Faster rotation
@@ -25,6 +26,7 @@ public class CorruptSlimeMovement : MonoBehaviour
     private float _jumpTimer;
     private Rigidbody _rb;
     private bool _beingAspired = false;
+    private float _currentTargetDistance = -1f;
     [SerializeField] private Transform groundChecker;
 
     [Header("VALORES GROUNDED")]
@@ -67,6 +69,7 @@ public class CorruptSlimeMovement : MonoBehaviour
         // If no target, jump in random direction
         if (jumpDir == Vector3.zero)
         {
+            _currentTargetDistance = -1f;
             jumpDir = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
         }
 
@@ -75,7 +78,14 @@ public class CorruptSlimeMovement : MonoBehaviour
             Quaternion lookRotation = Quaternion.LookRotation(jumpDir);
             transform.DORotateQuaternion(lookRotation, ROTATE_DURATION).SetEase(Ease.OutSine).OnComplete(() => 
             {
-                _rb.AddForce((transform.up + transform.forward) * JUMP_FORCE);
+                float forceMultiplier = 1.0f;
+                if (_currentTargetDistance > 0)
+                {
+                    forceMultiplier = Mathf.Clamp(_currentTargetDistance / MAX_PHYSICS_JUMP_DISTANCE, 0.3f, 1.0f);
+                }
+
+                Vector3 jumpForceVector = (transform.up * JUMP_FORCE) + (transform.forward * JUMP_FORCE * forceMultiplier);
+                _rb.AddForce(jumpForceVector);
                 StartCoroutine(WaitToLand());
             });
         }
@@ -91,10 +101,15 @@ public class CorruptSlimeMovement : MonoBehaviour
         Transform target = FindClosestTarget();
         if (target != null)
         {
+            Vector3 posNoY = transform.position; posNoY.y = 0;
+            Vector3 targetNoY = target.position; targetNoY.y = 0;
+            _currentTargetDistance = Vector3.Distance(posNoY, targetNoY);
+
             Vector3 dir = (target.position - transform.position).normalized;
             dir.y = 0;
             return dir;
         }
+        _currentTargetDistance = -1f;
         return Vector3.zero;
     }
 
