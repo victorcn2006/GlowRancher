@@ -3914,6 +3914,7 @@ MonoBehaviour:
   _ambience: 1
   _fogSetOnActive: 2
   _puzzleNumber: 3
+  _monolitoUnlocked: 0
 --- !u!135 &193931888
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -11947,6 +11948,7 @@ GameObject:
   - component: {fileID: 542831210}
   - component: {fileID: 542831212}
   - component: {fileID: 542831213}
+  - component: {fileID: 542831214}
   m_Layer: 0
   m_Name: CameraMinimapa
   m_TagString: Untagged
@@ -12034,6 +12036,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nonRigidbodyVelocity: 0
   attenuationObject: {fileID: 0}
+--- !u!114 &542831214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 542831209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 1
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!1 &543379569
 GameObject:
   m_ObjectHideFlags: 0
@@ -19516,6 +19562,7 @@ MonoBehaviour:
   _ambience: 1
   _fogSetOnActive: 3
   _puzzleNumber: 0
+  _monolitoUnlocked: 0
 --- !u!135 &884542585
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -19887,10 +19934,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BlueGemPrefab: {fileID: 0}
   RedGemPrefab: {fileID: 5097261789379587870, guid: b8167ae71f7ed084487204e9c9e5f763, type: 3}
+  FireGemPrefab: {fileID: 0}
+  ScaredGemPrefab: {fileID: 0}
+  IceGemPrefab: {fileID: 0}
+  MushroomGemPrefab: {fileID: 0}
+  CatGemPrefab: {fileID: 0}
+  RockGemPrefab: {fileID: 0}
   RedBlueGemPrefab: {fileID: 0}
+  FrozenRockGemPrefab: {fileID: 0}
+  BurningMushGemPrefab: {fileID: 0}
+  ScaredCatGemPrefab: {fileID: 0}
+  obsidianGemPrefab: {fileID: 0}
   blueGemsList: []
   redGemsList: []
+  fireGemsList: []
+  scaredGemsList: []
+  iceGemsList: []
+  mushroomGemsList: []
+  catGemsList: []
+  rockGemsList: []
   redblueGemsList: []
+  frozenRockGemsList: []
+  burningMushGemsList: []
+  scaredCatGemsList: []
+  obsidianGemsList: []
 --- !u!114 &908038398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36122,6 +36189,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SuckPoint
       objectReference: {fileID: 0}
+    - target: {fileID: 4824388224711805482, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5316250449291250590, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
       propertyPath: m_Name
       value: Player
@@ -36656,7 +36727,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1230601593132593266, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 169443418}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6324665923922024361, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1563374109}
   m_SourcePrefab: {fileID: 100100000, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
 --- !u!4 &1563374105 stripped
 Transform:
@@ -36679,6 +36753,55 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5073461156153243541, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
   m_PrefabInstance: {fileID: 1563374104}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1563374108 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6324665923922024361, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
+  m_PrefabInstance: {fileID: 1563374104}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1563374109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1563374108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 1
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!114 &1563374110 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7789661516611291817, guid: 0cb6adf03222e854ab2ce1ce03e1903a, type: 3}
@@ -38658,6 +38781,7 @@ MonoBehaviour:
   _ambience: 1
   _fogSetOnActive: 0
   _puzzleNumber: 1
+  _monolitoUnlocked: 0
 --- !u!135 &1704497395
 SphereCollider:
   m_ObjectHideFlags: 0
