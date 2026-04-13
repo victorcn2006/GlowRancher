@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class PanelShopController : MonoBehaviour
 {
     [Header("Refs")]
-    [SerializeField] private BuildingManager _buildingManager;
     [SerializeField] private GameObject _shopPanel;
     [SerializeField] private GameObject _incinerator;
     [SerializeField] private GameObject _planter;
@@ -87,7 +86,7 @@ public class PanelShopController : MonoBehaviour
     public void BuyIncinerator()
     {
 
-        if (WalletCurrency.instance.bank >= 0)
+        if (WalletCurrency.instance.bank >= 5)
         {
             WalletCurrency.instance.bank -= 5;
             WalletCurrency.instance.SaveMoney();
@@ -95,7 +94,6 @@ public class PanelShopController : MonoBehaviour
 
             Debug.Log("Incinerator purchased");
             _incinerator.SetActive(true);
-            _buildingManager.IncineratorBuyed();
         }
         else
         {
@@ -111,7 +109,7 @@ public class PanelShopController : MonoBehaviour
             WalletCurrency.instance.bank -= 5;
             WalletCurrency.instance.SaveMoney();
             WalletCurrency.instance.Score_txt.text = WalletCurrency.instance.bank.ToString();
-            //_buildingManager.PlanterBuyed();
+
             Debug.Log("Planter purchased");
         }
         else
@@ -128,7 +126,7 @@ public class PanelShopController : MonoBehaviour
             WalletCurrency.instance.bank -= 5;
             WalletCurrency.instance.SaveMoney();
             WalletCurrency.instance.Score_txt.text = WalletCurrency.instance.bank.ToString();
-            //_buildingManager.CageBuyed();
+
             Debug.Log("Slime Cage purchased");
         }
         else
@@ -145,7 +143,7 @@ public class PanelShopController : MonoBehaviour
             WalletCurrency.instance.bank -= 5;
             WalletCurrency.instance.SaveMoney();
             WalletCurrency.instance.Score_txt.text = WalletCurrency.instance.bank.ToString();
-            //_buildingManager.SiloBuyed();
+
             Debug.Log("Silo purchased");
         }
         else

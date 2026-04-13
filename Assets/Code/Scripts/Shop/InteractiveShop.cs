@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class InteractiveShop : MonoBehaviour, IInteractive
+public class InteractiveShop : MonoBehaviour
 {
     [Header("Referencias de Interfaz")]
     [SerializeField] private GameObject _shopUIContainer;
@@ -14,8 +14,6 @@ public class InteractiveShop : MonoBehaviour, IInteractive
 
     float timeSinceLastOpenedClosed = 0.16f;
     const float timeBetweenOpenClose = 0.16f;
-
-
 
     private void OnEnable()
     {
@@ -38,7 +36,7 @@ public class InteractiveShop : MonoBehaviour, IInteractive
     }
 
     // Este método solo se dispara cuando presionas la tecla de Shop (ej. ESC o E)
-    public void HandleKeyboardToggle()//esta public per a permitir la construccio d'elements.
+    public void HandleKeyboardToggle()
     {
         //if (InputManager.Instance.IsPaused) return;
 
@@ -72,7 +70,7 @@ public class InteractiveShop : MonoBehaviour, IInteractive
 
         if (timeSinceLastOpenedClosed >= timeBetweenOpenClose)
         {
-            if (!_isShopActive) return; // Ya está cerrada, no hacemos nada
+            if (!_isShopActive) return; // Ya está abierta, no hacemos nada
             timeSinceLastOpenedClosed = 0;
 
             Debug.Log("Cerrando Tienda...");
@@ -109,10 +107,5 @@ public class InteractiveShop : MonoBehaviour, IInteractive
         // Mostrar/Ocultar el mouse según el estado
         Cursor.visible = shopOpen;
         Cursor.lockState = shopOpen ? CursorLockMode.None : CursorLockMode.Locked;
-    }
-
-    public void OnInteract()
-    {
-        OpenShop();
     }
 }

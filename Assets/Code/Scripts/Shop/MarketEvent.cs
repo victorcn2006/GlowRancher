@@ -67,7 +67,7 @@ public class MarketEvent : MonoBehaviour
         if (_eventoActivo)
         {
             //aqui aniria el multiplayer de valor de la slimestone
-            marketManager.EconomyEvent();
+            //marketManager.EconomyEvent();
             if (_tiempoEvento > _timeZero)
             {
                 _tiempoEvento -= Time.deltaTime;

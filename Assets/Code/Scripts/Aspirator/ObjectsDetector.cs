@@ -2,15 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class ObjectsDetector : MonoBehaviour
 {
 
     private List<GameObject> _aspirableObjectsList = new List<GameObject>();
-
-    [SerializeField] private GameObject _keyboardSprite;
-    [SerializeField] private GameObject _controllerSprite;
 
     private Vector3 _point1;
     private Vector3 _point2;
@@ -18,21 +14,9 @@ public class ObjectsDetector : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Food") || other.CompareTag("Slime") || other.CompareTag("Gem"))
+        if (other.CompareTag("Food") || other.CompareTag("Slime") || other.CompareTag("Gem") || other.GetComponent<IAspirable>() != null)
         {
             _aspirableObjectsList.Add(other.gameObject);
-        }
-
-        if (other.CompareTag("InteractuableShop") || other.CompareTag("Monolito"))
-        {
-            if (Gamepad.current != null && Gamepad.current.wasUpdatedThisFrame)
-            {
-                _controllerSprite.SetActive(true);
-            }
-            else
-            {
-                _keyboardSprite.SetActive(true);
-            }
         }
     }
 
@@ -43,10 +27,6 @@ public class ObjectsDetector : MonoBehaviour
             other.GetComponent<IAspirable>().StopBeingAspired();
             _aspirableObjectsList.Remove(other.gameObject);
         }
-
-        _keyboardSprite.SetActive(false);
-        _controllerSprite.SetActive(false);
-
     }
 
     public void RemoveTargetFromAspirableObjectList(GameObject target)
