@@ -22,6 +22,16 @@ public class MarketManager : MonoBehaviour
         priceMultipliers[GemsPool.gemTypes.BLUE_GEM] = _multi;
         priceMultipliers[GemsPool.gemTypes.RED_GEM] = _multi;
         priceMultipliers[GemsPool.gemTypes.REDBLUE_GEM] = _multi;
+        priceMultipliers[GemsPool.gemTypes.SCARED_GEM] = _multi;
+        priceMultipliers[GemsPool.gemTypes.SCAREDCAT_GEM] = _multi;
+        priceMultipliers[GemsPool.gemTypes.ICE_GEM] = _multi;
+        priceMultipliers[GemsPool.gemTypes.FIRE_GEM] = _multi;
+        priceMultipliers[GemsPool.gemTypes.ROCK_GEM] = _multi;
+        priceMultipliers[GemsPool.gemTypes.FROZENROCK_GEM] = _multi;
+        priceMultipliers[GemsPool.gemTypes.OBSIDIAN_GEM] = _multi;
+        priceMultipliers[GemsPool.gemTypes.MUSHROOM_GEM] = _multi;
+        priceMultipliers[GemsPool.gemTypes.BURNINGMUSH_GEM] = _multi;
+        priceMultipliers[GemsPool.gemTypes.CAT_GEM] = _multi;
     }
 
     // Aquesta funció calcula el preu actual basat en la pool de gemas
@@ -37,6 +47,16 @@ public class MarketManager : MonoBehaviour
         UpdateTypeMultiplier(GemsPool.gemTypes.BLUE_GEM, GemsPool.Instance.blueGemsList);
         UpdateTypeMultiplier(GemsPool.gemTypes.RED_GEM, GemsPool.Instance.redGemsList);
         UpdateTypeMultiplier(GemsPool.gemTypes.REDBLUE_GEM, GemsPool.Instance.redblueGemsList);
+        UpdateTypeMultiplier(GemsPool.gemTypes.SCAREDCAT_GEM, GemsPool.Instance.blueGemsList);
+        UpdateTypeMultiplier(GemsPool.gemTypes.SCARED_GEM, GemsPool.Instance.redGemsList);
+        UpdateTypeMultiplier(GemsPool.gemTypes.OBSIDIAN_GEM, GemsPool.Instance.redblueGemsList);
+        UpdateTypeMultiplier(GemsPool.gemTypes.FIRE_GEM, GemsPool.Instance.blueGemsList);
+        UpdateTypeMultiplier(GemsPool.gemTypes.ICE_GEM, GemsPool.Instance.redGemsList);
+        UpdateTypeMultiplier(GemsPool.gemTypes.ROCK_GEM, GemsPool.Instance.redblueGemsList);
+        UpdateTypeMultiplier(GemsPool.gemTypes.BURNINGMUSH_GEM, GemsPool.Instance.blueGemsList);
+        UpdateTypeMultiplier(GemsPool.gemTypes.MUSHROOM_GEM, GemsPool.Instance.redGemsList);
+        UpdateTypeMultiplier(GemsPool.gemTypes.FROZENROCK_GEM, GemsPool.Instance.redblueGemsList);
+        UpdateTypeMultiplier(GemsPool.gemTypes.CAT_GEM, GemsPool.Instance.redblueGemsList);
     }
 
     private void UpdateTypeMultiplier(GemsPool.gemTypes type, List<GameObject> list)
@@ -65,5 +85,15 @@ public class MarketManager : MonoBehaviour
         priceMultipliers[GemsPool.gemTypes.BLUE_GEM] = _randPriceMulti;
         priceMultipliers[GemsPool.gemTypes.RED_GEM] = _randPriceMulti;
         priceMultipliers[GemsPool.gemTypes.REDBLUE_GEM] = _randPriceMulti;
+        priceMultipliers[GemsPool.gemTypes.SCARED_GEM] = _randPriceMulti;
+        priceMultipliers[GemsPool.gemTypes.SCAREDCAT_GEM] = _randPriceMulti;
+        priceMultipliers[GemsPool.gemTypes.ICE_GEM] = _randPriceMulti;
+        priceMultipliers[GemsPool.gemTypes.FIRE_GEM] = _randPriceMulti;
+        priceMultipliers[GemsPool.gemTypes.ROCK_GEM] = _randPriceMulti;
+        priceMultipliers[GemsPool.gemTypes.FROZENROCK_GEM] = _randPriceMulti;
+        priceMultipliers[GemsPool.gemTypes.OBSIDIAN_GEM] = _randPriceMulti;
+        priceMultipliers[GemsPool.gemTypes.MUSHROOM_GEM] = _randPriceMulti;
+        priceMultipliers[GemsPool.gemTypes.BURNINGMUSH_GEM] = _randPriceMulti;
+        priceMultipliers[GemsPool.gemTypes.CAT_GEM] = _randPriceMulti;
     }
 }
