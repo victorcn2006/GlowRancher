@@ -38,7 +38,7 @@ public class InteractiveShop : MonoBehaviour, IInteractive
     }
 
     // Este método solo se dispara cuando presionas la tecla de Shop (ej. ESC o E)
-    public void HandleKeyboardToggle()//esta public per a permitir la construccio d'elements.
+    private void HandleKeyboardToggle()
     {
         //if (InputManager.Instance.IsPaused) return;
 
@@ -72,7 +72,7 @@ public class InteractiveShop : MonoBehaviour, IInteractive
 
         if (timeSinceLastOpenedClosed >= timeBetweenOpenClose)
         {
-            if (!_isShopActive) return; // Ya está cerrada, no hacemos nada
+            if (!_isShopActive) return; // Ya está abierta, no hacemos nada
             timeSinceLastOpenedClosed = 0;
 
             Debug.Log("Cerrando Tienda...");

@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 
 public class Select : MonoBehaviour
 {
-    [SerializeField] private Transform _cameraTransform;
     private LayerMask _mask;
     public float distance = 2.5f; // Aumentado un poco para mejor sensación
 
@@ -33,22 +32,41 @@ public class Select : MonoBehaviour
             _mask = LayerMask.GetMask("Raycast layer");
     }
 
-    
-
     private void HandleInteraction()
     {
         RaycastHit hit;
+        // Debug visual del rayo
+        Debug.DrawRay(transform.position, transform.forward * distance, Color.red, 0.5f);
 
-        Transform rayOrigin = _cameraTransform != null ? _cameraTransform : transform;
-
-        Debug.DrawRay(rayOrigin.position, rayOrigin.forward * distance, Color.red, 2f);
-
-        if (Physics.Raycast(rayOrigin.position, rayOrigin.forward, out hit, distance, _mask))
+        if (Physics.Raycast(transform.position, transform.forward, out hit, distance, _mask))
         {
             if (hit.collider.TryGetComponent<IInteractive>(out var InteractiveElement))
             {
                 InteractiveElement.OnInteract();
             }
+            /*
+
+            // Caso 2: La Tienda
+            if (hit.collider.CompareTag("InteractuableShop"))
+            {
+                Debug.Log("Interacción con tienda detectada.");
+                if (hit.collider.TryGetComponent<InteractiveShop>(out var shop))
+                {
+                    shop.OpenShop();
+                }
+
+            }
+            // Caso 3: Mapa
+            if (hit.collider.CompareTag("Monolito"))
+            {
+                Debug.Log("Interacción con Monolito detectada.");
+                if (hit.collider.TryGetComponent<InteractiveMap>(out var map))
+                {
+                    map.OpenMap();
+                }
+            }
+            */
+
         }
         else
         {

@@ -86,7 +86,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d5ae75f9668962247a6c9ed160ce1d9c, type: 2}
+  - {fileID: -2813467912831258332, guid: 707a959d984bf6a45a81051f398e43c2, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -252,7 +252,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5e82cb50845018b4b8b06bf2aabc617c, type: 2}
+  - {fileID: -7022791106822696090, guid: 707a959d984bf6a45a81051f398e43c2, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -360,6 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c49b33196c51645ae7a1079f424e9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _basicSlime: {fileID: 0}
 --- !u!1 &1610240923376707953
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,7 +476,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5e82cb50845018b4b8b06bf2aabc617c, type: 2}
+  - {fileID: -7022791106822696090, guid: 707a959d984bf6a45a81051f398e43c2, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -796,7 +797,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5e82cb50845018b4b8b06bf2aabc617c, type: 2}
+  - {fileID: -7022791106822696090, guid: 707a959d984bf6a45a81051f398e43c2, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -921,7 +922,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5e82cb50845018b4b8b06bf2aabc617c, type: 2}
+  - {fileID: -7022791106822696090, guid: 707a959d984bf6a45a81051f398e43c2, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1156,7 +1157,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c255fab9f69f464e8db1e6f7f6670ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gemTypeToDrop: 5
+  _gemTypeToDrop: 0
+  _basicSlime: {fileID: 0}
 --- !u!1 &6115958512293705400
 GameObject:
   m_ObjectHideFlags: 0
@@ -1317,72 +1319,6 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.008024963, y: 0.0060700225, z: 0.0008354641}
     m_Extent: {x: 0.0007688971, y: 0.0011984676, z: 0.007477659}
   m_DirtyAABB: 0
---- !u!1 &7012838259177908888
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1815105356731540164}
-  - component: {fileID: 8402180570283371287}
-  - component: {fileID: 6567825244033458592}
-  m_Layer: 0
-  m_Name: FoodDetector
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1815105356731540164
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7012838259177908888}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7452852779955510310}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &8402180570283371287
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7012838259177908888}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6567825244033458592
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7012838259177908888}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47da066d7a441074886258019d02960e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7339144026622719177
 GameObject:
   m_ObjectHideFlags: 0
@@ -1466,7 +1402,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5e82cb50845018b4b8b06bf2aabc617c, type: 2}
+  - {fileID: -7022791106822696090, guid: 707a959d984bf6a45a81051f398e43c2, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1525,6 +1461,7 @@ GameObject:
   - component: {fileID: 1653755865561224488}
   - component: {fileID: 2964294049826075288}
   - component: {fileID: 988911614466147733}
+  - component: {fileID: 7671122189957667991}
   m_Layer: 0
   m_Name: MushroomSlime
   m_TagString: Slime
@@ -1540,7 +1477,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7792927961781864092}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 586.15, y: 20.44802, z: 183.483}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1562,7 +1499,6 @@ Transform:
   - {fileID: 5738274138640834995}
   - {fileID: 3039058201385923271}
   - {fileID: 524927919047525492}
-  - {fileID: 1815105356731540164}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &4025026618635591069
@@ -1646,7 +1582,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1790124a44ec2f14588dc92bca8dc184, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icono: {fileID: 21300000, guid: eaf1acae0bad90d4080f31d36cff132f, type: 3}
+  icono: {fileID: 21300000, guid: 858a7dd37440b244fa925f4e8a338953, type: 3}
   nombre: MushroomSlime
 --- !u!114 &8055571976693791253
 MonoBehaviour:
@@ -1660,7 +1596,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf5155dada168554ca86993a48211fed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gemSystem: {fileID: 8902487534508243219}
   hungerTimeReset: 90
   hungry: 1
 --- !u!114 &1653755865561224488
@@ -1695,12 +1630,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f9eb95cfaab6ec4389b3c0f630242bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hungerSystem: {fileID: 8055571976693791253}
-  _foodDetector: {fileID: 6567825244033458592}
-  _gemSystem: {fileID: 8902487534508243219}
-  _mouth: {fileID: 7651358531522629636}
-  _movementBehaviour: {fileID: 1653755865561224488}
-  _animator: {fileID: 2284732885928402666}
+  hungerSystem: {fileID: 8055571976693791253}
+  gemSystem: {fileID: 8902487534508243219}
+  mouth: {fileID: 7651358531522629636}
+  movementbehaviour: {fileID: 1653755865561224488}
+  animator: {fileID: 2284732885928402666}
 --- !u!114 &988911614466147733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1715,6 +1649,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _armature: {fileID: 2007777841494363320}
   _lockedLocalRotation: {x: -90, y: 0, z: 90}
+--- !u!114 &7671122189957667991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7792927961781864092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf5155dada168554ca86993a48211fed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hungerTimeReset: 90
+  hungry: 0
 --- !u!1 &8160731202720662449
 GameObject:
   m_ObjectHideFlags: 0
@@ -2045,7 +1993,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f98a5d7472113d44d85d0008a106477b, type: 2}
+  - {fileID: -6478536213147159724, guid: 707a959d984bf6a45a81051f398e43c2, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

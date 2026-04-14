@@ -16,7 +16,6 @@ public class BasicSlimeMovement : MonoBehaviour
     [SerializeField] private float JUMP_FORCE = 170f;
     [SerializeField] private float JUMP_TIME = 1f;
     [SerializeField] private float JUMP_DISTANCE = 1f;
-    [SerializeField] private float MAX_PHYSICS_JUMP_DISTANCE = 3f; // CALIBRATE THIS
 
     [Header("VALORES DE ROTACIÓN")]
     [SerializeField] private float ROTATE_DURATION = 0.5f;
@@ -28,7 +27,6 @@ public class BasicSlimeMovement : MonoBehaviour
     private Rigidbody _rb;
 
     private bool _beingAspired = false;
-    private float _currentTargetDistance = -1f;
 
     private Vector3 jumpDirection;
     [SerializeField] private Transform groundChecker;
@@ -67,44 +65,18 @@ public class BasicSlimeMovement : MonoBehaviour
     {
         _BasicSlime.animator.SetBool("Jump", true);
         
-        Vector3 jumpDir = Vector3.zero;
+        Vector3 randomDir = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
+        Vector3 destination = transform.position + randomDir * JUMP_DISTANCE;
 
-        // Check if we should move towards food
-        if (_BasicSlime.hungerSystem != null && _BasicSlime.hungerSystem.IsHungry() && _BasicSlime.foodDetector != null)
+        Vector3 direction = destination - transform.position;
+        direction.y = 0;
+
+        if (direction != Vector3.zero)
         {
-            Transform closestFood = _BasicSlime.foodDetector.GetClosestFood(transform.position);
-            if (closestFood != null)
-            {
-                // Store distance
-                Vector3 posNoY = transform.position; posNoY.y = 0;
-                Vector3 targetNoY = closestFood.position; targetNoY.y = 0;
-                _currentTargetDistance = Vector3.Distance(posNoY, targetNoY);
-
-                jumpDir = (closestFood.position - transform.position).normalized;
-                jumpDir.y = 0;
-            }
-        }
-
-        // If no food target, jump in random direction
-        if (jumpDir == Vector3.zero)
-        {
-            _currentTargetDistance = -1f;
-            jumpDir = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
-        }
-
-        if (jumpDir != Vector3.zero)
-        {
-            Quaternion lookRotation = Quaternion.LookRotation(jumpDir);
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
             transform.DORotateQuaternion(lookRotation, ROTATE_DURATION).SetEase(Ease.OutSine).OnComplete(() => 
             {
-                float forceMultiplier = 1.0f;
-                if (_currentTargetDistance > 0)
-                {
-                    forceMultiplier = Mathf.Clamp(_currentTargetDistance / MAX_PHYSICS_JUMP_DISTANCE, 0.3f, 1.0f);
-                }
-
-                Vector3 jumpForceVector = (transform.up * JUMP_FORCE) + (transform.forward * JUMP_FORCE * forceMultiplier);
-                _rb.AddForce(jumpForceVector);
+                _rb.AddForce((transform.up + transform.forward) * JUMP_FORCE);
                 StartCoroutine(WaitToLand());
             });
         }
