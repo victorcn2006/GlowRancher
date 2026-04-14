@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicSlime : MonoBehaviour, IAspirable, ISlime
+public class BasicSlime : MonoBehaviour, IAspirable, ISlime, IEatable
 {
     // --------------------------------------------LINKED SCRIPTS------------------------------------------------- \\
     [Header("SLIME SCRIPTS")]

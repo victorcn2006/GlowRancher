@@ -106,9 +106,9 @@ public class PanelShopController : MonoBehaviour
     public void BuyPlanter()
     {
 
-        if (WalletCurrency.instance.bank >= 5)
+        if (WalletCurrency.instance.bank >= 30)
         {
-            WalletCurrency.instance.bank -= 5;
+            WalletCurrency.instance.bank -= 30;
             WalletCurrency.instance.SaveMoney();
             WalletCurrency.instance.Score_txt.text = WalletCurrency.instance.bank.ToString();
             //_buildingManager.PlanterBuyed();
@@ -123,9 +123,9 @@ public class PanelShopController : MonoBehaviour
     public void BuySlimeCage()
     {
 
-        if (WalletCurrency.instance.bank >= 5)
+        if (WalletCurrency.instance.bank >= 15)
         {
-            WalletCurrency.instance.bank -= 5;
+            WalletCurrency.instance.bank -= 15;
             WalletCurrency.instance.SaveMoney();
             WalletCurrency.instance.Score_txt.text = WalletCurrency.instance.bank.ToString();
             //_buildingManager.CageBuyed();

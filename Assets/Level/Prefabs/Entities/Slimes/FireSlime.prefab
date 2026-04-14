@@ -34,7 +34,7 @@ Transform:
   m_GameObject: {fileID: 839288053946347718}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 626.68567, y: 20.44803, z: 214.27475}
+  m_LocalPosition: {x: 622.36316, y: 20.448025, z: 195.59183}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -49,7 +49,6 @@ Transform:
   - {fileID: 6168085916102371186}
   - {fileID: 4311179933767478691}
   - {fileID: 3575363705465331837}
-  - {fileID: 421482692510082826}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &6566229669964301304
@@ -133,7 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1790124a44ec2f14588dc92bca8dc184, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icono: {fileID: 21300000, guid: 2738f89a9c6c4984f9bc438963e80fac, type: 3}
+  icono: {fileID: 1535799385, guid: 85109e335a0b5de4a88bf17045c0d33a, type: 3}
   nombre: FireSlime
 --- !u!114 &1055142548560343825
 MonoBehaviour:
@@ -147,7 +146,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf5155dada168554ca86993a48211fed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gemSystem: {fileID: 4481010487037154642}
   hungerTimeReset: 90
   hungry: 1
 --- !u!114 &7993395566574913341
@@ -182,12 +180,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f9eb95cfaab6ec4389b3c0f630242bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hungerSystem: {fileID: 1055142548560343825}
-  _foodDetector: {fileID: 5822915740113318488}
-  _gemSystem: {fileID: 4481010487037154642}
-  _mouth: {fileID: 66751346501692310}
-  _movementBehaviour: {fileID: 7993395566574913341}
-  _animator: {fileID: 2318632662104089185}
+  hungerSystem: {fileID: 1055142548560343825}
+  gemSystem: {fileID: 4481010487037154642}
+  mouth: {fileID: 66751346501692310}
+  movementbehaviour: {fileID: 7993395566574913341}
+  animator: {fileID: 2318632662104089185}
 --- !u!114 &458854614321744526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,8 +332,8 @@ SkinnedMeshRenderer:
   - 100
   m_RootBone: {fileID: 4769094763330068920}
   m_AABB:
-    m_Center: {x: -0.008084029, y: 0.006113682, z: 0.0008553206}
-    m_Extent: {x: 0.00094774365, y: 0.0011786579, z: 0.007770496}
+    m_Center: {x: -0.00808403, y: 0.006113683, z: 0.00085532106}
+    m_Extent: {x: 0.00094774365, y: 0.0011786579, z: 0.0077704964}
   m_DirtyAABB: 0
 --- !u!1 &1943136443708776149
 GameObject:
@@ -430,8 +427,8 @@ SkinnedMeshRenderer:
   - 0
   m_RootBone: {fileID: 4769094763330068920}
   m_AABB:
-    m_Center: {x: -0.0036905305, y: 0.005899141, z: 0.0008553164}
-    m_Extent: {x: 0.015381477, y: 0.010073381, z: 0.010905474}
+    m_Center: {x: -0.0036905305, y: 0.0058991406, z: 0.0008553164}
+    m_Extent: {x: 0.015381477, y: 0.010073381, z: 0.010905475}
   m_DirtyAABB: 0
 --- !u!1 &2069163763697136135
 GameObject:
@@ -586,8 +583,8 @@ SkinnedMeshRenderer:
   - 0
   m_RootBone: {fileID: 4769094763330068920}
   m_AABB:
-    m_Center: {x: -0.010741845, y: 0.0035109285, z: 0.000584715}
-    m_Extent: {x: 0.0003398098, y: 0.0016899433, z: 0.002274524}
+    m_Center: {x: -0.010741847, y: 0.0035109287, z: 0.00058471505}
+    m_Extent: {x: 0.0003398098, y: 0.0016899435, z: 0.0022745242}
   m_DirtyAABB: 0
 --- !u!1 &4383309584308403641
 GameObject:
@@ -678,8 +675,8 @@ SkinnedMeshRenderer:
   - 0
   m_RootBone: {fileID: 4769094763330068920}
   m_AABB:
-    m_Center: {x: -0.008098416, y: 0.005913269, z: 0.00085532013}
-    m_Extent: {x: 0.00067261537, y: 0.001041715, z: 0.0074975137}
+    m_Center: {x: -0.008098417, y: 0.0059132692, z: 0.0008553206}
+    m_Extent: {x: 0.00067261537, y: 0.0010417155, z: 0.007497514}
   m_DirtyAABB: 0
 --- !u!1 &4834426985206314556
 GameObject:
@@ -733,8 +730,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.15652353
-  m_Center: {x: -0.03867647, y: -0.024064243, z: -0.0004812777}
+  m_Radius: 0.13235474
+  m_Center: {x: -0.038676467, y: 0.00010454655, z: -0.0004812777}
 --- !u!114 &66751346501692310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -747,6 +744,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c49b33196c51645ae7a1079f424e9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _basicSlime: {fileID: 1485042742539602296}
 --- !u!1 &4963682945166676065
 GameObject:
   m_ObjectHideFlags: 0
@@ -835,75 +833,9 @@ SkinnedMeshRenderer:
   - 100
   m_RootBone: {fileID: 4769094763330068920}
   m_AABB:
-    m_Center: {x: -0.004008744, y: 0.0070924293, z: -0.0022390736}
-    m_Extent: {x: 0.002494228, y: 0.0030841604, z: 0.0023212815}
+    m_Center: {x: -0.004008745, y: 0.0070924293, z: -0.0022390736}
+    m_Extent: {x: 0.002494228, y: 0.0030841602, z: 0.0023212815}
   m_DirtyAABB: 0
---- !u!1 &5048537496431168008
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 421482692510082826}
-  - component: {fileID: 5822915740113318488}
-  - component: {fileID: 4734880721170883568}
-  m_Layer: 0
-  m_Name: FoodDetector
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &421482692510082826
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5048537496431168008}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 67009346739055228}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5822915740113318488
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5048537496431168008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47da066d7a441074886258019d02960e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!135 &4734880721170883568
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5048537496431168008}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5421341247457498186
 GameObject:
   m_ObjectHideFlags: 0
@@ -1027,8 +959,8 @@ SkinnedMeshRenderer:
   - 0
   m_RootBone: {fileID: 4769094763330068920}
   m_AABB:
-    m_Center: {x: -0.0039010532, y: 0.006222276, z: 0.00085531734}
-    m_Extent: {x: 0.01639628, y: 0.0108526535, z: 0.011709755}
+    m_Center: {x: -0.0039010532, y: 0.006222275, z: 0.00085531734}
+    m_Extent: {x: 0.01639628, y: 0.010852654, z: 0.011709756}
   m_DirtyAABB: 0
 --- !u!1 &7246194778837357902
 GameObject:
@@ -1212,7 +1144,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -2813467912831258332, guid: 4d520823fb70db941b28a5f665ccbdbf, type: 3}
+  - {fileID: 2100000, guid: d5ae75f9668962247a6c9ed160ce1d9c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1251,8 +1183,8 @@ SkinnedMeshRenderer:
   - 100
   m_RootBone: {fileID: 4769094763330068920}
   m_AABB:
-    m_Center: {x: -0.008024962, y: 0.0060700206, z: 0.00083546573}
-    m_Extent: {x: 0.0007688978, y: 0.0011984673, z: 0.0074776583}
+    m_Center: {x: -0.008024963, y: 0.006070021, z: 0.00083546597}
+    m_Extent: {x: 0.0007688978, y: 0.0011984673, z: 0.007477659}
   m_DirtyAABB: 0
 --- !u!1 &8370647625606782698
 GameObject:
@@ -1392,4 +1324,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c255fab9f69f464e8db1e6f7f6670ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gemTypeToDrop: 2
+  _gemTypeToDrop: 0
+  _basicSlime: {fileID: 1485042742539602296}

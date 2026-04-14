@@ -19,6 +19,7 @@ public class ScaredSlimeMovement : MonoBehaviour
     [Header("VALORES DEL SALTO")]
     [SerializeField] private float jumpForce = 170f;
     [SerializeField] private float jumpDistance = 1f;
+    [SerializeField] private float maxPhysicsJumpDistance = 3f; // CALIBRATE THIS: Distance slime travels with 100% force
 
     [Header("VALORES DEL SALTO ASUSTADO")]
     [SerializeField] private float scaredJumpForce = 120f;
@@ -38,6 +39,7 @@ public class ScaredSlimeMovement : MonoBehaviour
     private bool _scared = false;
 
     private Vector3 jumpDirection;
+    private float _currentTargetDistance = -1f;
 
 
     // --------------------------------------------RAYCAST SETTINGS--------------------------------------------\\
@@ -80,6 +82,7 @@ public class ScaredSlimeMovement : MonoBehaviour
                 
         if (_scared)
         {
+            _currentTargetDistance = -1f;
             Transform player = _ScaredSlime.playerDetector.GetPlayerTransform();
             if (player != null)
             {
@@ -96,6 +99,7 @@ public class ScaredSlimeMovement : MonoBehaviour
         }
         else
         {
+            _currentTargetDistance = -1f;
             // If not scared, check for food
             if (_ScaredSlime.hungerSystem != null && _ScaredSlime.hungerSystem.IsHungry() && _ScaredSlime.foodDetector != null)
             {
@@ -104,6 +108,12 @@ public class ScaredSlimeMovement : MonoBehaviour
                 {
                     Vector3 foodDirection = (closestFood.position - transform.position).normalized;
                     foodDirection.y = 0;
+                    
+                    // Store the actual horizontal distance to the food
+                    Vector3 posNoY = transform.position; posNoY.y = 0;
+                    Vector3 targetNoY = closestFood.position; targetNoY.y = 0;
+                    _currentTargetDistance = Vector3.Distance(posNoY, targetNoY);
+                    
                     destination = transform.position + foodDirection * jumpDistance;
                 }
             }
@@ -142,7 +152,17 @@ public class ScaredSlimeMovement : MonoBehaviour
         else
         {
             yield return new WaitForSeconds(rotateDuration);
-            _rb.AddForce((transform.up + transform.forward) * jumpForce);
+
+            float forceMultiplier = 1.0f;
+            if (_currentTargetDistance > 0)
+            {
+                // Calculate multiplier relative to maxPhysicsJumpDistance
+                forceMultiplier = Mathf.Clamp(_currentTargetDistance / maxPhysicsJumpDistance, 0.3f, 1.0f);
+            }
+
+            // Apply full vertical force, but scaled horizontal force
+            Vector3 jumpForceVector = (transform.up * jumpForce) + (transform.forward * jumpForce * forceMultiplier);
+            _rb.AddForce(jumpForceVector);
         }
     }
 
