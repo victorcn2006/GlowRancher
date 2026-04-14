@@ -12,7 +12,7 @@ public class Drone : MonoBehaviour
 
     private void Awake()
     {
-        _boxToDelivery = transform.GetChild(0).gameObject;
+        _boxToDelivery = transform.GetChild(0).GetChild(0).gameObject;
         _deliveryBox = _boxToDelivery.GetComponent<DeliveryBox>();
     }
 
