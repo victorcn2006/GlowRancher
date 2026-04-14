@@ -33,6 +33,10 @@ public class InteractiveMap : MonoBehaviour, IInteractive
 
     private void Start()
     {
+        if (_isMapActive == true)
+        {
+            _isMapActive = false;
+        }
         _lastInteractiveMapInteracted = null;
         CloseMap(); // Empezar siempre cerrada
     }
