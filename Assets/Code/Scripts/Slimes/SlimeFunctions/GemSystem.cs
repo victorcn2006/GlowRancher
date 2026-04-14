@@ -6,14 +6,20 @@ public class GemSystem : MonoBehaviour
 {
 
     [SerializeField] private GemsPool.gemTypes _gemTypeToDrop;
-    [SerializeField] private BasicSlime _basicSlime;
+    private ISlime _slime;
+
+    private void Start()
+    {
+        _slime = GetComponentInParent<ISlime>();
+    }
+
     public IEnumerator SpawnGem()
     {
-        _basicSlime.animator.SetBool("DropGem", true);
+        _slime.animator.SetBool("DropGem", true);
         yield return new WaitForSeconds(2f);
         GameObject newGem = GemsPool.Instance.GetGem(_gemTypeToDrop);
         newGem.SetActive(true);
         newGem.transform.position = transform.position;
-        _basicSlime.animator.SetBool("DropGem", false);
+        _slime.animator.SetBool("DropGem", false);
     }
 }

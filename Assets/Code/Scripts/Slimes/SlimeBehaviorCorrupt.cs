@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class SlimeBehaviorCorrupt : MonoBehaviour
 {
+
+
     [SerializeField] private float detectionRadius = 5f;
     [SerializeField] private float chaseForce = 200f;
     [SerializeField] private int damageAmount = 1;
@@ -11,9 +13,12 @@ public class SlimeBehaviorCorrupt : MonoBehaviour
     private Rigidbody _rb;
     private float _lastDamageTime;
 
+    private CorruptSlime _corruptSlime;
+
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
+        _corruptSlime = GetComponent<CorruptSlime>();
     }
 
     private void Update()
@@ -57,6 +62,7 @@ public class SlimeBehaviorCorrupt : MonoBehaviour
                 {
                     damageable.TakeDamage(damageAmount);
                     _lastDamageTime = Time.time;
+                    _corruptSlime.animator.SetTrigger("Attack");
                 }
             }
         }

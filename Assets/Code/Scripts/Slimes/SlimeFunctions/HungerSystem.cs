@@ -5,10 +5,9 @@ using UnityEngine;
 
 public class HungerSystem : MonoBehaviour
 {
-    private BasicSlime _basicSlime;
+    private ISlime _slime;
     // --------------------------------------------LINKED SCRIPTS--------------------------------------------\\
-    private GemSystem gemSystem;
-
+    [SerializeField] private GemSystem gemSystem;
 
 
     [Header("TEMPORIZADOR HAMBRE")]
@@ -18,8 +17,8 @@ public class HungerSystem : MonoBehaviour
 
     private void Start()
     {
-        _basicSlime = GetComponent<BasicSlime>();
-        gemSystem = GetComponentInChildren<GemSystem>();
+        _slime = GetComponent<ISlime>();
+        if (gemSystem == null) gemSystem = GetComponentInChildren<GemSystem>();
         hungry = true;
         hungerTimer = 0;
     }
@@ -44,14 +43,14 @@ public class HungerSystem : MonoBehaviour
             if (food.TryGetComponent<Rigidbody>(out Rigidbody rb)) rb.isKinematic = true;
             
             // Move food to the mouth position smoothly
-            food.transform.DOMove(_basicSlime.mouth.transform.position, 0.2f).SetEase(Ease.InSine);
-            food.transform.SetParent(_basicSlime.mouth.transform);
+            food.transform.DOMove(_slime.mouth.transform.position, 0.2f).SetEase(Ease.InSine);
+            food.transform.SetParent(_slime.mouth.transform);
         }
 
         // Small delay to let the food reach the mouth before opening it
         yield return new WaitForSeconds(0.2f);
 
-        _basicSlime.animator.SetBool("Eat", true);
+        _slime.animator.SetBool("Eat", true);
         
         yield return new WaitForSeconds(1f); // Duration of eat animation
         
@@ -64,7 +63,7 @@ public class HungerSystem : MonoBehaviour
             if (food.TryGetComponent<Food>(out Food foodScript)) foodScript.isBeingEaten = false;
         }
         
-        _basicSlime.animator.SetBool("Eat", false);
+        _slime.animator.SetBool("Eat", false);
         
         // Now start spawning the gem
         StartCoroutine(gemSystem.SpawnGem());
