@@ -49,6 +49,12 @@ public class SiloLogic : MonoBehaviour
     {
         if (indice < 0 || indice >= slotsSilo.Count || slotsSilo[indice] == null) return;
 
+        // --- AQUÍ EL DEBUG.LOG ---
+        SlotInventario item = slotsSilo[indice];
+        Debug.Log($"<color=cyan>[SILO]</color> Extrayendo Item: <b>{item.nombre}</b> " +
+                  $"| Cantidad: {item.cantidad} ");
+        // -------------------------
+
         // IMPORTANTE: Pasamos el icono y el nombre EXACTOS que tiene el silo
         bool exito = playerInventory.AñadirAlInventario(slotsSilo[indice].icono, slotsSilo[indice].nombre);
 
