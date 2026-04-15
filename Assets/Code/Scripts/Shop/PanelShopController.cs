@@ -140,9 +140,9 @@ public class PanelShopController : MonoBehaviour
     public void BuySilo()
     {
 
-        if (WalletCurrency.instance.bank >= 5)
+        if (WalletCurrency.instance.bank >= 160)
         {
-            WalletCurrency.instance.bank -= 5;
+            WalletCurrency.instance.bank -= 160;
             WalletCurrency.instance.SaveMoney();
             WalletCurrency.instance.Score_txt.text = WalletCurrency.instance.bank.ToString();
             //_buildingManager.SiloBuyed();
@@ -154,12 +154,12 @@ public class PanelShopController : MonoBehaviour
         }
     }
 
-    public void BuyHook()
+    public void BuyFusioner()
     {
 
-        if (WalletCurrency.instance.bank >= 5)
+        if (WalletCurrency.instance.bank >= 20)
         {
-            WalletCurrency.instance.bank -= 5;
+            WalletCurrency.instance.bank -= 20;
             WalletCurrency.instance.SaveMoney();
             WalletCurrency.instance.Score_txt.text = WalletCurrency.instance.bank.ToString();
 

@@ -199,7 +199,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: INCINERATOR
+  m_text: Planter
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -467,7 +467,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 50 X
+  m_text: 15 X
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1021,7 +1021,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Incinerator:'
+  m_text: 'Fusionador:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1364,17 +1364,18 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'El incinerador es una estructura usada para quemar los desechos i elementos
-    no deseados en la isla.
+  m_text: 'El Fusionador es una pieza de tecnologia punta que permite al usuario
+    fusionar materiales para crear unos de mas valor.
 
 
-    El incinerador esta alimentado por tocones de madera
-    de los arboles de la pradera y carbon de la mina.
+    El Fusionador esta alimentado
+    por una bateria de litio i dos turbinas de plasma, dandole asi suficiente potencia
+    para mezclar materiales a nivel atomico.
 
 
-    Ten cuidado de su llama
-    una vez un limo salto dentro de uno y despues de que se apagara el fuego el limo
-    acabo chamuscado reducido a solo polvo negro.'
+    Ten cuidado de no introducir extremidades
+    ya que podrian ser detectadas como material dando como consecuencia la perdida
+    de estas.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1401,7 +1402,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30.1
+  m_fontSize: 27.1
   m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1481,7 +1482,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00003889448}
+  m_AnchoredPosition: {x: 0, y: 0.000013664505}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1919885213275161363
@@ -2194,7 +2195,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 50 X
+  m_text: 20 X
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3487,7 +3488,7 @@ GameObject:
   - component: {fileID: 571377819762267038}
   - component: {fileID: 6904982299748017335}
   m_Layer: 5
-  m_Name: InfoHook
+  m_Name: InfoFusioner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3905,11 +3906,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d4f82fa823bc9b4a86bacb6aa888229, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  incinerator: {fileID: 3328271736941451929}
-  planter: {fileID: 6253199845522010567}
-  SlimeCage: {fileID: 1870098859569069058}
-  Silo: {fileID: 6895554476592269677}
-  Hook: {fileID: 2427138465825424398}
+  _buildingManager: {fileID: 0}
+  _shopPanel: {fileID: 0}
+  _incinerator: {fileID: 0}
+  _planter: {fileID: 0}
+  _slimeCage: {fileID: 0}
+  _silo: {fileID: 0}
+  _hook: {fileID: 0}
   _itemOne: {fileID: 0}
   _itemPlanter: {fileID: 0}
   _itemSlimeCage: {fileID: 0}
@@ -4310,7 +4313,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 50 X
+  m_text: 30 X
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7062,7 +7065,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Incinerator:'
+  m_text: 'Planter:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7753,6 +7756,7 @@ GameObject:
   - component: {fileID: 5268655326548375372}
   - component: {fileID: 3894375448367715186}
   - component: {fileID: 8998793491424322311}
+  - component: {fileID: 8136825876763050713}
   m_Layer: 5
   m_Name: NameSlime
   m_TagString: Untagged
@@ -7807,7 +7811,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: INCINERATOR
+  m_text: Fusionador
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7876,6 +7880,46 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &8136825876763050713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6459891340875723060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:20cbd8734186ac7418931ae17891ed01
+    m_TableEntryReference:
+      m_KeyId: 19572336394129408
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8998793491424322311}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &6727912847430090636
 GameObject:
   m_ObjectHideFlags: 0
@@ -8372,7 +8416,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6087065701669656401
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8392,10 +8436,10 @@ RectTransform:
   - {fileID: 41493371503869950}
   m_Father: {fileID: 8916002190119192832}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 415.5, y: -424.5}
+  m_SizeDelta: {x: 811, y: 829}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1758915051768148458
 CanvasRenderer:
@@ -8633,7 +8677,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 50 X
+  m_text: 160 X
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
