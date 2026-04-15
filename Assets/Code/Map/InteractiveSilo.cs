@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class InteractiveSilo : MonoBehaviour, IInteractive
@@ -9,55 +8,46 @@ public class InteractiveSilo : MonoBehaviour, IInteractive
 
     [Header("Referencias de Control")]
     [SerializeField] private PlayerCameraMovement _cameraControl;
+    [SerializeField] private SiloLogic _siloLogic; // El script de arriba
+    [SerializeField] private Inventory _playerInventory;
 
     private bool _isSiloActive = false;
-
     private float _timeSinceLastOpenedClosed = 0.16f;
     private const float TIMEBETWEENOPENCLOSE = 0.16f;
 
     private void OnEnable()
     {
-        // Suscribimos al evento global de teclado
         if (InputManager.Instance != null)
+        {
             InputManager.Instance.OnInteractPerformed.AddListener(HandleKeyboardToggle);
-        InputManager.Instance.OnPausePerformed.AddListener(CloseSilo);
+            InputManager.Instance.OnPausePerformed.AddListener(CloseSilo);
+        }
     }
 
     private void OnDisable()
     {
         if (InputManager.Instance != null)
+        {
             InputManager.Instance.OnInteractPerformed.RemoveListener(HandleKeyboardToggle);
-        InputManager.Instance.OnPausePerformed.RemoveListener(CloseSilo);
+            InputManager.Instance.OnPausePerformed.RemoveListener(CloseSilo);
+        }
     }
 
-    private void Start()
-    {
-    }
-
-    // Este método solo se dispara cuando presionas la tecla de Shop (ej. ESC o E)
     private void HandleKeyboardToggle()
     {
-        //if (InputManager.Instance.IsPaused) return;
-
-        // IMPORTANTE: Solo permitimos cerrar con el teclado si ya está abierta.
-        // Esto evita que la tienda se abra desde lejos.
-        if (_isSiloActive)
-        {
-            CloseSilo();
-        }
+        if (_isSiloActive) CloseSilo();
     }
 
     public void OpenSilo()
     {
-        if (_timeSinceLastOpenedClosed >= TIMEBETWEENOPENCLOSE)
+        if (_timeSinceLastOpenedClosed >= TIMEBETWEENOPENCLOSE && !_isSiloActive)
         {
-            if (_isSiloActive) return; // Ya está abierta, no hacemos nada
-            _timeSinceLastOpenedClosed = 0;
-            Debug.Log("Abriendo Mapa...");
             _isSiloActive = true;
+            _timeSinceLastOpenedClosed = 0;
 
-            if (_siloUIContainer != null) _siloUIContainer.SetActive(true);
-
+            _siloUIContainer.SetActive(true);
+            _playerInventory.siloAbierto = _siloLogic; // Conectamos
+            _siloLogic.RefrescarUI();
 
             UpdateGameState(true);
             StartCoroutine(_InputDelay());
@@ -66,21 +56,26 @@ public class InteractiveSilo : MonoBehaviour, IInteractive
 
     public void CloseSilo()
     {
-
-        if (_timeSinceLastOpenedClosed >= TIMEBETWEENOPENCLOSE)
+        if (_timeSinceLastOpenedClosed >= TIMEBETWEENOPENCLOSE && _isSiloActive)
         {
-            if (!_isSiloActive) return; // Ya está abierta, no hacemos nada
+            _isSiloActive = false;
             _timeSinceLastOpenedClosed = 0;
 
-            Debug.Log("Cerrando Silo...");
-            _isSiloActive = false;
-
-            if (_siloUIContainer != null) _siloUIContainer.SetActive(false);
-
+            _siloUIContainer.SetActive(false);
+            _playerInventory.siloAbierto = null; // Desconectamos
 
             UpdateGameState(false);
             StartCoroutine(_InputDelay());
         }
+    }
+
+    public void UpdateGameState(bool siloOpen)
+    {
+        Time.timeScale = siloOpen ? 0f : 1f;
+        if (_cameraControl != null) _cameraControl.SetControlState(!siloOpen);
+
+        Cursor.visible = siloOpen;
+        Cursor.lockState = siloOpen ? CursorLockMode.None : CursorLockMode.Locked;
     }
 
     IEnumerator _InputDelay()
@@ -92,23 +87,5 @@ public class InteractiveSilo : MonoBehaviour, IInteractive
         }
     }
 
-    public void UpdateGameState(bool siloOpen)
-    {
-        // Pausar el tiempo solo si la tienda está abierta
-        Time.timeScale = siloOpen ? 0f : 1f;
-
-        // Controlar el cursor y la cámara
-        if (_cameraControl != null)
-        {
-            _cameraControl.SetControlState(!siloOpen);
-        }
-
-        // Mostrar/Ocultar el mouse según el estado
-        Cursor.visible = siloOpen;
-    }
-
-    public void OnInteract()
-    {
-        OpenSilo();
-    }
+    public void OnInteract() => OpenSilo();
 }
