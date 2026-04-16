@@ -23,10 +23,16 @@ public class WikiSlime : MonoBehaviour
 
     private void Start()
     {
-
-        _currentActiveSlime = _slime1;
+        // Amaga TOTS els panells d'info al començar
         _slime1.SetActive(false);
         _slime2.SetActive(false);
+        _slime3.SetActive(false);
+        _slime4.SetActive(false);
+        _slime5.SetActive(false);
+        _slime6.SetActive(false);
+        _slime7.SetActive(false);
+
+        _currentActiveSlime = null; // Cap seleccionat inicialment
 
         _slime1Button.onClick.AddListener(() => SwitchSlime(_slime1));
         _slime2Button.onClick.AddListener(() => SwitchSlime(_slime2));
@@ -45,10 +51,26 @@ public class WikiSlime : MonoBehaviour
     public void DesactiveWiki()
     {
         _wikiMenu.SetActive(false);
+
+        // Amaga la info activa quan tanques la wiki
+        if (_currentActiveSlime != null)
+        {
+            _currentActiveSlime.SetActive(false);
+            _currentActiveSlime = null;
+        }
     }
 
     private void SwitchSlime(GameObject newSlime)
     {
+        // Si cliques el mateix botó dues vegades, el tanca
+        if (_currentActiveSlime == newSlime)
+        {
+            _currentActiveSlime.SetActive(false);
+            _currentActiveSlime = null;
+            return;
+        }
+
+        // Amaga l'anterior i mostra el nou
         if (_currentActiveSlime != null)
             _currentActiveSlime.SetActive(false);
 
