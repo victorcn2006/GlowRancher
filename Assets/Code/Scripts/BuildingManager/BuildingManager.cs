@@ -31,26 +31,26 @@ public class BuildingManager : MonoBehaviour
     public void FusionerBuyed()
     {
         _shop.HandleKeyboardToggle();
-
-        Instantiate(_fusionerHologram, _spawnPlace.position, _spawnPlace.rotation);
+        _droneZone.CallDrone(_fusionerHologram);
+        //Instantiate(_fusionerHologram, _spawnPlace.position, _spawnPlace.rotation);
     }
 
     public void CageBuyed()
     {
         _shop.HandleKeyboardToggle();
-
-        Instantiate(_cageHologram, _spawnPlace.position, _spawnPlace.rotation);
+        _droneZone.CallDrone(_cageHologram);
+        //Instantiate(_cageHologram, _spawnPlace.position, _spawnPlace.rotation);
     }
     public void PlanterBuyed()
     {
         _shop.HandleKeyboardToggle();
-
-        Instantiate(_planterHologram, _spawnPlace.position, _spawnPlace.rotation);
+        _droneZone.CallDrone(_planterHologram);
+        //Instantiate(_planterHologram, _spawnPlace.position, _spawnPlace.rotation);
     }
     public void SiloBuyed()
     {
         _shop.HandleKeyboardToggle();
-
-        Instantiate(_siloHologram, _spawnPlace.position, _spawnPlace.rotation);
+        _droneZone.CallDrone(_siloHologram);
+        //Instantiate(_siloHologram, _spawnPlace.position, _spawnPlace.rotation);
     }
 }
