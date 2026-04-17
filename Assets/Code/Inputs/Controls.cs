@@ -667,6 +667,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Run"",
+                    ""type"": ""Button"",
+                    ""id"": ""bfd16140-2bf1-4d30-8b7f-7b0b3384ea72"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -885,7 +894,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/leftShift"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""Run"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -898,6 +907,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
                     ""action"": ""Build"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""22bfd89b-2e0e-4b9c-9562-c1a47120179e"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Run"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1156,6 +1176,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_PauseGame = m_Player.FindAction("PauseGame", throwIfNotFound: true);
         m_Player_NextDialog = m_Player.FindAction("NextDialog", throwIfNotFound: true);
         m_Player_Build = m_Player.FindAction("Build", throwIfNotFound: true);
+        m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
         // Aspirator
         m_Aspirator = asset.FindActionMap("Aspirator", throwIfNotFound: true);
         m_Aspirator_Aspirate = m_Aspirator.FindAction("Aspirate", throwIfNotFound: true);
@@ -1367,6 +1388,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_PauseGame;
     private readonly InputAction m_Player_NextDialog;
     private readonly InputAction m_Player_Build;
+    private readonly InputAction m_Player_Run;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -1378,6 +1400,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @PauseGame => m_Wrapper.m_Player_PauseGame;
         public InputAction @NextDialog => m_Wrapper.m_Player_NextDialog;
         public InputAction @Build => m_Wrapper.m_Player_Build;
+        public InputAction @Run => m_Wrapper.m_Player_Run;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1408,6 +1431,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Build.started += instance.OnBuild;
             @Build.performed += instance.OnBuild;
             @Build.canceled += instance.OnBuild;
+            @Run.started += instance.OnRun;
+            @Run.performed += instance.OnRun;
+            @Run.canceled += instance.OnRun;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1433,6 +1459,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Build.started -= instance.OnBuild;
             @Build.performed -= instance.OnBuild;
             @Build.canceled -= instance.OnBuild;
+            @Run.started -= instance.OnRun;
+            @Run.performed -= instance.OnRun;
+            @Run.canceled -= instance.OnRun;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1608,6 +1637,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnPauseGame(InputAction.CallbackContext context);
         void OnNextDialog(InputAction.CallbackContext context);
         void OnBuild(InputAction.CallbackContext context);
+        void OnRun(InputAction.CallbackContext context);
     }
     public interface IAspiratorActions
     {

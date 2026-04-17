@@ -69,12 +69,12 @@ public class GemsPool : MonoBehaviour
         RegisterGem(ScaredGemPrefab, "ScaredGem");
         RegisterGem(IceGemPrefab, "IceGem");
         RegisterGem(MushroomGemPrefab, "MushroomGem");
-        RegisterGem(CatGemPrefab, "CatGem");
+        RegisterGem(CatGemPrefab, "CatSlimeStone");
         RegisterGem(RockGemPrefab, "RockGem");
         RegisterGem(FrozenRockGemPrefab, "FrozenRockGem");
         RegisterGem(BurningMushGemPrefab, "BurningMushGem");
-        RegisterGem(BurningMushGemPrefab, "ScaredCatGem");
-        RegisterGem(BurningMushGemPrefab, "ObsidianGem");
+        RegisterGem(ScaredCatGemPrefab, "ScaredCatGem");
+        RegisterGem(obsidianGemPrefab, "ObsidianGem");
     }
 
     private void RegisterGem(GameObject prefab, string defaultName)
