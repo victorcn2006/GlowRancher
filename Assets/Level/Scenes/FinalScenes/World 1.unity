@@ -17693,6 +17693,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasHUD
       objectReference: {fileID: 0}
+    - target: {fileID: 4514785217170946333, guid: aaf5f0c1e594b854fb67e145c0d2e296, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BuySilo
+      objectReference: {fileID: 0}
     - target: {fileID: 4593340119541463469, guid: aaf5f0c1e594b854fb67e145c0d2e296, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -35585,6 +35589,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1cd6178735b452b448096d21150ccb48, type: 3}
+--- !u!114 &1297357283 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4374544067840527164, guid: 1cd6178735b452b448096d21150ccb48, type: 3}
+  m_PrefabInstance: {fileID: 1297357282}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1b33593a0411574a852b2971654fc27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1299023831
 GameObject:
   m_ObjectHideFlags: 0
@@ -48409,7 +48424,7 @@ PrefabInstance:
     - target: {fileID: 4731288130168359705, guid: ff99fb1a63826f24da9b39be2a740205, type: 3}
       propertyPath: _shop
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1297357283}
     - target: {fileID: 4731288130168359705, guid: ff99fb1a63826f24da9b39be2a740205, type: 3}
       propertyPath: _droneZone
       value: 
@@ -48417,15 +48432,7 @@ PrefabInstance:
     - target: {fileID: 4731288130168359705, guid: ff99fb1a63826f24da9b39be2a740205, type: 3}
       propertyPath: _spawnPlace
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4731288130168359705, guid: ff99fb1a63826f24da9b39be2a740205, type: 3}
-      propertyPath: _houseHologram
-      value: 
-      objectReference: {fileID: 4926908979118916474, guid: a59144f01251c1c489841c75d34ef898, type: 3}
-    - target: {fileID: 4731288130168359705, guid: ff99fb1a63826f24da9b39be2a740205, type: 3}
-      propertyPath: _incineratorHologram
-      value: 
-      objectReference: {fileID: 4552608808884278563, guid: 34bb7d95527e78947a036ea82b237ac2, type: 3}
+      objectReference: {fileID: 1970610871}
     - target: {fileID: 6371051754934922830, guid: ff99fb1a63826f24da9b39be2a740205, type: 3}
       propertyPath: m_Name
       value: BuldingManager
@@ -51664,6 +51671,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 5179180688959270411, guid: 1b2b96aa59e0c494b9327898a645439d, type: 3}
   m_PrefabInstance: {fileID: 1970085015}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1970610871 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6626314797806212835, guid: 1cd6178735b452b448096d21150ccb48, type: 3}
+  m_PrefabInstance: {fileID: 1297357282}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1972781532
 GameObject:
