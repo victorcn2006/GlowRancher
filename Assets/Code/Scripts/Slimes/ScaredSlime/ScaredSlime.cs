@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScaredSlime : MonoBehaviour, IAspirable, ISlime
+public class ScaredSlime : MonoBehaviour, IAspirable, ISlime, IEatable, IDamageable
 {
     // --------------------------------------------LINKED SCRIPTS------------------------------------------------- \\
     [Header("SLIME SCRIPTS")]
@@ -13,6 +13,9 @@ public class ScaredSlime : MonoBehaviour, IAspirable, ISlime
     [SerializeField] private ScaredSlimeMovement _movementBehaviour;
     [SerializeField] private ScaredSlimePlayerDetector _playerDetector;
     [SerializeField] private Animator _animator;
+
+    [SerializeField] private int _health = 3;
+    [SerializeField] private int _maxHealth = 3;
 
     // Interface Implementation
     public HungerSystem hungerSystem => _hungerSystem;
@@ -34,5 +37,24 @@ public class ScaredSlime : MonoBehaviour, IAspirable, ISlime
     public void StopBeingAspired()
     {
         _movementBehaviour.SetBeingAspired(false);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        _health -= damage;
+        if (_health <= 0)
+        {
+            Die();
+        }
+    }
+
+    public void Heal(int amount)
+    {
+        _health = Mathf.Min(_health + amount, _maxHealth);
+    }
+
+    private void Die()
+    {
+        gameObject.SetActive(false);
     }
 }

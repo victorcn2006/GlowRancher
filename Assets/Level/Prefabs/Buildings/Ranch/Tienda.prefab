@@ -324,6 +324,7 @@ GameObject:
   - component: {fileID: 8419020519034399484}
   - component: {fileID: 1964462277341093531}
   - component: {fileID: 3600096603776238273}
+  - component: {fileID: 7721804250649612683}
   m_Layer: 0
   m_Name: SendSpot
   m_TagString: Untagged
@@ -377,6 +378,19 @@ CapsuleCollider:
   m_Height: 15.515427
   m_Direction: 1
   m_Center: {x: 0.00000006467097, y: 0.0000005016987, z: -0.000000097006456}
+--- !u!114 &7721804250649612683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3983898664205165799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b89aca1a3e8b4e94e8da269dc070fa2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MarketManager: {fileID: 0}
 --- !u!1 &4221844873238111875
 GameObject:
   m_ObjectHideFlags: 0
@@ -658,9 +672,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 576230186779871258}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tienda
-  m_TagString: Untagged
+  m_TagString: building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -684,6 +698,7 @@ Transform:
   - {fileID: 1999632243405820397}
   - {fileID: 8419020519034399484}
   - {fileID: 8559546035377135024}
+  - {fileID: 6626314797806212835}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5785194592001631763
@@ -853,6 +868,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 496.86035, y: 226.06923, z: 212.65665}
   m_Center: {x: -248.43018, y: 9.011579, z: 119.7409}
+--- !u!1 &8027676728166042745
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6626314797806212835}
+  m_Layer: 6
+  m_Name: SpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6626314797806212835
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8027676728166042745}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.14, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 576230186779871258}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8557055613217828700
 GameObject:
   m_ObjectHideFlags: 0
@@ -863,6 +909,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5471771245241429067}
   - component: {fileID: 349630785468942864}
+  - component: {fileID: 4374544067840527164}
   m_Layer: 12
   m_Name: Keyboard
   m_TagString: InteractuableShop
@@ -910,6 +957,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.7415581, y: 0.46294212, z: 0.8828306}
   m_Center: {x: -1.2173033, y: 1.9890144, z: -0.022224903}
+--- !u!114 &4374544067840527164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8557055613217828700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1b33593a0411574a852b2971654fc27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shopUIContainer: {fileID: 0}
+  _panelShop: {fileID: 0}
+  _cameraControl: {fileID: 0}
 --- !u!1 &9043876112260761354
 GameObject:
   m_ObjectHideFlags: 0
