@@ -328,11 +328,11 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1188803829176720893
@@ -1185,9 +1185,8 @@ GameObject:
   - component: {fileID: 3705661723594025846}
   - component: {fileID: 7855371704623417284}
   - component: {fileID: 8840870498319470107}
-  - component: {fileID: 7491309347118318836}
-  - component: {fileID: 7739723146896092817}
   - component: {fileID: 9070152283449064215}
+  - component: {fileID: 8450363715474044434}
   m_Layer: 6
   m_Name: LavaZone
   m_TagString: Untagged
@@ -1260,7 +1259,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7491309347118318836
+--- !u!114 &9070152283449064215
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1269,11 +1268,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6507277224844952907}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c32136e62f95c44283b6eb97b9a4b14, type: 3}
+  m_Script: {fileID: 11500000, guid: c7dd82f8dd45f494da25e9325d748628, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!64 &7739723146896092817
-MeshCollider:
+  _damageAmount: 999
+--- !u!65 &8450363715474044434
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1287,26 +1287,12 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &9070152283449064215
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6507277224844952907}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7dd82f8dd45f494da25e9325d748628, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageAmount: 999
+  serializedVersion: 3
+  m_Size: {x: 0.7247195, y: 2.179036, z: 0.67266685}
+  m_Center: {x: -0.020832272, y: 0.08951825, z: -0.0074384757}
 --- !u!1 &6904476828506168997
 GameObject:
   m_ObjectHideFlags: 0
