@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public interface ISlime
+public interface ISlime : IDamageable
 {
     Animator animator { get; }
     Mouth mouth { get; }

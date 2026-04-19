@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class LavaHazard : MonoBehaviour
 {
-    [SerializeField] private int damageAmount = 999; // Default to lethal
+    [SerializeField] private int _damageAmount = 999; // Default to lethal
 
     private void OnTriggerEnter(Collider other)
     {
@@ -12,7 +12,7 @@ public class LavaHazard : MonoBehaviour
             return;
         }
 
-        if (other.gameObject.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             DeathScript.instance.Die();
             return;
@@ -22,8 +22,7 @@ public class LavaHazard : MonoBehaviour
         IDamageable damageable = other.GetComponent<IDamageable>();
         if (damageable != null)
         {
-            damageable.TakeDamage(damageAmount);
-            
+            damageable.TakeDamage(_damageAmount);
         }
         else
         {
