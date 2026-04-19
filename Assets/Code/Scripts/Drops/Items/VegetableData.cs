@@ -5,12 +5,13 @@ public class VegetableData : MonoBehaviour
     [Header("Data")]
     [SerializeField] private Vegetable _vegetableData;
 
-    [Header("Models States")]
-    [SerializeField] private GameObject _seed;
-    [SerializeField] private GameObject _growth;
-    [SerializeField] private GameObject _mature;
-    [SerializeField] private GameObject _recolect;
+    [Header("Models States - Prefabs")]
+    [SerializeField] private GameObject _seedPrefab;
+    [SerializeField] private GameObject _growthPrefab;
+    [SerializeField] private GameObject _maturePrefab;
+    [SerializeField] private GameObject _recolectPrefab;
 
+    private GameObject _currentModel;
     private float _stateTimer;
 
 
@@ -21,18 +22,21 @@ public class VegetableData : MonoBehaviour
         RECOLECT
     }
 
+    [SerializeField] private STATES _currentState;
+
     private void Start()
     {
         _stateTimer = 0f;
         SetState(STATES.SEED);
     }
 
-    [SerializeField] private STATES _currentState;
+    
 
     private void Update()
     {
 
         _stateTimer += Time.deltaTime;
+        _vegetableData.time = _stateTimer;
 
         switch (_currentState)
         {
@@ -61,33 +65,23 @@ public class VegetableData : MonoBehaviour
                 // Wait for player interaction
                 break;
         }
-        _vegetableData.time = _stateTimer;
     }
 
     private void UpdateVisuals()
     {
-        _seed.SetActive(false);
-        _growth.SetActive(false);
-        _mature.SetActive(false);
-        _recolect.SetActive(false);
-
-        switch (_currentState)
+        if(_currentModel != null) Destroy(_currentModel);
+        GameObject prefabToSpawn = _currentState switch
         {
-            case STATES.SEED:
-                _seed.SetActive(true);
-                break;
-
-            case STATES.GROWTH:
-                _growth.SetActive(true);
-                break;
-
-            case STATES.MATURE:
-                _mature.SetActive(true);
-                break;
-
-            case STATES.RECOLECT:
-                _recolect.SetActive(true);
-                break;
+            STATES.SEED => _seedPrefab,
+            STATES.GROWTH => _growthPrefab,
+            STATES.MATURE => _maturePrefab,
+            STATES.RECOLECT => _recolectPrefab,
+            _ => null
+        };
+        if (prefabToSpawn != null)
+        {
+            // Instantiate as a child of this GameObject, inheriting its position
+            _currentModel = Instantiate(prefabToSpawn, transform.position, transform.rotation, transform);
         }
     }
 
