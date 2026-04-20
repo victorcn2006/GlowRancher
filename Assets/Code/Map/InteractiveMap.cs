@@ -33,12 +33,9 @@ public class InteractiveMap : MonoBehaviour, IInteractive
 
     private void Start()
     {
-        if (_isMapActive == true)
-        {
-            _isMapActive = false;
-        }
-        _lastInteractiveMapInteracted = null;
-        CloseMap(); // Empezar siempre cerrada
+        // Let CloseMap handle the boolean and the logic!
+        _isMapActive = true; // Temporarily force true so CloseMap actually runs
+        CloseMap();
     }
 
     // Este método solo se dispara cuando presionas la tecla de Shop (ej. ESC o E)
