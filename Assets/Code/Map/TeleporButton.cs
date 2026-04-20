@@ -52,9 +52,11 @@ public class TeleporButton : MonoBehaviour
     {
         if (_player != null && _teleport != null)
         {
-            _player.transform.DORotate(_teleport.eulerAngles, _delayTime)
-                .SetEase(Ease.InOutSine)
-                .SetUpdate(UpdateType.Normal, true);
+            DOTween.Sequence()
+                .Append(_player.transform.DOMove(InteractiveMap.GetLastInteractiveMapInteractedAltarTransform().position, _delayTime))
+                .Join(_player.transform.DORotate(_teleport.eulerAngles, _delayTime)
+                    .SetEase(Ease.InOutSine)
+                    ).SetUpdate(UpdateType.Normal, true);
         }
     }
 }
