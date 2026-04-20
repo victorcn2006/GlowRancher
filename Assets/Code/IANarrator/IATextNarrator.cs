@@ -9,7 +9,7 @@ public class IATextNarrator : MonoBehaviour
     [SerializeField] private float _timeBetweenCharacters = 0.05f;
     [SerializeField] private List<char> _errorCharacters = new List<char> { '#', '@', '%' };
     [SerializeField] private float _errorTimeBetweenCharacters = 0.02f;
-    [SerializeField, Range(0, 50)] private int _errorProbability = 10;
+    [SerializeField, Range(0, 100)] private int _errorChance = 10;
 
     private IANarratorManager _iANarratorManager;
     private IASoundNarrator _iASoundNarrator;
@@ -25,7 +25,7 @@ public class IATextNarrator : MonoBehaviour
         _iAText.text = "";
         foreach(char character in textToNarrate)
         {
-            if (_errorProbability > 0 && Random.Range(0, _errorProbability) == 0 && character != ' ')
+            if (_errorChance > 0 && Random.Range(0, _errorChance) == 0 && character != ' ')
             {
                 char errorCharacter = _errorCharacters[Random.Range(0, _errorCharacters.Count)];
                 WriteLetter(errorCharacter);
