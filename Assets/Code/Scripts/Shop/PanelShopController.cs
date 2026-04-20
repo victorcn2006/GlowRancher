@@ -7,6 +7,7 @@ public class PanelShopController : MonoBehaviour
 {
     [Header("Refs")]
     [SerializeField] private BuildingManager _buildingManager;
+    [SerializeField] private Player _player;
     [SerializeField] private GameObject _shopPanel;
     [SerializeField] private GameObject _incinerator;
     [SerializeField] private GameObject _planter;
@@ -14,6 +15,7 @@ public class PanelShopController : MonoBehaviour
     [SerializeField] private GameObject _silo;
     [SerializeField] private GameObject _hook;
     [SerializeField] private GameObject _doubleJump;
+    [SerializeField] private GameObject _staminaPlus;
 
     [Header("Buttons")]
     [SerializeField] private Button _itemOne;
@@ -22,6 +24,7 @@ public class PanelShopController : MonoBehaviour
     [SerializeField] private Button _itemSilo;
     [SerializeField] private Button _itemHook;
     [SerializeField] private Button _itemDoubleJump;
+    [SerializeField] private Button _itemStaminaPlus;
 
     #region Prices
     [Header("Prices")]
@@ -36,6 +39,8 @@ public class PanelShopController : MonoBehaviour
     [SerializeField] private int _fusionerPrice;
     [Tooltip("Price for the Fusioner")]
     [SerializeField] private int _doubleJumpPrice;
+    [Tooltip("Price for the Double Jump")]
+    [SerializeField] private int _staminaPlusPrice;
     [Tooltip("Price for the Double Jump")]
     #endregion
 
@@ -109,6 +114,16 @@ public class PanelShopController : MonoBehaviour
         _slimeCage.SetActive(false);
         _silo.SetActive(false);
         _doubleJump.SetActive(true);
+    }
+    public void ActivateStaminaPlus()
+    {
+        _hook.SetActive(false);
+        _incinerator.SetActive(false);
+        _planter.SetActive(false);
+        _slimeCage.SetActive(false);
+        _silo.SetActive(false);
+        _doubleJump.SetActive(false);
+        _staminaPlus.SetActive(true);
     }
     #endregion
 
@@ -201,13 +216,29 @@ public class PanelShopController : MonoBehaviour
     public void BuyDoubleJump()
     {
 
-        if (WalletCurrency.instance.bank >= _fusionerPrice)
+        if (WalletCurrency.instance.bank >= _doubleJumpPrice)
         {
-            WalletCurrency.instance.bank -= _fusionerPrice;
+            WalletCurrency.instance.bank -= _doubleJumpPrice;
             WalletCurrency.instance.SaveMoney();
             WalletCurrency.instance.Score_txt.text = WalletCurrency.instance.bank.ToString();
             
             Debug.Log("Hook purchased");
+        }
+        else
+        {
+            Debug.Log("Not enough money");
+        }
+    }
+    public void BuyStaminaPlus()
+    {
+
+        if (WalletCurrency.instance.bank >= _staminaPlusPrice)
+        {
+            WalletCurrency.instance.bank -= _staminaPlusPrice;
+            WalletCurrency.instance.SaveMoney();
+            WalletCurrency.instance.Score_txt.text = WalletCurrency.instance.bank.ToString();
+            _player.AddMaxEnergy();
+            Debug.Log("satmina+ purchased");
         }
         else
         {
