@@ -21,6 +21,20 @@ public class PanelShopController : MonoBehaviour
     [SerializeField] private Button _itemSilo;
     [SerializeField] private Button _itemHook;
 
+    #region Prices
+    [Header("Prices")]
+    [SerializeField] private int _incineratorPrice = 10;
+    [Tooltip("Price for the Incinerator")]
+    [SerializeField] private int _planterPrice = 30;
+    [Tooltip("Price for the Planter")]
+    [SerializeField] private int _slimeCagePrice = 15;
+    [Tooltip("Price for the Cage")]
+    [SerializeField] private int _siloPrice = 160;
+    [Tooltip("Price for the Silo")]
+    [SerializeField] private int _fusionerPrice = 20;
+    [Tooltip("Price for the Fusioner")]
+    #endregion
+
     // Start is called before the first frame update
     void Start()
     {
@@ -87,9 +101,9 @@ public class PanelShopController : MonoBehaviour
     public void BuyIncinerator()
     {
 
-        if (WalletCurrency.instance.bank >= 0)
+        if (WalletCurrency.instance.bank >= _incineratorPrice)
         {
-            WalletCurrency.instance.bank -= 5;
+            WalletCurrency.instance.bank -= _incineratorPrice;
             WalletCurrency.instance.SaveMoney();
             WalletCurrency.instance.Score_txt.text = WalletCurrency.instance.bank.ToString();
 
@@ -106,9 +120,9 @@ public class PanelShopController : MonoBehaviour
     public void BuyPlanter()
     {
 
-        if (WalletCurrency.instance.bank >= 30)
+        if (WalletCurrency.instance.bank >= _planterPrice)
         {
-            WalletCurrency.instance.bank -= 30;
+            WalletCurrency.instance.bank -= _planterPrice;
             WalletCurrency.instance.SaveMoney();
             WalletCurrency.instance.Score_txt.text = WalletCurrency.instance.bank.ToString();
             _buildingManager.PlanterBuyed();
@@ -123,9 +137,9 @@ public class PanelShopController : MonoBehaviour
     public void BuySlimeCage()
     {
 
-        if (WalletCurrency.instance.bank >= 15)
+        if (WalletCurrency.instance.bank >= _slimeCagePrice)
         {
-            WalletCurrency.instance.bank -= 15;
+            WalletCurrency.instance.bank -= _slimeCagePrice;
             WalletCurrency.instance.SaveMoney();
             WalletCurrency.instance.Score_txt.text = WalletCurrency.instance.bank.ToString();
             _buildingManager.CageBuyed();
@@ -140,9 +154,9 @@ public class PanelShopController : MonoBehaviour
     public void BuySilo()
     {
 
-        if (WalletCurrency.instance.bank >= 5)
+        if (WalletCurrency.instance.bank >= _siloPrice)
         {
-            WalletCurrency.instance.bank -= 5;
+            WalletCurrency.instance.bank -= _siloPrice;
             WalletCurrency.instance.SaveMoney();
             WalletCurrency.instance.Score_txt.text = WalletCurrency.instance.bank.ToString();
             _buildingManager.SiloBuyed();
@@ -154,12 +168,12 @@ public class PanelShopController : MonoBehaviour
         }
     }
 
-    public void BuyHook()
+    public void BuyFusioner()
     {
 
-        if (WalletCurrency.instance.bank >= 5)
+        if (WalletCurrency.instance.bank >= _fusionerPrice)
         {
-            WalletCurrency.instance.bank -= 5;
+            WalletCurrency.instance.bank -= _fusionerPrice;
             WalletCurrency.instance.SaveMoney();
             WalletCurrency.instance.Score_txt.text = WalletCurrency.instance.bank.ToString();
 
