@@ -13,6 +13,7 @@ public class PanelShopController : MonoBehaviour
     [SerializeField] private GameObject _slimeCage;
     [SerializeField] private GameObject _silo;
     [SerializeField] private GameObject _hook;
+    [SerializeField] private GameObject _doubleJump;
 
     [Header("Buttons")]
     [SerializeField] private Button _itemOne;
@@ -20,19 +21,22 @@ public class PanelShopController : MonoBehaviour
     [SerializeField] private Button _itemSlimeCage;
     [SerializeField] private Button _itemSilo;
     [SerializeField] private Button _itemHook;
+    [SerializeField] private Button _itemDoubleJump;
 
     #region Prices
     [Header("Prices")]
-    [SerializeField] private int _incineratorPrice = 10;
+    [SerializeField] private int _incineratorPrice;
     [Tooltip("Price for the Incinerator")]
-    [SerializeField] private int _planterPrice = 30;
+    [SerializeField] private int _planterPrice;
     [Tooltip("Price for the Planter")]
-    [SerializeField] private int _slimeCagePrice = 15;
+    [SerializeField] private int _slimeCagePrice;
     [Tooltip("Price for the Cage")]
-    [SerializeField] private int _siloPrice = 160;
+    [SerializeField] private int _siloPrice;
     [Tooltip("Price for the Silo")]
-    [SerializeField] private int _fusionerPrice = 20;
+    [SerializeField] private int _fusionerPrice;
     [Tooltip("Price for the Fusioner")]
+    [SerializeField] private int _doubleJumpPrice;
+    [Tooltip("Price for the Double Jump")]
     #endregion
 
     // Start is called before the first frame update
@@ -43,6 +47,7 @@ public class PanelShopController : MonoBehaviour
         _slimeCage.SetActive(false);
         _silo.SetActive(false);
         _hook.SetActive(false);
+        _doubleJump.SetActive(false);
     }
 
     // Update is called once per frame
@@ -95,6 +100,15 @@ public class PanelShopController : MonoBehaviour
         _planter.SetActive(false);
         _slimeCage.SetActive(false);
         _silo.SetActive(false);
+    }
+    public void ActivateDoubleJump()
+    {
+        _hook.SetActive(false);
+        _incinerator.SetActive(false);
+        _planter.SetActive(false);
+        _slimeCage.SetActive(false);
+        _silo.SetActive(false);
+        _doubleJump.SetActive(true);
     }
     #endregion
 
@@ -176,7 +190,23 @@ public class PanelShopController : MonoBehaviour
             WalletCurrency.instance.bank -= _fusionerPrice;
             WalletCurrency.instance.SaveMoney();
             WalletCurrency.instance.Score_txt.text = WalletCurrency.instance.bank.ToString();
+            _buildingManager.FusionerBuyed();
+            Debug.Log("Hook purchased");
+        }
+        else
+        {
+            Debug.Log("Not enough money");
+        }
+    }
+    public void BuyDoubleJump()
+    {
 
+        if (WalletCurrency.instance.bank >= _fusionerPrice)
+        {
+            WalletCurrency.instance.bank -= _fusionerPrice;
+            WalletCurrency.instance.SaveMoney();
+            WalletCurrency.instance.Score_txt.text = WalletCurrency.instance.bank.ToString();
+            
             Debug.Log("Hook purchased");
         }
         else
