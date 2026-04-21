@@ -8,7 +8,7 @@ public class InteractiveSilo : MonoBehaviour, IInteractive
 
     [Header("Referencias de Control")]
     [SerializeField] private PlayerCameraMovement _cameraControl;
-    [SerializeField] private SiloLogic _siloLogic; // El script de arriba
+    [SerializeField] private SiloLogic _siloLogic;
     [SerializeField] private Inventory _playerInventory;
 
     private bool _isSiloActive = false;
@@ -17,12 +17,31 @@ public class InteractiveSilo : MonoBehaviour, IInteractive
 
     private void Start()
     {
+        if (_siloLogic == null)
+            _siloLogic = GetComponent<SiloLogic>();
         if (_cameraControl == null)
             _cameraControl = FindObjectOfType<PlayerCameraMovement>();
+
         if (_playerInventory == null)
             _playerInventory = FindObjectOfType<Inventory>();
+
         if (_siloUIContainer == null)
-            _siloUIContainer = transform.Find("SiloUIContainer").gameObject;
+        {
+            // Busca directament per nom si el tag falla
+            GameObject panel = GameObject.FindWithTag("SiloPanel");
+            if (panel == null)
+                panel = GameObject.Find("SiloPanel"); // fallback per nom
+
+            if (panel != null)
+            {
+                _siloUIContainer = panel; // El panel ES el container
+                Debug.Log("[InteractiveSilo] SiloUIContainer trobat: " + panel.name);
+            }
+            else
+            {
+                Debug.LogError("[InteractiveSilo] No s'ha trobat SiloPanel! Comprova el tag o el nom.");
+            }
+        }
     }
 
     private void OnEnable()
@@ -54,11 +73,9 @@ public class InteractiveSilo : MonoBehaviour, IInteractive
         {
             _isSiloActive = true;
             _timeSinceLastOpenedClosed = 0;
-
             _siloUIContainer.SetActive(true);
-            _playerInventory.siloAbierto = _siloLogic; // Conectamos
+            _playerInventory.siloAbierto = _siloLogic;
             _siloLogic.RefrescarUI();
-
             UpdateGameState(true);
             StartCoroutine(_InputDelay());
         }
@@ -70,10 +87,8 @@ public class InteractiveSilo : MonoBehaviour, IInteractive
         {
             _isSiloActive = false;
             _timeSinceLastOpenedClosed = 0;
-
             _siloUIContainer.SetActive(false);
-            _playerInventory.siloAbierto = null; // Desconectamos
-
+            _playerInventory.siloAbierto = null;
             UpdateGameState(false);
             StartCoroutine(_InputDelay());
         }
@@ -83,7 +98,6 @@ public class InteractiveSilo : MonoBehaviour, IInteractive
     {
         Time.timeScale = siloOpen ? 0f : 1f;
         if (_cameraControl != null) _cameraControl.SetControlState(!siloOpen);
-
         Cursor.visible = siloOpen;
         Cursor.lockState = siloOpen ? CursorLockMode.None : CursorLockMode.Locked;
     }
