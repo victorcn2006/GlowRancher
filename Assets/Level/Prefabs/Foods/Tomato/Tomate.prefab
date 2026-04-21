@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 2397400834323744838}
   - component: {fileID: 1651304622433273827}
   - component: {fileID: 3534880989224923945}
+  - component: {fileID: 9014267305553645552}
+  - component: {fileID: 3237313676796481614}
   m_Layer: 0
   m_Name: Tomate
   m_TagString: Food
@@ -26,13 +28,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3030526689611862780}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.53130645, z: -0, w: 0.8471797}
+  m_LocalRotation: {x: 0, y: 0.53130984, z: 0, w: 0.84717757}
   m_LocalPosition: {x: 648.93585, y: 20.651316, z: 229.35811}
   m_LocalScale: {x: 0.011595114, y: 0.11069665, z: 0.011595114}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 64.188, z: 0}
 --- !u!33 &1651304622433273827
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -83,3 +85,51 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!135 &9014267305553645552
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3030526689611862780}
+  m_Material: {fileID: 13400000, guid: 9c54b74de3d24e24a93e1fd808f9bc64, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 2.83
+  m_Center: {x: -0.09403239, y: -1.9534951, z: 3.083015}
+--- !u!54 &3237313676796481614
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3030526689611862780}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
