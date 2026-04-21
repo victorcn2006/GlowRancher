@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class PanelShopController : MonoBehaviour
 {
+    public static PanelShopController Instance { get; private set; }
+
     [Header("Refs")]
     [SerializeField] private BuildingManager _buildingManager;
     [SerializeField] private Player _player;
@@ -43,6 +45,18 @@ public class PanelShopController : MonoBehaviour
     [SerializeField] private int _staminaPlusPrice;
     [Tooltip("Price for the Double Jump")]
     #endregion
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -256,5 +270,22 @@ public class PanelShopController : MonoBehaviour
     public void DesactiveShop()
     {
         _shopPanel.SetActive(false);
+    }
+
+    public float GetBuildingPrice(BuildingType building) {
+        switch (building) {
+            case BuildingType.Incinerator:
+                return _incineratorPrice;
+            case BuildingType.Greenhouse:
+                return _planterPrice;
+            case BuildingType.Silo:
+                return _siloPrice;
+            case BuildingType.SlimeCage:
+                return _slimeCagePrice;
+            case BuildingType.Fusioner:
+                return _fusionerPrice;
+            default:
+                return 0f;
+        }
     }
 }
