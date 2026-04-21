@@ -8,7 +8,7 @@ public class Player : Character, ISavable
     public int money = 0;
 
     [Header("Sistema de Energía (Stamina)")]
-    [SerializeField] private const float MAXENERGY = 100f;
+    [SerializeField] private float _maxEnergy = 100f;
     [SerializeField] private float _currentEnergy = 100f;
     [SerializeField] private float _energyBurnRate = 25f;
     [SerializeField] private float _energyRegenRate = 45f;
@@ -22,7 +22,7 @@ public class Player : Character, ISavable
     {
         // Importante: Si la clase base (Character) tiene un Awake, 
         // a veces es mejor llamarlo después de nuestras referencias.
-        _currentEnergy = MAXENERGY;
+        _currentEnergy = _maxEnergy;
         currentHealth = maxHealth;
         _inventory = new SiloInventory();
 
@@ -61,20 +61,20 @@ public class Player : Character, ISavable
         }
         else
         {
-            if (_currentEnergy < MAXENERGY && _regenCoroutine == null)
+            if (_currentEnergy < _maxEnergy && _regenCoroutine == null)
             {
                 _regenCoroutine = StartCoroutine(RegenEnergyRoutine());
             }
         }
 
-        _currentEnergy = Mathf.Clamp(_currentEnergy, 0, MAXENERGY);
+        _currentEnergy = Mathf.Clamp(_currentEnergy, 0, _maxEnergy);
     }
 
     private IEnumerator RegenEnergyRoutine()
     {
         yield return new WaitForSeconds(REGENDELAY);
 
-        while (_currentEnergy < MAXENERGY)
+        while (_currentEnergy < _maxEnergy)
         {
             bool isMoving = InputManager.Instance.MoveInput.magnitude > 0.1f;
 
@@ -85,7 +85,7 @@ public class Player : Character, ISavable
             float currentRegenSpeed = isMoving ? (_energyRegenRate * _walkRegenMultiplier) : _energyRegenRate;
 
             _currentEnergy += currentRegenSpeed * Time.deltaTime;
-            _currentEnergy = Mathf.Clamp(_currentEnergy, 0, MAXENERGY);
+            _currentEnergy = Mathf.Clamp(_currentEnergy, 0, _maxEnergy);
 
             yield return null;
         }
@@ -94,7 +94,8 @@ public class Player : Character, ISavable
     }
 
     public float GetCurrentEnergy() => _currentEnergy;
-    public float GetMaxEnergy() => MAXENERGY;
+    public float GetMaxEnergy() => _maxEnergy;
+    public void AddMaxEnergy() { _maxEnergy += 10; } 
 
     // Propiedad que lee PlayerMovement
     public bool CanRun => InputManager.Instance.IsRunning && _currentEnergy > 0 && InputManager.Instance.MoveInput.magnitude > 0.1f;

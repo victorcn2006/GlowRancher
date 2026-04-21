@@ -5,6 +5,7 @@ public class WikiManager : MonoBehaviour
     [Header("Referencias de UI")]
     [SerializeField] private WikiSlime _wikiMenu;
     [SerializeField] private PanelShopController _panelShop;
+    [SerializeField] private GameObject _inventari;
 
     [Header("Referencias de Control")]
     [Tooltip("Arrastra aquí el objeto que tiene el script PlayerCameraMovement")]
@@ -56,12 +57,14 @@ public class WikiManager : MonoBehaviour
     {
         _wikiMenu.ActiveWiki(); // Activa el panel visual
         UpdateGameState(true);  // Bloquea cámara y tiempo
+        _inventari.SetActive(false);
     }
 
     private void CloseWiki()
     {
         _wikiMenu.DesactiveWiki(); // Desactiva el panel visual
         UpdateGameState(false);    // Desbloquea cámara y tiempo
+        _inventari.SetActive(true);
     }
 
 
