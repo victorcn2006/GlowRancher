@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class VegetableData : MonoBehaviour
+public class VegetableData : MonoBehaviour, IAspirable
 {
     [Header("Data")]
     [SerializeField] private Vegetable _vegetableData;
@@ -30,11 +30,8 @@ public class VegetableData : MonoBehaviour
         SetState(STATES.SEED);
     }
 
-    
-
     private void Update()
     {
-
         _stateTimer += Time.deltaTime;
         _vegetableData.time = _stateTimer;
 
@@ -91,16 +88,63 @@ public class VegetableData : MonoBehaviour
         UpdateVisuals();
     }
 
-    public void GetState(STATES state)
-    {
-        _currentState = state;
-    }
-
     public void Harvest()
     {
         if (_currentState == STATES.RECOLECT)
         {
+            // Spawn Vegetable
+            if (VegetablesPool.Instance != null && _vegetableData != null)
+            {
+                GameObject veg = VegetablesPool.Instance.GetVegetable(_vegetableData.type);
+                if (veg != null)
+                {
+                    veg.transform.position = transform.position + Vector3.up;
+                    if (veg.TryGetComponent(out Rigidbody rb))
+                    {
+                        rb.velocity = Vector3.zero;
+                        rb.AddForce(Vector3.up * 5f + Random.insideUnitSphere * 2f, ForceMode.Impulse);
+                    }
+                }
+
+                // Spawn Seed
+                GameObject seed = VegetablesPool.Instance.GetSeed(GetSeedType(_vegetableData.type));
+                if (seed != null)
+                {
+                    seed.transform.position = transform.position + Vector3.up;
+                    if (seed.TryGetComponent(out Rigidbody rbSeed))
+                    {
+                        rbSeed.velocity = Vector3.zero;
+                        rbSeed.AddForce(Vector3.up * 5f + Random.insideUnitSphere * 2f, ForceMode.Impulse);
+                    }
+                }
+            }
+
             SetState(STATES.SEED);
         }
+    }
+
+    private VegetablesPool.seedsType GetSeedType(VegetablesPool.vegetablesType vegType)
+    {
+        return vegType switch
+        {
+            VegetablesPool.vegetablesType.CARROT => VegetablesPool.seedsType.CARROT_SEED,
+            VegetablesPool.vegetablesType.EGGPLANT => VegetablesPool.seedsType.EGGPLANT_SEED,
+            VegetablesPool.vegetablesType.PUMPKIN => VegetablesPool.seedsType.PUMPKIN_SEED,
+            VegetablesPool.vegetablesType.TOMATO => VegetablesPool.seedsType.TOMATO_SEED,
+            _ => VegetablesPool.seedsType.CARROT_SEED
+        };
+    }
+
+    public void BeingAspired()
+    {
+        if (_currentState == STATES.RECOLECT)
+        {
+            Harvest();
+        }
+    }
+
+    public void StopBeingAspired()
+    {
+        // Not needed for fixed plants
     }
 }
