@@ -11,6 +11,10 @@ public class VegetableData : MonoBehaviour, IAspirable
     [SerializeField] private GameObject _maturePrefab;
     [SerializeField] private GameObject _recolectPrefab;
 
+    [Header("Items to be dropped")]
+    [SerializeField] private GameObject _seed;
+    [SerializeField] private GameObject _food;
+
     private GameObject _currentModel;
     private float _stateTimer;
 
@@ -92,34 +96,11 @@ public class VegetableData : MonoBehaviour, IAspirable
     {
         if (_currentState == STATES.RECOLECT)
         {
-            // Spawn Vegetable
-            if (VegetablesPool.Instance != null && _vegetableData != null)
-            {
-                GameObject veg = VegetablesPool.Instance.GetVegetable(_vegetableData.type);
-                if (veg != null)
-                {
-                    veg.transform.position = transform.position + Vector3.up;
-                    if (veg.TryGetComponent(out Rigidbody rb))
-                    {
-                        rb.velocity = Vector3.zero;
-                        rb.AddForce(Vector3.up * 5f + Random.insideUnitSphere * 2f, ForceMode.Impulse);
-                    }
-                }
-
-                // Spawn Seed
-                GameObject seed = VegetablesPool.Instance.GetSeed(GetSeedType(_vegetableData.type));
-                if (seed != null)
-                {
-                    seed.transform.position = transform.position + Vector3.up;
-                    if (seed.TryGetComponent(out Rigidbody rbSeed))
-                    {
-                        rbSeed.velocity = Vector3.zero;
-                        rbSeed.AddForce(Vector3.up * 5f + Random.insideUnitSphere * 2f, ForceMode.Impulse);
-                    }
-                }
-            }
-
+            Instantiate(_food, this.transform.position, transform.rotation);
+            Instantiate(_seed, this.transform.position, transform.rotation);
             SetState(STATES.SEED);
+            Debug.Log("AAAAAAAAAAAAAAA");
+            Destroy(this.gameObject);
         }
     }
 

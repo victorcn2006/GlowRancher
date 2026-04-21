@@ -13,11 +13,11 @@ GameObject:
   - component: {fileID: 7020488677423605951}
   - component: {fileID: 6156325876409877476}
   - component: {fileID: 5905640470302416411}
-  - component: {fileID: 5560618336474970357}
   - component: {fileID: 2371924216475725267}
+  - component: {fileID: -1395549197358332478}
   m_Layer: 0
   m_Name: EggPlantSeed
-  m_TagString: Gem
+  m_TagString: Seed
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -137,20 +137,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5560618336474970357
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3035131153792984462}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78f3539ff7df8274fbef0f7e007fa868, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 5b5511080e0ef1e4e941211c2bf89a30, type: 2}
-  type: 3
 --- !u!114 &2371924216475725267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,3 +151,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icono: {fileID: 21300000, guid: 2738f89a9c6c4984f9bc438963e80fac, type: 3}
   nombre: EggPlantSeed
+--- !u!114 &-1395549197358332478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3035131153792984462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d87abd98951854c8daa49b902f4531, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cropPrefab: {fileID: 4480465354937303860, guid: 87ae27efa7047204b9c9d409a589aeed, type: 3}

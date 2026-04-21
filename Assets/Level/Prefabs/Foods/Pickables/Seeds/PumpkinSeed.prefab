@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 5398136054606377214}
   - component: {fileID: 5652208124131912961}
   - component: {fileID: 4570983620496383689}
+  - component: {fileID: 2870767935552249364}
   m_Layer: 0
   m_Name: PumpkinSeed
-  m_TagString: Gem
+  m_TagString: Seed
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 3862771627816326804}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 626.8583, y: 20.658026, z: 212.7199}
+  m_LocalPosition: {x: 661.84033, y: 20.59, z: 207.44798}
   m_LocalScale: {x: 0.21, y: 0.21, z: 0.21}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -150,3 +151,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icono: {fileID: 21300000, guid: 5180bae75ca303044be0bcbf76e351d8, type: 3}
   nombre: PumpkinSeed
+--- !u!114 &2870767935552249364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3862771627816326804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d87abd98951854c8daa49b902f4531, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cropPrefab: {fileID: 2284931463007283789, guid: a080f8ccec79bd140acac439519a3415, type: 3}
