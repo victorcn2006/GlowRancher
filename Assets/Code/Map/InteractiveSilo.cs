@@ -15,6 +15,16 @@ public class InteractiveSilo : MonoBehaviour, IInteractive
     private float _timeSinceLastOpenedClosed = 0.16f;
     private const float TIMEBETWEENOPENCLOSE = 0.16f;
 
+    private void Start()
+    {
+        if (_cameraControl == null)
+            _cameraControl = FindObjectOfType<PlayerCameraMovement>();
+        if (_playerInventory == null)
+            _playerInventory = FindObjectOfType<Inventory>();
+        if (_siloUIContainer == null)
+            _siloUIContainer = transform.Find("SiloUIContainer").gameObject;
+    }
+
     private void OnEnable()
     {
         if (InputManager.Instance != null)
