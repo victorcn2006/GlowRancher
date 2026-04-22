@@ -83,6 +83,8 @@ public class PanelShopController : MonoBehaviour
         _slimeCage.SetActive(false);
         _silo.SetActive(false);
         _hook.SetActive(false);
+        _doubleJump.SetActive(false);
+        _staminaPlus.SetActive(false);
     }
 
     public void ActivatePlanter()
@@ -92,6 +94,8 @@ public class PanelShopController : MonoBehaviour
         _slimeCage.SetActive(false);
         _silo.SetActive(false);
         _hook.SetActive(false);
+        _doubleJump.SetActive(false);
+        _staminaPlus.SetActive(false);
     }
 
     public void ActivateSlimeCage()
@@ -101,6 +105,8 @@ public class PanelShopController : MonoBehaviour
         _planter.SetActive(false);
         _silo.SetActive(false);
         _hook.SetActive(false);
+        _doubleJump.SetActive(false);
+        _staminaPlus.SetActive(false);
     }
 
     public void ActivateSilo()
@@ -110,6 +116,8 @@ public class PanelShopController : MonoBehaviour
         _planter.SetActive(false);
         _slimeCage.SetActive(false);
         _hook.SetActive(false);
+        _doubleJump.SetActive(false);
+        _staminaPlus.SetActive(false);
     }
 
     public void ActivateHook()
@@ -119,6 +127,8 @@ public class PanelShopController : MonoBehaviour
         _planter.SetActive(false);
         _slimeCage.SetActive(false);
         _silo.SetActive(false);
+        _doubleJump.SetActive(false);
+        _staminaPlus.SetActive(false);
     }
     public void ActivateDoubleJump()
     {
@@ -128,6 +138,7 @@ public class PanelShopController : MonoBehaviour
         _slimeCage.SetActive(false);
         _silo.SetActive(false);
         _doubleJump.SetActive(true);
+        _staminaPlus.SetActive(false);
     }
     public void ActivateStaminaPlus()
     {
