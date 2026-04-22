@@ -62,10 +62,13 @@ public class ActionButtonManager : MonoBehaviour
                 PauseManager.instance?.SetPause();
                 break;
             case BUTTONS.EXIT:
+                GameManager.Instance.SaveStats();
                 #if UNITY_EDITOR
                     EditorApplication.isPlaying = false; // Detiene el juego en el editor
                 #else
-                    Application.Quit(); // Cierra la build final
+                    Application.Quit();
+                    
+                    
                 #endif
                 break;
         }
