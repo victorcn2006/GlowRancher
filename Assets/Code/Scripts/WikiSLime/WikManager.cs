@@ -13,7 +13,7 @@ public class WikiManager : MonoBehaviour
 
     private bool _isWikiActive = false;
 
-
+    public bool IsWikiActive => _isWikiActive;//per el status de si esta obert o tancat
     private void OnEnable()
     {
         // Suscripción al evento del InputManager
@@ -88,6 +88,17 @@ public class WikiManager : MonoBehaviour
         else
         {
             Debug.LogError("¡Falta asignar la cámara en el WikiManager!");
+        }
+    }
+
+    public void OnPauseResumed()
+    {
+        if (_isWikiActive)
+        {
+            // La wiki estava oberta abans de pausar, restaurem el seu estat
+            _wikiMenu.ActiveWiki();
+            _inventari.SetActive(false);
+            // No cal tocar timeScale ni càmera, ho fa PauseManager
         }
     }
 }
