@@ -1190,6 +1190,7 @@ MonoBehaviour:
   _nextDialog: {fileID: 2274616954005545242, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
   _run: {fileID: 1720790925765943201, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
   _buildPerformed: {fileID: 5967558730159387155, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
+  _sellPerformed: {fileID: 1745026931808395888, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
   _aspirate: {fileID: 6501401278561469931, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
   _launchObject: {fileID: 8266952679875099490, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
   _inventoryNavigation: {fileID: -4489386230323612283, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
@@ -1218,6 +1219,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnBuildPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSellBuildingPerformed:
     m_PersistentCalls:
       m_Calls: []
   OnScroll:
@@ -2149,8 +2153,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoad:
-    _sceneAsset: {fileID: 102900000, guid: 34c774083c113d84881487281a540f96, type: 3}
-    _sceneName: World-ScalePlayer
+    _sceneAsset: {fileID: 102900000, guid: 4601702e50312e446a3e9c50de2b5bc1, type: 3}
+    _sceneName: World 1
 --- !u!1 &1700736264
 GameObject:
   m_ObjectHideFlags: 0

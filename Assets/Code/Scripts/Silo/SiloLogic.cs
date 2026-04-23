@@ -4,54 +4,69 @@ using System.Collections.Generic;
 public class SiloLogic : MonoBehaviour
 {
     [Header("Configuración")]
+    // Usamos una lista fija de 24 para que coincida con la UI
     public List<SlotInventario> slotsSilo = new List<SlotInventario>();
     [SerializeField] private Inventory _playerInventory;
 
     private SlotUI[] slotUISilo;
-    private const int MAX_CANTIDAD_SILO = 99;
+    private const int MAX_CANTIDAD_POR_SLOT = 99;
+    private const int TOTAL_SLOTS = 24;
 
+    private void Awake()
+    {
+        // Garantizamos que la lista siempre tenga 24 posiciones al iniciar
+        if (slotsSilo == null || slotsSilo.Count == 0)
+        {
+            slotsSilo = new List<SlotInventario>();
+            for (int i = 0; i < TOTAL_SLOTS; i++)
+            {
+                slotsSilo.Add(null);
+            }
+        }
+    }
 
     private void Start()
     {
-        if (_playerInventory == null)
-            _playerInventory = FindObjectOfType<Inventory>();
-        // El panel es únic a l'escena, el busquem per tag
-        GameObject panel = GameObject.FindWithTag("SiloPanel");
+        if (_playerInventory == null) _playerInventory = FindObjectOfType<Inventory>();
+    }
+
+    public void VincularUI(GameObject panel)
+    {
         if (panel != null)
         {
+            // Importante: GetComponentsInChildren debe encontrar exactamente 24 scripts SlotUI
             slotUISilo = panel.GetComponentsInChildren<SlotUI>(true);
-            slotsSilo.Clear();
-            for (int i = 0; i < slotUISilo.Length; i++)
-                slotsSilo.Add(null);
-        }
-        else
-        {
-            Debug.LogError("[SiloLogic] No s'ha trobat cap GameObject amb tag 'SiloPanel'!");
         }
     }
 
     public bool AñadirAlSilo(Sprite icono, string nombre)
     {
-        // 1. Intentar apilar
+        // PASO 1: Buscar si ya existe el ítem para apilarlo
         for (int i = 0; i < slotsSilo.Count; i++)
         {
-            if (slotsSilo[i] != null && slotsSilo[i].nombre == nombre && slotsSilo[i].cantidad < MAX_CANTIDAD_SILO)
+            if (slotsSilo[i] != null && slotsSilo[i].nombre == nombre)
             {
-                slotsSilo[i].cantidad++;
-                slotUISilo[i].ActualizarSlot(slotsSilo[i]);
-                return true;
+                if (slotsSilo[i].cantidad < MAX_CANTIDAD_POR_SLOT)
+                {
+                    slotsSilo[i].cantidad++;
+                    RefrescarUI();
+                    return true;
+                }
             }
         }
-        // 2. Buscar hueco vacío
+
+        // PASO 2: Si no se pudo apilar, buscar el PRIMER hueco vacío disponible
         for (int i = 0; i < slotsSilo.Count; i++)
         {
-            if (slotsSilo[i] == null)
+            if (slotsSilo[i] == null || string.IsNullOrEmpty(slotsSilo[i].nombre))
             {
                 slotsSilo[i] = new SlotInventario(icono, nombre, 1);
-                slotUISilo[i].ActualizarSlot(slotsSilo[i]);
+                RefrescarUI();
                 return true;
             }
         }
+
+        Debug.LogWarning("El silo está completamente lleno.");
         return false;
     }
 
@@ -59,21 +74,34 @@ public class SiloLogic : MonoBehaviour
     {
         if (indice < 0 || indice >= slotsSilo.Count || slotsSilo[indice] == null) return;
 
-        SlotInventario item = slotsSilo[indice];
-        Debug.Log($"<color=cyan>[SILO]</color> Extrayendo Item: <b>{item.nombre}</b> | Cantidad: {item.cantidad}");
+        // Intentamos mover al inventario del jugador
+        bool pudoAñadir = _playerInventory.AñadirAlInventario(slotsSilo[indice].icono, slotsSilo[indice].nombre);
 
-        bool exito = _playerInventory.AñadirAlInventario(slotsSilo[indice].icono, slotsSilo[indice].nombre);
-        if (exito)
+        if (pudoAñadir)
         {
             slotsSilo[indice].cantidad--;
-            if (slotsSilo[indice].cantidad <= 0) slotsSilo[indice] = null;
-            slotUISilo[indice].ActualizarSlot(slotsSilo[indice]);
+
+            // Si llegamos a cero, el slot vuelve a ser nulo (vacío)
+            if (slotsSilo[indice].cantidad <= 0)
+            {
+                slotsSilo[indice] = null;
+            }
+
+            RefrescarUI();
         }
     }
 
     public void RefrescarUI()
     {
+        if (slotUISilo == null || slotUISilo.Length == 0) return;
+
         for (int i = 0; i < slotUISilo.Length; i++)
-            slotUISilo[i].ActualizarSlot(slotsSilo[i]);
+        {
+            if (i < slotsSilo.Count)
+            {
+                // Actualizamos el slot de la UI con el dato (null o con objeto)
+                slotUISilo[i].ActualizarSlot(slotsSilo[i]);
+            }
+        }
     }
 }
