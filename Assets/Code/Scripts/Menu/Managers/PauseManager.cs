@@ -48,14 +48,16 @@ public class PauseManager : MonoBehaviour
         // Toggle the pause state
         if (_pausePanel.activeSelf)
         {
+            
             // Pause panel is active, so unpause
             DisablePausePanel();
             _focusSet = false;
             InputManager.Instance.IsPaused = false;
         }
-        else if (!InputManager.Instance.IsWikiOpen)
+        else
         {
             // Pause panel is not active and wiki is not open, so pause
+            WikiSlime.instance.QuitWiki();
             ActivePausePanel();
             if (!_focusSet)
             {

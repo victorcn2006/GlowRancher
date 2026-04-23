@@ -3,6 +3,9 @@ using UnityEngine.UI;
 
 public class WikiSlime : MonoBehaviour
 {
+
+    public static WikiSlime instance { get; private set; }
+
     [SerializeField] private GameObject _wikiMenu;
     [SerializeField] private GameObject _slime1;
     [SerializeField] private GameObject _slime2;
@@ -46,6 +49,17 @@ public class WikiSlime : MonoBehaviour
     public void ActiveWiki()
     {
         _wikiMenu.SetActive(true);
+    }
+    public void QuitWiki()
+    {
+        Debug.Log("cfdcv");
+        _wikiMenu.SetActive(false);
+    }
+
+    private void Awake()
+    {
+        if (instance == null) instance = this;
+        else Destroy(this.gameObject);
     }
 
     public void DesactiveWiki()
