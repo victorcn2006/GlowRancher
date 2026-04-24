@@ -101,7 +101,7 @@ public class InteractiveSilo : MonoBehaviour, IInteractive
         UpdateGameState(false);
         StartCoroutine(_InputDelay());
     }
-
+    //a
     public void UpdateGameState(bool siloOpen)
     {
         Time.timeScale = siloOpen ? 0f : 1f;
