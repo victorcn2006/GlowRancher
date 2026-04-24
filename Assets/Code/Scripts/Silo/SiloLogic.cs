@@ -4,74 +4,104 @@ using System.Collections.Generic;
 public class SiloLogic : MonoBehaviour
 {
     [Header("Configuración")]
+    // Usamos una lista fija de 24 para que coincida con la UI
     public List<SlotInventario> slotsSilo = new List<SlotInventario>();
-    public SlotUI[] slotUISilo; // Arrastra aquí los slots de la UI del Silo
-    public Inventory playerInventory;
-    private const int MAX_CANTIDAD_SILO = 99;
+    [SerializeField] private Inventory _playerInventory;
 
-    void Awake()
+    private SlotUI[] slotUISilo;
+    private const int MAX_CANTIDAD_POR_SLOT = 99;
+    private const int TOTAL_SLOTS = 24;
+
+    private void Awake()
     {
-        // Inicializar la lista según la cantidad de slots visuales que tengas
-        for (int i = 0; i < slotUISilo.Length; i++)
+        // Garantizamos que la lista siempre tenga 24 posiciones al iniciar
+        if (slotsSilo == null || slotsSilo.Count == 0)
         {
-            slotsSilo.Add(null);
+            slotsSilo = new List<SlotInventario>();
+            for (int i = 0; i < TOTAL_SLOTS; i++)
+            {
+                slotsSilo.Add(null);
+            }
+        }
+    }
+
+    private void Start()
+    {
+        if (_playerInventory == null) _playerInventory = FindObjectOfType<Inventory>();
+    }
+
+    public void VincularUI(GameObject panel)
+    {
+        if (panel != null)
+        {
+            // Importante: GetComponentsInChildren debe encontrar exactamente 24 scripts SlotUI
+            slotUISilo = panel.GetComponentsInChildren<SlotUI>(true);
         }
     }
 
     public bool AñadirAlSilo(Sprite icono, string nombre)
     {
-        // 1. Intentar apilar
+        // PASO 1: Buscar si ya existe el ítem para apilarlo
         for (int i = 0; i < slotsSilo.Count; i++)
         {
-            if (slotsSilo[i] != null && slotsSilo[i].nombre == nombre && slotsSilo[i].cantidad < MAX_CANTIDAD_SILO)
+            if (slotsSilo[i] != null && slotsSilo[i].nombre == nombre)
             {
-                slotsSilo[i].cantidad++;
-                slotUISilo[i].ActualizarSlot(slotsSilo[i]);
+                if (slotsSilo[i].cantidad < MAX_CANTIDAD_POR_SLOT)
+                {
+                    slotsSilo[i].cantidad++;
+                    RefrescarUI();
+                    return true;
+                }
+            }
+        }
+
+        // PASO 2: Si no se pudo apilar, buscar el PRIMER hueco vacío disponible
+        for (int i = 0; i < slotsSilo.Count; i++)
+        {
+            if (slotsSilo[i] == null || string.IsNullOrEmpty(slotsSilo[i].nombre))
+            {
+                slotsSilo[i] = new SlotInventario(icono, nombre, 1);
+                RefrescarUI();
                 return true;
             }
         }
 
-        // 2. Buscar hueco vacío
-        for (int i = 0; i < slotsSilo.Count; i++)
-        {
-            if (slotsSilo[i] == null)
-            {
-                slotsSilo[i] = new SlotInventario(icono, nombre, 1);
-                slotUISilo[i].ActualizarSlot(slotsSilo[i]);
-                return true;
-            }
-        }
+        Debug.LogWarning("El silo está completamente lleno.");
         return false;
     }
 
-    // Se llama al hacer clic en un botón de la UI del Silo
     public void ExtraerDelSilo(int indice)
     {
         if (indice < 0 || indice >= slotsSilo.Count || slotsSilo[indice] == null) return;
 
-        // --- AQUÍ EL DEBUG.LOG ---
-        SlotInventario item = slotsSilo[indice];
-        Debug.Log($"<color=cyan>[SILO]</color> Extrayendo Item: <b>{item.nombre}</b> " +
-                  $"| Cantidad: {item.cantidad} ");
-        // -------------------------
+        // Intentamos mover al inventario del jugador
+        bool pudoAñadir = _playerInventory.AñadirAlInventario(slotsSilo[indice].icono, slotsSilo[indice].nombre);
 
-        // IMPORTANTE: Pasamos el icono y el nombre EXACTOS que tiene el silo
-        bool exito = playerInventory.AñadirAlInventario(slotsSilo[indice].icono, slotsSilo[indice].nombre);
-
-        if (exito)
+        if (pudoAñadir)
         {
             slotsSilo[indice].cantidad--;
-            if (slotsSilo[indice].cantidad <= 0) slotsSilo[indice] = null;
 
-            slotUISilo[indice].ActualizarSlot(slotsSilo[indice]);
+            // Si llegamos a cero, el slot vuelve a ser nulo (vacío)
+            if (slotsSilo[indice].cantidad <= 0)
+            {
+                slotsSilo[indice] = null;
+            }
+
+            RefrescarUI();
         }
     }
 
     public void RefrescarUI()
     {
+        if (slotUISilo == null || slotUISilo.Length == 0) return;
+
         for (int i = 0; i < slotUISilo.Length; i++)
         {
-            slotUISilo[i].ActualizarSlot(slotsSilo[i]);
+            if (i < slotsSilo.Count)
+            {
+                // Actualizamos el slot de la UI con el dato (null o con objeto)
+                slotUISilo[i].ActualizarSlot(slotsSilo[i]);
+            }
         }
     }
 }
