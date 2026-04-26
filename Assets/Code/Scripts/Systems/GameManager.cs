@@ -13,11 +13,21 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int _deathCounter;
     [SerializeField] private float _timePlayed;
 
-    private void Start()
+    private void Awake()
     {
+        if (gameManager != null && gameManager != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        gameManager = this;
+        DontDestroyOnLoad(gameObject);
+
         _timePlayed = PlayerPrefs.GetFloat(TIME_PLAYED, 0f);
         _deathCounter = PlayerPrefs.GetInt(DEATH_COUNTER, 0);
     }
+
     private void Update()
     {
         _timePlayed += Time.deltaTime;
