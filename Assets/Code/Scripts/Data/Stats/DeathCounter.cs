@@ -9,7 +9,21 @@ public class DeathCounter : MonoBehaviour
     private void Start()
     {
         _deathCounterText = GetComponent<TextMeshProUGUI>();
-        float deathCounter = GameManager.Instance.GetDeathCounter();
+        UpdateUI();
+
+        if (GameManager.Instance != null)
+            GameManager.Instance.OnStatsLoaded += UpdateUI;
+    }
+
+    private void OnDestroy()
+    {
+        if (GameManager.Instance != null)
+            GameManager.Instance.OnStatsLoaded -= UpdateUI;
+    }
+
+    private void UpdateUI()
+    {
+        int deathCounter = GameManager.Instance.GetDeathCounter();
         _deathCounterText.text = deathCounter.ToString();
     }
 }

@@ -1,30 +1,41 @@
 using UnityEngine;
 using MongoDB.Driver;
-using MongoDB.Bson;
+using System.Threading.Tasks;
+using MongoDB.Bson.Serialization.Attributes;
 
 public class MongoDBReader : MonoBehaviour
 {
     public static MongoDBReader Instance { get; private set; }
-
-    private MongoClient client;
-    private IMongoDatabase database;
-    private IMongoCollection<BsonDocument> usersCollection;
-
+    private IMongoCollection<PlayerData> _collection;
 
     private void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(this.gameObject);
+        if (Instance == null) { Instance = this; DontDestroyOnLoad(gameObject); }
+        else { Destroy(gameObject); return; }
+
+        // Initialize Connection
+        var client = new MongoClient("mongodb+srv://victor:victor2006@cluster0.ndzrtvd.mongodb.net/?appName=Cluster0");
+        var database = client.GetDatabase("GlowRancher");
+        _collection = database.GetCollection<PlayerData>("UserStats");
     }
 
-    async void Start() {
-        string connectionString = "mongodb+srv://victor:victor2006@cluster0.ndzrtvd.mongodb.net/?appName=Cluster0";
-
-        try {
-            client = new MongoClient(connectionString);
-            Debug.Log("MongoDB client initialized. Connection will be established on first operation.");
-        } catch (System.Exception e) {
-            Debug.LogError($"MongoDB Initialization Error: {e.Message}");
-        }
+    public async Task<PlayerData> LoadStats(string userId)
+    {
+        return await _collection.Find(x => x.userId == userId).FirstOrDefaultAsync();
     }
+
+    public async Task SaveStats(PlayerData data)
+    {
+        var filter = Builders<PlayerData>.Filter.Eq(x => x.userId, data.userId);
+        await _collection.ReplaceOneAsync(filter, data, new ReplaceOptions { IsUpsert = true });
+    }
+}
+
+[System.Serializable]
+[BsonIgnoreExtraElements]
+public class PlayerData
+{
+    public string userId;
+    public float timePlayed;
+    public int deathCounter;
 }
