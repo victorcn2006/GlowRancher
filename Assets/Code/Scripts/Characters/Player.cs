@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Player : Character, ISavable
+public class Player : Character
 {
     [Header("Configuración de Bioma y Economía")]
     public string currentBiome = "Pradera";
@@ -105,20 +105,7 @@ public class Player : Character, ISavable
     public override void TakeDamage(int damage) => base.TakeDamage(damage);
 
     // --- IMPLEMENTATION ---
-    private void OnEnable() => SaveManager.Instance?.RegisterSavable(this);
-    private void OnDisable() => SaveManager.Instance?.UnregisterSavable(this);
     public string GetSaveID() => "Player";
-    public object CaptureState() => new PlayerData(this);
-    public void RestoreState(object state)
-    {
-        if (state is PlayerData data)
-        {
-            currentBiome = data.currentBiome;
-            money = data.money;
-            currentHealth = data.health;
-            transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
-        }
-    }
 
     protected override void Die()
     {

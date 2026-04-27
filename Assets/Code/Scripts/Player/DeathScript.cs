@@ -15,6 +15,7 @@ public class DeathScript : MonoBehaviour
     }
 
     public void Die() {
+        GameManager.Instance.AddDeathPlayer();
         if(!firstMonolitoUnlocked) this.transform.position = _initialPlayerSpawn.transform.position;
         else this.transform.position = _monolitoSpawn.transform.position;
     }
