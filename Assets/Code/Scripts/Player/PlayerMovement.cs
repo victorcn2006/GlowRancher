@@ -13,8 +13,10 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Audio")]
     [SerializeField] private EventReference _jumpSound;
+    [SerializeField] private EventReference _footstepSound; // Nuevo: Evento de pasos
+    [SerializeField] private float _stepInterval = 0.5f;   // Tiempo entre pasos al caminar
+    [SerializeField] private float _runStepMultiplier = 0.7f; // Reducción de tiempo al correr
 
-    // Propiedades para que la aspiradora las lea
     public bool IsMoving => _rb != null && new Vector3(_rb.velocity.x, 0, _rb.velocity.z).magnitude > 0.1f;
     public bool IsRunning => _player != null && _player.CanRun && IsMoving;
 
@@ -25,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     private bool _canJump = true;
     private bool _hasDoubleJumpItem = false;
     private bool _didDoubleJump = false;
+    private float _stepTimer; // Temporizador interno
 
     private void Awake()
     {
@@ -50,6 +53,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         ApplyMovement();
+        HandleFootsteps(); // Llamamos a la lógica de pasos
     }
 
     private void ApplyMovement()
@@ -65,11 +69,38 @@ public class PlayerMovement : MonoBehaviour
         Vector3 camRight = Vector3.Scale(_mainCamTransform.right, new Vector3(1, 0, 1)).normalized;
         Vector3 moveDirection = (camRight * input.x + camForward * input.y).normalized;
 
-        float currentSpeed = (_player != null && _player.CanRun) ? _runSpeed : _walkSpeed;
+        float currentSpeed = IsRunning ? _runSpeed : _walkSpeed;
 
         Vector3 targetVelocity = moveDirection * currentSpeed;
         targetVelocity.y = _rb.velocity.y;
         _rb.velocity = targetVelocity;
+    }
+
+    private void HandleFootsteps()
+    {
+        // Solo sonar si el jugador se está moviendo y está en el suelo (canJump)
+        if (IsMoving && _canJump)
+        {
+            _stepTimer -= Time.fixedDeltaTime;
+
+            if (_stepTimer <= 0f)
+            {
+                PlayFootstep();
+
+                // Ajustar ritmo según si corre o camina
+                float currentInterval = IsRunning ? (_stepInterval * _runStepMultiplier) : _stepInterval;
+                _stepTimer = currentInterval;
+            }
+        }
+        else
+        {
+            _stepTimer = 0f; // Reiniciar para que el primer paso suene instantáneo al volver a moverte
+        }
+    }
+
+    private void PlayFootstep()
+    {
+        RuntimeManager.PlayOneShot(_footstepSound, transform.position);
     }
 
     private void HandleJump()
