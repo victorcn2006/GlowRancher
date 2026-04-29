@@ -183,7 +183,7 @@ public class InputManager : MonoBehaviour {
 
     private void OnPauseGame(InputAction.CallbackContext ctx)
     {
-        IsPaused = true;
+        //IsPaused = true;
         OnPausePerformed?.Invoke();
     }
 

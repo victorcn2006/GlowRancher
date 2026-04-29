@@ -18,6 +18,9 @@ public class PauseManager : MonoBehaviour
     [Header("UI Navigation")]
     [SerializeField] private GameObject _firstButton;
 
+    [Header("Dependencies")]
+    [SerializeField] private WikiManager _wikiManager;
+
     private bool _focusSet = false;
     private void Awake() {
         if (instance == null)
@@ -45,14 +48,16 @@ public class PauseManager : MonoBehaviour
         // Toggle the pause state
         if (_pausePanel.activeSelf)
         {
+            
             // Pause panel is active, so unpause
             DisablePausePanel();
             _focusSet = false;
             InputManager.Instance.IsPaused = false;
         }
-        else if (!InputManager.Instance.IsWikiOpen)
+        else
         {
             // Pause panel is not active and wiki is not open, so pause
+            WikiSlime.instance.QuitWiki();
             ActivePausePanel();
             if (!_focusSet)
             {
@@ -76,6 +81,10 @@ public class PauseManager : MonoBehaviour
         _hud.SetActive(true);
         _gamePanel.SetActive(true);
         Time.timeScale = 1f;
+
+        if (_wikiManager != null) {
+            _wikiManager.OnPauseResumed();
+        }
 
     }
 }

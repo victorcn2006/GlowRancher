@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class WikiManager : MonoBehaviour
 {
+    public static WikiManager instance { get; private set; }
+
     [Header("Referencias de UI")]
     [SerializeField] private WikiSlime _wikiMenu;
     [SerializeField] private PanelShopController _panelShop;
@@ -13,7 +15,7 @@ public class WikiManager : MonoBehaviour
 
     private bool _isWikiActive = false;
 
-
+    public bool IsWikiActive => _isWikiActive;//per el status de si esta obert o tancat
     private void OnEnable()
     {
         // Suscripción al evento del InputManager
@@ -32,6 +34,11 @@ public class WikiManager : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        if(instance == null) instance = this;
+        else Destroy(this.gameObject);
+    }
     private void Start()
     {
         // Estado inicial: Wiki cerrada al empezar
@@ -53,14 +60,16 @@ public class WikiManager : MonoBehaviour
             CloseWiki();
     }
 
-    private void OpenWiki()
+    public void OpenWiki()
     {
         _wikiMenu.ActiveWiki(); // Activa el panel visual
         UpdateGameState(true);  // Bloquea cámara y tiempo
         _inventari.SetActive(false);
+        InputManager.Instance.SetWikiOpen(true);
     }
 
-    private void CloseWiki()
+
+    public void CloseWiki()
     {
         _wikiMenu.DesactiveWiki(); // Desactiva el panel visual
         UpdateGameState(false);    // Desbloquea cámara y tiempo
@@ -88,6 +97,17 @@ public class WikiManager : MonoBehaviour
         else
         {
             Debug.LogError("¡Falta asignar la cámara en el WikiManager!");
+        }
+    }
+
+    public void OnPauseResumed()
+    {
+        if (_isWikiActive)
+        {
+            // La wiki estava oberta abans de pausar, restaurem el seu estat
+            _wikiMenu.ActiveWiki();
+            _inventari.SetActive(false);
+            // No cal tocar timeScale ni càmera, ho fa PauseManager
         }
     }
 }
