@@ -132,6 +132,9 @@ public class VegetablesPool : MonoBehaviour
 
     private GameObject GetFromPool(List<GameObject> pool)
     {
+
+        Debug.Log($"GetFromPool cridat. Pool: {pool?.Count} objectes");
+
         if (pool == null) return null;
 
         foreach (GameObject obj in pool)
