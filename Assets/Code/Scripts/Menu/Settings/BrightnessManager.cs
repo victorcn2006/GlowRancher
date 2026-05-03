@@ -1,44 +1,148 @@
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class BrightnessManager : MonoBehaviour
 {
     public static BrightnessManager instance;
 
-    private void Awake() {
-        if (instance == null) {
-            instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        } 
-        else Destroy(this.gameObject);
-    }
-
     private const string BRIGHTNESS_KEY = "brightness";
     private const float DEFAULT_BRIGHTNESS = 0.5f;
-    [SerializeField] private Image _brighnessPanel;
-    private Slider _slider;
-    private float _savedBrightness;
 
-    private void Start() {
-        if (_slider == null) _slider = GetComponent<Slider>();
-        if (_brighnessPanel == null || _slider == null) return;
-        _savedBrightness = PlayerPrefs.GetFloat(BRIGHTNESS_KEY, DEFAULT_BRIGHTNESS);
-        _slider.value = _savedBrightness;
-        //Modificamos del color el parametro del alfa que es el que nos dara la sensacion de apagar la pantalla
-        Update_brighnessPanel(_savedBrightness);  
-        _slider.onValueChanged.AddListener(Change_slider);
+    private Volume _globalVolume;
+    private ColorAdjustments _colorAdjustments;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            
+            // Ensure it's a root object for DontDestroyOnLoad to work correctly
+            if (transform.parent != null)
+            {
+                transform.SetParent(null);
+            }
+            
+            DontDestroyOnLoad(gameObject);
+            InitializePostProcessing();
+            LoadAndApplyBrightness();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
-    private void OnDisable(){
-        _slider.onValueChanged.RemoveListener(Change_slider);
+
+    private void InitializePostProcessing()
+    {
+        // Look for an existing global volume
+        Volume[] volumes = FindObjectsByType<Volume>(FindObjectsSortMode.None);
+        foreach (var v in volumes)
+        {
+            if (v.isGlobal)
+            {
+                _globalVolume = v;
+                Debug.Log($"[BrightnessManager] Found existing global volume: {v.name}");
+                break;
+            }
+        }
+
+        // Create a dedicated global volume if none found
+        if (_globalVolume == null)
+        {
+            GameObject volumeObject = new GameObject("GlobalBrightnessVolume");
+            volumeObject.transform.SetParent(transform);
+            _globalVolume = volumeObject.AddComponent<Volume>();
+            _globalVolume.isGlobal = true;
+            _globalVolume.priority = 100;
+            Debug.Log("[BrightnessManager] Created new dedicated global volume");
+        }
+
+        // Ensure we have a profile
+        if (_globalVolume.sharedProfile == null)
+        {
+            _globalVolume.sharedProfile = ScriptableObject.CreateInstance<VolumeProfile>();
+            Debug.Log("[BrightnessManager] Created new VolumeProfile");
+        }
+
+        // Ensure we have ColorAdjustments override
+        if (!_globalVolume.sharedProfile.TryGet(out _colorAdjustments))
+        {
+            _colorAdjustments = _globalVolume.sharedProfile.Add<ColorAdjustments>(true);
+            Debug.Log("[BrightnessManager] Added ColorAdjustments to profile");
+        }
+
+        _colorAdjustments.postExposure.overrideState = true;
+        
+        // Debug: Check if camera can see this volume's layer
+        int volumeLayer = _globalVolume.gameObject.layer;
+        Debug.Log($"[BrightnessManager] Volume is on layer: {LayerMask.LayerToName(volumeLayer)} (Index: {volumeLayer})");
     }
-    public void Change_slider(float brightness){
-        PlayerPrefs.SetFloat(BRIGHTNESS_KEY, brightness);
+
+    private void LoadAndApplyBrightness()
+    {
+        float savedBrightness = PlayerPrefs.GetFloat(BRIGHTNESS_KEY, DEFAULT_BRIGHTNESS);
+        UpdateBrightness(savedBrightness);
+    }
+
+    public void SetBrightness(float value)
+    {
+        PlayerPrefs.SetFloat(BRIGHTNESS_KEY, value);
         PlayerPrefs.Save();
-        Update_brighnessPanel(brightness);
+        UpdateBrightness(value);
     }
-    private void Update_brighnessPanel(float brightness) {
-        if(_brighnessPanel == null) return;
-        float inverted = Mathf.Lerp(0.9f, 0.06f, brightness);
-        _brighnessPanel.color = new Color(_brighnessPanel.color.r, _brighnessPanel.color.g, _brighnessPanel.color.b, inverted);
+
+    public float GetBrightness()
+    {
+        return PlayerPrefs.GetFloat(BRIGHTNESS_KEY, DEFAULT_BRIGHTNESS);
+    }
+
+    private void UpdateBrightness(float brightness)
+    {
+        // Re-find volume if it's missing (e.g. after scene load)
+        if (_globalVolume == null)
+        {
+            Volume[] volumes = FindObjectsByType<Volume>(FindObjectsSortMode.None);
+            foreach (var v in volumes)
+            {
+                if (v.isGlobal)
+                {
+                    _globalVolume = v;
+                    break;
+                }
+            }
+        }
+
+        if (_globalVolume == null) return;
+
+        // Ensure we have the effect reference
+        if (_colorAdjustments == null && _globalVolume.sharedProfile != null)
+        {
+            _globalVolume.sharedProfile.TryGet(out _colorAdjustments);
+        }
+
+        if (_colorAdjustments != null)
+        {
+            // Range: -5 (Very Dark) to +2 (Bright)
+            // 0.5 is the middle (Standard)
+            float postExposureValue = Mathf.Lerp(-5f, 2f, brightness);
+            _colorAdjustments.postExposure.value = postExposureValue;
+            
+            // Safety: Ensure it's active
+            _colorAdjustments.active = true;
+            _colorAdjustments.postExposure.overrideState = true;
+
+            Debug.Log($"[BrightnessManager] APPLIED -> Slider: {brightness:F2} | PostExposure: {postExposureValue:F2}");
+        }
+        else
+        {
+            // Fallback: If for some reason the effect isn't there, we use Weight
+            // Slider 1.0 -> Weight 0 (Normal)
+            // Slider 0.0 -> Weight 1 (Full Effect/Dark)
+            // This assumes you have a profile that makes things dark.
+            _globalVolume.weight = 1f - brightness;
+            Debug.Log($"[BrightnessManager] FALLBACK -> Volume Weight: {_globalVolume.weight:F2}");
+        }
     }
 }

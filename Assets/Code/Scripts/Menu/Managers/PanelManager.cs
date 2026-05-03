@@ -2,16 +2,31 @@ using UnityEngine;
 
 public class PanelManager : MonoBehaviour
 {
-    [SerializeField] GameObject _panel;
-    [SerializeField] GameObject _panel2;
+    [SerializeField] private GameObject _keyboardPanel;
+    [SerializeField] private GameObject _gamepadPanel;
+    [SerializeField] private UICarrousel _deviceCarrousel;
 
-    public void ActivePanel1() {
-        _panel2.SetActive(false);
-        _panel.SetActive(true);
+    private void OnEnable()
+    {
+        _deviceCarrousel.OnItemChanged += HandleItemChanged;
     }
 
-    public void ActivePanel2() {
-        _panel.SetActive(false);
-        _panel2.SetActive(true);
-    }  
+    private void OnDisable()
+    {
+        _deviceCarrousel.OnItemChanged -= HandleItemChanged;
+    }
+
+    private void HandleItemChanged(UICarrousel.CarrouselItem item)
+    {
+        if (item.title == "Keyboard")
+        {
+            _keyboardPanel.SetActive(true);
+            _gamepadPanel.SetActive(false);
+        }
+        else if (item.title == "Gamepad")
+        {
+            _keyboardPanel.SetActive(false);
+            _gamepadPanel.SetActive(true);
+        }
+    }
 }
