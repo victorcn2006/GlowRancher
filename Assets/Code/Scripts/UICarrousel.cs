@@ -1,9 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-using System.Collections;
 using UnityEngine.UI;
-using System;
 
 public class UICarrousel : MonoBehaviour
 {
@@ -12,13 +10,67 @@ public class UICarrousel : MonoBehaviour
     {
         public string title;
         public Color textColor;
-        public GameObject panel; // ADD THIS - The panel to show for this item
     }
 
-    [Header("UI")]
+    [SerializeField] private Button _prevButton;
+    [SerializeField] private Button _nextButton;
+    [SerializeField] private TextMeshProUGUI _textToChange;
     [SerializeField] public CarouselItem[] _items;
+
+    private int _currentIndex = 0;
+
+    private void OnEnable()
+    {
+        _prevButton.onClick.AddListener(PrevButton);
+        _nextButton.onClick.AddListener(NextButton);
+    }
+    private void Start()
+    {
+        _textToChange.text = _items[0].title;
+
+    }
+
+    private void Update()
+    {
+        UpdateUI();
+    }
+
+    private void OnDisable()
+    {
+        _nextButton.onClick.RemoveListener(NextButton);
+        _prevButton.onClick.RemoveListener(PrevButton);
+    }
+    private void PrevButton()
+    {
+        _currentIndex--;
+
+        if (_currentIndex < 0)
+            _currentIndex = _items.Length - 1;
+        UpdateUI();
+    }
+
+    private void NextButton()
+    {
+        _currentIndex++;
+
+        if (_currentIndex >= _items.Length)
+            _currentIndex = 0;
+        UpdateUI();
+    }
+
+    private void UpdateUI()
+    {
+        _textToChange.text = _items[_currentIndex].title;
+        _textToChange.color = _items[_currentIndex].textColor;
+    }
+}
+
+    /*
+
+    [Header("UI")]
+    
     [SerializeField] private TextMeshProUGUI _titleText;
-    public event Action<string> OnValueChanged; //aquest event s'utilitzara per a fer el canvi de idioma
+    public event Action<string> OnValueChanged;
     public Button _prevButton;
      public Button _nextButton;
 
@@ -140,9 +192,9 @@ public class UICarrousel : MonoBehaviour
         // Setup initial states
         switch (_panelTransition)
         {
-            /*case TransitionType.Instant:
+            case TransitionType.Instant:
                 currentPanel.SetActive(false);
-                yield break;*/
+                yield break;
 
             case TransitionType.Fade:
                 nextCG.alpha = 0f;
@@ -229,5 +281,4 @@ public class UICarrousel : MonoBehaviour
             _titleText.text = _items[_currentIndex].title;
             _titleText.color = _items[_currentIndex].textColor;
         }
-    }
-}
+    }*/
