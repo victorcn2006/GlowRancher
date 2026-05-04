@@ -9,7 +9,7 @@ public class EndAspiratorTutorial : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("player"))
+        if (other.CompareTag("Player"))
         {
             DeleteObject(_lightGo);
         }
