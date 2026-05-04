@@ -22,7 +22,7 @@ public class LanguageManager : MonoBehaviour
             return;
         }
 
-        languageCarrousel.OnValueChanged += OnLanguageSelected;
+        //languageCarrousel.OnValueChanged += OnLanguageSelected;
 
         string savedLanguage = PlayerPrefs.GetString(LANGUAGE_PREF_KEY, DEFAULT_LANGUAGE);
         StartCoroutine(UpdateLocalization(savedLanguage));
@@ -38,7 +38,7 @@ public class LanguageManager : MonoBehaviour
         PlayerPrefs.Save();
         StartCoroutine(UpdateLocalization(newLanguage));
     }
-
+    /*
     private void SetCarouselToLanguage(string languageName)
     {
         for (int i = 0; i < languageCarrousel._items.Length; i++)
@@ -49,7 +49,7 @@ public class LanguageManager : MonoBehaviour
                 break;
             }
         }
-    }
+    }*/
 
     private IEnumerator UpdateLocalization(string languageName)
     {
@@ -88,10 +88,10 @@ public class LanguageManager : MonoBehaviour
         // Unsubscribe to prevent memory leaks
         if (languageCarrousel != null)
         {
-            languageCarrousel.OnValueChanged -= OnLanguageSelected;
+            //languageCarrousel.OnValueChanged -= OnLanguageSelected;
         }
     }
-
+    /*
     private void OnCarouselChanged()
     {
         string newLanguage = languageCarrousel.GetValue();
@@ -102,7 +102,7 @@ public class LanguageManager : MonoBehaviour
         }
 
         OnLanguageChanged(newLanguage);
-    }
+    }*/
 
     private string GetLanguageCode(string languageName)
     {
