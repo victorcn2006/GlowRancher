@@ -166,18 +166,15 @@ public class VegetablesPool : MonoBehaviour
         {
             if (obj != null && !obj.activeInHierarchy)
             {
-                obj.SetActive(true);
-                return obj;
+                return obj; // retorna sense activar
             }
         }
 
-        // Nou objecte
         if (_currentObjectPrefab != null)
         {
             GameObject newObj = Instantiate(_currentObjectPrefab);
-            newObj.SetActive(true);
             pool.Add(newObj);
-            return newObj;
+            return newObj; // retorna sense activar
         }
 
         return null;
