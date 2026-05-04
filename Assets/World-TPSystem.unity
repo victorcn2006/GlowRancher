@@ -33248,7 +33248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _map: {fileID: 1741825462}
-  _update: {fileID: 1543197060}
+  _update: {fileID: 72877440}
   _player: {fileID: 1563374107}
   _teleport: {fileID: 1359994620}
   _moveTp: {fileID: 6085043}
@@ -43346,64 +43346,28 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 207.629
       objectReference: {fileID: 0}
+    - target: {fileID: 8003063219788724838, guid: 6b10ea38af2c3e04481eef98ef1b6584, type: 3}
+      propertyPath: _cameraControl
+      value: 
+      objectReference: {fileID: 1563374110}
+    - target: {fileID: 8003063219788724838, guid: 6b10ea38af2c3e04481eef98ef1b6584, type: 3}
+      propertyPath: _altarTransform
+      value: 
+      objectReference: {fileID: 6085043}
+    - target: {fileID: 8003063219788724838, guid: 6b10ea38af2c3e04481eef98ef1b6584, type: 3}
+      propertyPath: _mapUIContainer
+      value: 
+      objectReference: {fileID: 1741825462}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 206209428925996521, guid: 6b10ea38af2c3e04481eef98ef1b6584, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1543197059}
-    - targetCorrespondingSourceObject: {fileID: 206209428925996521, guid: 6b10ea38af2c3e04481eef98ef1b6584, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1543197060}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b10ea38af2c3e04481eef98ef1b6584, type: 3}
 --- !u!4 &1543197057 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 691103318776743763, guid: 6b10ea38af2c3e04481eef98ef1b6584, type: 3}
   m_PrefabInstance: {fileID: 1543197056}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1543197058 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 206209428925996521, guid: 6b10ea38af2c3e04481eef98ef1b6584, type: 3}
-  m_PrefabInstance: {fileID: 1543197056}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &1543197059
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1543197058}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -459354988071967511, guid: 5e0cc82dd790e9349981579e7f0dc2c9, type: 3}
---- !u!114 &1543197060
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1543197058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c7b66596589594498be768c035e07b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _mapUIContainer: {fileID: 1741825462}
-  _cameraControl: {fileID: 1563374110}
-  _altarTransform: {fileID: 6085043}
 --- !u!1001 &1546212515
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -51437,7 +51401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _map: {fileID: 1741825462}
-  _update: {fileID: 1543197060}
+  _update: {fileID: 72877440}
   _player: {fileID: 1563374107}
   _teleport: {fileID: 1359994620}
   _moveTp: {fileID: 6085043}
