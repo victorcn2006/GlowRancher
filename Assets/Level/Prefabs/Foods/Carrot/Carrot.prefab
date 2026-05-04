@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2274226892640536017
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6840617546291098535}
+  - component: {fileID: 2916936602976720625}
+  m_Layer: 0
+  m_Name: Carrot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6840617546291098535
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2274226892640536017}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.747363, y: 3.629288, z: 0.747363}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2916936602976720625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2274226892640536017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d41f33ba5d93094fa760f8b2ee8bf35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _vegetableData: {fileID: 11400000, guid: 0adff2d6aba4fe242ae5efd7e7c63d77, type: 2}
+  _seedPrefab: {fileID: 42227988586814877, guid: ee97a59e5d3dc6342adb03379b1d20e2, type: 3}
+  _growthPrefab: {fileID: 1656173016845155972, guid: a5d53b5f33cd1264da9eff1945046d4a, type: 3}
+  _maturePrefab: {fileID: 2821853121726099876, guid: 69d388a9c05a90943a8e284aff5db640, type: 3}
+  _recolectPrefab: {fileID: 4412472839938984771, guid: 3b05a2e8c44dd1945a1587d9d39b72cc, type: 3}
+  _currentState: 0

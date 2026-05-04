@@ -62,3 +62,21 @@ The system SHALL prevent the player from finalizing building placement if the cu
 #### Scenario: Prevent Placing on Obstruction
 - **WHEN** the player attempts to finalize placement (pressing 'C') while the status is invalid
 - **THEN** the building remains in hologram mode, and an "Invalid placement" message is logged
+
+## 💰 Building Removal (Selling)
+
+### Requirement: Building Selling Mechanism
+The system MUST allow the player to remove a building and receive a partial refund by pressing the 'S' key while inside the building's trigger.
+
+#### Scenario: Sell Building
+- **WHEN** the player is inside the building's interaction trigger and NOT in editing mode
+- **AND** the player presses the 'S' key
+- **THEN** the building is destroyed
+- **AND** the player receives a refund equal to 50% of the building's base purchase price
+
+### Requirement: Refund Lookup
+The system SHALL look up the building's purchase price from the global shop configuration using the building's designated type.
+
+#### Scenario: Price Retrieval
+- **WHEN** a building is sold
+- **THEN** the system retrieves the `BuildingType` and queries the `PanelShopController` for the corresponding price

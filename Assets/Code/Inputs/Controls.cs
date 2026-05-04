@@ -676,6 +676,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Sell"",
+                    ""type"": ""Button"",
+                    ""id"": ""67a3cc41-c9b5-48d6-b6c7-389375416856"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -918,6 +927,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Run"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4082b0eb-c9de-45f2-ae2e-8e84bf097a0f"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Sell"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1177,6 +1197,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_NextDialog = m_Player.FindAction("NextDialog", throwIfNotFound: true);
         m_Player_Build = m_Player.FindAction("Build", throwIfNotFound: true);
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
+        m_Player_Sell = m_Player.FindAction("Sell", throwIfNotFound: true);
         // Aspirator
         m_Aspirator = asset.FindActionMap("Aspirator", throwIfNotFound: true);
         m_Aspirator_Aspirate = m_Aspirator.FindAction("Aspirate", throwIfNotFound: true);
@@ -1389,6 +1410,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_NextDialog;
     private readonly InputAction m_Player_Build;
     private readonly InputAction m_Player_Run;
+    private readonly InputAction m_Player_Sell;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -1401,6 +1423,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @NextDialog => m_Wrapper.m_Player_NextDialog;
         public InputAction @Build => m_Wrapper.m_Player_Build;
         public InputAction @Run => m_Wrapper.m_Player_Run;
+        public InputAction @Sell => m_Wrapper.m_Player_Sell;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1434,6 +1457,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Run.started += instance.OnRun;
             @Run.performed += instance.OnRun;
             @Run.canceled += instance.OnRun;
+            @Sell.started += instance.OnSell;
+            @Sell.performed += instance.OnSell;
+            @Sell.canceled += instance.OnSell;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1462,6 +1488,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Run.started -= instance.OnRun;
             @Run.performed -= instance.OnRun;
             @Run.canceled -= instance.OnRun;
+            @Sell.started -= instance.OnSell;
+            @Sell.performed -= instance.OnSell;
+            @Sell.canceled -= instance.OnSell;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1638,6 +1667,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnNextDialog(InputAction.CallbackContext context);
         void OnBuild(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
+        void OnSell(InputAction.CallbackContext context);
     }
     public interface IAspiratorActions
     {

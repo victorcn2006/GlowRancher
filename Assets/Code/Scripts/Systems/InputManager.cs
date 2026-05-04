@@ -27,6 +27,7 @@ public class InputManager : MonoBehaviour {
     [RequiredField, SerializeField] private InputActionReference _nextDialog;
     [RequiredField, SerializeField] private InputActionReference _run;
     [RequiredField, SerializeField] private InputActionReference _buildPerformed;
+    [RequiredField, SerializeField] private InputActionReference _sellPerformed;
 
     [Header("Aspirator Inputs")]
     [RequiredField, SerializeField] private InputActionReference _aspirate;
@@ -54,6 +55,8 @@ public class InputManager : MonoBehaviour {
     [HideInInspector] public UnityEvent OnLookPerformed = new UnityEvent();
     [HideInInspector] public UnityEvent OnEnterPerformed = new UnityEvent();
     [HideInInspector] public UnityEvent OnBuildPerformed = new UnityEvent();
+    [HideInInspector] public UnityEvent OnSellBuildingPerformed = new UnityEvent();
+
 
 
 
@@ -121,6 +124,7 @@ public class InputManager : MonoBehaviour {
         _run.action.performed += OnRunStarted;
         _run.action.canceled += OnRunCanceled;
         _buildPerformed.action.performed += OnBuild;
+        _sellPerformed.action.performed += OnSellBuilding;
 
         _look.action.performed += OnLook;
         _scroll.action.performed += OnScrollPerformed;
@@ -142,6 +146,7 @@ public class InputManager : MonoBehaviour {
         _scroll.action.performed -= OnScrollPerformed;
         _inventoryNavigation.action.performed -= OnInventorySlotKeyPerformed;
         _rightClick.action.performed -= OnInventoryRightClickPerformed;
+        _sellPerformed.action.performed -= OnSellBuilding;
     }
 
     private void OnBuild(InputAction.CallbackContext ctx)
@@ -149,6 +154,9 @@ public class InputManager : MonoBehaviour {
         OnBuildPerformed?.Invoke();
     }
 
+    private void OnSellBuilding(InputAction.CallbackContext ctx) {
+        OnSellBuildingPerformed?.Invoke();
+    }
     private void OnEnter(InputAction.CallbackContext ctx)
     {
         OnEnterPerformed?.Invoke();
@@ -175,7 +183,7 @@ public class InputManager : MonoBehaviour {
 
     private void OnPauseGame(InputAction.CallbackContext ctx)
     {
-        IsPaused = true;
+        //IsPaused = true;
         OnPausePerformed?.Invoke();
     }
 

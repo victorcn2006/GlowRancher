@@ -1,5 +1,75 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2231615115358241511
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3195953414768558107}
+  - component: {fileID: 2553525061694052507}
+  - component: {fileID: 8278220305158868727}
+  m_Layer: 12
+  m_Name: detector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3195953414768558107
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2231615115358241511}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5, y: 0, z: -0.37}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4674342452840817474}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2553525061694052507
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2231615115358241511}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.7259693, y: 6.5098886, z: 2.374987}
+  m_Center: {x: -0.8629857, y: 2.754945, z: 0.31164244}
+--- !u!114 &8278220305158868727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2231615115358241511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bc4fa94b59bde84caf1f30748116201, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _siloUIContainer: {fileID: 0}
+  _cameraControl: {fileID: 0}
+  _siloLogic: {fileID: 4198478702831167531}
+  _playerInventory: {fileID: 0}
 --- !u!1 &3886688176689889119
 GameObject:
   m_ObjectHideFlags: 0
@@ -51,7 +121,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 7.540077
+  m_Radius: 6.27
   m_Center: {x: -0.37890625, y: 0, z: 0.41632843}
 --- !u!1 &5436782552830159598
 GameObject:
@@ -111,6 +181,7 @@ MonoBehaviour:
   _obstructionLayer:
     serializedVersion: 2
     m_Bits: 64
+  _buildingType: 3
 --- !u!65 &3206869358026096025
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -286,10 +357,16 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 900751417250926283, guid: 80e7cabae8f1089428e8c72dfe4cccce, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1388668484306725084}
+    - targetCorrespondingSourceObject: {fileID: 900751417250926283, guid: 80e7cabae8f1089428e8c72dfe4cccce, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3195953414768558107}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 561766916937192561, guid: 80e7cabae8f1089428e8c72dfe4cccce, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2530331520474872407}
+    - targetCorrespondingSourceObject: {fileID: 561766916937192561, guid: 80e7cabae8f1089428e8c72dfe4cccce, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4198478702831167531}
   m_SourcePrefab: {fileID: 100100000, guid: 80e7cabae8f1089428e8c72dfe4cccce, type: 3}
 --- !u!4 &4674342452840817474 stripped
 Transform:
@@ -324,3 +401,18 @@ CapsuleCollider:
   m_Height: 25.301731
   m_Direction: 1
   m_Center: {x: -0.34925127, y: 9.421082, z: -0.6404257}
+--- !u!114 &4198478702831167531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5446339715134044664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 083068f2ee6d9f146ab636b722cd14b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slotsSilo: []
+  _siloUIPanel: {fileID: 0}
+  playerInventory: {fileID: 0}
