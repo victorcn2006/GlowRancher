@@ -129,7 +129,7 @@ public class VegetablesPool : MonoBehaviour
 
         return GetFromPool(currentPool);
     }
-
+    /*
     private GameObject GetFromPool(List<GameObject> pool)
     {
 
@@ -151,6 +151,32 @@ public class VegetablesPool : MonoBehaviour
             GameObject newObj = Instantiate(_currentObjectPrefab);
             pool.Add(newObj);
             newObj.SetActive(true);
+            return newObj;
+        }
+
+        return null;
+    }
+    */
+
+    private GameObject GetFromPool(List<GameObject> pool)
+    {
+        if (pool == null) return null;
+
+        foreach (GameObject obj in pool)
+        {
+            if (obj != null && !obj.activeInHierarchy)
+            {
+                obj.SetActive(true);
+                return obj;
+            }
+        }
+
+        // Nou objecte
+        if (_currentObjectPrefab != null)
+        {
+            GameObject newObj = Instantiate(_currentObjectPrefab);
+            newObj.SetActive(true);
+            pool.Add(newObj);
             return newObj;
         }
 
