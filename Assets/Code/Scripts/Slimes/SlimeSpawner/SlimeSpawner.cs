@@ -7,7 +7,7 @@ public class SlimeSpawner : MonoBehaviour
     [SerializeField] private int _slimesQuantity;
     [SerializeField] private float _launchRange;
     [SerializeField] private float _launchUpForce;
-    [SerializeField] private List<GameObject> slimesList = new List<GameObject>();
+    [SerializeField] private List<GameObject> _slimesList = new List<GameObject>();
 
     private bool _corrupted = true;
     private bool _playerInZone = false;
@@ -31,14 +31,14 @@ public class SlimeSpawner : MonoBehaviour
                 if (corruptedProbability == 0) slime = PoolManager.Instance.GetFirstAvailableObject("CorruptSlime");
                 else
                 {
-                    int selectedSlimeTypeIndex = Random.Range(0, slimesList.Count);
-                    slime = PoolManager.Instance.GetFirstAvailableObject(slimesList[selectedSlimeTypeIndex].name);
+                    int selectedSlimeTypeIndex = Random.Range(0, _slimesList.Count);
+                    slime = PoolManager.Instance.GetFirstAvailableObject(_slimesList[selectedSlimeTypeIndex].name);
                 }
             }
             else
             {
-                int selectedSlimeTypeIndex = Random.Range(0, slimesList.Count);
-                slime = PoolManager.Instance.GetFirstAvailableObject(slimesList[selectedSlimeTypeIndex].name);
+                int selectedSlimeTypeIndex = Random.Range(0, _slimesList.Count);
+                slime = PoolManager.Instance.GetFirstAvailableObject(_slimesList[selectedSlimeTypeIndex].name);
             }
             slime.SetActive(true);
             slime.transform.SetParent(transform);
@@ -57,7 +57,7 @@ public class SlimeSpawner : MonoBehaviour
         }
     }
 
-    public void SetCorrupted() => _corrupted = true;
+    public void SetCorrupted(bool state) => _corrupted = state;
 
     private void OnTriggerEnter(Collider other)
     {
