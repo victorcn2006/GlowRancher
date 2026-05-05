@@ -9,6 +9,7 @@ public class MonolitoManager : MonoBehaviour
     [SerializeField] private int _fogSetOnActive;
     [SerializeField] private int _puzzleNumber;
     [SerializeField] private bool _monolitoUnlocked;
+    [SerializeField] private List<GameObject> _spawnsAsigned;
 
     private bool _activated = false;
 
@@ -22,6 +23,12 @@ public class MonolitoManager : MonoBehaviour
             AmbienceController.Instance.SetAmbience(_ambience);
             FogWallsSetsManager.Instance.UpdateFogSet(_fogSetOnActive);
             BigWallsManager.Instance.PuzzleCompleted(_puzzleNumber);
+
+            foreach (GameObject spawn in _spawnsAsigned)
+            {
+                spawn.GetComponent<SlimeSpawner>().SetCorrupted(false);
+            }
+
             //agregar animación de cristal y cinematica
             _monolitoUnlocked = true;
             if (this.gameObject.CompareTag("FirstMonolito")) DeathScript.instance.firstMonolitoUnlocked = true;

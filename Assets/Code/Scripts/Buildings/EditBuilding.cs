@@ -27,6 +27,10 @@ public class EditBuilding : MonoBehaviour
     [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private LayerMask _obstructionLayer;
 
+    [Header("Selling Settings")]
+    [Tooltip("The type of building to look up its price in the ShopController.")]
+    [SerializeField] private BuildingType _buildingType;
+
     private bool _isNewBuilding;
 
     private Material _originalHologramMaterial;
@@ -44,6 +48,7 @@ public class EditBuilding : MonoBehaviour
         if (InputManager.Instance != null)
         {
             InputManager.Instance.OnBuildPerformed.AddListener(HandleBuildInput);
+            InputManager.Instance.OnSellBuildingPerformed.AddListener(HandleSellInput);
         }
     }
 
@@ -52,6 +57,7 @@ public class EditBuilding : MonoBehaviour
         if (InputManager.Instance != null)
         {
             InputManager.Instance.OnBuildPerformed.RemoveListener(HandleBuildInput);
+            InputManager.Instance.OnSellBuildingPerformed.RemoveListener(HandleSellInput);
         }
         _playerColliders.Clear();
     }
@@ -136,6 +142,55 @@ public class EditBuilding : MonoBehaviour
         else if (_isPlayerInside)
         {
             StartEditing();
+        }
+    }
+
+    private void HandleSellInput()
+    {
+        if (!_isEditing && _isPlayerInside)
+        {
+            SellBuilding();
+        }
+    }
+
+    private void SellBuilding()
+    {
+        PanelShopController shop = PanelShopController.Instance;
+
+        // Fallback if the shop UI hasn't been opened yet (singleton not initialized)
+        if (shop == null)
+        {
+            shop = FindFirstObjectByType<PanelShopController>(FindObjectsInactive.Include);
+        }
+
+        if (shop != null && _buildingType != BuildingType.None)
+        {
+            float basePrice = shop.GetBuildingPrice(_buildingType);
+            float refund = basePrice * 0.5f;
+
+            if (WalletCurrency.instance != null)
+            {
+                WalletCurrency.instance.Score(refund);
+                Debug.Log($"[EditBuilding] Successfully sold {_buildingType} for {refund} (50% of {basePrice})");
+                
+                // Only destroy if refund was successful
+                Destroy(gameObject);
+            }
+            else
+            {
+                Debug.LogError("[EditBuilding] Cannot sell building: WalletCurrency.instance is null!");
+            }
+        }
+        else
+        {
+            if (_buildingType == BuildingType.None)
+            {
+                Debug.LogWarning($"[EditBuilding] {gameObject.name} cannot be sold because 'Building Type' is set to 'None' in the Inspector. Please update your building prefabs!");
+            }
+            else
+            {
+                Debug.LogError($"[EditBuilding] {gameObject.name} cannot be sold: ShopController not found in scene!");
+            }
         }
     }
 

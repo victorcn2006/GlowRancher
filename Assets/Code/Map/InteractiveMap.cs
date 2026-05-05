@@ -14,7 +14,8 @@ public class InteractiveMap : MonoBehaviour, IInteractive
 
     private float _timeSinceLastOpenedClosed = 0.16f;
     private const float TIMEBETWEENOPENCLOSE = 0.16f;
-
+    private static InteractiveMap _lastInteractiveMapInteracted = null;
+    [SerializeField] private Transform _altarTransform;
     private void OnEnable()
     {
         // Suscribimos al evento global de teclado
@@ -32,7 +33,9 @@ public class InteractiveMap : MonoBehaviour, IInteractive
 
     private void Start()
     {
-        CloseMap(); // Empezar siempre cerrada
+        // Let CloseMap handle the boolean and the logic!
+        _isMapActive = true; // Temporarily force true so CloseMap actually runs
+        CloseMap();
     }
 
     // Este método solo se dispara cuando presionas la tecla de Shop (ej. ESC o E)
@@ -50,6 +53,7 @@ public class InteractiveMap : MonoBehaviour, IInteractive
 
     public void OpenMap()
     {
+        _lastInteractiveMapInteracted = this;
         if (_timeSinceLastOpenedClosed >= TIMEBETWEENOPENCLOSE)
         {
             if (_isMapActive) return; // Ya está abierta, no hacemos nada
@@ -113,4 +117,10 @@ public class InteractiveMap : MonoBehaviour, IInteractive
     {
         OpenMap();
     }
+
+    public static Transform GetLastInteractiveMapInteractedAltarTransform()
+    {
+        return _lastInteractiveMapInteracted._altarTransform;
+    }
+
 }

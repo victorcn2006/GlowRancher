@@ -1,25 +1,52 @@
-using DG.Tweening.Core.Easing;
+using System;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    static GameManager gameManager;
-    public static GameManager Instance { get { return RequestGameManager(); } }
+    public static GameManager Instance { get; private set; }
 
-    static GameManager RequestGameManager()
+    [SerializeField] private PlayerData data = new PlayerData { userId = "DefaultPlayer" };
+    public event Action OnStatsLoaded;
+
+    private void Awake()
     {
-        if (gameManager == null)
+        if (Instance == null) { Instance = this; DontDestroyOnLoad(gameObject); }
+        else { Destroy(gameObject); return; }
+
+        // Load local fallback
+        data.timePlayed = PlayerPrefs.GetFloat("TIME_PLAYED", 0f);
+        data.deathCounter = PlayerPrefs.GetInt("DEATH_COUNTER", 0);
+    }
+
+    private async void Start()
+    {
+        // Wait for MongoDBReader to be ready
+        while (MongoDBReader.Instance == null) await Task.Yield();
+
+        PlayerData cloudData = await MongoDBReader.Instance.LoadStats(data.userId);
+        if (cloudData != null)
         {
-            GameObject gameManagerObj = new GameObject("GameManager");
-            gameManager = gameManagerObj.AddComponent<GameManager>();
-
+            data = cloudData;
+            OnStatsLoaded?.Invoke();
+            Debug.Log("Stats synced from MongoDB.");
         }
-        return gameManager;
-
     }
-    public void Exit()
+
+    private void Update() => data.timePlayed += Time.deltaTime;
+
+    public void SaveStats()
     {
-        Application.Quit();
+        PlayerPrefs.SetFloat("TIME_PLAYED", data.timePlayed);
+        PlayerPrefs.SetInt("DEATH_COUNTER", data.deathCounter);
+        PlayerPrefs.Save();
 
+        if (MongoDBReader.Instance != null)
+            _ = MongoDBReader.Instance.SaveStats(data);
     }
+
+    public void AddDeathPlayer() { data.deathCounter++; SaveStats(); }
+    public float GetCurrentTimePlayed() => data.timePlayed;
+    public int GetDeathCounter() => data.deathCounter;
+    private void OnApplicationQuit() => SaveStats();
 }
