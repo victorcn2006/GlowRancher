@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
     private Player _player;
 
     private bool _canJump = true;
-    private bool _hasDoubleJumpItem = true;
+    private bool _hasDoubleJumpItem = false;
     private bool _didDoubleJump = false;
 
     private void Awake()
