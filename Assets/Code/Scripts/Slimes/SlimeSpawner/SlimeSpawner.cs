@@ -7,7 +7,10 @@ public class SlimeSpawner : MonoBehaviour
     [SerializeField] private int _slimesQuantity;
     [SerializeField] private float _launchRange;
     [SerializeField] private float _launchUpForce;
+    [SerializeField] private GameObject _particleSystem;
     [SerializeField] private List<GameObject> slimesList = new List<GameObject>();
+
+    
 
     private bool _corrupted = true;
     private bool _playerInZone = false;
@@ -52,12 +55,21 @@ public class SlimeSpawner : MonoBehaviour
     {
         foreach (Transform child in transform)
         {
-            //llamar al codigo de victor para activar shader de despawn
+            
             child.gameObject.SetActive(false);
+
+            GameObject newParticleFx = Instantiate(_particleSystem);
+            newParticleFx.transform.position = child.transform.position;
+
+            ParticleSystem ps = newParticleFx.GetComponent<ParticleSystem>();
+            ps.Play();
+
+            Destroy(newParticleFx, ps.main.duration + ps.main.startLifetime.constantMax);
         }
+        
     }
 
-    public void SetCorrupted() => _corrupted = true;
+    public void SetCorrupted(bool state) => _corrupted = true;
 
     private void OnTriggerEnter(Collider other)
     {
