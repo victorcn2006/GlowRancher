@@ -9,9 +9,11 @@ public class BigWallsManager : MonoBehaviour
     [SerializeField] private GameObject _bigDoorOne;
     [SerializeField] private GameObject _bigDoorTwo;
     [SerializeField] private GameObject _bigDoorThree;
+    [SerializeField] private GameObject _bigDoorFour;
 
     private bool _secondPuzzleCompleted;
     private bool _thirdPuzzleCompleted;
+    private bool _forthPuzzleCompleted;
 
     private bool _firstSetCompleted;
     private bool _secondSetCompleted;
@@ -38,8 +40,12 @@ public class BigWallsManager : MonoBehaviour
             case 1: _firstSetCompleted = true; break;
 
             case 2: _secondPuzzleCompleted = true; break;
-
+                
             case 3: _thirdPuzzleCompleted = true; break;
+
+            case 4: _forthPuzzleCompleted = true; break;
+
+
         }
 
         if (_secondPuzzleCompleted && _thirdPuzzleCompleted) _secondSetCompleted = true;
@@ -47,6 +53,10 @@ public class BigWallsManager : MonoBehaviour
         if (_firstSetCompleted) OpenFirstsWallSet();
 
         if(_secondSetCompleted) OpenSecondWallSet();
+
+        if(_forthPuzzleCompleted) OpenLastWallWall();
+
+
 
     }
 
@@ -60,5 +70,9 @@ public class BigWallsManager : MonoBehaviour
         _bigDoorThree.GetComponent<BigWall>().OpenDoor();
     }
 
+    private void OpenLastWallWall()
+    {
+        _bigDoorFour.GetComponent<BigWall>().OpenDoor();
+    }
 
 }

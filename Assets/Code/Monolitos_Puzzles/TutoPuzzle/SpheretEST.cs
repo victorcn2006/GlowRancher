@@ -13,7 +13,6 @@ public class SpheretEST : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Entra en sphereTest");
         if (other.CompareTag("Player"))
         {
            _tutorialPuzzle.ActivateMonolito();
