@@ -99,7 +99,7 @@ public class PlayerMovement : MonoBehaviour
         if (_canJump) _didDoubleJump = false;
     }
 
-    public void EnableDoubleJumpItem()
+    public void EnableDoubleJumpButton()
     {
         _hasDoubleJumpItem = true;
         Debug.Log("¡Habilidad de Doble Salto desbloqueada!");

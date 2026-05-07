@@ -30,7 +30,7 @@ public class DoubleJumpItem : MonoBehaviour
         if (other.TryGetComponent<PlayerMovement>(out PlayerMovement player))
         {
             _playerDoubleJump = true;
-            player.EnableDoubleJumpItem();
+            player.EnableDoubleJumpButton();
 
             // Aquí puedes añadir un efecto de sonido o partículas antes de destruir
             Destroy(gameObject);
