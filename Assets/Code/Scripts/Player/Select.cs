@@ -45,9 +45,11 @@ public class Select : MonoBehaviour
 
         if (Physics.Raycast(rayOrigin.position, rayOrigin.forward, out hit, distance, _mask))
         {
+            
             if (hit.collider.TryGetComponent<IInteractive>(out var InteractiveElement))
             {
                 InteractiveElement.OnInteract();
+                Debug.Log("El rayo impactó con objeto interactuable.");
             }
         }
         else
