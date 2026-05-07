@@ -57,7 +57,6 @@ public class PauseManager : MonoBehaviour
         else
         {
             // Pause panel is not active and wiki is not open, so pause
-            WikiSlime.instance.QuitWiki();
             ActivePausePanel();
             if (!_focusSet)
             {
