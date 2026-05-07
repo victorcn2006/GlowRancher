@@ -4424,6 +4424,9 @@ MonoBehaviour:
   _fogSetOnActive: 2
   _puzzleNumber: 3
   _monolitoUnlocked: 0
+  _spawnsAsigned: []
+  _lightCrystal: {fileID: 0}
+  _lightCrystalFinalPosition: {fileID: 0}
 --- !u!135 &193931888
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -20397,6 +20400,9 @@ MonoBehaviour:
   _fogSetOnActive: 3
   _puzzleNumber: 0
   _monolitoUnlocked: 0
+  _spawnsAsigned: []
+  _lightCrystal: {fileID: 0}
+  _lightCrystalFinalPosition: {fileID: 0}
 --- !u!135 &884542585
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -34510,7 +34516,7 @@ PrefabInstance:
     - target: {fileID: 4374544067840527164, guid: 1cd6178735b452b448096d21150ccb48, type: 3}
       propertyPath: _panelShop
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1600286159}
     - target: {fileID: 4374544067840527164, guid: 1cd6178735b452b448096d21150ccb48, type: 3}
       propertyPath: _cameraControl
       value: 
@@ -34518,7 +34524,7 @@ PrefabInstance:
     - target: {fileID: 4374544067840527164, guid: 1cd6178735b452b448096d21150ccb48, type: 3}
       propertyPath: _shopUIContainer
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1600286160}
     - target: {fileID: 5746525185025714832, guid: 1cd6178735b452b448096d21150ccb48, type: 3}
       propertyPath: m_Name
       value: Tienda
@@ -37741,6 +37747,7 @@ MonoBehaviour:
   _bigDoorOne: {fileID: 3933011715141292982}
   _bigDoorTwo: {fileID: 7186223924262347225}
   _bigDoorThree: {fileID: 431617483739268947}
+  _bigDoorFour: {fileID: 0}
 --- !u!1001 &1424653464
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41620,6 +41627,22 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ef4e8917f289084ebe3d90bf23919dd, type: 3}
+--- !u!114 &1600286159 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4228833495209331790, guid: aaf5f0c1e594b854fb67e145c0d2e296, type: 3}
+  m_PrefabInstance: {fileID: 717932367}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1600286160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d4f82fa823bc9b4a86bacb6aa888229, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1600286160 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4393251435507717843, guid: aaf5f0c1e594b854fb67e145c0d2e296, type: 3}
+  m_PrefabInstance: {fileID: 717932367}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1600289969
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44270,6 +44293,9 @@ MonoBehaviour:
   _fogSetOnActive: 0
   _puzzleNumber: 1
   _monolitoUnlocked: 0
+  _spawnsAsigned: []
+  _lightCrystal: {fileID: 0}
+  _lightCrystalFinalPosition: {fileID: 0}
 --- !u!135 &1704497395
 SphereCollider:
   m_ObjectHideFlags: 0
