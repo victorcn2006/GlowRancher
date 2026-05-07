@@ -8,7 +8,7 @@ public class SlimeSpawner : MonoBehaviour
     [SerializeField] private float _launchRange;
     [SerializeField] private float _launchUpForce;
     [SerializeField] private List<GameObject> _slimesList = new List<GameObject>();
-
+    [SerializeField] private GameObject _particleSystem;
     
 
     private bool _corrupted = true;
@@ -52,19 +52,29 @@ public class SlimeSpawner : MonoBehaviour
 
     public void DespawnSlimes()
     {
-        foreach (Transform child in transform)
+
+        for (int i = 0; i < transform.childCount; i++)
         {
-            
-            child.gameObject.SetActive(false);
+            GameObject child = transform.GetChild(i).gameObject;
+            child.SetActive(false);
 
-            GameObject newParticleFx = Instantiate(_particleSystem);
-            newParticleFx.transform.position = child.transform.position;
+            if (_particleSystem)
+            {
+                GameObject newParticleFx = Instantiate(_particleSystem);
+                newParticleFx.transform.position = child.transform.position;
 
-            ParticleSystem ps = newParticleFx.GetComponent<ParticleSystem>();
-            ps.Play();
+                ParticleSystem ps = newParticleFx.GetComponent<ParticleSystem>();
+                if (ps)
+                {
+                    ps.Play();
 
-            Destroy(newParticleFx, ps.main.duration + ps.main.startLifetime.constantMax);
+                    Destroy(newParticleFx, ps.main.duration + ps.main.startLifetime.constantMax);
+                }
+            }
         }
+
+
+
         
     }
 

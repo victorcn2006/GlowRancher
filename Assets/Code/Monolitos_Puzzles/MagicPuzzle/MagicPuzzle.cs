@@ -7,15 +7,16 @@ public class MagicPuzzle : MonoBehaviour
     [SerializeField] private List<GameObject> _magicRocksOrderList = new List<GameObject>();
     private List<GameObject> _activeMagicRocks = new List<GameObject>();
 
-    private MonolitoManager _monolitoManager;
+    private KeyRock _keyRock;
 
     private void Awake()
     {
-        _monolitoManager = GetComponentInChildren<MonolitoManager>();
+        _keyRock = GetComponentInChildren<KeyRock>();
     }
 
     public void AddActiveRock(GameObject newRock)
     {
+        Debug.Log("Active Rock agregada");
         _activeMagicRocks.Add(newRock);
         CheckRocksOrder();
     }
@@ -34,7 +35,11 @@ public class MagicPuzzle : MonoBehaviour
 
         if (_activeMagicRocks.Count == _magicRocksOrderList.Count)
         {
-            _monolitoManager.ActivateMonolito();
+            foreach (GameObject rock in _activeMagicRocks)
+            {
+                rock.GetComponent<MagicRock>().PuzzleCompleted();
+            }
+            _keyRock.SpawnKey();
         }
 
     }
