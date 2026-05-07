@@ -81,6 +81,13 @@ namespace DigitalRuby.LightningBolt
         [Tooltip("The animation mode for the lightning")]
         public LightningBoltAnimationMode AnimationMode = LightningBoltAnimationMode.PingPong;
 
+        [Header("Ring Settings")]
+        [Tooltip("Whether the lightning should be a ring instead of a line")]
+        public bool IsRing;
+
+        [Tooltip("The radius of the ring, if IsRing is true")]
+        public float Radius = 2.0f;
+
         /// <summary>
         /// Assign your own random if you want to have the same lightning appearance
         /// </summary>
@@ -184,6 +191,64 @@ namespace DigitalRuby.LightningBolt
                 }
 
                 // halve the distance the lightning can deviate for each generation down
+                offsetAmount *= 0.5f;
+            }
+        }
+
+        private void GenerateLightningRing(Vector3 center, int generation, int totalGenerations, float offsetAmount)
+        {
+            if (generation < 0 || generation > 8)
+            {
+                return;
+            }
+
+            // Create initial circle segments
+            int initialSegmentsCount = 12; // Base segments for the ring
+            for (int i = 0; i < initialSegmentsCount; i++)
+            {
+                float angle1 = i * (360.0f / initialSegmentsCount) * Mathf.Deg2Rad;
+                float angle2 = (i + 1) * (360.0f / initialSegmentsCount) * Mathf.Deg2Rad;
+                
+                Vector3 pos1 = center + (transform.right * Mathf.Cos(angle1) + transform.up * Mathf.Sin(angle1)) * Radius;
+                Vector3 pos2 = center + (transform.right * Mathf.Cos(angle2) + transform.up * Mathf.Sin(angle2)) * Radius;
+                
+                if (orthographic)
+                {
+                    pos1.z = pos2.z = center.z;
+                }
+                
+                segments.Add(new KeyValuePair<Vector3, Vector3>(pos1, pos2));
+            }
+
+            if (generation == 0)
+            {
+                return;
+            }
+
+            if (offsetAmount <= 0.0f)
+            {
+                // For a ring, use a fraction of the radius as base offset
+                offsetAmount = Radius * ChaosFactor;
+            }
+
+            // Subdivide the initial ring segments
+            while (generation-- > 0)
+            {
+                int previousStartIndex = startIndex;
+                startIndex = segments.Count;
+                for (int i = previousStartIndex; i < startIndex; i++)
+                {
+                    Vector3 start = segments[i].Key;
+                    Vector3 end = segments[i].Value;
+                    Vector3 midPoint = (start + end) * 0.5f;
+                    Vector3 randomVector;
+
+                    RandomVector(ref start, ref end, offsetAmount, out randomVector);
+                    midPoint += randomVector;
+
+                    segments.Add(new KeyValuePair<Vector3, Vector3>(start, midPoint));
+                    segments.Add(new KeyValuePair<Vector3, Vector3>(midPoint, end));
+                }
                 offsetAmount *= 0.5f;
             }
         }
@@ -334,7 +399,14 @@ namespace DigitalRuby.LightningBolt
                 end = EndObject.transform.position + EndPosition;
             }
             startIndex = 0;
-            GenerateLightningBolt(start, end, Generations, Generations, 0.0f);
+            if (IsRing)
+            {
+                GenerateLightningRing(start, Generations, Generations, 0.0f);
+            }
+            else
+            {
+                GenerateLightningBolt(start, end, Generations, Generations, 0.0f);
+            }
             UpdateLineRenderer();
         }
 
