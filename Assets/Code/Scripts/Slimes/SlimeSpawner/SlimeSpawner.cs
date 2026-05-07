@@ -8,8 +8,9 @@ public class SlimeSpawner : MonoBehaviour
     [SerializeField] private float _launchRange;
     [SerializeField] private float _launchUpForce;
     [SerializeField] private List<GameObject> _slimesList = new List<GameObject>();
+    [SerializeField] private GameObject _particleSystem;
 
-    
+
 
     private bool _corrupted = true;
     private bool _playerInZone = false;
