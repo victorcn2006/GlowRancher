@@ -133,10 +133,25 @@ MonoBehaviour:
   _launchObject: {fileID: 8266952679875099490, guid: f782dcbc2ee276749aeb1277879c7e67, type: 3}
   _objectsDetector: {fileID: 7741154236061171609}
   _suctionPoint: {fileID: 5192815070856350641}
+  _inventory: {fileID: 1708060972411278706}
   _aspiratePoint: {fileID: 7384607020094096725}
   _aspirateForce: 5
   _launchForce: 5
-  _inventory: {fileID: 1708060972411278706}
+  _maxDistance: 10
+  _vacuumSuckSoundSlime:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  _vacuumShotSoundSlime:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!1 &3201461701181217775
 GameObject:
   m_ObjectHideFlags: 0
@@ -538,6 +553,15 @@ MonoBehaviour:
       Data3: 0
       Data4: 0
     Path: 
+  _footstepSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  _stepInterval: 0.5
+  _runStepMultiplier: 0.7
 --- !u!114 &7789661516611291817
 MonoBehaviour:
   m_ObjectHideFlags: 0
