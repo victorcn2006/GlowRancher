@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PressurePuzzle : MonoBehaviour
 {
-    //private MonolitoManager _monolitoManager;
+    [SerializeField] private ParkourPuzzle _parkourPuzzle;
 
     private List<bool> _platesStates = new List<bool>(3) { false, false, false };
 
@@ -25,7 +25,12 @@ public class PressurePuzzle : MonoBehaviour
                 allPlatesActivated = false;
             }
         }
-        if (allPlatesActivated) GetComponentInChildren<KeyRock>().SpawnKey();
+        if (allPlatesActivated)
+        {
+            GetComponentInChildren<KeyRock>().SpawnKey();
+            _parkourPuzzle.UnlockParkour();
+        }
+        
         //if (allPlatesActivated) _monolitoManager.ActivateMonolito();
 
     }

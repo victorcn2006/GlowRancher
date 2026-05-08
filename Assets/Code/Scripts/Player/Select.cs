@@ -37,6 +37,8 @@ public class Select : MonoBehaviour
 
     private void HandleInteraction()
     {
+
+        Debug.Log("Interactao");
         RaycastHit hit;
 
         Transform rayOrigin = _cameraTransform != null ? _cameraTransform : transform;

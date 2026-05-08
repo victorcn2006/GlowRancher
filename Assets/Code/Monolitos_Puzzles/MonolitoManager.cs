@@ -51,7 +51,7 @@ public class MonolitoManager : MonoBehaviour
                     .OnComplete(() =>
                     {
                         _lightCrystal.transform.DOLocalRotate(new Vector3(0f, 0f, 180f), 1f, RotateMode.LocalAxisAdd).SetEase(Ease.Linear).SetLoops(-1, LoopType.Incremental);
-_lightCrystal.GetComponent<FloatingFX>().enabled = true;
+                        _lightCrystal.GetComponent<FloatingFX>().enabled = true;
                     });
             });
     }
