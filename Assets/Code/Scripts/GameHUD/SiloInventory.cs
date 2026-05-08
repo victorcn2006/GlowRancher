@@ -11,7 +11,6 @@ public class SiloInventory : MonoBehaviour
         AddItem(new Item { itemType = Item.ItemType.CARROT, amount=1});
         AddItem(new Item { itemType = Item.ItemType.CAULIFLOWER, amount = 1 });
         AddItem(new Item { itemType = Item.ItemType.POTATO, amount = 1 });
-        Debug.Log(_itemList.Count);
     }
 
     public void AddItem(Item item) {
