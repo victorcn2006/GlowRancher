@@ -124,7 +124,13 @@ public class EditBuilding : MonoBehaviour
             QueryTriggerInteraction.Collide
         );
 
-        _isValidPlacement = (hitColliders.Length == 0);
+        bool isWithinRange = true;
+        if (ConstructionRangeManager.Instance != null)
+        {
+            isWithinRange = ConstructionRangeManager.Instance.IsPositionWithinRange(_hologramModel.transform.position);
+        }
+
+        _isValidPlacement = (hitColliders.Length == 0) && isWithinRange;
 
         // Update visual feedback
         if (_hologramRenderer != null)

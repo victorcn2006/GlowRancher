@@ -489,7 +489,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _houseUIContainer: {fileID: 0}
-  _houseShopController: {fileID: 0}
+  _houseShopController: {fileID: 7691958412691576423}
   _cameraControl: {fileID: 0}
 --- !u!1 &7573920685877453838
 GameObject:
@@ -503,6 +503,7 @@ GameObject:
   - component: {fileID: 6620085421646267121}
   - component: {fileID: 8668948439488594388}
   - component: {fileID: 432412308267702978}
+  - component: {fileID: 7691958412691576423}
   m_Layer: 6
   m_Name: House
   m_TagString: building
@@ -601,6 +602,19 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 3.1922424
   m_Center: {x: 0.08243013, y: 0.6564293, z: -0.34740508}
+--- !u!114 &7691958412691576423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7573920685877453838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 138e28d9acac4704e88de6096ce23f9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shopUI: {fileID: 0}
 --- !u!1001 &327504998303472949
 PrefabInstance:
   m_ObjectHideFlags: 0
