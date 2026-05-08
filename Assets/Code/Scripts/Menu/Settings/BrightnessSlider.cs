@@ -17,7 +17,6 @@ public class BrightnessSlider : MonoBehaviour
         {
             float val = BrightnessManager.instance.GetBrightness();
             _slider.SetValueWithoutNotify(val);
-            Debug.Log($"[BrightnessSlider] Initialized with value: {val}");
         }
         else
         {
@@ -28,7 +27,6 @@ public class BrightnessSlider : MonoBehaviour
 
     public void OnSliderValueChanged(float value)
     {
-        Debug.Log($"[BrightnessSlider] Slider moved to: {value}");
         if (BrightnessManager.instance != null)
         {
             BrightnessManager.instance.SetBrightness(value);

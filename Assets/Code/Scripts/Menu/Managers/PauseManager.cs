@@ -18,9 +18,6 @@ public class PauseManager : MonoBehaviour
     [Header("UI Navigation")]
     [SerializeField] private GameObject _firstButton;
 
-    [Header("Dependencies")]
-    [SerializeField] private WikiManager _wikiManager;
-
     private bool _focusSet = false;
     private void Awake() {
         if (instance == null)
@@ -80,10 +77,6 @@ public class PauseManager : MonoBehaviour
         _hud.SetActive(true);
         _gamePanel.SetActive(true);
         Time.timeScale = 1f;
-
-        if (_wikiManager != null) {
-            _wikiManager.OnPauseResumed();
-        }
 
     }
 }

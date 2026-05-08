@@ -5,6 +5,8 @@ using FMODUnity;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement instance;
+
     [Header("Settings")]
     [SerializeField] private float _walkSpeed = 5f;
     [SerializeField] private float _runSpeed = 9f;
@@ -26,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
     private Player _player;
 
     private bool _canJump = true;
-    private bool _hasDoubleJumpItem = false;
+    public bool _hasDoubleJumpItem = false;
     private bool _didDoubleJump = false;
     private float _stepTimer;
 
@@ -37,6 +39,10 @@ public class PlayerMovement : MonoBehaviour
 
         if (Camera.main != null)
             _mainCamTransform = Camera.main.transform;
+        if (instance == null)
+        {
+            instance = this;
+        }
     }
 
     private void OnEnable()
