@@ -6,27 +6,31 @@ using FMOD.Studio;
 public class ZonaSonora : MonoBehaviour
 {
     [Header("Configuración de FMOD")]
-    [Tooltip("Arrastra aquí el evento de FMOD desde el Event Browser")]
     [SerializeField] private EventReference _zonaSound;
+
+    [Tooltip("Nombre exacto del parámetro en FMOD")]
+    [SerializeField] private string _nombreParametro = "dark";
 
     [Header("Ajustes de Sonido")]
     [Range(0f, 5f)]
-    [SerializeField] private float _volumen = 1.0f; // 1.0 es el valor por defecto
+    [SerializeField] private float _volumen = 1.0f;
+
+    [Tooltip("1 = Corrupto, 0 = Purificado")]
+    [Range(0f, 1f)]
+    [SerializeField] private float _estadoInicialDark = 1.0f;
 
     private EventInstance _instancia;
 
     void Start()
     {
-        // Verificar si la referencia es válida antes de crear la instancia
         if (!_zonaSound.IsNull)
         {
             _instancia = RuntimeManager.CreateInstance(_zonaSound);
-
-            // Si el sonido es 3D, esto hace que siga la posición de este GameObject
             RuntimeManager.AttachInstanceToGameObject(_instancia, transform);
 
-            // Aplicamos el volumen inicial
+            // Aplicamos el volumen y el parámetro INICIAL antes de que suene
             _instancia.setVolume(_volumen);
+            _instancia.setParameterByName(_nombreParametro, _estadoInicialDark);
         }
         else
         {
@@ -34,21 +38,37 @@ public class ZonaSonora : MonoBehaviour
         }
     }
 
-    // Update se asegura de que si cambias el volumen en el Inspector en tiempo real, se aplique
     void Update()
     {
-        PLAYBACK_STATE state;
-        _instancia.getPlaybackState(out state);
-
-        if (state == PLAYBACK_STATE.PLAYING)
+        if (_instancia.isValid())
         {
-            _instancia.setVolume(_volumen);
+            PLAYBACK_STATE state;
+            _instancia.getPlaybackState(out state);
+
+            if (state == PLAYBACK_STATE.PLAYING)
+            {
+                _instancia.setVolume(_volumen);
+                // Opcional: Esto permite mover el slider de 'dark' en el Inspector y verlo reflejado en vivo
+                _instancia.setParameterByName(_nombreParametro, _estadoInicialDark);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Llama a esta función desde otro script para cambiar el estado de la zona.
+    /// Ejemplo: zonaSonora.CambiarEstado(0f); // Para purificar
+    /// </summary>
+    public void CambiarEstado(float nuevoValor)
+    {
+        _estadoInicialDark = Mathf.Clamp01(nuevoValor);
+        if (_instancia.isValid())
+        {
+            _instancia.setParameterByName(_nombreParametro, _estadoInicialDark);
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        // Solo se activa si el objeto que entra tiene el Tag "Player"
         if (other.CompareTag("Player"))
         {
             PLAYBACK_STATE state;
@@ -56,8 +76,9 @@ public class ZonaSonora : MonoBehaviour
 
             if (state != PLAYBACK_STATE.PLAYING)
             {
+                // Aseguramos el parámetro justo antes de dar Play
+                _instancia.setParameterByName(_nombreParametro, _estadoInicialDark);
                 _instancia.start();
-                Debug.Log($"Reproduciendo: {gameObject.name}");
             }
         }
     }
@@ -66,19 +87,31 @@ public class ZonaSonora : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            // STOP_MODE.ALLOWFADEOUT permite que se escuche el "Release" del ADSR configurado en FMOD
             _instancia.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-            Debug.Log($"Deteniendo: {gameObject.name}");
         }
     }
 
-    private void OnDestroy()
+    private void OnDestroy()    
     {
-        // Es vital liberar la memoria de la instancia cuando el objeto se destruye
         if (_instancia.isValid())
         {
             _instancia.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             _instancia.release();
         }
     }
+
+    //eso seria el codigo donde ira cuando el player completo un puzzle i podemos poner que zons se purifican, en este caso el bosque y el lago, pero se pueden agregar mas zonas y cambiar su estado a purificado o corrupto dependiendo de la situacion
+    /*public class ControlMision : MonoBehaviour
+    {
+        [Header("Zonas a Purificar")]
+        public ZonaSonora zonaBosque;
+        public ZonaSonora zonaLago;
+
+        public void PurificarZonas()
+        {
+            // Solo estos dos cambiarán a estado 0 (Purificado)
+            zonaBosque.CambiarEstado(0f);
+            zonaLago.CambiarEstado(0f);
+        }
+    }*/
 }
