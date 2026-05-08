@@ -246,7 +246,8 @@ public class PanelShopController : MonoBehaviour
             WalletCurrency.instance.bank -= _doubleJumpPrice;
             WalletCurrency.instance.SaveMoney();
             WalletCurrency.instance.Score_txt.text = WalletCurrency.instance.bank.ToString();
-            
+            PlayerMovement.instance._hasDoubleJumpItem = true;
+
             Debug.Log("Hook purchased");
         }
         else
