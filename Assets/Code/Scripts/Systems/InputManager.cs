@@ -200,7 +200,6 @@ public class InputManager : MonoBehaviour {
     private void OnScrollPerformed(InputAction.CallbackContext ctx)
     {
         float scroll = ctx.ReadValue<Vector2>().y;
-        Debug.Log("Scroll");
         OnScroll?.Invoke(scroll);
     }
 
