@@ -107,10 +107,10 @@ public class InputManager : MonoBehaviour {
 
     public void DisableInputs()
     {
-        _ui.Disable();
-        _player.Disable();
-        _aspirator.Disable();
-        _inventory.Disable();
+        _ui?.Disable();
+        _player?.Disable();
+        _aspirator?.Disable();
+        _inventory?.Disable();
     }
 
     private void SubscribeEvents()
