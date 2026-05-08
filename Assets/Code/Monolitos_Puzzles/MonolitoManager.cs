@@ -30,7 +30,7 @@ public class MonolitoManager : MonoBehaviour
     public ZonaSonora zonaPuzzlefFort;
     public ZonaSonora zonaForestSmall;
     public ZonaSonora zonaMountain;
-    public ZonaSonora zonaLava;
+    public ZonaSonora zonaLava  ;
 
     private bool _activated = false;
 
