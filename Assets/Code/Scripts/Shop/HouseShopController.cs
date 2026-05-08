@@ -2,7 +2,12 @@ using UnityEngine;
 
 public class HouseShopController : MonoBehaviour
 {
-    [SerializeField] private GameObject _shopUI;
+    private GameObject _shopUI;
+
+    private void Start()
+    {
+        _shopUI = References.Instance._houseShopPanel;
+    }
 
     public void ActiveShop()
     {
@@ -16,5 +21,17 @@ public class HouseShopController : MonoBehaviour
     {
         if (_shopUI != null) 
             _shopUI.SetActive(false);
+    }
+
+    public void BuyRangeUpgrade()
+    {
+        if (ConstructionRangeManager.Instance != null)
+        {
+            ConstructionRangeManager.Instance.UpgradeRange();
+        }
+        else
+        {
+            Debug.LogError("HouseShopController: ConstructionRangeManager.Instance is null!");
+        }
     }
 }

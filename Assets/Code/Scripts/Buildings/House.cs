@@ -5,11 +5,11 @@ using UnityEngine;
 public class House : MonoBehaviour, IInteractive
 {
     [Header("UI References")]
-    [SerializeField] private GameObject _houseUIContainer;
+    private GameObject _houseUIContainer;
     [SerializeField] private HouseShopController _houseShopController;
 
     [Header("Control References")]
-    [SerializeField] private PlayerCameraMovement _cameraControl;
+    private PlayerCameraMovement _cameraControl;
 
     private bool _isPanelActive = false;
     private float _timeSinceLastToggle = 0.16f;
@@ -45,6 +45,10 @@ public class House : MonoBehaviour, IInteractive
 
     private void Start()
     {
+        if (References.Instance != null) {
+            _cameraControl = References.Instance._playerCameraMovement;
+            _houseUIContainer = References.Instance._houseShopPanel;
+        }
         // If subscription failed in OnEnable because InputManager wasn't ready, try again here
         SubscribeToInputs();
 
