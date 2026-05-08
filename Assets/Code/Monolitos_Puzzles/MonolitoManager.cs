@@ -18,6 +18,19 @@ public class MonolitoManager : MonoBehaviour
     [Header("Zonas a Purificar")]
     public ZonaSonora zonaPlaya;
     public ZonaSonora zonaGranja;
+    public ZonaSonora zonaForest;
+    public ZonaSonora zonaLake;
+    public ZonaSonora zonaEntranceMountain;
+    public ZonaSonora zonaEntranceMagicForest;
+    public ZonaSonora zonaThirdPuzzle;
+    public ZonaSonora zonaEnterToMagicForest;
+    public ZonaSonora zonaMushroom;
+    public ZonaSonora zonaMushroomSmall;
+    public ZonaSonora zonaForestMushroom;
+    public ZonaSonora zonaPuzzlefFort;
+    public ZonaSonora zonaForestSmall;
+    public ZonaSonora zonaMountain;
+    public ZonaSonora zonaLava;
 
     private bool _activated = false;
 
@@ -35,7 +48,7 @@ public class MonolitoManager : MonoBehaviour
 
             foreach (GameObject spawn in _spawnsAsigned)
             {
-                spawn.GetComponent<SlimeSpawner>().SetCorrupted(false);
+                  spawn.GetComponent<SlimeSpawner>().SetCorrupted(false);
             }
 
             CrystalAnimation();
@@ -67,6 +80,20 @@ public class MonolitoManager : MonoBehaviour
         // Solo estos dos cambiarán a estado 0 (Purificado)
         zonaPlaya.CambiarEstado(0f);
         zonaGranja.CambiarEstado(0f);
+        zonaForest.CambiarEstado(0f);
+        zonaLake.CambiarEstado(0f);
+        zonaThirdPuzzle.CambiarEstado(0f);
+        zonaEntranceMagicForest.CambiarEstado(0f);
+        zonaEntranceMountain.CambiarEstado(0f);
+        zonaEnterToMagicForest.CambiarEstado(0f);
+        zonaMushroom.CambiarEstado(0f);
+        zonaMushroomSmall.CambiarEstado(0f);
+        zonaForestMushroom.CambiarEstado(0f);
+        zonaPuzzlefFort.CambiarEstado(0f);
+        zonaForestSmall.CambiarEstado(0f);
+        zonaMountain.CambiarEstado(0f);
+        zonaLava.CambiarEstado(0f);
+
     }
 
 }
