@@ -15,11 +15,14 @@ public class MonolitoManager : MonoBehaviour
     [SerializeField] private GameObject _lightCrystal;
     [SerializeField] private Transform _lightCrystalFinalPosition;
 
+    [Header("Zonas a Purificar")]
+    public ZonaSonora zonaPlaya;
+    public ZonaSonora zonaGranja;
+
     private bool _activated = false;
 
     public void ActivateMonolito()
     {
-        Debug.Log("Monolito Activado");
 
         if (!_activated)
         {
@@ -27,6 +30,8 @@ public class MonolitoManager : MonoBehaviour
             AmbienceController.Instance.SetAmbience(_ambience);
             FogWallsSetsManager.Instance.UpdateFogSet(_fogSetOnActive);
             BigWallsManager.Instance.PuzzleCompleted(_puzzleNumber);
+
+            PurificarZonas();
 
             foreach (GameObject spawn in _spawnsAsigned)
             {
@@ -57,6 +62,11 @@ public class MonolitoManager : MonoBehaviour
     }
 
 
-    
+    public void PurificarZonas()
+    {
+        // Solo estos dos cambiarán a estado 0 (Purificado)
+        zonaPlaya.CambiarEstado(0f);
+        zonaGranja.CambiarEstado(0f);
+    }
 
 }
