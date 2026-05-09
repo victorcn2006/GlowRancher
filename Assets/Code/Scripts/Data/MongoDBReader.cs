@@ -54,4 +54,6 @@ public class PlayerData
     public float puzzleTime4;
     public float puzzleTime5;
     public int sellShopAmount;
+    public int tpAmount;
+    public int mapAmountOpen;
 }

@@ -92,6 +92,7 @@ public class TeleporButton : MonoBehaviour
 
         // 5. Limpiamos estado
         FinalizeSequence();
+        if (GameManager.Instance != null) GameManager.Instance.SetTPAmount(); 
     }
 
     private void ExecuteTeleport()
