@@ -13,7 +13,7 @@ public class ConstructionRangeManager : MonoBehaviour
     [SerializeField] private float _maxRadius = 50f;
 
     [Header("Upgrade Settings")]
-    [SerializeField] private float _upgradeCost = 100f;
+    [SerializeField] private float _upgradeCost = 0f;
 
     private float _currentRadius;
     private int _upgradeLevel = 0;

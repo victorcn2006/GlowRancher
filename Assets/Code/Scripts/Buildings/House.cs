@@ -6,7 +6,7 @@ public class House : MonoBehaviour, IInteractive
 {
     [Header("UI References")]
     private GameObject _houseUIContainer;
-    [SerializeField] private HouseShopController _houseShopController;
+    private HouseShopController _houseShopController;
 
     [Header("Control References")]
     private PlayerCameraMovement _cameraControl;

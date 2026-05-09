@@ -10,8 +10,11 @@ public class References : MonoBehaviour
     public GameObject _houseShopPanel;
     public PlayerCameraMovement _playerCameraMovement;
 
-    //[Header("SHOP REFERENCES")]
-
+    [Header("SHOP REFERENCES")]
+    public GameObject _shopPanel;
+    public BuildingManager _buildingManager;
+    public GameObject player;
+    public PanelShopController _panelShopController;
 
     private void Awake()
     {
