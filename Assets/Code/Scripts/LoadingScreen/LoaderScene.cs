@@ -21,10 +21,7 @@ public class LoaderScene : MonoBehaviour
     }
     public void LoadScene(string nameScene)
     {
-
-        SceneManager.LoadScene(ConstantGame.SCENELOADINGSCREEN);
-        StartCoroutine(LoadSceneAsync(nameScene));
-
+        SceneManager.LoadScene(nameScene);
     }
 
     private IEnumerator LoadSceneAsync(string nameScene)

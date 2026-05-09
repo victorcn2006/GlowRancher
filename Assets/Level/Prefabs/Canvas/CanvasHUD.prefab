@@ -163,7 +163,6 @@ GameObject:
   - component: {fileID: 124840141606387940}
   - component: {fileID: 3861032924844695995}
   - component: {fileID: 5960836480901619745}
-  - component: {fileID: 899255490451197271}
   - component: {fileID: 4441389281092699704}
   m_Layer: 0
   m_Name: Options Button
@@ -286,21 +285,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c75a4433206744f41b276ae1bf5de9a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &899255490451197271
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 191080104567576143}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f50e22384034304eb5e5f3a2deaf4c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneToLoad:
-    _sceneAsset: {fileID: 102900000, guid: b6f99ffb3b399864b886912bd766bce3, type: 3}
-    _sceneName: Options_Redesign
 --- !u!114 &4441389281092699704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4736,7 +4720,6 @@ GameObject:
   - component: {fileID: 4187162186769145576}
   - component: {fileID: 1012959683766224935}
   - component: {fileID: 5664554098929367829}
-  - component: {fileID: 2690791575192978579}
   - component: {fileID: 5297378944230369891}
   m_Layer: 0
   m_Name: Main Menu Button
@@ -4859,21 +4842,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c75a4433206744f41b276ae1bf5de9a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2690791575192978579
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3419316627237985019}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f50e22384034304eb5e5f3a2deaf4c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneToLoad:
-    _sceneAsset: {fileID: 102900000, guid: b7282ba3dd7844644afdffeb9094f4f0, type: 3}
-    _sceneName: MainMenu_Redesign
 --- !u!114 &5297378944230369891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5058,7 +5026,7 @@ RectTransform:
   m_GameObject: {fileID: 3531035330428021273}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.3684746, y: 0.3684746, z: 0.3684746}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2446105538185066070}
@@ -5076,7 +5044,7 @@ RectTransform:
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &2689905479804408985
 Canvas:
   m_ObjectHideFlags: 0

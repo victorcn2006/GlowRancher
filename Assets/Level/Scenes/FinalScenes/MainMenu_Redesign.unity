@@ -182,18 +182,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 765488798403800077, guid: 17d982f16127e6d418ad023742259aab, type: 3}
       insertIndex: -1
       addedObject: {fileID: 455487923}
-    - targetCorrespondingSourceObject: {fileID: 7582234958551040542, guid: 17d982f16127e6d418ad023742259aab, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 587168033}
-    - targetCorrespondingSourceObject: {fileID: 7582234958551040542, guid: 17d982f16127e6d418ad023742259aab, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 587168032}
-    - targetCorrespondingSourceObject: {fileID: 5508962264597310824, guid: 17d982f16127e6d418ad023742259aab, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 599153285}
-    - targetCorrespondingSourceObject: {fileID: 5508962264597310824, guid: 17d982f16127e6d418ad023742259aab, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 599153284}
   m_SourcePrefab: {fileID: 100100000, guid: 17d982f16127e6d418ad023742259aab, type: 3}
 --- !u!1 &288271610
 GameObject:
@@ -526,7 +514,6 @@ GameObject:
   - component: {fileID: 451405666}
   - component: {fileID: 451405665}
   - component: {fileID: 451405664}
-  - component: {fileID: 451405668}
   - component: {fileID: 451405667}
   m_Layer: 5
   m_Name: ButtonCredits
@@ -657,21 +644,6 @@ MonoBehaviour:
       Data4: 220430310
     Path: event:/sfx/ui/main_menu/button_click
   currentButton: 4
---- !u!114 &451405668
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 451405662}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f50e22384034304eb5e5f3a2deaf4c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneToLoad:
-    _sceneAsset: {fileID: 102900000, guid: d84db4560129c874498ce9afc57d0f2f, type: 3}
-    _sceneName: Credits
 --- !u!1 &455487921 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 765488798403800077, guid: 17d982f16127e6d418ad023742259aab, type: 3}
@@ -773,7 +745,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 60.95
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -823,89 +795,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 516947964}
   m_CullTransparentMesh: 1
---- !u!1 &587168030 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7582234958551040542, guid: 17d982f16127e6d418ad023742259aab, type: 3}
-  m_PrefabInstance: {fileID: 123072998}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &587168032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 587168030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: -1552742437
-      Data2: 1151022498
-      Data3: -1756065866
-      Data4: 1777678549
-    Path: event:/Muisc_Rancho
-  Event: 
-  EventPlayTrigger: 1
-  EventStopTrigger: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  NonRigidbodyVelocity: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
---- !u!114 &587168033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 587168030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10b98ef0857e2274eb249534842eaa5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 594d98a202578d245834a8ec3def504c, type: 3}
---- !u!1 &599153282 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5508962264597310824, guid: 17d982f16127e6d418ad023742259aab, type: 3}
-  m_PrefabInstance: {fileID: 123072998}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &599153284
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 599153282}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 387b60d81a8d9564d932a0bf1fd38dfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data:
-    userId: DefaultPlayer
-    timePlayed: 0
-    deathCounter: 0
---- !u!114 &599153285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 599153282}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10b98ef0857e2274eb249534842eaa5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 01e531daa8a5847439614ba9cf0e0451, type: 3}
 --- !u!1 &673713692
 GameObject:
   m_ObjectHideFlags: 0
@@ -1277,7 +1166,6 @@ GameObject:
   - component: {fileID: 1011964429}
   - component: {fileID: 1011964428}
   - component: {fileID: 1011964427}
-  - component: {fileID: 1011964431}
   - component: {fileID: 1011964430}
   m_Layer: 5
   m_Name: ButtonOptions
@@ -1408,21 +1296,6 @@ MonoBehaviour:
       Data4: 220430310
     Path: event:/sfx/ui/main_menu/button_click
   currentButton: 1
---- !u!114 &1011964431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1011964425}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f50e22384034304eb5e5f3a2deaf4c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneToLoad:
-    _sceneAsset: {fileID: 102900000, guid: b6f99ffb3b399864b886912bd766bce3, type: 3}
-    _sceneName: Options_Redesign
 --- !u!1 &1244261267
 GameObject:
   m_ObjectHideFlags: 0
@@ -1717,7 +1590,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 60.95
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1897,7 +1770,6 @@ GameObject:
   - component: {fileID: 1540072655}
   - component: {fileID: 1540072654}
   - component: {fileID: 1540072653}
-  - component: {fileID: 1540072657}
   - component: {fileID: 1540072658}
   m_Layer: 5
   m_Name: ButtonPlay
@@ -2020,26 +1892,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1540072651}
   m_CullTransparentMesh: 1
---- !u!114 &1540072657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1540072651}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7caca753bb14bdb4e889b1f11e860fc9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clickSound:
-    Guid:
-      Data1: 1087912405
-      Data2: 1182583354
-      Data3: -2063760239
-      Data4: 220430310
-    Path: event:/sfx/ui/main_menu/button_click
-  currentButton: 0
 --- !u!114 &1540072658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2049,7 +1901,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1540072651}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f50e22384034304eb5e5f3a2deaf4c0, type: 3}
+  m_Script: {fileID: 11500000, guid: c9242fdc9c05bfb41ab9291231ad2bf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoad:
@@ -2139,7 +1991,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 60.95
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2461,7 +2313,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 60.95
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1

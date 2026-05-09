@@ -44,6 +44,8 @@ public class MonolitoManager : MonoBehaviour
             FogWallsSetsManager.Instance.UpdateFogSet(_fogSetOnActive);
             BigWallsManager.Instance.PuzzleCompleted(_puzzleNumber);
 
+            GetComponent<MonolitoTimer>().StopTimer();
+
             PurificarZonas();
 
             foreach (GameObject spawn in _spawnsAsigned)
