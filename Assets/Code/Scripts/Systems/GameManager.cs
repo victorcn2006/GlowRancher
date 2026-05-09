@@ -173,5 +173,8 @@ public class GameManager : MonoBehaviour
                 return 0;
         }
     }
+
+    public void SetTPAmount() => data.tpAmount++;
+    public int GetTPAmount() => data.tpAmount;
     private void OnApplicationQuit() => SaveStats();
 }
