@@ -91,5 +91,7 @@ As you can see in the images, the connection is fine with MongoDB Atlas. Below a
 
 ![MongoDB Connection 1](Stats/Mongo1.png)
 ![MongoDB Connection 2](Stats/Mongo2.png)
+![MongoDB Connection Unity](Stats/MongoLogSave.png)
+![Stats Scene](Stats/Stats.png)
 
 

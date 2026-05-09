@@ -174,7 +174,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SetTPAmount() => data.tpAmount++;
+    public void SetTPAmount() { data.tpAmount++; SaveStats(); }
     public int GetTPAmount() => data.tpAmount;
+
+    public void SetMapOpenAmount() { data.mapAmountOpen++; SaveStats(); }
+    public int GetMapOpenCounter() => data.mapAmountOpen;
     private void OnApplicationQuit() => SaveStats();
 }
