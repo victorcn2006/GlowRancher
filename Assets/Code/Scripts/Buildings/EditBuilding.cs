@@ -215,6 +215,7 @@ public class EditBuilding : MonoBehaviour
 
 private void TryFinalizePlacement()
     {
+        if (GameManager.Instance != null) GameManager.Instance.SetBuildingAmount();
         if (!_isValidPlacement)
         {
             Debug.Log("<color=red>Invalid placement: Building obstructed!</color>");
@@ -231,6 +232,7 @@ private void TryFinalizePlacement()
         _isEditing = false;
         InputManager.Instance.IsBuildingPressed = false;
         SetState(false);
+        
     }
 
     private void CancelPlacement(){

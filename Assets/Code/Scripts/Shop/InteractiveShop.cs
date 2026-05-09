@@ -8,7 +8,7 @@ public class InteractiveShop : MonoBehaviour, IInteractive
      private PanelShopController _panelShop;
 
     [Header("Referencias de Control")]
-    [SerializeField] private PlayerCameraMovement _cameraControl;
+    private PlayerCameraMovement _cameraControl;
 
     private bool _isShopActive = false;
 
@@ -36,6 +36,7 @@ public class InteractiveShop : MonoBehaviour, IInteractive
     {
         _panelShop = References.Instance._panelShopController;
         _shopUIContainer = References.Instance._shopPanel;
+        _cameraControl = References.Instance._playerCameraMovement;
         CloseShop(); // Empezar siempre cerrada
     }
 
@@ -57,6 +58,7 @@ public class InteractiveShop : MonoBehaviour, IInteractive
         if (timeSinceLastOpenedClosed >= timeBetweenOpenClose)
         {
             if (_isShopActive) return; // Ya está abierta, no hacemos nada
+            if (GameManager.Instance != null) GameManager.Instance.AddShopUsedAmount();
             timeSinceLastOpenedClosed = 0;
             Debug.Log("Abriendo Tienda...");
             _isShopActive = true;

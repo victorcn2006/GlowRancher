@@ -56,12 +56,11 @@ public class MonolitoManager : MonoBehaviour
             CrystalAnimation();
 
             _monolitoUnlocked = true;
-            if (this.gameObject.CompareTag("FirstMonolito"))
-            {
-                GetComponentInParent<TutorialPuzzle>().FinishPuzzle();
+            if (this.gameObject.CompareTag("FirstMonolito")) {
                 DeathScript.instance.firstMonolitoUnlocked = true;
-            }
-
+                GetComponentInParent<TutorialPuzzle>().FinishPuzzle();
+                if(GameManager.Instance != null) GameManager.Instance.TutorialUnlocked();
+            } 
         }
     }
 

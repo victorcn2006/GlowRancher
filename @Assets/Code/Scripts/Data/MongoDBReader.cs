@@ -10,7 +10,7 @@ public class MongoDBReader : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null) Instance = this;
+        if (Instance == null) { Instance = this; DontDestroyOnLoad(gameObject); }
         else { Destroy(gameObject); return; }
 
         // Initialize Connection
@@ -39,9 +39,9 @@ public class PlayerData
     public float timePlayed;
     public int deathCounter;
     public int amountBuildings;
-    public bool tutorialUnlocked;
+    public int amountPlayersTutorialPassed;
     public int amountPlayersGamePassed;
-    public float moneyAmount;
+    public int moneyAmount;
     public int buildingSystemUsed;
     public int amountShopUsed;
     public int jumpAmount;
@@ -53,5 +53,4 @@ public class PlayerData
     public float puzzleTime3;
     public float puzzleTime4;
     public float puzzleTime5;
-    public int sellShopAmount;
 }

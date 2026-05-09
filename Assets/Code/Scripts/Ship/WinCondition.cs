@@ -6,6 +6,11 @@ public class WinCondition : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            if(GameManager.Instance != null)
+            {
+                GameManager.Instance.AddPlayerGamePassed();
+                GameManager.Instance.AddMoneyAmount(WalletCurrency.instance.bank);
+            }
             GameManager.Instance.SaveStats();
             SceneManager.LoadScene("Stats");
         }

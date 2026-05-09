@@ -12,7 +12,7 @@ public class MonolitoTimer : MonoBehaviour
      * 4 = HIELO (ES EL MONOLITO DE LA ZONA DE HIELO, NO LA PARED DE HIELO, LA PARED NO CUENTA COMO PUZZLE)
      * */
 
-    [SerializeField] private int _monolitoNumber;
+    public int _monolitoNumber;
 
     private float _monolitoTime = 0f;
     private bool _completed;
@@ -26,11 +26,13 @@ public class MonolitoTimer : MonoBehaviour
         
     }
 
+    public int GetMonolitoNumber() {
+        return _monolitoNumber;
+    }
     public void StopTimer()
     {
         _completed = true;
-        Debug.Log("Tiempo en completar el primer Puzzle: " + _monolitoTime);
-        //codigo victor (aqui el tiempo ya está parado, puedes coger _monolitoTime como el tiempo que ha tardado)
+        if (GameManager.Instance != null) GameManager.Instance.SetTimePuzzle(_monolitoTime, _monolitoNumber);
     }
 
 }
