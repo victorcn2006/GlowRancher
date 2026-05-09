@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using FMODUnity;
-using UnityEditor; // 1. Importante añadir esto
+using UnityEditor;
+using UnityEngine.SceneManagement; // 1. Importante añadir esto
 
 public class ActionButtonManager : MonoBehaviour
 {
@@ -52,14 +53,19 @@ public class ActionButtonManager : MonoBehaviour
         switch (currentButton)
         {
             case BUTTONS.PLAY:
+                SceneManager.LoadScene("LoadingScreen");
                 break;
             case BUTTONS.OPTIONS:
+                SceneManager.LoadScene("Options_Redesign");
+                break;
             case BUTTONS.MAINMENU:
+                SceneManager.LoadScene("MainMenu_Redesign");
+                break;
             case BUTTONS.CONTINUE:
                 PauseManager.instance?.SetPause();
                 break;
             case BUTTONS.CREDITS:
-                PauseManager.instance?.SetPause();
+                SceneManager.LoadScene("Credits");
                 break;
             case BUTTONS.EXIT:
                 GameManager.Instance.SaveStats();
