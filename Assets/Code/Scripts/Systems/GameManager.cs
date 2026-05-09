@@ -41,6 +41,15 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("DEATH_COUNTER", data.deathCounter);
         PlayerPrefs.Save();
 
+        // --- Start: Synchronize Player.money with GameManager.data.moneyAmount ---
+        // Find the Player instance to get its current money
+        Player player = FindObjectOfType<Player>(); // Assumes Player script is on a GameObject in the scene
+        if (player != null)
+        {
+            data.moneyAmount = player.money;
+        }
+        // --- End: Synchronize Player.money with GameManager.data.moneyAmount ---
+
         if (MongoDBReader.Instance != null)
             _ = MongoDBReader.Instance.SaveStats(data);
     }
@@ -48,5 +57,38 @@ public class GameManager : MonoBehaviour
     public void AddDeathPlayer() { data.deathCounter++; SaveStats(); }
     public float GetCurrentTimePlayed() => data.timePlayed;
     public int GetDeathCounter() => data.deathCounter;
+
+    public void SetBuildingAmount() {
+        data.buildingSystemUsed++; SaveStats();
+        
+    }
+    public int GetBuildingAmountEdit() => data.amountBuildings;
+
+    public void AddPlayerGamePassed() => data.amountPlayersGamePassed++;
+    public int GetPlayersGamePassed() => data.amountPlayersGamePassed;
+
+    public void AddShopUsedAmount() => data.amountShopUsed++;
+    public int GetAmountShopUsed() => data.amountShopUsed;
+
+    public void AddJumpAmount() => data.jumpAmount++;
+    public int GetJumpAmount() => data.jumpAmount;
+
+    public void AddSiloOpened() => data.siloAmountOpened++;
+    public int GetSiloOpenedAmount() => data.siloAmountOpened;
+
+    public void AddMoneyAmount(float money) => data.moneyAmount = money;
+    public float GetMoneyAmount() => data.moneyAmount;
+
+    public void TutorialUnlocked() => data.tutorialUnlocked = true;
+    public bool IsTutorialUnlocked() => data.tutorialUnlocked;
+
+    public void AddSellAmount() => data.sellShopAmount++;
+    public int GetSellAmount() => data.sellShopAmount;
+
+    public void SetAspirableAmountItems() => data.aspirateAmountObjects++;
+    public int GetAspirableAmountItems() => data.aspirateAmountObjects;
+
+    public void SetBuildingsAmount() => data.buildingSystemUsed++;
+    public int GetBuildingsAmount() => data.buildingSystemUsed;
     private void OnApplicationQuit() => SaveStats();
 }

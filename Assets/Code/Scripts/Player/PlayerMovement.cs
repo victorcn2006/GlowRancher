@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 using FMODUnity;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -126,6 +125,7 @@ public class PlayerMovement : MonoBehaviour
     // He modificado este método para que reciba el sonido a reproducir
     private void PerformJump(float force, EventReference soundToPlay)
     {
+        if (GameManager.Instance != null) GameManager.Instance.AddJumpAmount();
         if (!soundToPlay.IsNull)
         {
             RuntimeManager.PlayOneShot(soundToPlay, transform.position);

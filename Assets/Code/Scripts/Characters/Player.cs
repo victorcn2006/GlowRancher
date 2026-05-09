@@ -109,6 +109,14 @@ public class Player : Character
 
     protected override void Die()
     {
+        // --- Start: Update deathCounter via GameManager ---
+        // Call GameManager to handle death count increment and save.
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.AddDeathPlayer();
+        }
+        // --- End: Update deathCounter via GameManager ---
+
         DeathScript.instance.Die();
         currentHealth = maxHealth;
     }

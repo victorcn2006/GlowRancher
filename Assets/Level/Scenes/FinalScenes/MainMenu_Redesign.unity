@@ -175,25 +175,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 9175369400959451626, guid: 17d982f16127e6d418ad023742259aab, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 765488798403800077, guid: 17d982f16127e6d418ad023742259aab, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 455487923}
-    - targetCorrespondingSourceObject: {fileID: 7582234958551040542, guid: 17d982f16127e6d418ad023742259aab, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 587168033}
-    - targetCorrespondingSourceObject: {fileID: 7582234958551040542, guid: 17d982f16127e6d418ad023742259aab, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 587168032}
-    - targetCorrespondingSourceObject: {fileID: 5508962264597310824, guid: 17d982f16127e6d418ad023742259aab, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 599153285}
-    - targetCorrespondingSourceObject: {fileID: 5508962264597310824, guid: 17d982f16127e6d418ad023742259aab, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 599153284}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17d982f16127e6d418ad023742259aab, type: 3}
 --- !u!1 &288271610
 GameObject:
@@ -672,23 +656,6 @@ MonoBehaviour:
   sceneToLoad:
     _sceneAsset: {fileID: 102900000, guid: d84db4560129c874498ce9afc57d0f2f, type: 3}
     _sceneName: Credits
---- !u!1 &455487921 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 765488798403800077, guid: 17d982f16127e6d418ad023742259aab, type: 3}
-  m_PrefabInstance: {fileID: 123072998}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &455487923
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 455487921}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3898fcea83e8cb444b3c7767edf89407, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &516947964
 GameObject:
   m_ObjectHideFlags: 0
@@ -823,89 +790,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 516947964}
   m_CullTransparentMesh: 1
---- !u!1 &587168030 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7582234958551040542, guid: 17d982f16127e6d418ad023742259aab, type: 3}
-  m_PrefabInstance: {fileID: 123072998}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &587168032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 587168030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: -1552742437
-      Data2: 1151022498
-      Data3: -1756065866
-      Data4: 1777678549
-    Path: event:/Muisc_Rancho
-  Event: 
-  EventPlayTrigger: 1
-  EventStopTrigger: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  NonRigidbodyVelocity: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
---- !u!114 &587168033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 587168030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10b98ef0857e2274eb249534842eaa5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 594d98a202578d245834a8ec3def504c, type: 3}
---- !u!1 &599153282 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5508962264597310824, guid: 17d982f16127e6d418ad023742259aab, type: 3}
-  m_PrefabInstance: {fileID: 123072998}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &599153284
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 599153282}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 387b60d81a8d9564d932a0bf1fd38dfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data:
-    userId: DefaultPlayer
-    timePlayed: 0
-    deathCounter: 0
---- !u!114 &599153285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 599153282}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10b98ef0857e2274eb249534842eaa5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 01e531daa8a5847439614ba9cf0e0451, type: 3}
 --- !u!1 &673713692
 GameObject:
   m_ObjectHideFlags: 0

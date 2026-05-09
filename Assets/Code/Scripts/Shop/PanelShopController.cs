@@ -167,6 +167,7 @@ public class PanelShopController : MonoBehaviour
             Debug.Log("Incinerator purchased");
             _incinerator.SetActive(true);
             _buildingManager.IncineratorBuyed();
+            if (GameManager.Instance != null) GameManager.Instance.SetBuildingAmount();
         }
         else
         {
@@ -183,6 +184,7 @@ public class PanelShopController : MonoBehaviour
             WalletCurrency.instance.SaveMoney();
             WalletCurrency.instance.Score_txt.text = WalletCurrency.instance.bank.ToString();
             _buildingManager.PlanterBuyed();
+            if (GameManager.Instance != null) GameManager.Instance.SetBuildingAmount();
             Debug.Log("Planter purchased");
         }
         else
@@ -200,6 +202,7 @@ public class PanelShopController : MonoBehaviour
             WalletCurrency.instance.SaveMoney();
             WalletCurrency.instance.Score_txt.text = WalletCurrency.instance.bank.ToString();
             _buildingManager.CageBuyed();
+            if (GameManager.Instance != null) GameManager.Instance.SetBuildingAmount();
             Debug.Log("Slime Cage purchased");
         }
         else
@@ -217,6 +220,7 @@ public class PanelShopController : MonoBehaviour
             WalletCurrency.instance.SaveMoney();
             WalletCurrency.instance.Score_txt.text = WalletCurrency.instance.bank.ToString();
             _buildingManager.SiloBuyed();
+            if (GameManager.Instance != null) GameManager.Instance.SetBuildingAmount();
             Debug.Log("Silo purchased");
         }
         else
@@ -234,6 +238,7 @@ public class PanelShopController : MonoBehaviour
             WalletCurrency.instance.SaveMoney();
             WalletCurrency.instance.Score_txt.text = WalletCurrency.instance.bank.ToString();
             _buildingManager.FusionerBuyed();
+            if (GameManager.Instance != null) GameManager.Instance.SetBuildingAmount();
             Debug.Log("Hook purchased");
         }
         else
@@ -250,7 +255,7 @@ public class PanelShopController : MonoBehaviour
             WalletCurrency.instance.SaveMoney();
             WalletCurrency.instance.Score_txt.text = WalletCurrency.instance.bank.ToString();
             PlayerMovement.instance._hasDoubleJumpItem = true;
-
+            if (GameManager.Instance != null) GameManager.Instance.SetBuildingAmount();
             Debug.Log("Hook purchased");
         }
         else
@@ -267,6 +272,7 @@ public class PanelShopController : MonoBehaviour
             WalletCurrency.instance.SaveMoney();
             WalletCurrency.instance.Score_txt.text = WalletCurrency.instance.bank.ToString();
             _player.AddMaxEnergy();
+            if (GameManager.Instance != null) GameManager.Instance.SetBuildingAmount();
             Debug.Log("satmina+ purchased");
         }
         else
