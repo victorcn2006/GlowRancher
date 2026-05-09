@@ -11,12 +11,5 @@ public class SpheretEST : MonoBehaviour
         _tutorialPuzzle = GetComponentInParent<TutorialPuzzle>();
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-           _tutorialPuzzle.ActivateMonolito();
-        }
-    }
 
 }
