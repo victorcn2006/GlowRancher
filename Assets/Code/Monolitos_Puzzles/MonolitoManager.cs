@@ -15,6 +15,8 @@ public class MonolitoManager : MonoBehaviour
     [SerializeField] private GameObject _lightCrystal;
     [SerializeField] private Transform _lightCrystalFinalPosition;
 
+    public bool IsActivated => _activated;
+
     [Header("Zonas a Purificar")]
     public ZonaSonora zonaPlaya;
     public ZonaSonora zonaGranja;
