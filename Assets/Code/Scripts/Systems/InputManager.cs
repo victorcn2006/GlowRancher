@@ -107,10 +107,10 @@ public class InputManager : MonoBehaviour {
 
     public void DisableInputs()
     {
-        _ui.Disable();
-        _player.Disable();
-        _aspirator.Disable();
-        _inventory.Disable();
+        _ui?.Disable();
+        _player?.Disable();
+        _aspirator?.Disable();
+        _inventory?.Disable();
     }
 
     private void SubscribeEvents()
@@ -200,7 +200,6 @@ public class InputManager : MonoBehaviour {
     private void OnScrollPerformed(InputAction.CallbackContext ctx)
     {
         float scroll = ctx.ReadValue<Vector2>().y;
-        Debug.Log("Scroll");
         OnScroll?.Invoke(scroll);
     }
 

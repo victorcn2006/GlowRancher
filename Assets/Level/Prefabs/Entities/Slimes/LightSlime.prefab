@@ -1320,6 +1320,20 @@ MonoBehaviour:
   JUMP_TIME: 1
   JUMP_DISTANCE: 1
   ROTATE_DURATION: 0.5
+  _landSoundSlime:
+    Guid:
+      Data1: -1746834499
+      Data2: 1316020304
+      Data3: 1173717946
+      Data4: -1606751673
+    Path: event:/sfx/slime/normal/jump_land
+  _jumpSoundSlime:
+    Guid:
+      Data1: 1878456471
+      Data2: 1164852200
+      Data3: 2047576989
+      Data4: -1353354511
+    Path: event:/sfx/slime/normal/jump
   groundChecker: {fileID: 3290533553603179955}
   groundCheckDistance: 0.4
 --- !u!114 &3561488418458474028
@@ -1340,6 +1354,8 @@ MonoBehaviour:
   _mouth: {fileID: 7390221846618597790}
   _movementBehaviour: {fileID: 7088897787694904420}
   _animator: {fileID: 6266632745772060623}
+  _health: 3
+  _maxHealth: 3
 --- !u!114 &4145827230067692307
 MonoBehaviour:
   m_ObjectHideFlags: 0

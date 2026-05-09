@@ -1,59 +1,57 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using FMODUnity;
 using UnityEngine.UI;
+using FMODUnity;
 
+[RequireComponent(typeof(Slider))]
 public class FMODSliderController : MonoBehaviour
 {
     [Header("FMOD Settings")]
-    public string vcaPath;
-    // Usamos una constante para evitar errores de escritura al llamar a PlayerPrefs
-    private string PLAYER_PREF_KEY;
+    [Tooltip("Nombre del VCA (ambients, music o sfx)")]
+    public string vcaName;
 
     [Header("UI Feedback")]
     public GameObject iconMuted;
 
     private FMOD.Studio.VCA _vcaController;
     private Slider _slider;
+    private string _playerPrefKey;
 
     private void Start()
     {
-        _vcaController = RuntimeManager.GetVCA(vcaPath);
         _slider = GetComponent<Slider>();
 
-        // Creamos una clave única basada en el path del VCA (por si tienes varios sliders)
-        PLAYER_PREF_KEY = "Volume_" + vcaPath;
+        // Formateamos la ruta automáticamente para que sea vca:/nombre
+        string fullPath = vcaName.StartsWith("vca:/") ? vcaName : "vca:/" + vcaName;
 
-        if (_slider == null)
-        {
-            Debug.LogError("Slider not found on " + gameObject.name);
-            return;
-        }
+        _vcaController = RuntimeManager.GetVCA(fullPath);
+        _playerPrefKey = "Volume_" + vcaName;
 
-        // 1. Cargar el valor guardado. Si no existe, usamos 1 (volumen máximo) por defecto.
-        float savedVolume = PlayerPrefs.GetFloat(PLAYER_PREF_KEY, 1f);
+        // Configuración del Slider
+        _slider.minValue = 0f;
+        _slider.maxValue = 1f;
 
-        // 2. Aplicar el volumen cargado a FMOD y al Slider
+        // Cargar y aplicar volumen previo
+        float savedVolume = PlayerPrefs.GetFloat(_playerPrefKey, 1f);
+
+        // Aplicamos a FMOD y al Slider
         _vcaController.setVolume(savedVolume);
         _slider.value = savedVolume;
 
-        // 3. Actualizar el icono de mute
         UpdateMuteIcon(savedVolume);
 
-        // 4. Escuchar cambios del slider
+        // Listener para cambios en tiempo real
         _slider.onValueChanged.AddListener(SetVolume);
     }
 
     public void SetVolume(float volume)
     {
-        // Aplicar volumen en FMOD
+        // 1. Cambiar volumen en el motor FMOD
         _vcaController.setVolume(volume);
 
-        // Guardar el valor en el dispositivo
-        PlayerPrefs.SetFloat(PLAYER_PREF_KEY, volume);
-        PlayerPrefs.Save(); // Asegura que se escriba en el disco de inmediato
+        // 2. Guardar persistencia
+        PlayerPrefs.SetFloat(_playerPrefKey, volume);
 
+        // 3. Feedback visual
         UpdateMuteIcon(volume);
     }
 
@@ -61,6 +59,7 @@ public class FMODSliderController : MonoBehaviour
     {
         if (iconMuted != null)
         {
+            // Se activa si el slider está al mínimo
             iconMuted.SetActive(volume <= 0.001f);
         }
     }

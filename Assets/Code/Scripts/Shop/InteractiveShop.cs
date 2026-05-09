@@ -4,8 +4,8 @@ using UnityEngine;
 public class InteractiveShop : MonoBehaviour, IInteractive
 {
     [Header("Referencias de Interfaz")]
-    [SerializeField] private GameObject _shopUIContainer;
-    [SerializeField] private PanelShopController _panelShop;
+     private GameObject _shopUIContainer;
+     private PanelShopController _panelShop;
 
     [Header("Referencias de Control")]
     [SerializeField] private PlayerCameraMovement _cameraControl;
@@ -34,6 +34,8 @@ public class InteractiveShop : MonoBehaviour, IInteractive
 
     private void Start()
     {
+        _panelShop = References.Instance._panelShopController;
+        _shopUIContainer = References.Instance._shopPanel;
         CloseShop(); // Empezar siempre cerrada
     }
 

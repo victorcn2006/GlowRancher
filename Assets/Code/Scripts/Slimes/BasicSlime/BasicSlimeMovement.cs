@@ -1,4 +1,5 @@
 using DG.Tweening;
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,10 +17,13 @@ public class BasicSlimeMovement : MonoBehaviour
     [SerializeField] private float JUMP_FORCE = 170f;
     [SerializeField] private float JUMP_TIME = 1f;
     [SerializeField] private float JUMP_DISTANCE = 1f;
-    [SerializeField] private float MAX_PHYSICS_JUMP_DISTANCE = 3f; // CALIBRATE THIS
 
     [Header("VALORES DE ROTACIÓN")]
     [SerializeField] private float ROTATE_DURATION = 0.5f;
+
+    [Header("AUDIO")]
+    [SerializeField] private EventReference _landSoundSlime;
+    [SerializeField] private EventReference _jumpSoundSlime;
 
 
     // --------------------------------------------PRIVATE VARIABLES--------------------------------------------\\
@@ -28,7 +32,6 @@ public class BasicSlimeMovement : MonoBehaviour
     private Rigidbody _rb;
 
     private bool _beingAspired = false;
-    private float _currentTargetDistance = -1f;
 
     private Vector3 jumpDirection;
     [SerializeField] private Transform groundChecker;
@@ -65,8 +68,9 @@ public class BasicSlimeMovement : MonoBehaviour
 
     private void GoJump()
     {
+        StartCoroutine(Jump());
         _BasicSlime.animator.SetBool("Jump", true);
-        
+
         Vector3 jumpDir = Vector3.zero;
 
         // Check if we should move towards food
@@ -75,11 +79,6 @@ public class BasicSlimeMovement : MonoBehaviour
             Transform closestFood = _BasicSlime.foodDetector.GetClosestFood(transform.position);
             if (closestFood != null)
             {
-                // Store distance
-                Vector3 posNoY = transform.position; posNoY.y = 0;
-                Vector3 targetNoY = closestFood.position; targetNoY.y = 0;
-                _currentTargetDistance = Vector3.Distance(posNoY, targetNoY);
-
                 jumpDir = (closestFood.position - transform.position).normalized;
                 jumpDir.y = 0;
             }
@@ -88,23 +87,17 @@ public class BasicSlimeMovement : MonoBehaviour
         // If no food target, jump in random direction
         if (jumpDir == Vector3.zero)
         {
-            _currentTargetDistance = -1f;
+
             jumpDir = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
         }
 
         if (jumpDir != Vector3.zero)
         {
-            Quaternion lookRotation = Quaternion.LookRotation(jumpDir);
-            transform.DORotateQuaternion(lookRotation, ROTATE_DURATION).SetEase(Ease.OutSine).OnComplete(() => 
-            {
-                float forceMultiplier = 1.0f;
-                if (_currentTargetDistance > 0)
-                {
-                    forceMultiplier = Mathf.Clamp(_currentTargetDistance / MAX_PHYSICS_JUMP_DISTANCE, 0.3f, 1.0f);
-                }
 
-                Vector3 jumpForceVector = (transform.up * JUMP_FORCE) + (transform.forward * JUMP_FORCE * forceMultiplier);
-                _rb.AddForce(jumpForceVector);
+            Quaternion lookRotation = Quaternion.LookRotation(jumpDir);
+            transform.DORotateQuaternion(lookRotation, ROTATE_DURATION).SetEase(Ease.OutSine).OnComplete(() =>
+            {
+                _rb.AddForce((transform.up + transform.forward) * JUMP_FORCE);
                 StartCoroutine(WaitToLand());
             });
         }
@@ -117,20 +110,28 @@ public class BasicSlimeMovement : MonoBehaviour
 
     private IEnumerator WaitToLand()
     {
-        yield return new WaitForSeconds(0.2f); // Give it time to leave the ground
+        yield return new WaitForSeconds(0.7f); // Give it time to leave the ground
         yield return new WaitUntil(() => Grounded());
+        PlayLandingSound();
         _BasicSlime.animator.SetBool("Jump", false);
+    }
+    private IEnumerator Jump()
+    {
+        yield return new WaitForSeconds(0.7f); // Give it time to leave the ground
+        PlayJumpSound();
+
     }
 
     private void ResetJumpTimer()
     {
         _jumpTimer = Random.Range(MIN_TIME, MAX_TIME);
-        
+
     }
 
     private bool Grounded()
     {
         return Physics.Raycast(groundChecker.position, Vector3.down, groundCheckDistance);
+
     }
     void OnDrawGizmos()
     {
@@ -146,5 +147,20 @@ public class BasicSlimeMovement : MonoBehaviour
     public void SetGravity(bool state)
     {
         _rb.useGravity = state;
+    }
+
+    private void PlayLandingSound()
+    {
+        if (!_landSoundSlime.IsNull)
+        {
+            RuntimeManager.PlayOneShot(_landSoundSlime, transform.position);
+        }
+    }
+    private void PlayJumpSound()
+    {
+        if (!_landSoundSlime.IsNull)
+        {
+            RuntimeManager.PlayOneShot(_landSoundSlime, transform.position);
+        }
     }
 }
