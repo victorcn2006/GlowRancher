@@ -10,6 +10,7 @@ public class WinCondition : MonoBehaviour
     [Tooltip("The root object of the cutscene (e.g., Cutscene_Final) which should be inactive by default.")]
     [SerializeField] private GameObject _cutsceneRoot;
     [SerializeField] private GameObject _player;
+    [SerializeField] private GameObject _canvasHUD;
 
     private bool _alreadyTriggered;
 
@@ -45,6 +46,7 @@ public class WinCondition : MonoBehaviour
         if (_player != null) 
         {
             _player.SetActive(false); // This also deactivates the child camera and stops all player logic
+            _canvasHUD.SetActive(false);
         }
         else
         {
