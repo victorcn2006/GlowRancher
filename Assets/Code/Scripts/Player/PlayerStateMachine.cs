@@ -8,7 +8,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     [Header("Detection Settings")]
     [SerializeField] private LayerMask _groundLayer;
-    private const float GROUND_CHECK_DISTANCE = 1.5f;
+    private const float GROUND_CHECK_DISTANCE = 1.6f;
 
     [Header("Audio")]
     [SerializeField] private EventReference _landSound;

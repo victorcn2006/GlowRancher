@@ -35,7 +35,6 @@ public class Silo : Building
     {
         if (_playerInside)
         {
-            if (GameManager.Instance != null) GameManager.Instance.AddSiloOpened();
             _inventoryPanel.SetActive(!_inventoryPanel.activeSelf);
             if (_inventoryPanel.activeSelf)
                 EventSystem.current.SetSelectedGameObject(_firstSlot);

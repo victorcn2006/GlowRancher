@@ -23,7 +23,7 @@ public class ObjectsDetector : MonoBehaviour
             _aspirableObjectsList.Add(other.gameObject);
         }
 
-        if (other.CompareTag("InteractuableShop") || other.CompareTag("Monolito") || other.CompareTag("InteractuableObject"))
+        if (other.CompareTag("InteractuableShop") || other.CompareTag("Monolito"))
         {
             if (Gamepad.current != null && Gamepad.current.wasUpdatedThisFrame)
             {

@@ -1,5 +1,4 @@
 using DG.Tweening;
-using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,10 +20,6 @@ public class CorruptSlimeMovement : MonoBehaviour
 
     [Header("VALORES DE ROTACIÓN")]
     [SerializeField] private float ROTATE_DURATION = 0.3f; // Faster rotation
-
-    [Header("AUDIO")]
-    [SerializeField] private EventReference _landSoundSlime;
-    [SerializeField] private EventReference _jumpSoundSlime;
 
 
     // --------------------------------------------PRIVATE VARIABLES--------------------------------------------\\
@@ -67,7 +62,6 @@ public class CorruptSlimeMovement : MonoBehaviour
 
     private void GoJump()
     {
-        StartCoroutine(Jump());
         _corruptSlime.animator.SetBool("Jump", true);
         
         Vector3 jumpDir = GetTargetDirection();
@@ -145,16 +139,9 @@ public class CorruptSlimeMovement : MonoBehaviour
 
     private IEnumerator WaitToLand()
     {
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(0.2f);
         yield return new WaitUntil(() => Grounded());
-        PlayLandingSound();
         _corruptSlime.animator.SetBool("Jump", false);
-    }
-    private IEnumerator Jump()
-    {
-        yield return new WaitForSeconds(0.7f); // Give it time to leave the ground
-        PlayJumpSound();
-
     }
 
     private void ResetJumpTimer()
@@ -179,19 +166,5 @@ public class CorruptSlimeMovement : MonoBehaviour
         
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectionRange);
-    }
-    private void PlayLandingSound()
-    {
-        if (!_landSoundSlime.IsNull)
-        {
-            RuntimeManager.PlayOneShot(_landSoundSlime, transform.position);
-        }
-    }
-    private void PlayJumpSound()
-    {
-        if (!_landSoundSlime.IsNull)
-        {
-            RuntimeManager.PlayOneShot(_landSoundSlime, transform.position);
-        }
     }
 }

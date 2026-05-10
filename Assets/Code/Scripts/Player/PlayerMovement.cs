@@ -1,11 +1,10 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using FMODUnity;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
-    public static PlayerMovement instance;
-
     [Header("Settings")]
     [SerializeField] private float _walkSpeed = 5f;
     [SerializeField] private float _runSpeed = 9f;
@@ -14,11 +13,8 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Audio")]
     [SerializeField] private EventReference _jumpSound;
-    [SerializeField] private EventReference _doubleJumpSound; // Nuevo: Sonido específico para el segundo salto
-    [SerializeField] private EventReference _footstepSound;
-    [SerializeField] private float _stepInterval = 0.5f;
-    [SerializeField] private float _runStepMultiplier = 0.7f;
 
+    // Propiedades para que la aspiradora las lea
     public bool IsMoving => _rb != null && new Vector3(_rb.velocity.x, 0, _rb.velocity.z).magnitude > 0.1f;
     public bool IsRunning => _player != null && _player.CanRun && IsMoving;
 
@@ -27,9 +23,8 @@ public class PlayerMovement : MonoBehaviour
     private Player _player;
 
     private bool _canJump = true;
-    public bool _hasDoubleJumpItem = false;
+    private bool _hasDoubleJumpItem = true;
     private bool _didDoubleJump = false;
-    private float _stepTimer;
 
     private void Awake()
     {
@@ -38,10 +33,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (Camera.main != null)
             _mainCamTransform = Camera.main.transform;
-        if (instance == null)
-        {
-            instance = this;
-        }
     }
 
     private void OnEnable()
@@ -59,7 +50,6 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         ApplyMovement();
-        HandleFootsteps();
     }
 
     private void ApplyMovement()
@@ -75,62 +65,30 @@ public class PlayerMovement : MonoBehaviour
         Vector3 camRight = Vector3.Scale(_mainCamTransform.right, new Vector3(1, 0, 1)).normalized;
         Vector3 moveDirection = (camRight * input.x + camForward * input.y).normalized;
 
-        float currentSpeed = IsRunning ? _runSpeed : _walkSpeed;
+        float currentSpeed = (_player != null && _player.CanRun) ? _runSpeed : _walkSpeed;
 
         Vector3 targetVelocity = moveDirection * currentSpeed;
         targetVelocity.y = _rb.velocity.y;
         _rb.velocity = targetVelocity;
     }
 
-    private void HandleFootsteps()
-    {
-        if (IsMoving && _canJump)
-        {
-            _stepTimer -= Time.fixedDeltaTime;
-
-            if (_stepTimer <= 0f)
-            {
-                PlayFootstep();
-                float currentInterval = IsRunning ? (_stepInterval * _runStepMultiplier) : _stepInterval;
-                _stepTimer = currentInterval;
-            }
-        }
-        else
-        {
-            _stepTimer = 0f;
-        }
-    }
-
-    private void PlayFootstep()
-    {
-        RuntimeManager.PlayOneShot(_footstepSound, transform.position);
-    }
-
     private void HandleJump()
     {
         if (_canJump)
         {
-            // Salto normal con el sonido de salto base
-            PerformJump(_jumpForce, _jumpSound);
+            PerformJump(_jumpForce);
             _didDoubleJump = false;
         }
         else if (_hasDoubleJumpItem && !_didDoubleJump)
         {
-            // Salto doble con el sonido de doble salto
             _didDoubleJump = true;
-            PerformJump(_doubleJumpForce, _doubleJumpSound);
+            PerformJump(_doubleJumpForce);
         }
     }
 
-    // He modificado este método para que reciba el sonido a reproducir
-    private void PerformJump(float force, EventReference soundToPlay)
+    private void PerformJump(float force)
     {
-        if (GameManager.Instance != null) GameManager.Instance.AddJumpAmount();
-        if (!soundToPlay.IsNull)
-        {
-            RuntimeManager.PlayOneShot(soundToPlay, transform.position);
-        }
-
+        RuntimeManager.PlayOneShot(_jumpSound, transform.position);
         _rb.velocity = new Vector3(_rb.velocity.x, 0, _rb.velocity.z);
         _rb.AddForce(Vector3.up * force, ForceMode.Impulse);
     }

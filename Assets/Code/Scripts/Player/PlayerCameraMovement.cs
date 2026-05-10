@@ -19,26 +19,18 @@ public class PlayerCameraMovement : MonoBehaviour
 
     private void Awake()
     {
-
         // Si no se asignó en el inspector, intenta buscar la cámara en los hijos
         if (_cameraTransform == null)
             _cameraTransform = GetComponentInChildren<Camera>().transform;
-        _rotationSensitivity = PlayerPrefs.GetFloat("MouseSensitivity", _rotationSensitivity);
 
         SetControlState(true);
-    }
-
-    public void SetSensitivity(float value)
-    {
-        Debug.Log("working");
-        _rotationSensitivity = value;
     }
 
     private void LateUpdate()
     {
         // Si el control está desactivado, no procesamos la rotación
         if (!CanControlCamera) return;
-        if (InputManager.Instance.IsPaused) return;
+
         HandleRotation();
     }
 

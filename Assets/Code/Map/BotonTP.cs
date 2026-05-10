@@ -10,7 +10,6 @@ public class BotonTP : MonoBehaviour
     {
         if (_player != null && _teleport != null)
         {
-            if(GameManager.Instance != null) GameManager.Instance.SetTPAmount();
             // Copia la posición exacta del destino
             _player.position = _teleport.localPosition;
 

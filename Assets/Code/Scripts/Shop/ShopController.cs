@@ -24,7 +24,6 @@ public class ShopController : MonoBehaviour
             WalletCurrency.instance.Score(gemValue);
             Debug.Log($"Has obtingut {gemValue} monedes per la {collision.gameObject.GetComponent<Gem>().data.gemName}");
             collision.gameObject.SetActive(false);
-            if (GameManager.Instance != null) GameManager.Instance.AddSellAmount();
         }
     }
 

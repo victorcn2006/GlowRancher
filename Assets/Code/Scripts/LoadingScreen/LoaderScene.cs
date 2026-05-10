@@ -12,6 +12,7 @@ public class LoaderScene : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(this.gameObject);
         }
         else
         {
@@ -21,7 +22,10 @@ public class LoaderScene : MonoBehaviour
     }
     public void LoadScene(string nameScene)
     {
-        SceneManager.LoadScene(nameScene);
+
+        SceneManager.LoadScene(ConstantGame.SCENELOADINGSCREEN);
+        StartCoroutine(LoadSceneAsync(nameScene));
+
     }
 
     private IEnumerator LoadSceneAsync(string nameScene)

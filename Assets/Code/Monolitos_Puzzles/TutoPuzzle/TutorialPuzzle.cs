@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class TutorialPuzzle : MonoBehaviour
 {
+    private MonolitoManager _monolitoManager;
 
-    [SerializeField] private Dialogue _dialogue;
+    private void Awake()
+    {
+        _monolitoManager = GetComponentInChildren<MonolitoManager>();
+    }
 
-    public void FinishPuzzle() => IANarratorManager.Instance.AddNewDialogueToQueue(_dialogue);
+    public void ActivateMonolito() => _monolitoManager.ActivateMonolito();
 }

@@ -98,6 +98,7 @@ public class Inventory : MonoBehaviour
     {
         for (int i = 0; i < slots.Count; i++)
         {
+            Debug.Log(nombre);
             if (slots[i] != null && slots[i].nombre == nombre && slots[i].cantidad < MAX_CANTIDAD_POR_SLOT)
             {
                 slots[i].cantidad++;

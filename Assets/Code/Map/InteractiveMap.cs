@@ -60,7 +60,7 @@ public class InteractiveMap : MonoBehaviour, IInteractive
             _timeSinceLastOpenedClosed = 0;
             Debug.Log("Abriendo Mapa...");
             _isMapActive = true;
-            if (GameManager.Instance != null) GameManager.Instance.SetMapOpenAmount();
+
             if (_mapUIContainer != null) _mapUIContainer.SetActive(true);
             
 

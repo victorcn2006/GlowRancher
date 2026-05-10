@@ -43,6 +43,7 @@ public class BrightnessManager : MonoBehaviour
             if (v.isGlobal)
             {
                 _globalVolume = v;
+                Debug.Log($"[BrightnessManager] Found existing global volume: {v.name}");
                 break;
             }
         }
@@ -55,24 +56,28 @@ public class BrightnessManager : MonoBehaviour
             _globalVolume = volumeObject.AddComponent<Volume>();
             _globalVolume.isGlobal = true;
             _globalVolume.priority = 100;
+            Debug.Log("[BrightnessManager] Created new dedicated global volume");
         }
 
         // Ensure we have a profile
         if (_globalVolume.sharedProfile == null)
         {
             _globalVolume.sharedProfile = ScriptableObject.CreateInstance<VolumeProfile>();
+            Debug.Log("[BrightnessManager] Created new VolumeProfile");
         }
 
         // Ensure we have ColorAdjustments override
         if (!_globalVolume.sharedProfile.TryGet(out _colorAdjustments))
         {
             _colorAdjustments = _globalVolume.sharedProfile.Add<ColorAdjustments>(true);
+            Debug.Log("[BrightnessManager] Added ColorAdjustments to profile");
         }
 
         _colorAdjustments.postExposure.overrideState = true;
         
         // Debug: Check if camera can see this volume's layer
         int volumeLayer = _globalVolume.gameObject.layer;
+        Debug.Log($"[BrightnessManager] Volume is on layer: {LayerMask.LayerToName(volumeLayer)} (Index: {volumeLayer})");
     }
 
     private void LoadAndApplyBrightness()
@@ -127,6 +132,8 @@ public class BrightnessManager : MonoBehaviour
             // Safety: Ensure it's active
             _colorAdjustments.active = true;
             _colorAdjustments.postExposure.overrideState = true;
+
+            Debug.Log($"[BrightnessManager] APPLIED -> Slider: {brightness:F2} | PostExposure: {postExposureValue:F2}");
         }
         else
         {
@@ -135,6 +142,7 @@ public class BrightnessManager : MonoBehaviour
             // Slider 0.0 -> Weight 1 (Full Effect/Dark)
             // This assumes you have a profile that makes things dark.
             _globalVolume.weight = 1f - brightness;
+            Debug.Log($"[BrightnessManager] FALLBACK -> Volume Weight: {_globalVolume.weight:F2}");
         }
     }
 }

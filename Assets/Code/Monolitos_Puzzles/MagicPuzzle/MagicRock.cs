@@ -10,8 +10,7 @@ public class MagicRock : MonoBehaviour
 
     [SerializeField] private float _succedYOffset;
     [SerializeField] private float _succedMovementTime;
-    private float _initialYPosition;
-    private bool _isActive = false;
+    private float initialYPosition;
 
     private void Awake()
     {
@@ -20,29 +19,29 @@ public class MagicRock : MonoBehaviour
 
     private void Start()
     {
-        _initialYPosition = transform.position.y;
+        initialYPosition = transform.position.y;
     }
 
-
-    public void ActiveRock()
+    private void OnTriggerEnter(Collider other)
     {
-        if (!_isActive)
+        if (other.CompareTag("Player"))
         {
-            _isActive = true;
-            transform.DOMoveY(_initialYPosition + _succedYOffset, _succedMovementTime).SetEase(Ease.InOutSine).OnComplete(() => _magicPuzzle.AddActiveRock(this.gameObject));
+            ActiveRock();
         }
+    }
+
+    private void ActiveRock()
+    {
+        transform.DOMoveY(initialYPosition + _succedYOffset, _succedMovementTime).SetEase(Ease.InOutSine).OnComplete(() => _magicPuzzle.AddActiveRock(this.gameObject));
+        GetComponent<SphereCollider>().enabled = false;  
     }
 
     public void DeactivateRock()
     {
-        _isActive = false;
-        transform.DOMoveY(_initialYPosition, _succedMovementTime).SetEase(Ease.InExpo);
+        transform.DOMoveY(initialYPosition, _succedMovementTime).SetEase(Ease.InExpo);
+        GetComponent<SphereCollider>().enabled = true;
 
     }
 
-    public void PuzzleCompleted()
-    {
-        transform.DOMoveY(_initialYPosition, _succedMovementTime).SetEase(Ease.InExpo);
-    } 
 
 }

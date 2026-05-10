@@ -867,7 +867,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 3411390899930993789}
         m_TargetAssemblyTypeName: PanelShopController, Assembly-CSharp
         m_MethodName: ActivateSlimeCage
         m_Mode: 1
@@ -1637,7 +1637,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.0000059042845}
+  m_AnchoredPosition: {x: 0, y: 0.000019879297}
   m_SizeDelta: {x: 0, y: 1148.7578}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1919885213275161363
@@ -1785,7 +1785,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 3411390899930993789}
         m_TargetAssemblyTypeName: PanelShopController, Assembly-CSharp
         m_MethodName: BuyIncinerator
         m_Mode: 1
@@ -2348,7 +2348,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 3411390899930993789}
         m_TargetAssemblyTypeName: PanelShopController, Assembly-CSharp
         m_MethodName: ActivatePlanter
         m_Mode: 1
@@ -4493,6 +4493,7 @@ GameObject:
   - component: {fileID: 3670770294662319988}
   - component: {fileID: 1768747640098015154}
   - component: {fileID: 4215674474844840274}
+  - component: {fileID: 3411390899930993789}
   m_Layer: 5
   m_Name: Shop
   m_TagString: Untagged
@@ -4605,6 +4606,42 @@ MonoBehaviour:
   m_ChildScaleWidth: 1
   m_ChildScaleHeight: 1
   m_ReverseArrangement: 0
+--- !u!114 &3411390899930993789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2958744820957531872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d4f82fa823bc9b4a86bacb6aa888229, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buildingManager: {fileID: 0}
+  _player: {fileID: 0}
+  _shopPanel: {fileID: 0}
+  _incinerator: {fileID: 0}
+  _planter: {fileID: 0}
+  _slimeCage: {fileID: 0}
+  _silo: {fileID: 0}
+  _hook: {fileID: 0}
+  _doubleJump: {fileID: 0}
+  _staminaPlus: {fileID: 0}
+  _itemOne: {fileID: 0}
+  _itemPlanter: {fileID: 0}
+  _itemSlimeCage: {fileID: 0}
+  _itemSilo: {fileID: 0}
+  _itemHook: {fileID: 0}
+  _itemDoubleJump: {fileID: 0}
+  _itemStaminaPlus: {fileID: 0}
+  _incineratorPrice: 10
+  _planterPrice: 30
+  _slimeCagePrice: 15
+  _siloPrice: 160
+  _fusionerPrice: 20
+  _doubleJumpPrice: 20
+  _staminaPlusPrice: 0
 --- !u!1 &3031256576605759361
 GameObject:
   m_ObjectHideFlags: 0
@@ -5489,7 +5526,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7326248135113215457
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5509,10 +5546,10 @@ RectTransform:
   - {fileID: 4380692889639056811}
   m_Father: {fileID: 8916002190119192832}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 415.5, y: -424.5}
+  m_SizeDelta: {x: 811, y: 829}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8141381881779567099
 CanvasRenderer:
@@ -6393,7 +6430,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 3411390899930993789}
         m_TargetAssemblyTypeName: PanelShopController, Assembly-CSharp
         m_MethodName: ActivateStaminaPlus
         m_Mode: 1
@@ -6604,7 +6641,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 3411390899930993789}
         m_TargetAssemblyTypeName: PanelShopController, Assembly-CSharp
         m_MethodName: BuySlimeCage
         m_Mode: 1
@@ -7351,7 +7388,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 3411390899930993789}
         m_TargetAssemblyTypeName: PanelShopController, Assembly-CSharp
         m_MethodName: ActivateHook
         m_Mode: 1
@@ -8130,7 +8167,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 3411390899930993789}
         m_TargetAssemblyTypeName: PanelShopController, Assembly-CSharp
         m_MethodName: ActivateSilo
         m_Mode: 1
@@ -8263,7 +8300,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 3411390899930993789}
         m_TargetAssemblyTypeName: PanelShopController, Assembly-CSharp
         m_MethodName: BuyStaminaPlus
         m_Mode: 1
@@ -9172,7 +9209,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 3411390899930993789}
         m_TargetAssemblyTypeName: PanelShopController, Assembly-CSharp
         m_MethodName: BuyPlanter
         m_Mode: 1
@@ -9851,7 +9888,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 3411390899930993789}
         m_TargetAssemblyTypeName: PanelShopController, Assembly-CSharp
         m_MethodName: ActivateItemOne
         m_Mode: 1
@@ -10860,7 +10897,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 3411390899930993789}
         m_TargetAssemblyTypeName: PanelShopController, Assembly-CSharp
         m_MethodName: BuyHook
         m_Mode: 1
@@ -11009,7 +11046,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 415.5, y: -1253.5}
+  m_AnchoredPosition: {x: 415.5, y: -424.5}
   m_SizeDelta: {x: 811, y: 829}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1758915051768148458
@@ -11171,7 +11208,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 3411390899930993789}
         m_TargetAssemblyTypeName: PanelShopController, Assembly-CSharp
         m_MethodName: BuyHook
         m_Mode: 1
@@ -13367,7 +13404,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 3411390899930993789}
         m_TargetAssemblyTypeName: PanelShopController, Assembly-CSharp
         m_MethodName: BuyDoubleJump
         m_Mode: 1
@@ -13635,7 +13672,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 3411390899930993789}
         m_TargetAssemblyTypeName: PanelShopController, Assembly-CSharp
         m_MethodName: ActivateDoubleJump
         m_Mode: 1

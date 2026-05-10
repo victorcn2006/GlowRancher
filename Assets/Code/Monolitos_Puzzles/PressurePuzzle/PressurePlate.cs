@@ -25,6 +25,7 @@ public class PressurePlate : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Entra en el trigger enter");
 
         if (other.CompareTag("Slime") || other.CompareTag("Player"))
         {
@@ -38,6 +39,7 @@ public class PressurePlate : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        Debug.Log("Entra en el trigger exit");
 
 
         if (other.CompareTag("Slime") || other.CompareTag("Player"))

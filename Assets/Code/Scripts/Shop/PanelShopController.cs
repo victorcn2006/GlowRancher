@@ -8,8 +8,8 @@ public class PanelShopController : MonoBehaviour
     public static PanelShopController Instance { get; private set; }
 
     [Header("Refs")]
-     private BuildingManager _buildingManager;
-     private Player _player;
+    [SerializeField] private BuildingManager _buildingManager;
+    [SerializeField] private Player _player;
     [SerializeField] private GameObject _shopPanel;
     [SerializeField] private GameObject _incinerator;
     [SerializeField] private GameObject _planter;
@@ -27,7 +27,6 @@ public class PanelShopController : MonoBehaviour
     [SerializeField] private Button _itemHook;
     [SerializeField] private Button _itemDoubleJump;
     [SerializeField] private Button _itemStaminaPlus;
-
 
     #region Prices
     [Header("Prices")]
@@ -62,8 +61,6 @@ public class PanelShopController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _buildingManager = References.Instance._buildingManager;
-        _player = References.Instance.player.GetComponent<Player>();
         _incinerator.SetActive(false);
         _planter.SetActive(false);
         _slimeCage.SetActive(false);
@@ -167,7 +164,6 @@ public class PanelShopController : MonoBehaviour
             Debug.Log("Incinerator purchased");
             _incinerator.SetActive(true);
             _buildingManager.IncineratorBuyed();
-            if (GameManager.Instance != null) GameManager.Instance.SetBuildingAmount();
         }
         else
         {
@@ -184,7 +180,6 @@ public class PanelShopController : MonoBehaviour
             WalletCurrency.instance.SaveMoney();
             WalletCurrency.instance.Score_txt.text = WalletCurrency.instance.bank.ToString();
             _buildingManager.PlanterBuyed();
-            if (GameManager.Instance != null) GameManager.Instance.SetBuildingAmount();
             Debug.Log("Planter purchased");
         }
         else
@@ -202,7 +197,6 @@ public class PanelShopController : MonoBehaviour
             WalletCurrency.instance.SaveMoney();
             WalletCurrency.instance.Score_txt.text = WalletCurrency.instance.bank.ToString();
             _buildingManager.CageBuyed();
-            if (GameManager.Instance != null) GameManager.Instance.SetBuildingAmount();
             Debug.Log("Slime Cage purchased");
         }
         else
@@ -220,7 +214,6 @@ public class PanelShopController : MonoBehaviour
             WalletCurrency.instance.SaveMoney();
             WalletCurrency.instance.Score_txt.text = WalletCurrency.instance.bank.ToString();
             _buildingManager.SiloBuyed();
-            if (GameManager.Instance != null) GameManager.Instance.SetBuildingAmount();
             Debug.Log("Silo purchased");
         }
         else
@@ -238,7 +231,6 @@ public class PanelShopController : MonoBehaviour
             WalletCurrency.instance.SaveMoney();
             WalletCurrency.instance.Score_txt.text = WalletCurrency.instance.bank.ToString();
             _buildingManager.FusionerBuyed();
-            if (GameManager.Instance != null) GameManager.Instance.SetBuildingAmount();
             Debug.Log("Hook purchased");
         }
         else
@@ -254,8 +246,7 @@ public class PanelShopController : MonoBehaviour
             WalletCurrency.instance.bank -= _doubleJumpPrice;
             WalletCurrency.instance.SaveMoney();
             WalletCurrency.instance.Score_txt.text = WalletCurrency.instance.bank.ToString();
-            PlayerMovement.instance._hasDoubleJumpItem = true;
-            if (GameManager.Instance != null) GameManager.Instance.SetBuildingAmount();
+            
             Debug.Log("Hook purchased");
         }
         else
@@ -272,7 +263,6 @@ public class PanelShopController : MonoBehaviour
             WalletCurrency.instance.SaveMoney();
             WalletCurrency.instance.Score_txt.text = WalletCurrency.instance.bank.ToString();
             _player.AddMaxEnergy();
-            if (GameManager.Instance != null) GameManager.Instance.SetBuildingAmount();
             Debug.Log("satmina+ purchased");
         }
         else
