@@ -1,9 +1,11 @@
+using FMODUnity;
 using UnityEngine;
 
 public class Character : MonoBehaviour, IDamageable
 {
     [SerializeField] protected string characterName;
     [SerializeField, TextArea] protected string description;
+    [SerializeField] private EventReference _damageSound;
 
     [SerializeField] protected int maxHealth = 3;
     [SerializeField] protected int maxEnergy = 100;
@@ -19,6 +21,8 @@ public class Character : MonoBehaviour, IDamageable
         currentEnergy = maxEnergy;
         position = transform.position;
     }
+
+
 
     // Getters
     public string GetCharacterName() => characterName;
@@ -46,6 +50,11 @@ public class Character : MonoBehaviour, IDamageable
     {
         damage = Mathf.Max(0, damage);
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHealth);
+        if (!_damageSound.IsNull)
+        {
+
+            RuntimeManager.PlayOneShot(_damageSound, transform.position);
+        }
 
         if (currentHealth <= 0) Die();
     }

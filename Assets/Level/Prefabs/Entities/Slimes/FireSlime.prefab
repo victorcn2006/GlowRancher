@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 1485042742539602296}
   - component: {fileID: 458854614321744526}
   - component: {fileID: 8997456195258938582}
+  - component: {fileID: 6435929905427605614}
   m_Layer: 0
   m_Name: FireSlime
   m_TagString: Slime
@@ -167,8 +168,21 @@ MonoBehaviour:
   JUMP_FORCE: 170
   JUMP_TIME: 1
   JUMP_DISTANCE: 1
-  MAX_PHYSICS_JUMP_DISTANCE: 3
   ROTATE_DURATION: 0.5
+  _landSoundSlime:
+    Guid:
+      Data1: -1746834499
+      Data2: 1316020304
+      Data3: 1173717946
+      Data4: -1606751673
+    Path: event:/sfx/slime/normal/jump_land
+  _jumpSoundSlime:
+    Guid:
+      Data1: 1878456471
+      Data2: 1164852200
+      Data3: 2047576989
+      Data4: -1353354511
+    Path: event:/sfx/slime/normal/jump
   groundChecker: {fileID: 4311179933767478691}
   groundCheckDistance: 0.4
 --- !u!114 &1485042742539602296
@@ -218,6 +232,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 20
+--- !u!114 &6435929905427605614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 839288053946347718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dbccc5fed1bedf489a4035a1527d7b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1316237494541959180
 GameObject:
   m_ObjectHideFlags: 0

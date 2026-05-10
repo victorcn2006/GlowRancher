@@ -11,19 +11,16 @@ public class IceWall : MonoBehaviour
 
     [SerializeField] private ParticleSystem _smokeParticleFX;
 
+    private bool _melted = false;
 
-    private void OnTriggerEnter(Collider other)
+    public void Melt()
     {
-        if (other.TryGetComponent<HeatFont>(out HeatFont heatFont))
+        if (!_melted)
         {
             _smokeParticleFX.Play();
-            Melt();
+            transform.DOMoveY(transform.position.y - _movementOffset, _timeToMove).SetEase(Ease.InQuint);
         }
-    }
-
-    private void Melt()
-    {
-        transform.DOMoveY(transform.position.y - _movementOffset, _timeToMove).SetEase(Ease.InQuint);
+        _melted = true;
     }
 
 }

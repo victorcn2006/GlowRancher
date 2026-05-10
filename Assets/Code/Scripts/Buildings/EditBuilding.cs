@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 using System.Collections.Generic;
+using System.Collections;
 
 /// <summary>
 /// Manages the building editing system, allowing players to move and reposition buildings via a hologram.
@@ -26,10 +27,16 @@ public class EditBuilding : MonoBehaviour
     [SerializeField] private float _maxPlaceDistance = 20f;
     [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private LayerMask _obstructionLayer;
+    [Tooltip("Optional: Use a specific BoxCollider for placement checks. If null, it uses the hologram's scale.")]
+    [SerializeField] private BoxCollider _placementHitbox;
+    [Tooltip("Extra space added to the placement hitbox to prevent tight overlaps.")]
+    [SerializeField] private Vector3 _placementPadding = new Vector3(0.2f, 0f, 0.2f);
 
     [Header("Selling Settings")]
     [Tooltip("The type of building to look up its price in the ShopController.")]
     [SerializeField] private BuildingType _buildingType;
+
+    [SerializeField] private List<GameObject> _dustParticles;
 
     private bool _isNewBuilding;
 
@@ -113,18 +120,41 @@ public class EditBuilding : MonoBehaviour
 
     private void ValidatePlacement()
     {
-        // Use halfExtents for OverlapBox (measures from center to edge)
-        Vector3 halfExtents = _hologramModel.transform.localScale / 2f;
+        Vector3 center;
+        Vector3 halfExtents;
+        Quaternion rotation = _hologramModel.transform.rotation;
+
+        if (_placementHitbox != null)
+        {
+            // Use the specific collider's size and center, adjusted by the hologram's transform
+            center = _hologramModel.transform.TransformPoint(_placementHitbox.center);
+            
+            // Multiply collider size by transform lossyScale, then add padding
+            Vector3 scaledSize = Vector3.Scale(_placementHitbox.size, _hologramModel.transform.lossyScale);
+            halfExtents = (scaledSize / 2f) + _placementPadding;
+        }
+        else
+        {
+            // Fallback to old scale-based logic (now with padding)
+            center = _hologramModel.transform.position;
+            halfExtents = (_hologramModel.transform.localScale / 2f) + _placementPadding;
+        }
         
         Collider[] hitColliders = Physics.OverlapBox(
-            _hologramModel.transform.position, 
+            center, 
             halfExtents, 
-            _hologramModel.transform.rotation, 
+            rotation, 
             _obstructionLayer,
             QueryTriggerInteraction.Collide
         );
 
-        _isValidPlacement = (hitColliders.Length == 0);
+        bool isWithinRange = true;
+        if (ConstructionRangeManager.Instance != null)
+        {
+            isWithinRange = ConstructionRangeManager.Instance.IsPositionWithinRange(_hologramModel.transform.position);
+        }
+
+        _isValidPlacement = (hitColliders.Length == 0) && isWithinRange;
 
         // Update visual feedback
         if (_hologramRenderer != null)
@@ -209,6 +239,7 @@ public class EditBuilding : MonoBehaviour
 
 private void TryFinalizePlacement()
     {
+        if (GameManager.Instance != null) GameManager.Instance.SetBuildingAmount();
         if (!_isValidPlacement)
         {
             Debug.Log("<color=red>Invalid placement: Building obstructed!</color>");
@@ -225,8 +256,21 @@ private void TryFinalizePlacement()
         _isEditing = false;
         InputManager.Instance.IsBuildingPressed = false;
         SetState(false);
-    }
 
+        foreach (GameObject _dustParticle in _dustParticles) {
+            _dustParticle.gameObject.SetActive(true);
+            ParticleSystem ps = _dustParticle.GetComponent<ParticleSystem>();
+            ps.Play();
+            StartCoroutine(StopDust(ps, ps.main.duration + ps.main.startLifetime.constantMax));
+        } 
+    }
+    private IEnumerator StopDust(ParticleSystem dust, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        dust.Stop();
+        dust.gameObject.SetActive(false);
+    }
     private void CancelPlacement(){
         if (_isNewBuilding)
         {
@@ -273,9 +317,25 @@ private void TryFinalizePlacement()
     {
         if (!_isEditing || _hologramModel == null) return;
 
+        Vector3 center;
+        Vector3 halfExtents;
+        Quaternion rotation = _hologramModel.transform.rotation;
+
+        if (_placementHitbox != null)
+        {
+            center = _hologramModel.transform.TransformPoint(_placementHitbox.center);
+            Vector3 scaledSize = Vector3.Scale(_placementHitbox.size, _hologramModel.transform.lossyScale);
+            halfExtents = (scaledSize / 2f) + _placementPadding;
+        }
+        else
+        {
+            center = _hologramModel.transform.position;
+            halfExtents = (_hologramModel.transform.localScale / 2f) + _placementPadding;
+        }
+
         Gizmos.color = _isValidPlacement ? new Color(0, 1, 0, 0.3f) : new Color(1, 0, 0, 0.3f);
-        Gizmos.matrix = Matrix4x4.TRS(_hologramModel.transform.position, _hologramModel.transform.rotation, _hologramModel.transform.lossyScale);
-        Gizmos.DrawCube(Vector3.zero, Vector3.one);
-        Gizmos.DrawWireCube(Vector3.zero, Vector3.one);
+        Gizmos.matrix = Matrix4x4.TRS(center, rotation, Vector3.one);
+        Gizmos.DrawCube(Vector3.zero, halfExtents * 2f);
+        Gizmos.DrawWireCube(Vector3.zero, halfExtents * 2f);
     }
 }

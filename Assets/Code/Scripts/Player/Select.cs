@@ -37,6 +37,8 @@ public class Select : MonoBehaviour
 
     private void HandleInteraction()
     {
+
+        Debug.Log("Interactao");
         RaycastHit hit;
 
         Transform rayOrigin = _cameraTransform != null ? _cameraTransform : transform;
@@ -45,9 +47,11 @@ public class Select : MonoBehaviour
 
         if (Physics.Raycast(rayOrigin.position, rayOrigin.forward, out hit, distance, _mask))
         {
+            
             if (hit.collider.TryGetComponent<IInteractive>(out var InteractiveElement))
             {
                 InteractiveElement.OnInteract();
+                Debug.Log("El rayo impactó con objeto interactuable.");
             }
         }
         else

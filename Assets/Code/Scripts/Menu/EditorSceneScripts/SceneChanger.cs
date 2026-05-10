@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
 {
@@ -8,11 +9,18 @@ public class SceneChanger : MonoBehaviour
     {
         if (LoaderScene.Instance != null)
         {
-            LoaderScene.Instance.LoadScene(sceneToLoad.SceneName);
+            if (sceneToLoad.SceneName == "World")
+            {
+                LoaderScene.Instance.LoadScene("LoadingScreen");
+            }
+            else
+            {
+                SceneManager.LoadScene(sceneToLoad.SceneName);
+            }
         }
         else
         {
-            Debug.LogWarning("No hay una instancia de LoaderScene en la jerarquía.");
+            Debug.LogWarning("Cambio de escena Fallido");
         }
     }
 }

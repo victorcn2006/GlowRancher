@@ -18,6 +18,14 @@ public class Player : Character
     private Coroutine _regenCoroutine;
     private SiloInventory _inventory;
 
+    //tiempo que tiene que pasar sin recibr daño para que empieze a curar
+    private const float TIMER_TO_HEAL = 10f;
+    private float _healTimer;
+
+    //tiempo que tiene que pasar entre cada heal una vez puede empezar a curarse
+    private const float HEALING_TIC_TIMER = 0.5f;
+    private float _healingTimer;
+
     protected override void Awake()
     {
         // Importante: Si la clase base (Character) tiene un Awake, 
@@ -42,6 +50,18 @@ public class Player : Character
     private void Update()
     {
         HandleEnergyLogic();
+
+        _healTimer += Time.deltaTime;
+        if(_healTimer >= TIMER_TO_HEAL)
+        {
+            _healingTimer += Time.deltaTime;
+            if (_healingTimer >= HEALING_TIC_TIMER)
+            {
+                Heal(2);
+                _healingTimer = 0;
+            }
+        }
+
     }
 
     private void HandleEnergyLogic()
@@ -100,15 +120,35 @@ public class Player : Character
     // Propiedad que lee PlayerMovement
     public bool CanRun => InputManager.Instance.IsRunning && _currentEnergy > 0 && InputManager.Instance.MoveInput.magnitude > 0.1f;
 
-    public void Heal(int amount) => currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
+    //public void Heal(int amount) => currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
+    public void Heal(int amount) {
+        Debug.Log("CURANDO");
+        currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
 
-    public override void TakeDamage(int damage) => base.TakeDamage(damage);
+    } 
+
+    //public override void TakeDamage(int damage) => base.TakeDamage(damage);
+    public override void TakeDamage(int damage)
+    {
+        Debug.Log("Dañado");
+        base.TakeDamage(damage);
+        _healTimer = 0;
+        _healingTimer = 0;
+    } 
 
     // --- IMPLEMENTATION ---
     public string GetSaveID() => "Player";
 
     protected override void Die()
     {
+        // --- Start: Update deathCounter via GameManager ---
+        // Call GameManager to handle death count increment and save.
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.AddDeathPlayer();
+        }
+        // --- End: Update deathCounter via GameManager ---
+
         DeathScript.instance.Die();
         currentHealth = maxHealth;
     }
