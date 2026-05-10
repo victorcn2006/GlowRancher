@@ -14,11 +14,17 @@ public class PlayerCameraMovement : MonoBehaviour
 
     private float _cameraVerticalAngle;
 
+    public static PlayerCameraMovement Instance { get; private set; }
+
     // Controlado por otros sistemas (ej. WikiManager)
     public bool CanControlCamera { get; private set; } = true;
 
     private void Awake()
     {
+        if (Instance == null)
+            Instance = this;
+        else
+
         // Si no se asignó en el inspector, intenta buscar la cámara en los hijos
         if (_cameraTransform == null)
             _cameraTransform = GetComponentInChildren<Camera>().transform;
@@ -30,7 +36,7 @@ public class PlayerCameraMovement : MonoBehaviour
     {
         // Si el control está desactivado, no procesamos la rotación
         if (!CanControlCamera) return;
-        if (InputManager.Instance.IsPaused) return; // per cuan estiogui el pause no es pugui rotar la camara
+        if (InputManager.Instance.IsPaused) return;
         HandleRotation();
     }
 

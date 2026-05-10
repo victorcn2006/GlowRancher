@@ -10,9 +10,6 @@ public class PauseManager : MonoBehaviour
 
     public static PauseManager instance { get; private set; }
 
-    [Header("References")]
-    [SerializeField] private PlayerCameraMovement _playerCamera;
-
     [Header("UI Panels")]
     [RequiredField, SerializeField] private GameObject _pausePanel;
     [RequiredField, SerializeField] private GameObject _hud;
@@ -74,7 +71,7 @@ public class PauseManager : MonoBehaviour
         _gamePanel.SetActive(false);
         Time.timeScale = 0f;
 
-        FindObjectOfType<PlayerCameraMovement>()?.SetControlState(false);
+        PlayerCameraMovement.Instance?.SetControlState(false);
     }
 
     private void DisablePausePanel(){
@@ -83,6 +80,6 @@ public class PauseManager : MonoBehaviour
         _gamePanel.SetActive(true);
         Time.timeScale = 1f;
 
-        FindObjectOfType<PlayerCameraMovement>()?.SetControlState(true);
+        PlayerCameraMovement.Instance?.SetControlState(true);
     }
 }
