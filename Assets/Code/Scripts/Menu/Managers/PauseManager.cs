@@ -18,6 +18,9 @@ public class PauseManager : MonoBehaviour
     [Header("UI Navigation")]
     [SerializeField] private GameObject _firstButton;
 
+    [Header("References")]
+    [SerializeField] private PlayerCameraMovement _playerCamera;
+
     private bool _focusSet = false;
     private void Awake() {
         if (instance == null)
@@ -70,6 +73,8 @@ public class PauseManager : MonoBehaviour
         _hud.SetActive(false);
         _gamePanel.SetActive(false);
         Time.timeScale = 0f;
+
+        _playerCamera.SetControlState(false);
     }
 
     private void DisablePausePanel(){
@@ -78,5 +83,6 @@ public class PauseManager : MonoBehaviour
         _gamePanel.SetActive(true);
         Time.timeScale = 1f;
 
+        _playerCamera.SetControlState(true);
     }
 }
