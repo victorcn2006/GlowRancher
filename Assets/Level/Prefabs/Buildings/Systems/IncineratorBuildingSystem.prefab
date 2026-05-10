@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 4967573976262413492}
   - component: {fileID: 7741097804488545637}
   - component: {fileID: 3341521109146969069}
+  - component: {fileID: 5187920526256866741}
   m_Layer: 0
   m_Name: Hologram
   m_TagString: building
@@ -216,6 +217,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5187920526256866741
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 875314755554607473}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 16.95863, y: 9.151563, z: 17.220243}
+  m_Center: {x: 0, y: 3.4523616, z: -0.040366184}
 --- !u!1 &978931310793685286
 GameObject:
   m_ObjectHideFlags: 0
@@ -838,6 +860,8 @@ MonoBehaviour:
   _obstructionLayer:
     serializedVersion: 2
     m_Bits: 64
+  _placementHitbox: {fileID: 5187920526256866741}
+  _placementPadding: {x: 0.4, y: 0, z: 0.4}
   _buildingType: 1
 --- !u!1 &4604323586439399605
 GameObject:

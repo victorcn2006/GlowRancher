@@ -181,6 +181,8 @@ MonoBehaviour:
   _obstructionLayer:
     serializedVersion: 2
     m_Bits: 64
+  _placementHitbox: {fileID: 3467573320064223047}
+  _placementPadding: {x: 0.4, y: 0, z: 0.4}
   _buildingType: 3
 --- !u!65 &3206869358026096025
 BoxCollider:
@@ -201,8 +203,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 16.057983, y: 8.451843, z: 13.497269}
-  m_Center: {x: -1.1300659, y: 3.7259216, z: 0.99422455}
+  m_Size: {x: 12.386963, y: 8.451843, z: 13.294998}
+  m_Center: {x: 0.078186035, y: 3.7259216, z: 0.8930893}
 --- !u!1001 &37474063142427274
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -266,7 +268,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5306355473825562369, guid: 7123327684b2e8e45bebb492134ee0b0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3467573320064223047}
   m_SourcePrefab: {fileID: 100100000, guid: 7123327684b2e8e45bebb492134ee0b0, type: 3}
 --- !u!4 &4786487385423036209 stripped
 Transform:
@@ -278,6 +283,27 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5306355473825562369, guid: 7123327684b2e8e45bebb492134ee0b0, type: 3}
   m_PrefabInstance: {fileID: 37474063142427274}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &3467573320064223047
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5271133812350739851}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 16.000132, y: 21.645662, z: 16.872215}
+  m_Center: {x: 0.8332323, y: 10.544328, z: 0.06415748}
 --- !u!23 &5919462974331339870 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 5954614403851476692, guid: 7123327684b2e8e45bebb492134ee0b0, type: 3}
