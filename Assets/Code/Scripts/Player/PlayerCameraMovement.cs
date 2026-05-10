@@ -14,16 +14,11 @@ public class PlayerCameraMovement : MonoBehaviour
 
     private float _cameraVerticalAngle;
 
-    public static PlayerCameraMovement Instance { get; private set; }
-
     // Controlado por otros sistemas (ej. WikiManager)
     public bool CanControlCamera { get; private set; } = true;
 
     private void Awake()
     {
-        if (Instance == null)
-            Instance = this;
-        else
 
         // Si no se asignó en el inspector, intenta buscar la cámara en los hijos
         if (_cameraTransform == null)
