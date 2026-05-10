@@ -96,10 +96,18 @@ public class VegetableData : MonoBehaviour, IAspirable
     {
         if (_currentState == STATES.RECOLECT)
         {
-            Instantiate(_food, this.transform.position, transform.rotation);
-            Instantiate(_seed, this.transform.position, transform.rotation);
+            /*
+            GameObject food = PoolManager.Instance.GetFirstAvailableObject("Tomato");
+            GameObject seed = PoolManager.Instance.GetFirstAvailableObject("TomatoSeed");
+            if (food != null) food.transform.position = transform.position;
+            if (seed != null) seed.transform.position = transform.position;
+            */
             SetState(STATES.SEED);
             Debug.Log("AAAAAAAAAAAAAAA");
+
+            if (Aspirator.instance != null)
+                Aspirator.instance.RemoveAspirableObject(this.gameObject);
+
             Destroy(this.gameObject);
         }
     }

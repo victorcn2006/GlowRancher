@@ -8,7 +8,7 @@ public class CropField : MonoBehaviour
         if (other.CompareTag("Seed") && !_plantCreated)
         {
             Seed seed = other.GetComponent<Seed>();
-
+            Debug.LogError("entraaaaaa");
             if (seed != null)
             {
                 GameObject crop = Instantiate(seed.cropPrefab, transform.position, Quaternion.identity, transform);

@@ -68,6 +68,7 @@ public class PoolManager : MonoBehaviour
         // Buscamos un objeto libre
         foreach (GameObject obj in actualPool.objects)
         {
+            if (obj == null) continue;
             if (!obj.activeInHierarchy)
             {
                 obj.SetActive(true);
