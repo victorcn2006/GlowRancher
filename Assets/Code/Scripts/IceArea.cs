@@ -7,7 +7,8 @@ public class IceArea : MonoBehaviour
     private float timer = 0f;
     [SerializeField] private float _damageInterval = 1f;
     public float _baseIcePoints = 1f;
-    
+
+    [SerializeField] private ParticleSystem _snowParticleSystem;
     [SerializeField] private float _catSlimeDetectionRadius = 5f;
 
     private void OnTriggerEnter(Collider other)
@@ -22,6 +23,7 @@ public class IceArea : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
 
+        _snowParticleSystem.Play();
         // Check for nearby Cat Slimes around the player to provide protection
         int resistance = GetNearbyCatSlimeResistance(other.transform.position);
         
@@ -43,6 +45,7 @@ public class IceArea : MonoBehaviour
         {
             // Reset timer if protected to avoid "burst" damage when stepping out of protection
             timer = 0f;
+            _snowParticleSystem.Stop();
         }
     }
 
