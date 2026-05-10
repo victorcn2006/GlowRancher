@@ -122,7 +122,6 @@ public class Player : Character
 
     //public void Heal(int amount) => currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
     public void Heal(int amount) {
-        Debug.Log("CURANDO");
         currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
 
     } 
