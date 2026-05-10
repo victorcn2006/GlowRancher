@@ -22,6 +22,8 @@ public class Character : MonoBehaviour, IDamageable
         position = transform.position;
     }
 
+
+
     // Getters
     public string GetCharacterName() => characterName;
     public string GetDescription() => description;
