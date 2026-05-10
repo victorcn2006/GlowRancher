@@ -30,7 +30,7 @@ public class PlayerCameraMovement : MonoBehaviour
     {
         // Si el control está desactivado, no procesamos la rotación
         if (!CanControlCamera) return;
-
+        if (InputManager.Instance.IsPaused) return; // per cuan estiogui el pause no es pugui rotar la camara
         HandleRotation();
     }
 
