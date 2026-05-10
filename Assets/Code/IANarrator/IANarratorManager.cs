@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class IANarratorManager : MonoBehaviour
@@ -9,6 +10,8 @@ public class IANarratorManager : MonoBehaviour
 
     [SerializeField] private GameObject _dialogueGO;
     [SerializeField] private Dialogue _OnboardingDialogue;
+    [SerializeField] private float _timeAutoSkip;
+    private float _timer;
 
     private List<Dialogue> _dialoguesList = new List<Dialogue>();
     private Dialogue _currentDialogue;
@@ -20,15 +23,27 @@ public class IANarratorManager : MonoBehaviour
     private void OnEnable() { if (InputManager.Instance != null) InputManager.Instance.OnEnterPerformed.AddListener(NextLineDialog); }
     private void OnDisable() { if (InputManager.Instance != null) InputManager.Instance.OnEnterPerformed.RemoveListener(NextLineDialog); }
 
-    private void Start()
-    {
-        StartNewDialog(_OnboardingDialogue);
-    }
     void Awake()
     {
         if (instance == null) instance = this;
         else { Destroy(gameObject); return; }
         _iATextNarrator = GetComponent<IATextNarrator>();
+    }
+    private void Start()
+    {
+        StartNewDialog(_OnboardingDialogue);
+    }
+
+    private void Update()
+    {
+        if (_dialogLineFinished && _dialogDisplaying)
+        {
+            _timer += Time.deltaTime;
+            if (_timer >= _timeAutoSkip)
+            {
+                NextLineDialog();
+            }
+        }
     }
 
     public void AddNewDialogueToQueue(Dialogue newDialogue)
@@ -74,7 +89,7 @@ public class IANarratorManager : MonoBehaviour
     public void DialogueLineFinished()
     {
         _dialogLineFinished = true;
-
+        _timer = 0;
     } 
 
     private void NextDialogue()
