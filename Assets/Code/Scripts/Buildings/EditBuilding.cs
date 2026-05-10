@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 using System.Collections.Generic;
+using System.Collections;
 
 /// <summary>
 /// Manages the building editing system, allowing players to move and reposition buildings via a hologram.
@@ -34,6 +35,8 @@ public class EditBuilding : MonoBehaviour
     [Header("Selling Settings")]
     [Tooltip("The type of building to look up its price in the ShopController.")]
     [SerializeField] private BuildingType _buildingType;
+
+    [SerializeField] private List<GameObject> _dustParticles;
 
     private bool _isNewBuilding;
 
@@ -253,9 +256,21 @@ private void TryFinalizePlacement()
         _isEditing = false;
         InputManager.Instance.IsBuildingPressed = false;
         SetState(false);
-        
-    }
 
+        foreach (GameObject _dustParticle in _dustParticles) {
+            _dustParticle.gameObject.SetActive(true);
+            ParticleSystem ps = _dustParticle.GetComponent<ParticleSystem>();
+            ps.Play();
+            StartCoroutine(StopDust(ps, ps.main.duration + ps.main.startLifetime.constantMax));
+        } 
+    }
+    private IEnumerator StopDust(ParticleSystem dust, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        dust.Stop();
+        dust.gameObject.SetActive(false);
+    }
     private void CancelPlacement(){
         if (_isNewBuilding)
         {
