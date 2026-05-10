@@ -4942,6 +4942,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2877026461865387428}
   - component: {fileID: 5685468310616954175}
+  - component: {fileID: 1815210354474769530}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -5000,6 +5001,21 @@ MonoBehaviour:
       Data3: 1823086989
       Data4: 1708965704
     Path: event:/sfx/chr/vacuum_shot
+--- !u!114 &1815210354474769530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2884135933666009489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 634127406eb4aa24fa5ef191b60b864f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _vacuumModel: {fileID: 2827381567654805254}
+  _moveAmount: {x: 0, y: 0.03, z: 0.02}
+  _cycleSpeed: 0.4
 --- !u!1 &3201461701181217775
 GameObject:
   m_ObjectHideFlags: 0
@@ -5300,7 +5316,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.66, y: 1.76, z: -14.48}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 135181718617093132}
