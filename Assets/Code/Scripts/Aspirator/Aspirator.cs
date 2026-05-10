@@ -112,6 +112,7 @@ public class Aspirator : MonoBehaviour
                 PlayShotSound();
 
                 _objectsDetector.RemoveTargetFromAspirableObjectList(objectToLaunch);
+                objectToLaunch.transform.SetParent(null);
                 objectToLaunch.transform.position = _aspiratePoint.position;
 
                 if (objectToLaunch.TryGetComponent<Rigidbody>(out var rb))
