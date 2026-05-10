@@ -87,7 +87,7 @@ public class MonolitoManager : MonoBehaviour
     public void PurificarZonas()
     {
         // Solo estos dos cambiarán a estado 0 (Purificado)
-        /*
+        
         zonaPlaya.CambiarEstado(0f);
         zonaGranja.CambiarEstado(0f);
         zonaForest.CambiarEstado(0f);
@@ -103,7 +103,7 @@ public class MonolitoManager : MonoBehaviour
         zonaForestSmall.CambiarEstado(0f);
         zonaMountain.CambiarEstado(0f);
         zonaLava.CambiarEstado(0f);
-        */
+        
     }
 
 }
