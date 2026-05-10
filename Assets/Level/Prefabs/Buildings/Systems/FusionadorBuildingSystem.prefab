@@ -71,7 +71,7 @@ MonoBehaviour:
   _buildingModel: {fileID: 6746096926259605991}
   _hologramModel: {fileID: 3935020951580587370}
   _hologramRenderer: {fileID: 3286779750105846975}
-  _invalidPlacementMaterial: {fileID: 2100000, guid: ce11e6e83c8cf8a46b8dec389b45633a, type: 2}
+  _invalidPlacementMaterial: {fileID: 2100000, guid: eecf30371a70c2c4baca37b0a0d58bf1, type: 2}
   _maxPlaceDistance: 8
   _groundLayer:
     serializedVersion: 2
@@ -159,6 +159,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6147813985291227602}
     m_Modifications:
+    - target: {fileID: 5107985164865936347, guid: b65f8990cfbff5b48a4fd01218138d61, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d31de14cef9a845eda8a2fe52a7f1e2f, type: 2}
+    - target: {fileID: 5107985164865936347, guid: b65f8990cfbff5b48a4fd01218138d61, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: d31de14cef9a845eda8a2fe52a7f1e2f, type: 2}
     - target: {fileID: 6244269114602512564, guid: b65f8990cfbff5b48a4fd01218138d61, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
