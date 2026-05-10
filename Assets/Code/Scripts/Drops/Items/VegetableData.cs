@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class VegetableData : MonoBehaviour
+public class VegetableData : MonoBehaviour, IAspirable
 {
     [Header("Data")]
     [SerializeField] private Vegetable _vegetableData;
@@ -10,6 +10,10 @@ public class VegetableData : MonoBehaviour
     [SerializeField] private GameObject _growthPrefab;
     [SerializeField] private GameObject _maturePrefab;
     [SerializeField] private GameObject _recolectPrefab;
+
+    [Header("Items to be dropped")]
+    [SerializeField] private GameObject _seed;
+    [SerializeField] private GameObject _food;
 
     private GameObject _currentModel;
     private float _stateTimer;
@@ -30,11 +34,8 @@ public class VegetableData : MonoBehaviour
         SetState(STATES.SEED);
     }
 
-    
-
     private void Update()
     {
-
         _stateTimer += Time.deltaTime;
         _vegetableData.time = _stateTimer;
 
@@ -91,16 +92,40 @@ public class VegetableData : MonoBehaviour
         UpdateVisuals();
     }
 
-    public void GetState(STATES state)
-    {
-        _currentState = state;
-    }
-
     public void Harvest()
     {
         if (_currentState == STATES.RECOLECT)
         {
+            Instantiate(_food, this.transform.position, transform.rotation);
+            Instantiate(_seed, this.transform.position, transform.rotation);
             SetState(STATES.SEED);
+            Debug.Log("AAAAAAAAAAAAAAA");
+            Destroy(this.gameObject);
         }
+    }
+
+    private VegetablesPool.seedsType GetSeedType(VegetablesPool.vegetablesType vegType)
+    {
+        return vegType switch
+        {
+            VegetablesPool.vegetablesType.CARROT => VegetablesPool.seedsType.CARROT_SEED,
+            VegetablesPool.vegetablesType.EGGPLANT => VegetablesPool.seedsType.EGGPLANT_SEED,
+            VegetablesPool.vegetablesType.PUMPKIN => VegetablesPool.seedsType.PUMPKIN_SEED,
+            VegetablesPool.vegetablesType.TOMATO => VegetablesPool.seedsType.TOMATO_SEED,
+            _ => VegetablesPool.seedsType.CARROT_SEED
+        };
+    }
+
+    public void BeingAspired()
+    {
+        if (_currentState == STATES.RECOLECT)
+        {
+            Harvest();
+        }
+    }
+
+    public void StopBeingAspired()
+    {
+        // Not needed for fixed plants
     }
 }

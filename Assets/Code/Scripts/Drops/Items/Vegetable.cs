@@ -10,4 +10,7 @@ public class Vegetable : ScriptableObject
 
     [Header("Growth Settings")]
     public float stateDuration = 15f;
+
+    [Header("Type")]
+    public VegetablesPool.vegetablesType type;
 }
