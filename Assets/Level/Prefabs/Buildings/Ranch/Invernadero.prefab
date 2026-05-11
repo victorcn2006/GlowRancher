@@ -977,6 +977,7 @@ GameObject:
   - component: {fileID: 5645673738088149515}
   - component: {fileID: 5087218991390335519}
   - component: {fileID: 2963204096523910127}
+  - component: {fileID: 8252565737983915852}
   m_Layer: 0
   m_Name: Crop Zone (5)
   m_TagString: Untagged
@@ -993,7 +994,7 @@ Transform:
   m_GameObject: {fileID: 1270554010837071922}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.651, y: 0, z: 0.777}
+  m_LocalPosition: {x: -1.651, y: 0.055000305, z: 0.777}
   m_LocalScale: {x: 0.73587507, y: 0.063511446, z: 0.68126655}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1014,7 +1015,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1270554010837071922}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1064,12 +1065,24 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 3.6285396, z: 1}
+  m_Center: {x: 0, y: 1.3142694, z: 0}
+--- !u!114 &8252565737983915852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1270554010837071922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3c1b4d33ad819d4492435ab81ca1372, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1412878181541962660
 GameObject:
   m_ObjectHideFlags: 0
@@ -1226,6 +1239,7 @@ GameObject:
   - component: {fileID: 4304430578027189840}
   - component: {fileID: 5284257884866204208}
   - component: {fileID: 5306123023473409268}
+  - component: {fileID: 6963131734475730405}
   m_Layer: 0
   m_Name: Crop Zone (2)
   m_TagString: Untagged
@@ -1242,7 +1256,7 @@ Transform:
   m_GameObject: {fileID: 2188251934775344879}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.017, y: 0, z: 1.633}
+  m_LocalPosition: {x: -0.017, y: 0.055, z: 1.633}
   m_LocalScale: {x: 0.73587507, y: 0.063511446, z: 0.68126655}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1263,7 +1277,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2188251934775344879}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1313,12 +1327,24 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 3.3567536, z: 1}
+  m_Center: {x: 0, y: 1.1783767, z: 0}
+--- !u!114 &6963131734475730405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2188251934775344879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3c1b4d33ad819d4492435ab81ca1372, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2189876164069447297
 GameObject:
   m_ObjectHideFlags: 0
@@ -2460,6 +2486,7 @@ GameObject:
   - component: {fileID: 882870219494273578}
   - component: {fileID: 8162717144305770476}
   - component: {fileID: 2643676143093114028}
+  - component: {fileID: 2038428276409004309}
   m_Layer: 0
   m_Name: Crop Zone (3)
   m_TagString: Untagged
@@ -2476,7 +2503,7 @@ Transform:
   m_GameObject: {fileID: 4518380330536355660}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.844, y: 0, z: 1.633}
+  m_LocalPosition: {x: -0.844, y: 0.055000305, z: 1.633}
   m_LocalScale: {x: 0.73587507, y: 0.063511446, z: 0.68126655}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2497,7 +2524,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4518380330536355660}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2547,12 +2574,24 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 3.4290695, z: 1}
+  m_Center: {x: 0, y: 1.2145346, z: 0}
+--- !u!114 &2038428276409004309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4518380330536355660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3c1b4d33ad819d4492435ab81ca1372, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4584282987721267935
 GameObject:
   m_ObjectHideFlags: 0
@@ -2775,6 +2814,7 @@ GameObject:
   - component: {fileID: 197214451522216608}
   - component: {fileID: 5870144566695272213}
   - component: {fileID: 3026222096070664267}
+  - component: {fileID: 6030750128485210908}
   m_Layer: 0
   m_Name: Crop Zone (4)
   m_TagString: Untagged
@@ -2791,7 +2831,7 @@ Transform:
   m_GameObject: {fileID: 5614378151877511168}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.651, y: 0, z: 1.633}
+  m_LocalPosition: {x: -1.651, y: 0.055000305, z: 1.633}
   m_LocalScale: {x: 0.73587507, y: 0.063511446, z: 0.68126655}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2812,7 +2852,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5614378151877511168}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2862,12 +2902,24 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 3.964172, z: 1}
+  m_Center: {x: 0, y: 1.4820861, z: 0}
+--- !u!114 &6030750128485210908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5614378151877511168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3c1b4d33ad819d4492435ab81ca1372, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5638893525420711831
 GameObject:
   m_ObjectHideFlags: 0
@@ -2880,6 +2932,7 @@ GameObject:
   - component: {fileID: 1250398081066562805}
   - component: {fileID: 1034906043937142147}
   - component: {fileID: 1706064138404732055}
+  - component: {fileID: 8011015364562599860}
   m_Layer: 0
   m_Name: Crop Zone (1)
   m_TagString: Untagged
@@ -2917,7 +2970,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5638893525420711831}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2967,12 +3020,24 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 3.5152304, z: 1}
+  m_Center: {x: 0, y: 1.2576149, z: 0}
+--- !u!114 &8011015364562599860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5638893525420711831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3c1b4d33ad819d4492435ab81ca1372, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5991410092752293461
 GameObject:
   m_ObjectHideFlags: 0
@@ -3891,6 +3956,8 @@ MonoBehaviour:
   _growthPrefab: {fileID: 5025625059317618901, guid: 9d22c27d50ed9bc4e82b05ca48482ad3, type: 3}
   _maturePrefab: {fileID: 9050247364605370717, guid: fc4f1b409ef3e264b8d4003ae967b0b4, type: 3}
   _recolectPrefab: {fileID: 3952928198722225414, guid: 834a27444b0ea304cb626f6731338215, type: 3}
+  _seed: {fileID: 0}
+  _food: {fileID: 0}
   _currentState: 0
 --- !u!1 &7273041313432522555
 GameObject:

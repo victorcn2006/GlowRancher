@@ -24,7 +24,8 @@ public class Food : MonoBehaviour, IAspirable
 
     private void OnDisable()
     {
-        Aspirator.instance.RemoveAspirableObject(this.gameObject);
+        if (Aspirator.instance != null)
+            Aspirator.instance.RemoveAspirableObject(this.gameObject);
     }
 
 
