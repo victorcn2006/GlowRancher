@@ -45,7 +45,7 @@ public class LightKeySphere : MonoBehaviour, IInteractive
         {
             RuntimeManager.PlayOneShot(_purifySound, transform.position);
         }
-
+         
         // 4. PASO 3: Preparar la cinemática
         if (_player != null) _player.SetActive(false);
         if (_canvasHUD != null) _canvasHUD.SetActive(false);
@@ -56,19 +56,18 @@ public class LightKeySphere : MonoBehaviour, IInteractive
         {
             _director.Play();
 
-            // Pequeña espera para que el Director cambie de estado a 'Playing'
-            yield return null;
+          
 
-            // Mientras la cinemática esté reproduciéndose, este código "duerme"
-            while (_director.state == PlayState.Playing)
-            {
-                yield return null;
-            }
+            yield return new WaitUntil(() => _director.state != PlayState.Playing);
+            // 6. PASO 5: Finalizar y devolver el control
+            if (_cutsceneRoot != null) _cutsceneRoot.SetActive(false);
+            if (_player != null) _player.SetActive(true);
+            if (_canvasHUD != null) _canvasHUD.SetActive(true);
+            
+
         }
 
-        // 6. PASO 5: Finalizar y devolver el control
-        if (_player != null) _player.SetActive(true);
-        if (_canvasHUD != null) _canvasHUD.SetActive(true);
+
 
         // Si quieres que el objeto desaparezca tras usarlo:
         // gameObject.SetActive(false);
