@@ -11,6 +11,12 @@ public class BigWall : MonoBehaviour
     public void OpenDoor()
     {
         transform.DOMoveY(transform.position.y - _openOffset, _timeToOpen).SetEase(Ease.InExpo);
+        StartCoroutine(WaitAnimationTime());
+    }
+
+    private IEnumerator WaitAnimationTime()
+    {
+        yield return new WaitForSeconds(25f);
     }
 
 }
