@@ -15,6 +15,6 @@ public class TutorialPuzzle : MonoBehaviour
 
     private IEnumerator WaitToAnimation()
     {
-        yield return new WaitForSeconds(37f);
+        yield return new WaitForSeconds(39f);
     }
 }
