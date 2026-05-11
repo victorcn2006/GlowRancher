@@ -77,4 +77,8 @@ public class WinCondition : MonoBehaviour
         // 4. Transition to Stats scene
         SceneManager.LoadScene("Stats");
     }
+
+
+
+
 }
