@@ -14,6 +14,8 @@ public class LoadingScene : MonoBehaviour
 
     private IEnumerator LoadAsync()
     {
+        yield return new WaitForSeconds(3f);
+
         AsyncOperation operation = SceneManager.LoadSceneAsync("World");
         while (!operation.isDone)
             yield return null;
