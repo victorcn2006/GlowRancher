@@ -48,7 +48,7 @@ public class MonolitoManager : MonoBehaviour
 
             GetComponent<MonolitoTimer>().StopTimer();
 
-            PurificarZonas();
+            //PurificarZonas();
 
             foreach (GameObject spawn in _spawnsAsigned)
             {
