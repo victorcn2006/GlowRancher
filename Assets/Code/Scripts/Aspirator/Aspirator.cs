@@ -18,6 +18,7 @@ public class Aspirator : MonoBehaviour
     [SerializeField] private SuctionPoint _suctionPoint;
     [SerializeField] private Inventory _inventory;
     [SerializeField] private Transform _aspiratePoint;
+    [SerializeField] private AnimacionesAspiradora _animacionesAspiradora;
 
     [Header("SETTINGS")]
     [SerializeField] private float _aspirateForce = 10f;
@@ -65,9 +66,11 @@ public class Aspirator : MonoBehaviour
     {
         if (_aspirating)
         {
+            _animacionesAspiradora.StartAspirating();
             AspirateObjects();
             UpdateSoundAttributes();
         }
+        else _animacionesAspiradora.StopAspirating();
     }
 
     private void UpdateSoundAttributes()
@@ -90,7 +93,7 @@ public class Aspirator : MonoBehaviour
             if (obj.TryGetComponent<Rigidbody>(out var rb))
             {
                 float distance = Vector3.Distance(obj.transform.position, _aspiratePoint.position);
-                float forceFactor = Mathf.Clamp01(1f - (distance / _maxDistance));
+                float forceFactor = Mathf.Pow(Mathf.Clamp01(1f - (distance / _maxDistance)), 3f);
                 Vector3 aspirateDirection = (_aspiratePoint.position - obj.transform.position).normalized;
 
                 rb.AddForce(aspirateDirection * _aspirateForce * forceFactor, ForceMode.Force);

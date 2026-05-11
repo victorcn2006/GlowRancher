@@ -56,8 +56,6 @@ public class BigWallsManager : MonoBehaviour
 
         if(_forthPuzzleCompleted) OpenLastWallWall();
 
-
-
     }
 
     private void OpenFirstsWallSet()
