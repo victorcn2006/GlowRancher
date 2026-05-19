@@ -61,7 +61,6 @@ GameObject:
   - component: {fileID: 5333685649500796454}
   - component: {fileID: 4165792998179981799}
   - component: {fileID: 6503744155653558028}
-  - component: {fileID: 3927103875215319948}
   - component: {fileID: 2546225550473761132}
   m_Layer: 0
   m_Name: ScaredSlime
@@ -230,19 +229,6 @@ MonoBehaviour:
   _movementBehaviour: {fileID: 2546225550473761132}
   _playerDetector: {fileID: 5268864360778402284}
   _animator: {fileID: 5680054598787933131}
---- !u!114 &3927103875215319948
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 809123657047631041}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7490dd475da77c4bb4ff105105c7da1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  detectionRange: 5
 --- !u!114 &2546225550473761132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,6 +251,7 @@ MonoBehaviour:
   scaredJumpDistance: 0.5
   rotateDuration: 2
   scaredRotateDuration: 0.01
+  groundChecker: {fileID: 3484517563913419675}
   groundCheckDistance: 0.35
 --- !u!1 &828816751968619511
 GameObject:

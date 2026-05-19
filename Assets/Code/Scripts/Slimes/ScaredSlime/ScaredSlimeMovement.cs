@@ -41,6 +41,8 @@ public class ScaredSlimeMovement : MonoBehaviour
     private Vector3 jumpDirection;
     private float _currentTargetDistance = -1f;
 
+    [SerializeField] private Transform groundChecker;
+
 
     // --------------------------------------------RAYCAST SETTINGS--------------------------------------------\\
     [Header("VALORES GROUNDED")]
@@ -164,6 +166,10 @@ public class ScaredSlimeMovement : MonoBehaviour
             Vector3 jumpForceVector = (transform.up * jumpForce) + (transform.forward * jumpForce * forceMultiplier);
             _rb.AddForce(jumpForceVector);
         }
+
+        yield return new WaitForSeconds(0.1f);
+        yield return new WaitUntil(() => Grounded());
+        _isJumping = false;
     }
 
     private void ResetJumpTimer()
@@ -174,11 +180,10 @@ public class ScaredSlimeMovement : MonoBehaviour
 
     private bool Grounded()
     {
-        bool check = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance);
-        if(!check) _isJumping = false;
-        return check;
-       
+        if (groundChecker == null) return Physics.Raycast(transform.position, Vector3.down, groundCheckDistance);
+        return Physics.Raycast(groundChecker.position, Vector3.down, groundCheckDistance);
     }
+
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

@@ -47,6 +47,15 @@ public class Player : Character
         // Si tu clase Character tiene lógica en Awake, asegúrate de que sea accesible o virtual
     }
 
+    private void OnDisable()
+    {
+        if (_regenCoroutine != null)
+        {
+            StopCoroutine(_regenCoroutine);
+            _regenCoroutine = null;
+        }
+    }
+
     private void Update()
     {
         HandleEnergyLogic();
