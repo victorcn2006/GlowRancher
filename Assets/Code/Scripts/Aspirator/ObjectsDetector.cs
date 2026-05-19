@@ -18,7 +18,7 @@ public class ObjectsDetector : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Food") || other.CompareTag("Slime") || other.CompareTag("Gem"))
+        if (other.CompareTag("Food") || other.CompareTag("Slime") || other.CompareTag("Gem") || other.CompareTag("Seed"))
         {
             _aspirableObjectsList.Add(other.gameObject);
         }
@@ -40,7 +40,10 @@ public class ObjectsDetector : MonoBehaviour
     {
         if (_aspirableObjectsList.Contains(other.gameObject))
         {
-            other.GetComponent<IAspirable>().StopBeingAspired();
+            if (other.TryGetComponent<IAspirable>(out var aspirable))
+            {
+                aspirable.StopBeingAspired();
+            }
             _aspirableObjectsList.Remove(other.gameObject);
         }
 

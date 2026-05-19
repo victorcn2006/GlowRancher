@@ -8,17 +8,21 @@ public class SuctionPoint : MonoBehaviour
     [SerializeField] private Inventory _inventory;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<IAspirable>() != null && _canSuck)
+        if (_canSuck && other.TryGetComponent<IAspirable>(out var aspirable))
         {
-            
             if (_inventory != null)
             {
-                ItemPickUp objectPickUp = other.GetComponent<ItemPickUp>();
-                // Añadimos el objeto al inventario
-                if (_inventory.AñadirAlInventario(objectPickUp.icono, objectPickUp.nombre))
+                if (other.TryGetComponent<ItemPickUp>(out var objectPickUp))
                 {
-                    //other.GetComponentInParent<GameObject>().SetActive(false);
-                    other.gameObject.SetActive(false); // desactivar el objeto en el mundo
+                    // Añadimos el objeto al inventario
+                    if (_inventory.AñadirAlInventario(objectPickUp.icono, objectPickUp.nombre))
+                    {
+                        other.gameObject.SetActive(false); // desactivar el objeto en el mundo
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning($"SuctionPoint: Object {other.name} has IAspirable but is missing ItemPickUp!");
                 }
             }
         }
