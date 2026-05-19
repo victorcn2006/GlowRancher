@@ -9,12 +9,13 @@ public class TutorialPuzzle : MonoBehaviour
 
     public void FinishPuzzle()
     {
-        StartCoroutine(WaitToAnimation());
-        IANarratorManager.Instance.AddNewDialogueToQueue(_dialogue);
-    }
-
-    private IEnumerator WaitToAnimation()
-    {
-        yield return new WaitForSeconds(39f);
+        if (_dialogue != null)
+        {
+            IANarratorManager.Instance.AddNewDialogueToQueue(_dialogue);
+        }
+        else
+        {
+            Debug.LogWarning("TutorialPuzzle: Dialogue is not assigned!");
+        }
     }
 }

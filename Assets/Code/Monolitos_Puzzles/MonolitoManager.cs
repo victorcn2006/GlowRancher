@@ -27,9 +27,6 @@ public class MonolitoManager : MonoBehaviour
 
     public void ActivateMonolito()
     {
-
-     
-
         if (!_activated)
         {
             _activated = true;
@@ -48,15 +45,17 @@ public class MonolitoManager : MonoBehaviour
             StartCoroutine(CrystalAnimation());
 
             _monolitoUnlocked = true;
-            if (this.gameObject.CompareTag("FirstMonolito")) {
-                Debug.Log("Monolito completao");
-                DeathScript.instance.firstMonolitoUnlocked = true;
-                GetComponentInParent<TutorialPuzzle>().FinishPuzzle();
-                if(GameManager.Instance != null) GameManager.Instance.TutorialUnlocked();
-            }
-            
         }
-        
+    }
+
+    public void OnTimelineFinished()
+    {
+        if (this.gameObject.CompareTag("FirstMonolito")) {
+            Debug.Log("First Monolito timeline finished, unlocking tutorial.");
+            DeathScript.instance.firstMonolitoUnlocked = true;
+            GetComponentInParent<TutorialPuzzle>().FinishPuzzle();
+            if(GameManager.Instance != null) GameManager.Instance.TutorialUnlocked();
+        }
     }
 
     private IEnumerator CrystalAnimation()

@@ -47,6 +47,11 @@ public class LightKeySphere : MonoBehaviour, IInteractive
         }
          
         // 4. PASO 3: Preparar la cinemática
+        if (IANarratorManager.Instance != null)
+        {
+            IANarratorManager.Instance.StopCurrentDialogue();
+        }
+
         if (_player != null) _player.SetActive(false);
         if (_canvasHUD != null) _canvasHUD.SetActive(false);
         if (_cutsceneRoot != null) _cutsceneRoot.SetActive(true);
@@ -59,12 +64,22 @@ public class LightKeySphere : MonoBehaviour, IInteractive
           
 
             yield return new WaitUntil(() => _director.state != PlayState.Playing);
+            
+            Debug.Log("LightKeySphere: Timeline finished. Reactivating HUD and player.");
+            
             // 6. PASO 5: Finalizar y devolver el control
             if (_cutsceneRoot != null) _cutsceneRoot.SetActive(false);
             if (_player != null) _player.SetActive(true);
             if (_canvasHUD != null) _canvasHUD.SetActive(true);
             
+            // Small delay to let HUD scripts initialize/wake up
+            yield return new WaitForSeconds(0.1f);
 
+            if (_monolitoManager != null)
+            {
+                Debug.Log("LightKeySphere: Triggering OnTimelineFinished on MonolitoManager.");
+                _monolitoManager.OnTimelineFinished();
+            }
         }
 
 
