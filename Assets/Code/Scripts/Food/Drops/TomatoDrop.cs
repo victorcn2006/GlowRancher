@@ -10,15 +10,23 @@ public class TomatoDrop : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            // Check if we are part of a growing plant
+            VegetableData plant = GetComponentInParent<VegetableData>();
+            if (plant != null)
+            {
+                plant.Harvest();
+                return;
+            }
+
+            // Original logic for wild drops
             Vector3 spawnPosition = transform.position + Vector3.up;
-            Instantiate(_crop, spawnPosition, transform.rotation);
-            Instantiate(_seed, spawnPosition, transform.rotation);
+            if (_crop != null) Instantiate(_crop, spawnPosition, transform.rotation);
+            if (_seed != null) Instantiate(_seed, spawnPosition, transform.rotation);
 
             if (Aspirator.instance != null)
-                Aspirator.instance.RemoveAspirableObject(this.gameObject); // ← afegeix
+                Aspirator.instance.RemoveAspirableObject(this.gameObject);
 
             Destroy(this.gameObject);
         }
-
     }
 }

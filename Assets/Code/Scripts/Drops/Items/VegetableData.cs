@@ -37,7 +37,6 @@ public class VegetableData : MonoBehaviour, IAspirable
     private void Update()
     {
         _stateTimer += Time.deltaTime;
-        _vegetableData.time = _stateTimer;
 
         switch (_currentState)
         {
@@ -96,14 +95,28 @@ public class VegetableData : MonoBehaviour, IAspirable
     {
         if (_currentState == STATES.RECOLECT)
         {
-            /*
-            GameObject food = PoolManager.Instance.GetFirstAvailableObject("Tomato");
-            GameObject seed = PoolManager.Instance.GetFirstAvailableObject("TomatoSeed");
-            if (food != null) food.transform.position = transform.position;
-            if (seed != null) seed.transform.position = transform.position;
-            */
-            SetState(STATES.SEED);
-            Debug.Log("AAAAAAAAAAAAAAA");
+            // Spawn Food
+            GameObject food = VegetablesPool.Instance.GetVegetable(_vegetableData.type);
+            if (food != null)
+            {
+                food.transform.position = transform.position + Vector3.up;
+                food.SetActive(true);
+            }
+
+            // Spawn Seed
+            GameObject seed = VegetablesPool.Instance.GetSeed(GetSeedType(_vegetableData.type));
+            if (seed != null)
+            {
+                seed.transform.position = transform.position + Vector3.up;
+                seed.SetActive(true);
+            }
+
+            // Notify CropField
+            CropField cropField = GetComponentInParent<CropField>();
+            if (cropField != null)
+            {
+                cropField.ClearHarvestState();
+            }
 
             if (Aspirator.instance != null)
                 Aspirator.instance.RemoveAspirableObject(this.gameObject);
