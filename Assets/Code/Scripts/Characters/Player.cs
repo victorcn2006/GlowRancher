@@ -34,17 +34,23 @@ public class Player : Character
         currentHealth = maxHealth;
         _inventory = new SiloInventory();
 
-        StartCoroutine(_AwakeRoutine());
+        if (SaveManager.Instance == null || SaveManager.Instance.IsLoading)
+        {
+            SaveManager.Instance.OnLoadingFinished += InitializeAfterLoading;
+        }
+        else
+        {
+            InitializeAfterLoading();
+        }
     }
 
-    // Cambié el nombre para evitar confusiones con Awake()
-    private IEnumerator _AwakeRoutine()
+    private void InitializeAfterLoading()
     {
-        while (SaveManager.Instance == null || SaveManager.Instance.IsLoading)
+        if (SaveManager.Instance != null)
         {
-            yield return null;
+            SaveManager.Instance.OnLoadingFinished -= InitializeAfterLoading;
         }
-        // Si tu clase Character tiene lógica en Awake, asegúrate de que sea accesible o virtual
+        // Proceed with any initialization that requires loaded data
     }
 
     private void OnDisable()

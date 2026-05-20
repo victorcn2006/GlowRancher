@@ -11,6 +11,8 @@ using UnityEngine.UIElements;
 public class SaveManager: MonoBehaviour {
     public static SaveManager Instance { get; private set; }
     public bool IsLoading { get; private set; } = true;
+    public event Action OnLoadingFinished;
+
     //Variable para guardar la ruta, es en el Appdata/LocalLow/DefaultCompany/GlowRancher/
     private string saveAllPath;
     // Lista para registrar los objetos ISavable mediante el metodo RegisterSavable
@@ -58,7 +60,7 @@ public class SaveManager: MonoBehaviour {
         {
             Debug.Log("SaveAll persistent path: " + Application.persistentDataPath);
             var entries = new List<SaveEntry>(); //Crear una lista de SaveEntry que tiene id y state
-            // Recorre todos los ISavable registrados y añade su estado a la lista
+            // Recorre todos los ISavable registrados y aï¿½ade su estado a la lista
             foreach (var savable in registeredSavables) {
                 entries.Add(new SaveEntry { id = savable.GetSaveID(), state = savable.CaptureState() });
             }
@@ -148,9 +150,11 @@ public class SaveManager: MonoBehaviour {
                 Debug.Log("Applied IDs: " + string.Join(", ", appliedIds)); 
             }
             // Marca que la fase de carga ha terminado para que otros componentes
-            // que dependían de IsLoading en Awake/Start puedan funcionar normalmente.
+            // que dependan de IsLoading en Awake/Start puedan funcionar normalmente.
             IsLoading = false;
+            OnLoadingFinished?.Invoke();
             LogSaveAllContents();
+
         }
         catch(Exception e)
         {

@@ -13,33 +13,39 @@ public class Enemy : Character, ISavable
 
     protected override void Awake()
     {
-        StartCoroutine(_Awake());
         currentHealth = maxHealth;
+        if (SaveManager.Instance == null || SaveManager.Instance.IsLoading)
+        {
+            SaveManager.Instance.OnLoadingFinished += InitializeAfterLoading;
+        }
+        else
+        {
+            InitializeAfterLoading();
+        }
     }
 
-    IEnumerator _Awake()
+    private void InitializeAfterLoading()
     {
-        while (SaveManager.Instance == null || SaveManager.Instance.IsLoading)
-            yield return null;
-
+        if (SaveManager.Instance != null)
+        {
+            SaveManager.Instance.OnLoadingFinished -= InitializeAfterLoading;
+        }
         base.Awake();
     }
 
     private void OnEnable()
     {
-        _OnEnable();
         SaveManager.Instance?.RegisterSavable(this);
     }
     private void OnDisable()
     {
         SaveManager.Instance?.UnregisterSavable(this);
+        if (SaveManager.Instance != null)
+        {
+            SaveManager.Instance.OnLoadingFinished -= InitializeAfterLoading;
+        }
     }
-    IEnumerator _OnEnable() {
-        while (SaveManager.Instance == null || SaveManager.Instance.IsLoading)
-            yield return null;
 
-        OnEnable();
-    }
     protected override void Attack()
     {
         if (SaveManager.Instance?.IsLoading == true)

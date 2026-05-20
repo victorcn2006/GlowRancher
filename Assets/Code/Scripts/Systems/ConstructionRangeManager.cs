@@ -38,20 +38,40 @@ public class ConstructionRangeManager : MonoBehaviour
         FindHouse();
     }
 
+    private void Update()
+    {
+        if (!_houseFound)
+        {
+            FindHouse();
+        }
+    }
+
     private void FindHouse()
     {
-        House house = FindFirstObjectByType<House>();
+        // Try to find the house even if it's inactive (it might be activated later by SpawnBase)
+        House house = FindFirstObjectByType<House>(FindObjectsInactive.Include);
+        
         if (house != null)
         {
-            _centerPoint = house.transform.position;
+            // If the house is found, use its renderer's bounds center if possible for a better "visual" center
+            // otherwise fallback to transform position.
+            Renderer houseRenderer = house.GetComponentInChildren<Renderer>();
+            if (houseRenderer != null)
+            {
+                _centerPoint = houseRenderer.bounds.center;
+            }
+            else
+            {
+                _centerPoint = house.transform.position;
+            }
+
             _houseFound = true;
             Debug.Log($"[ConstructionRangeManager] House found at {_centerPoint}. Initial radius: {_currentRadius}");
         }
-        else
+        else if (!_houseFound)
         {
-            Debug.LogWarning("[ConstructionRangeManager] House not found! Defaulting center to Vector3.zero.");
+            // Only log warning once or when it's critical
             _centerPoint = Vector3.zero;
-            _houseFound = false;
         }
     }
 

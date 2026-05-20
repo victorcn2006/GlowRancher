@@ -6,7 +6,9 @@ public class HouseShopController : MonoBehaviour
 
     private void Start()
     {
-        _shopUI = References.Instance._houseShopPanel;
+        if (References.Instance != null)
+            _shopUI = References.Instance._houseShopPanel;
+        else Debug.Log("NULLLQ");
     }
 
     public void ActiveShop()

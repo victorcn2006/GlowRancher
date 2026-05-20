@@ -37,15 +37,22 @@ public class GameManager : MonoBehaviour
 
     private async void Start()
     {
-        // Wait for MongoDBReader to be ready
-        while (MongoDBReader.Instance == null) await Task.Yield();
-
-        PlayerData cloudData = await MongoDBReader.Instance.LoadStats(data.userId);
-        if (cloudData != null)
+        // MongoDBReader initializes in Awake, so it should be ready by Start.
+        if (MongoDBReader.Instance == null)
         {
-            data = cloudData;
-            OnStatsLoaded?.Invoke();
-            Debug.Log("Stats synced from MongoDB.");
+            Debug.LogWarning("[GameManager] MongoDBReader.Instance was null in Start, waiting one frame.");
+            await Task.Yield();
+        }
+
+        if (MongoDBReader.Instance != null)
+        {
+            PlayerData cloudData = await MongoDBReader.Instance.LoadStats(data.userId);
+            if (cloudData != null)
+            {
+                data = cloudData;
+                OnStatsLoaded?.Invoke();
+                Debug.Log("Stats synced from MongoDB.");
+            }
         }
     }
 

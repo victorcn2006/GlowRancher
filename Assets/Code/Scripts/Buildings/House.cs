@@ -80,11 +80,6 @@ public class House : MonoBehaviour, IInteractive
             else
                 Debug.LogWarning("House: _houseUIContainer is null!");
 
-            if (_houseShopController != null) 
-                _houseShopController.ActiveShop();
-            else
-                Debug.LogWarning("House: _houseShopController is null!");
-
             UpdateGameState(true);
             StartCoroutine(ToggleDelay());
         }

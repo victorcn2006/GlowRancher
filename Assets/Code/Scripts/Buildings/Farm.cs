@@ -3,35 +3,37 @@ using UnityEngine;
 
 public class Farm : Building, ISavable{
     protected override void Awake() {
-        StartCoroutine(_Awake());
+        if (SaveManager.Instance == null || SaveManager.Instance.IsLoading)
+        {
+            SaveManager.Instance.OnLoadingFinished += InitializeAfterLoading;
+        }
+        else
+        {
+            InitializeAfterLoading();
+        }
     }
-    protected override void Start()
+
+    private void InitializeAfterLoading()
     {
-        StartCoroutine(_Start());
+        if (SaveManager.Instance != null)
+        {
+            SaveManager.Instance.OnLoadingFinished -= InitializeAfterLoading;
+        }
+        base.Awake();
+        base.Start();
     }
+
     private void OnEnable()
     {
-        _OnEnable();
         SaveManager.Instance?.RegisterSavable(this);
     }
     private void OnDisable()
     {
         SaveManager.Instance?.UnregisterSavable(this);
-    }
-    private IEnumerator _Awake() {
-        while (SaveManager.Instance == null || SaveManager.Instance.IsLoading)
-            yield return null;
-        base.Awake();
-    }
-    private IEnumerator _Start() {
-        while (SaveManager.Instance == null || SaveManager.Instance.IsLoading)
-            yield return null;
-        base.Start();
-    }
-    private IEnumerator _OnEnable() {
-        while (SaveManager.Instance == null || SaveManager.Instance.IsLoading)
-            yield return null;
-        OnEnable();
+        if (SaveManager.Instance != null)
+        {
+            SaveManager.Instance.OnLoadingFinished -= InitializeAfterLoading;
+        }
     }
     //===================== METODOS DE ISAVABLE =====================//
     public string GetSaveID()

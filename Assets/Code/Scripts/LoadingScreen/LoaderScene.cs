@@ -26,10 +26,11 @@ public class LoaderScene : MonoBehaviour
 
     private IEnumerator LoadSceneAsync(string nameScene)
     {
-        yield return new WaitForSeconds(2f);
         AsyncOperation operation = SceneManager.LoadSceneAsync(nameScene);
 
-
-        yield return new WaitUntil(() => operation.progress <= 0.9f);
+        while (!operation.isDone)
+        {
+            yield return null;
+        }
     }
 }
